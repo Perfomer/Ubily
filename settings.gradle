@@ -1,0 +1,5 @@
+rootProject.name='Ubily'
+include ':app'
+include ':core-common'
+include ':feature-auth'
+include ':core-data'

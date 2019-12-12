@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../android_commons.gradle'
+
+dependencies {
+    def room = "2.2.2"
+    def retrofit = "2.6.1"
+
+    api "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+    implementation "androidx.room:room-rxjava2:$room"
+    androidTestImplementation "androidx.room:room-testing:$room"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    implementation "org.jasypt:jasypt:1.9.2"
+}

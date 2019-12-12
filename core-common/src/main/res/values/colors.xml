@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_green">#34D66B</color>
+    <color name="brand_green_dark">#2FC361</color>
+    <color name="brand_green_darker">#2CAB57</color>
+    <color name="brand_green_darkest">#134725</color>
+    <color name="brand_green_transp">#7F2CAB57</color>
+
+    <color name="brand_emerald">#5CBFC6</color>
+    <color name="brand_emerald_dark">#499CA2</color>
+
+    <color name="brand_grey">#ADB1B4</color>
+    <color name="brand_grey_dark">#94989B</color>
+    <color name="brand_grey_darkest">#24303D</color>
+
+    <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+
+    <color name="colorPrimary">@color/brand_green</color>
+    <color name="colorPrimaryDark">@color/brand_green_dark</color>
+    <color name="colorAccent">@color/brand_emerald</color>
+
+
+    <color name="colorSecondaryText">@color/brand_grey</color>
+
+    <color name="darkBackground">#2e2e2e</color>
+    <color name="weakestDark">#102e2e2e</color>
+    <color name="weakDark">#202e2e2e</color>
+</resources>

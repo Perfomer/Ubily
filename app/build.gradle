@@ -1,0 +1,16 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../android_commons.gradle'
+
+android {
+    defaultConfig {
+        applicationId "vmedia.ubily"
+    }
+}
+
+dependencies {
+    implementation project(':core-common')
+    implementation project(':core-data')
+    implementation project(':feature-auth')
+}
