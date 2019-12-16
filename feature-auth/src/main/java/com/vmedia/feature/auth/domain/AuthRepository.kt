@@ -1,6 +1,6 @@
 package com.vmedia.feature.auth.domain
 
-import com.vmedia.core.data.Credentials
+import com.vmedia.core.data.internal.Credentials
 import io.reactivex.Completable
 import io.reactivex.Single
 

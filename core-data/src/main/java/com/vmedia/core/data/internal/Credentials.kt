@@ -1,4 +1,4 @@
-package com.vmedia.core.data
+package com.vmedia.core.data.internal
 
 data class Credentials(
     val login: String,

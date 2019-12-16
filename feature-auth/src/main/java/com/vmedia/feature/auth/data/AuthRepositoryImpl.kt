@@ -1,7 +1,7 @@
 package com.vmedia.feature.auth.data
 
 import android.webkit.WebView
-import com.vmedia.core.data.Credentials
+import com.vmedia.core.data.internal.Credentials
 import com.vmedia.core.data.datasource.PreferencesDataSource
 import com.vmedia.feature.auth.data.browser.unitySignIn
 import com.vmedia.feature.auth.domain.AuthRepository

@@ -2,7 +2,7 @@ package com.vmedia.core.data.datasource
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import com.vmedia.core.data.Credentials
+import com.vmedia.core.data.internal.Credentials
 import com.vmedia.core.data.util.decrypt
 import com.vmedia.core.data.util.encrypt
 import io.reactivex.Completable
@@ -14,7 +14,7 @@ class PreferencesDataSource(
 ) {
 
     fun getCredentials(): Single<Credentials> {
-        fun read(key: String) = preferences.getString(key, "")!!.decrypt()
+        fun read(key: String) = preferences.getString(key, NO_VALUE)!!.decrypt()
 
         return Single.fromCallable {
             Credentials(
@@ -41,6 +41,7 @@ class PreferencesDataSource(
         private const val KEY_PASSWORD = "b3cfc9d67f6e912eb420cab319e4133c"
         private const val KEY_LOGIN = "933ea9b377e74fd81e2b68543afe60bb"
 
+        private const val NO_VALUE = "OuJxVVbXMeTQzymMGnAn5w=="
     }
 
 }

@@ -7,11 +7,19 @@ android {
 
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "BASE_URL", '"https://publisher.assetstore.unity3d.com/"'
+        buildConfigField "String", "COOKIE_TOKEN", '"kharma_session"'
+        buildConfigField "int", "MAX_REQUESTS", "5"
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildTypes {
