@@ -5,10 +5,7 @@ import org.simpleframework.xml.Root
 
 @Root(name = "image", strict = false)
 data class RssImageModel(
-    @Element(name = "title")
-    val title: String,
-    @Element(name = "link")
-    val link: String,
-    @Element(name = "url")
-    val url: String
+    @Element(name = "title") val title: String,
+    @Element(name = "link") val link: String,
+    @Element(name = "url") val url: String
 )

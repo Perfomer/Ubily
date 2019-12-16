@@ -5,21 +5,29 @@ import com.google.gson.GsonBuilder
 import com.vmedia.core.data.datasource.PreferencesDataSource
 import com.vmedia.core.data.internal.TokenProvider
 import com.vmedia.core.data.internal.network.UnityApi
+import com.vmedia.core.data.internal.network.UnityRssApi
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module.module
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val RETROFIT_GSON = "retrofit_gson"
-private const val RETROFIT_XML = "retrofit_xml"
+val dataModules by lazy {
+    listOf(
+        preferencesModule,
+        dataBaseModule,
+        networkModule
+    )
+}
 
-val dataModule = module {
+private val preferencesModule = module {
     single { PreferencesDataSource(get()) }
     single { TokenProvider(get()) }
 
@@ -29,20 +37,34 @@ val dataModule = module {
             Context.MODE_PRIVATE
         )
     }
+}
 
-    single { get<Retrofit>().create(UnityApi::class.java) }
+private val dataBaseModule = module {
+
+}
+
+private val networkModule = module {
+    single {
+        val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
+        get.create(UnityApi::class.java)
+    }
+
+    single {
+        val get = get<Retrofit> { parametersOf(get<SimpleXmlConverterFactory>()) }
+        get.create(UnityRssApi::class.java)
+    }
 
     single { GsonBuilder().setLenient().create() }
     single { GsonConverterFactory.create(get()) }
     single { SimpleXmlConverterFactory.create() }
     single { RxJava2CallAdapterFactory.create() }
 
-    factory {
+    factory { (converterFactory: Converter.Factory) ->
         Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(get())
             .addCallAdapterFactory(get<RxJava2CallAdapterFactory>())
-            .addConverterFactory(get<GsonConverterFactory>())
+            .addConverterFactory(converterFactory)
             .build()
     }
 

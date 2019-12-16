@@ -5,10 +5,7 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(strict = false)
-data class RssRequest(
-    @Element(name = "rss")
-    val rss: RssModel,
-
-    @Attribute(name = "version")
-    val version: String
+data class RssResponseModel(
+    @Element(name = "rss") val rss: RssModel,
+    @Attribute(name = "version") val version: String
 )
