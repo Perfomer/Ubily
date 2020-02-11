@@ -8,9 +8,14 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField "String", "BASE_URL", '"https://publisher.assetstore.unity3d.com/"'
-        buildConfigField "String", "COOKIE_TOKEN", '"kharma_session"'
-        buildConfigField "int", "MAX_REQUESTS", "5"
+        buildConfigField "String", "CRYPTO_SEED", '"99f063bce46eda3745af899dbae20542"'
+        buildConfigField "String", "DB_NAME", '"ubilydb"'
+        buildConfigField "String", "NETWORK_COOKIE_TOKEN", '"kharma_session"'
+        buildConfigField "String", "NETWORK_BASE_URL", '"https://publisher.assetstore.unity3d.com/"'
+        buildConfigField "int", "NETWORK_MAX_REQUESTS", "5"
+        buildConfigField "long", "NETWORK_READ_TIMEOUT", "180"
+        buildConfigField "long", "NETWORK_WRITE_TIMEOUT", "180"
+        buildConfigField "long", "NETWORK_CONNECT_TIMEOUT", "180"
     }
 
     compileOptions {

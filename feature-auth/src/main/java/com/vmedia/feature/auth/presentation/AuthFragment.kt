@@ -33,6 +33,7 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
         auth_password.diffedValue = state.password
 
         auth_progressbar.isVisible = state.isLoading
+        auth_signin.isEnabled = !state.isLoading
 
         if (state.inputErrors.isNotEmpty()) {
             toast("there is input error") //todo input errors

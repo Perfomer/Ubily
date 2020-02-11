@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="summary">Summary</string>
+    <string name="more_assets">And %d more assets…</string>
+
+    <string name="dollar">$</string>
+    <string name="dollar_value">$%.2f</string>
+
+    <plurals name="hour">
+        <item quantity="one">hour</item>
+        <item quantity="other">hours</item>
+    </plurals>
+
+    <plurals name="day">
+        <item quantity="one">day</item>
+        <item quantity="other">days</item>
+    </plurals>
+
+    <plurals name="sale">
+        <item quantity="one">sale</item>
+        <item quantity="other">sales</item>
+    </plurals>
+
+    <string-array name="event_revenue_months">
+        <item>@string/event_revenue_statistics_all_time</item>
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string name="entities_publisher">Publisher</string>
+    <string name="entities_periods">Periods</string>
+    <string name="entities_assets">Assets</string>
+    <string name="entities_comments">Comments</string>
+    <string name="entities_unresolved_comments">Unresolved Comments</string>
+    <string name="entities_sales">Sales</string>
+    <string name="entities_free_downloads">Free downloads</string>
+    <string name="entities_revenue">Revenue</string>
+    <string name="entities_payout">Payout</string>
+
+    <string name="asset_status_published">Published</string>
+    <string name="asset_status_draft">Draft</string>
+    <string name="asset_status_pending_review">Pending review</string>
+    <string name="asset_status_declined">Declined</string>
+    <string name="asset_status_deprecated">Deprecated</string>
+    <string name="asset_status_disabled">Disabled</string>
+
+    <string name="event_asset_title">@string/entities_assets</string>
+    <string name="event_asset_text"><![CDATA[<b>%d</b> assets have been updated]]></string>
+
+    <string name="event_sale_title">@string/entities_sales</string>
+    <string name="event_sale_text"><![CDATA[You have sold the <b>%d</b> asset(s) in the amount of <b>$%.2f</b>]]></string>
+
+    <string name="event_free_download_title">@string/entities_free_downloads</string>
+    <string name="event_free_download_text"><![CDATA[<b>%1d</b> asset(s) were downloaded for free <b>%2d</b> times]]></string>
+
+    <string name="event_comment_title">Review</string>
+    <string name="event_comment_text"><![CDATA[New review from <b>%s</b>:]]></string>
+
+    <string name="event_comment_unresolved_title">@string/event_comment_title</string>
+    <string name="event_comment_unresolved_text"><![CDATA[New review with unresolved asset reference from <b>%s</b>:]]></string>
+
+    <string name="event_revenue_title">@string/entities_revenue</string>
+    <string name="event_revenue_text"><![CDATA[You have earned <b>$%.2f</b> for <b>%s</b>]]></string>
+    <string name="event_revenue_statistics_text"><![CDATA[Statistics for <b>%s</b>]]></string>
+    <string name="event_revenue_statistics_growth">Sales growth:</string>
+    <string name="event_revenue_statistics_sales"><![CDATA[Sales: <b>$%.2f</b>]]></string>
+    <string name="event_revenue_statistics_all_time">all time</string>
+
+    <string name="event_payout_title">@string/entities_payout</string>
+    <string name="event_payout_text"><![CDATA[Unity have sent you <b>$%.2f</b>]]></string>
+
+    <string name="event_initialized_title">Unity data is initialized</string>
+    <string name="event_initialized_text"><![CDATA[Welcome to <b>Unity Billionaire</b>! Let\'s start with your statistics. Just click it to see details]]></string>
+</resources>

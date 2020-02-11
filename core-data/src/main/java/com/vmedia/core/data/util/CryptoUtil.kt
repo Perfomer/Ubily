@@ -1,10 +1,13 @@
 package com.vmedia.core.data.util
 
+import com.vmedia.core.data.BuildConfig
 import org.jasypt.util.text.BasicTextEncryptor
 
-private const val SEED = "99f063bce46eda3745af899dbae20542"
+val NO_VALUE_ENCRYPT by lazy { "".encrypt() }
 
-private val encryptor = BasicTextEncryptor().apply { setPassword(SEED) }
+private val encryptor by lazy {
+    BasicTextEncryptor().apply { setPassword(BuildConfig.CRYPTO_SEED) }
+}
 
-fun String.encrypt() = encryptor.encrypt(this)
-fun String.decrypt() = encryptor.decrypt(this)
+fun String.encrypt() = encryptor.encrypt(this)!!
+fun String.decrypt() = encryptor.decrypt(this)!!

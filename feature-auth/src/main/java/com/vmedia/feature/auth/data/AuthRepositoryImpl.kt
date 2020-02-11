@@ -1,8 +1,8 @@
 package com.vmedia.feature.auth.data
 
 import android.webkit.WebView
+import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.internal.Credentials
-import com.vmedia.core.data.datasource.PreferencesDataSource
 import com.vmedia.feature.auth.data.browser.unitySignIn
 import com.vmedia.feature.auth.domain.AuthRepository
 import io.reactivex.Completable
@@ -10,7 +10,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 internal class AuthRepositoryImpl(
-    private val preferencesDataSource: PreferencesDataSource,
+    private val credentialsDataSource: CredentialsDataSource,
     private val cookieExtractor: CookieExtractor,
     private val webView: WebView
 ) : AuthRepository {
@@ -27,7 +27,7 @@ internal class AuthRepositoryImpl(
     }
 
     override fun saveCredentials(credentials: Credentials): Completable {
-        return preferencesDataSource.writeCredentials(credentials)
+        return credentialsDataSource.writeCredentials(credentials)
     }
 
     private companion object {

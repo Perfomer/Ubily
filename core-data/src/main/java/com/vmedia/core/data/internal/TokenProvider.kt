@@ -1,12 +1,12 @@
 package com.vmedia.core.data.internal
 
-import com.vmedia.core.data.datasource.PreferencesDataSource
+import com.vmedia.core.data.datasource.CredentialsDataSource
 
 internal class TokenProvider(
-    private val preferencesDataSource: PreferencesDataSource
+    private val credentialsDataSource: CredentialsDataSource
 ) {
 
     val token: String
-        get() = preferencesDataSource.getCredentials().blockingGet().token
+        get() = credentialsDataSource.getCredentials().blockingGet().token
 
 }

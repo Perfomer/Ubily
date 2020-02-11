@@ -13,6 +13,7 @@ internal class RoutableWebClient(
         onPageFinished.invoke(url)
     }
 
+    @Suppress("DEPRECATION")
     override fun onReceivedError(
         view: WebView?,
         errorCode: Int,

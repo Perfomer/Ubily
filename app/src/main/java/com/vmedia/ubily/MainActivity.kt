@@ -3,7 +3,6 @@ package com.vmedia.ubily
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
-import com.vmedia.core.data.internal.network.UnityApi
 import com.vmedia.core.data.internal.network.UnityRssApi
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,10 +28,10 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onError = {
-                        val i = 0
+//                        val i = 0
                     },
                     onSuccess = {
-                        val i = 0
+//                        val i = 0
                     }
                 )
         }

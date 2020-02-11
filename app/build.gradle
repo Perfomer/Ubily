@@ -15,4 +15,5 @@ dependencies {
 
     implementation project(':feature-splash')
     implementation project(':feature-auth')
+    implementation project(':feature-feed')
 }
