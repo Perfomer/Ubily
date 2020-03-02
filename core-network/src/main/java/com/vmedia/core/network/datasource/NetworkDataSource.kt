@@ -13,7 +13,7 @@ import com.vmedia.core.network.api.entity.rest.asset.PackageDetailsModel
 import com.vmedia.core.network.api.entity.rest.asset.PackagesModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
-import com.vmedia.core.network.api.entity.rest.rss.RssResponseModel
+import com.vmedia.core.network.api.entity.rest.rss.RssModel
 import com.vmedia.core.network.util.toPeriods
 import io.reactivex.Single
 
@@ -62,7 +62,7 @@ class NetworkDataSource(
         return api.getPackageVersionInfo(versionId)
     }
 
-    fun getComments(): Single<RssResponseModel> {
+    fun getComments(): Single<RssModel> {
         return rssApi.getCommentsRss(
             credentials.rssToken.publisherName,
             credentials.rssToken.token

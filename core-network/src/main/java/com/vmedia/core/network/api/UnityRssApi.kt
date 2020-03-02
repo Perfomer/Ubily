@@ -1,6 +1,6 @@
 package com.vmedia.core.network.api
 
-import com.vmedia.core.network.api.entity.rest.rss.RssResponseModel
+import com.vmedia.core.network.api.entity.rest.rss.RssModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,6 +11,6 @@ interface UnityRssApi {
     fun getCommentsRss(
         @Path("publisherActivityName") userName: String,
         @Path("publisherActivityToken") token: String
-    ): Single<RssResponseModel> // todo check
+    ): Single<RssModel>
 
 }
