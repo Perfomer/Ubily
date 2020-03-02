@@ -30,7 +30,7 @@ internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {
             modificationDate = currentVersion.modified.parse(FORMAT_PACKAGEVERSION),
             publishingDate = currentVersion.published?.parse(FORMAT_PACKAGEVERSION),
             price = Money(
-                currency = Currency.US_DOLLAR,
+                currency = Currency.USD,
                 value = BigDecimal(currentVersion.price)
             )
         )

@@ -7,8 +7,10 @@ import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.*
 import com.vmedia.core.network.api.entity.rest.PeriodsModel
 import com.vmedia.core.network.api.entity.rest.asset.*
+import com.vmedia.core.network.api.entity.rest.publisher.PublisherAccountModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
+import com.vmedia.core.network.api.entity.rest.publisher.PublisherWrapModel
 import com.vmedia.core.network.api.entity.rest.rss.RssChannelModel
 import com.vmedia.core.network.api.entity.rest.rss.RssModel
 import io.reactivex.Single
@@ -25,7 +27,8 @@ class NetworkDataSource(
     private val commentMapper: _CommentMapper,
     private val assetMapper: _AssetMapper,
     private val assetDetailsMapper: _AssetDetailsMapper,
-    private val periodMapper: _PeriodMapper
+    private val periodMapper: _PeriodMapper,
+    private val publisherMapper: _PublisherMapper
 ) {
 
     fun getPeriods(): Single<List<Period>> {
@@ -55,12 +58,17 @@ class NetworkDataSource(
             .map(assetMapper::map)
     }
 
-    fun getPublisherOverview(): Single<PublisherModel> {
+    fun getPublisherId(): Single<Long> {
         return api.getPublisherOverview()
+            .map(PublisherModel::publisher)
+            .map(PublisherAccountModel::id)
     }
 
-    fun getPublisherInfo(): Single<PublisherResponseModel> {
+    fun getPublisherInfo(): Single<PublisherDto> {
         return api.getPublisherInfo(credentials.userId)
+            .map(PublisherResponseModel::result)
+            .map(PublisherWrapModel::publisher)
+            .map(publisherMapper::map)
     }
 
     fun getAssetDetails(versionId: Long): Single<AssetDetailsDto> {

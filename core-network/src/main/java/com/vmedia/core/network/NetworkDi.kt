@@ -13,6 +13,7 @@ import com.vmedia.core.network.api.entity.rest.PeriodModel
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
 import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
+import com.vmedia.core.network.api.entity.rest.publisher.PublisherDetailsModel
 import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
@@ -34,6 +35,7 @@ internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
 internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
 internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
+internal typealias _PublisherMapper = Mapper<PublisherDetailsModel, PublisherDto>
 internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
 internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
 internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
@@ -51,7 +53,8 @@ val networkModule = module {
             commentMapper = get(BEAN_MAPPER_COMMENT),
             assetMapper = get(BEAN_MAPPER_ASSET),
             assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS),
-            periodMapper = get(BEAN_MAPPER_PERIOD)
+            periodMapper = get(BEAN_MAPPER_PERIOD),
+            publisherMapper = get(BEAN_MAPPER_PUBLISHER)
         )
     }
 
@@ -59,6 +62,7 @@ val networkModule = module {
     single<_DownloadMapper>(BEAN_MAPPER_DOWNLOAD) { DownloadMapper }
     single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
     single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
+    single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
     single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
     single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
@@ -125,4 +129,5 @@ private const val BEAN_MAPPER_REVENUE = "RevenueMapper"
 private const val BEAN_MAPPER_COMMENT = "CommentMapper"
 private const val BEAN_MAPPER_ASSET = "AssetMapper"
 private const val BEAN_MAPPER_ASSETDETAILS = "AssetDetailsMapper"
+private const val BEAN_MAPPER_PUBLISHER = "PublisherMapper"
 private const val BEAN_MAPPER_PERIOD = "PeriodMapper"

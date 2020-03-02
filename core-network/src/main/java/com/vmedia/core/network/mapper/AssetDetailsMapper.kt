@@ -3,6 +3,7 @@ package com.vmedia.core.network.mapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.network.api.entity.AssetDetailsDto
 import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
+import com.vmedia.core.network.util.fixUrl
 
 object AssetDetailsMapper : Mapper<LanguageMetadataModel, AssetDetailsDto> {
 
@@ -21,11 +22,6 @@ object AssetDetailsMapper : Mapper<LanguageMetadataModel, AssetDetailsDto> {
             artworksUrls = from.artworks.map { it.uri.fixUrl() }.toSet(),
             tags = from.keywords?.split(", ")?.toSet() ?: emptySet()
         )
-    }
-
-    private fun String.fixUrl(): String {
-        if (isBlank()) return this
-        return "http:$this"
     }
 
 }

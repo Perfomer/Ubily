@@ -18,7 +18,7 @@ internal abstract class TableValuesMapper<TO> : Mapper<TableValuesModel, List<TO
         if (isBlank()) return null
 
         return Money(
-            currency = Currency.US_DOLLAR,
+            currency = Currency.USD,
             value = BigDecimal(takeLast(length - 2))
         )
     }

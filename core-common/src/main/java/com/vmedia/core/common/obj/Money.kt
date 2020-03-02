@@ -7,9 +7,9 @@ data class Money(
     val value: BigDecimal
 )
 
-enum class Currency {
-    US_DOLLAR,
-    EURO,
-    CH_YUAN,
-    RU_RUBLE
+enum class Currency(val symbol: String) {
+    USD("$"),
+    EUR("€"),
+    YUAN("¥"),
+    RUB("₽")
 }

@@ -4,20 +4,16 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.common.obj.Money
 import com.vmedia.core.data.KeyEntity
 import com.vmedia.core.network.obj.RssToken
 
-@Entity(indices = [Index(value = ["label"], unique = true)])
+@Entity(indices = [Index(value = ["name"], unique = true)])
 data class Publisher(
     @PrimaryKey override val id: Long,
     val name: String,
-    val label: String,
     val description: String,
-    val email: String,
     val url: String,
-    val smallImageUrl: String = "",
-    val largeImageUrl: String = "",
-    @Embedded val balance: Money,
+    val smallImageUrl: String,
+    val largeImageUrl: String,
     @Embedded val rssToken: RssToken
 ) : KeyEntity<Long>
