@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.asset
 
 import com.google.gson.annotations.SerializedName
 
-data class PackageDetailsModel(
+internal data class PackageDetailsModel(
     @SerializedName("allow_submit") val allowSubmit: Boolean,
     @SerializedName("allow_publish") val allowPublish: Boolean,
     @SerializedName("terms_current") val termsCurrent: Int,

@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.publisher
 
 import com.google.gson.annotations.SerializedName
 
-data class Address(
+internal data class Address(
     @SerializedName("lock_address_fields") val lockAddressFields: Boolean,
     @SerializedName("country") val country: String,
     @SerializedName("firstname") val firstName: String,

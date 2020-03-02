@@ -18,6 +18,7 @@ import com.vmedia.core.network.api.entity.rest.publisher.PublisherDetailsModel
 import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.datasource.SynchronizationStatusDataSource
 import com.vmedia.core.network.filter.CommentFilter
 import com.vmedia.core.network.mapper.*
@@ -45,8 +46,8 @@ internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
 val networkModule = module {
     single { SynchronizationStatusDataSource() }
-    single {
-        NetworkDataSource(
+    single<NetworkDataSource> {
+        NetworkDataSourceImpl(
             api = get(),
             rssApi = get(),
             credentials = get(),

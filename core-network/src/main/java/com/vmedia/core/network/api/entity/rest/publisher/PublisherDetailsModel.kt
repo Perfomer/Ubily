@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.publisher
 
 import com.google.gson.annotations.SerializedName
 
-data class PublisherDetailsModel(
+internal data class PublisherDetailsModel(
     @SerializedName("id") val id: Long,
     @SerializedName("activity_url") val activityUrl: String,
     @SerializedName("ga_account") val gaAccount: String,

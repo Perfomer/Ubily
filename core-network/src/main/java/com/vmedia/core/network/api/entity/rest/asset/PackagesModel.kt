@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.asset
 
 import com.google.gson.annotations.SerializedName
 
-data class PackagesModel(
+internal data class PackagesModel(
     @SerializedName("publisher_name") val publisherName: String,
     @SerializedName("terms_current") val termsCurrent: String,
     @SerializedName("terms_accepted") val termsAccepted: String,

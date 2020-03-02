@@ -6,7 +6,7 @@ import com.vmedia.core.network.api.entity.rest.publisher.PublisherDetailsModel
 import com.vmedia.core.network.obj.RssToken
 import com.vmedia.core.network.util.fixUrl
 
-object PublisherMapper : Mapper<PublisherDetailsModel, PublisherDto> {
+internal object PublisherMapper : Mapper<PublisherDetailsModel, PublisherDto> {
 
     override fun map(from: PublisherDetailsModel): PublisherDto {
         return PublisherDto(

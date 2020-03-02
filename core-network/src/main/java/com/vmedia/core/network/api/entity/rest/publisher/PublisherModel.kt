@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.publisher
 
 import com.google.gson.annotations.SerializedName
 
-data class PublisherModel(
+internal data class PublisherModel(
     @SerializedName("downloader") val downloader: Boolean,
     @SerializedName("language_code") val languageCode: String,
     @SerializedName("currency") val currency: String,

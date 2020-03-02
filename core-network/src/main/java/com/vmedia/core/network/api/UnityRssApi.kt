@@ -5,7 +5,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface UnityRssApi {
+internal interface UnityRssApi {
 
     @GET("/feed/{publisherActivityName}/{publisherActivityToken}/activity.rss")
     fun getCommentsRss(

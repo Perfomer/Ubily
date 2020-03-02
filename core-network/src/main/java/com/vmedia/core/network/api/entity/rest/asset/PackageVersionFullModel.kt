@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.asset
 
 import com.google.gson.annotations.SerializedName
 
-data class PackageVersionFullModel(
+internal data class PackageVersionFullModel(
     @SerializedName("package_id") val packageId: Long,
     @SerializedName("version_name") val versionName: String,
     @SerializedName("category_id") val categoryId: Long,

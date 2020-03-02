@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.asset
 
 import com.google.gson.annotations.SerializedName
 
-data class PackageModel(
+internal data class PackageModel(
     @SerializedName("management_flags") val managementFlags: String,
     @SerializedName("category_id") val categoryId: Long,
     @SerializedName("short_url") val shortUrl: String,

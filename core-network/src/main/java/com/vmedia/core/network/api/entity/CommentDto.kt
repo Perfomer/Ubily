@@ -3,7 +3,7 @@ package com.vmedia.core.network.api.entity
 import androidx.annotation.IntRange
 import java.util.*
 
-data class CommentDto(
+internal data class CommentDto(
     val title: String,
     val authorName: String,
     @IntRange(from = 0, to = 5) val rating: Int,

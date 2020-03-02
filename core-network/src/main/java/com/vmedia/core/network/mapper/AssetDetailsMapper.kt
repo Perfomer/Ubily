@@ -5,7 +5,7 @@ import com.vmedia.core.network.api.entity.AssetDetailsDto
 import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
 import com.vmedia.core.network.util.fixUrl
 
-object AssetDetailsMapper : Mapper<LanguageMetadataModel, AssetDetailsDto> {
+internal object AssetDetailsMapper : Mapper<LanguageMetadataModel, AssetDetailsDto> {
 
     override fun map(from: LanguageMetadataModel): AssetDetailsDto {
         val keyImages = from.keyImages

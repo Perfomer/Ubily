@@ -10,7 +10,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface UnityApi {
+internal interface UnityApi {
 
     @GET("/api/publisher-info/months/{userId}.json")
     fun getPeriods(@Path("userId") userId: Long): Single<PeriodsModel>

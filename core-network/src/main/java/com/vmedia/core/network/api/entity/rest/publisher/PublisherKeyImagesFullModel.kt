@@ -1,6 +1,6 @@
 package com.vmedia.core.network.api.entity.rest.publisher
 
-data class PublisherKeyImagesFullModel(
+internal data class PublisherKeyImagesFullModel(
     val icon: String = "",
     val icon24: String = "",
     val small: String = "",

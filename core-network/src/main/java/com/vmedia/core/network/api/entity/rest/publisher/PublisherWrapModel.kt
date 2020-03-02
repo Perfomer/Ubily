@@ -2,7 +2,7 @@ package com.vmedia.core.network.api.entity.rest.publisher
 
 import com.google.gson.annotations.SerializedName
 
-data class PublisherWrapModel(
+internal data class PublisherWrapModel(
     @SerializedName("success") val success: Boolean,
     @SerializedName("terms_current") val termsCurrent: Int,
     @SerializedName("publisher") val publisher: PublisherDetailsModel,
