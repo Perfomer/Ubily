@@ -1,9 +1,12 @@
 rootProject.name='Ubily'
 
 include ':app'
+
 include ':core-common'
-include ':feature-auth'
+include ':core-network'
+include ':core-sync'
 include ':core-data'
+
+include ':feature-auth'
 include ':feature-splash'
 include ':feature-feed'
-include ':core-network'
