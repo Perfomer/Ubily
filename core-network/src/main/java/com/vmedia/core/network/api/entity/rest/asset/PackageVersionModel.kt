@@ -13,7 +13,7 @@ data class PackageVersionModel(
     val size: Long,
     val modified: String,
     val created: String,
-    val published: String,
+    val published: String?,
     val status: String,
-    val price: Double
+    val price: String
 )

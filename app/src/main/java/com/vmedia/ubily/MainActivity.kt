@@ -3,7 +3,6 @@ package com.vmedia.ubily
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
-import com.vmedia.core.common.view.BaseFragment
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthNavigator
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
             .commit()
 
         nav_host_fragment.postDelayed(0) {
-            get<NetworkDataSource>().getComments()
+            get<NetworkDataSource>().getAssets()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -45,7 +44,4 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
     override fun onAuthSucceed() {
     }
 
-    class FragmentTest : BaseFragment(layoutResource = R.layout.feed_fragment) {
-
-    }
 }

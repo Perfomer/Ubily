@@ -8,10 +8,12 @@ import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.DownloadDto
 import com.vmedia.core.network.api.entity.RevenueDto
 import com.vmedia.core.network.api.entity.SaleDto
+import com.vmedia.core.network.api.entity.rest.AssetDto
 import com.vmedia.core.network.api.entity.rest.CommentDto
 import com.vmedia.core.network.api.entity.rest.PeriodsModel
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import com.vmedia.core.network.api.entity.rest.asset.PackageDetailsModel
+import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
 import com.vmedia.core.network.api.entity.rest.asset.PackagesModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
@@ -28,7 +30,8 @@ class NetworkDataSource(
     private val saleMapper: Mapper<TableValuesModel, List<SaleDto>>,
     private val downloadMapper: Mapper<TableValuesModel, List<DownloadDto>>,
     private val revenueMapper: Mapper<TableValuesModel, List<RevenueDto>>,
-    private val commentMapper: ListMapper<RssItemModel, CommentDto>
+    private val commentMapper: ListMapper<RssItemModel, CommentDto>,
+    private val assetMapper: ListMapper<PackageModelWithVersions, AssetDto>
 ) {
 
     fun getPeriods(): Single<List<Period>> {
@@ -51,8 +54,10 @@ class NetworkDataSource(
             .map(revenueMapper::map)
     }
 
-    fun getPackages(): Single<PackagesModel> {
+    fun getAssets(): Single<List<AssetDto>> {
         return api.getPackages()
+            .map(PackagesModel::packages)
+            .map(assetMapper::map)
     }
 
     fun getPublisherOverview(): Single<PublisherModel> {

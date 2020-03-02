@@ -1,7 +1,7 @@
 package com.vmedia.core.data.internal.database.converter
 
 import androidx.room.TypeConverter
-import com.vmedia.core.data.internal.database.entity.AssetStatus
+import com.vmedia.core.common.obj.AssetStatus
 
 @Suppress("unused")
 class AssetStatusConverter {

@@ -1,6 +1,6 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.util.FORMAT_yyyyMMdd
+import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.SaleDto
 
@@ -13,8 +13,8 @@ internal object SaleMapper : TableValuesMapper<SaleDto>() {
             salesQuantity = tableValues[2].toInt(),
             refundsQuantity = tableValues[3].toInt(),
             chargebacksQuantity = tableValues[4].toInt(),
-            firstSale = tableValues[6].parse(FORMAT_yyyyMMdd),
-            lastSale = tableValues[7].parse(FORMAT_yyyyMMdd)
+            firstSale = tableValues[6].parse(FORMAT_TABLEVALUES),
+            lastSale = tableValues[7].parse(FORMAT_TABLEVALUES)
         )
     }
 

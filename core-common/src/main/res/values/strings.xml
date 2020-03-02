@@ -53,6 +53,7 @@
     <string name="asset_status_declined">Declined</string>
     <string name="asset_status_deprecated">Deprecated</string>
     <string name="asset_status_disabled">Disabled</string>
+    <string name="asset_status_none">None</string>
 
     <string name="event_asset_title">@string/entities_assets</string>
     <string name="event_asset_text"><![CDATA[<b>%d</b> assets have been updated]]></string>

@@ -12,7 +12,7 @@ internal abstract class TableValuesMapper<TO> : Mapper<TableValuesModel, List<TO
         return from.dataRow.map(::mapItem)
     }
 
-    protected abstract fun mapItem(tableValues: List<String>) : TO
+    protected abstract fun mapItem(tableValues: List<String>): TO
 
     protected fun String.toMoney(): Money? {
         if (isBlank()) return null
