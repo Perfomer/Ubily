@@ -25,7 +25,7 @@ internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {
             reviewsQuantity = from.countRatings,
             shortUrl = from.shortUrl,
             status = currentVersion.status.toAssetStatus(),
-            sizeBytes = currentVersion.size,
+            sizeBytes = currentVersion.size ?: 0L,
             creationDate = currentVersion.created.parse(FORMAT_PACKAGEVERSION),
             modificationDate = currentVersion.modified.parse(FORMAT_PACKAGEVERSION),
             publishingDate = currentVersion.published?.parse(FORMAT_PACKAGEVERSION),

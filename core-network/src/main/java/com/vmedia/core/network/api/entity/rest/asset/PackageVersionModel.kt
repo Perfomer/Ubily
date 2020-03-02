@@ -10,7 +10,7 @@ data class PackageVersionModel(
     @SerializedName("publishnotes") val publishNotes: String,
     val name: String,
     val id: String,
-    val size: Long,
+    val size: Long?,
     val modified: String,
     val created: String,
     val published: String?,

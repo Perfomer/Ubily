@@ -2,6 +2,7 @@ package com.vmedia.core.network
 
 import com.google.gson.GsonBuilder
 import com.vmedia.core.common.BuildConfig
+import com.vmedia.core.common.util.ListMapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.network.api.UnityApi
@@ -9,7 +10,13 @@ import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.DownloadDto
 import com.vmedia.core.network.api.entity.RevenueDto
 import com.vmedia.core.network.api.entity.SaleDto
+import com.vmedia.core.network.api.entity.rest.AssetDetailsDto
+import com.vmedia.core.network.api.entity.rest.AssetDto
+import com.vmedia.core.network.api.entity.rest.CommentDto
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
+import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
+import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
+import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.SynchronizationStatusDataSource
@@ -26,6 +33,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
+internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
+internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
+internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueDto>>
+internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
+internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
+internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
+
 val networkModule = module {
     single { SynchronizationStatusDataSource() }
     single {
@@ -37,15 +51,17 @@ val networkModule = module {
             downloadMapper = get(BEAN_MAPPER_DOWNLOAD),
             revenueMapper = get(BEAN_MAPPER_REVENUE),
             commentMapper = get(BEAN_MAPPER_COMMENT),
-            assetMapper = get(BEAN_MAPPER_ASSET)
+            assetMapper = get(BEAN_MAPPER_ASSET),
+            assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS)
         )
     }
 
-    single<Mapper<TableValuesModel, List<SaleDto>>>(BEAN_MAPPER_SALE) { SaleMapper }
-    single<Mapper<TableValuesModel, List<DownloadDto>>>(BEAN_MAPPER_DOWNLOAD) { DownloadMapper }
-    single<Mapper<TableValuesModel, List<RevenueDto>>>(BEAN_MAPPER_REVENUE) { RevenueMapper }
-    single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
+    single<_SaleMapper>(BEAN_MAPPER_SALE) { SaleMapper }
+    single<_DownloadMapper>(BEAN_MAPPER_DOWNLOAD) { DownloadMapper }
+    single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
+    single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
+    single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
 
     single {
         val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
@@ -108,3 +124,4 @@ private const val BEAN_MAPPER_DOWNLOAD = "DownloadMapper"
 private const val BEAN_MAPPER_REVENUE = "RevenueMapper"
 private const val BEAN_MAPPER_COMMENT = "CommentMapper"
 private const val BEAN_MAPPER_ASSET = "AssetMapper"
+private const val BEAN_MAPPER_ASSETDETAILS = "AssetDetailsMapper"

@@ -18,5 +18,5 @@ data class PackageVersionFullModel(
     val created: String,
     val published: String,
     val status: String,
-    val price: Double
+    val price: String
 )
