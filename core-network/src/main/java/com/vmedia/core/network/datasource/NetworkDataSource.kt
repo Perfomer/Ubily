@@ -1,18 +1,22 @@
 package com.vmedia.core.network.datasource
 
 import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.util.ListMapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.DownloadDto
 import com.vmedia.core.network.api.entity.RevenueDto
 import com.vmedia.core.network.api.entity.SaleDto
+import com.vmedia.core.network.api.entity.rest.CommentDto
 import com.vmedia.core.network.api.entity.rest.PeriodsModel
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import com.vmedia.core.network.api.entity.rest.asset.PackageDetailsModel
 import com.vmedia.core.network.api.entity.rest.asset.PackagesModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
+import com.vmedia.core.network.api.entity.rest.rss.RssChannelModel
+import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 import com.vmedia.core.network.api.entity.rest.rss.RssModel
 import com.vmedia.core.network.util.toPeriods
 import io.reactivex.Single
@@ -23,7 +27,8 @@ class NetworkDataSource(
     private val credentials: NetworkCredentialsProvider,
     private val saleMapper: Mapper<TableValuesModel, List<SaleDto>>,
     private val downloadMapper: Mapper<TableValuesModel, List<DownloadDto>>,
-    private val revenueMapper: Mapper<TableValuesModel, List<RevenueDto>>
+    private val revenueMapper: Mapper<TableValuesModel, List<RevenueDto>>,
+    private val commentMapper: ListMapper<RssItemModel, CommentDto>
 ) {
 
     fun getPeriods(): Single<List<Period>> {
@@ -62,11 +67,13 @@ class NetworkDataSource(
         return api.getPackageVersionInfo(versionId)
     }
 
-    fun getComments(): Single<RssModel> {
-        return rssApi.getCommentsRss(
-            credentials.rssToken.publisherName,
-            credentials.rssToken.token
-        )
+    fun getComments(): Single<List<CommentDto>> {
+        val token = credentials.rssToken
+
+        return rssApi.getCommentsRss(token.publisherName, token.token)
+            .map(RssModel::getChannel)
+            .map(RssChannelModel::getItems)
+            .map(commentMapper::map)
     }
 
 }

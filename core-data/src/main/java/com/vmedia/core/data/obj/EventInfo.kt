@@ -30,12 +30,6 @@ sealed class EventInfo(
 //        val comment: Comment
 //    ): EventInfo(id, date, EventType.COMMENT)
 
-//    data class EventUnresolvedComment(
-//        override val id: Long,
-//        override val date: Date,
-//        val unresolvedComment: UnresolvedComment
-//    ): EventInfo(id, date, EventType.UNRESOLVED_COMMENT)
-
     data class EventAsset(
         override val id: Long,
         override val date: Date,

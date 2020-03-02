@@ -48,11 +48,11 @@ public class RssItemModel {
         mDescription = description;
     }
 
-    public String getPublishDate() {
+    public String getPublishingDate() {
         return mPubDate;
     }
 
-    public void setPubDate(String pubDate) {
+    public void setPublishingDate(String pubDate) {
         mPubDate = pubDate;
     }
 

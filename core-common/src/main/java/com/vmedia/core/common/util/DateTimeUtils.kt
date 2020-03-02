@@ -6,6 +6,7 @@ import java.util.*
 
 const val FORMAT_ddMMyy = "dd-MM-yy"
 const val FORMAT_yyyyMMdd = "yyyy-MM-dd"
+const val FORMAT_RSS = "EEE, d MMM yyyy HH:mm:ss Z"
 
 val currentDate: Date
     get() = Calendar.getInstance().time

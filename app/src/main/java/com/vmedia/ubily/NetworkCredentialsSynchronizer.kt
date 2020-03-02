@@ -3,6 +3,7 @@ package com.vmedia.ubily
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
+import com.vmedia.core.network.obj.RssToken
 import io.reactivex.Completable
 
 internal class NetworkCredentialsSynchronizer(
@@ -28,6 +29,10 @@ internal class NetworkCredentialsSynchronizer(
         //todo remove when code below will work
         return Completable.fromAction {
             networkCredentialsProvider.userId = 21232L
+            networkCredentialsProvider.rssToken = RssToken(
+                publisherName = "wello-graphics",
+                token = "ayrtrVzN1cIfk44lSmoJuOFlOSA"
+            )
         }
 
         return databaseDataSource.getPublisher()

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
 import com.vmedia.core.common.view.BaseFragment
-import com.vmedia.core.network.api.UnityRssApi
+import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,9 +26,7 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
             .commit()
 
         nav_host_fragment.postDelayed(0) {
-
-            //            get<NetworkDataSource>().getRevenue()
-            get<UnityRssApi>().getCommentsRss("wello-graphics", "ayrtrVzN1cIfk44lSmoJuOFlOSA")
+            get<NetworkDataSource>().getComments()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
