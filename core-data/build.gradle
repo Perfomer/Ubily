@@ -6,7 +6,6 @@ apply from: '../android_commons.gradle'
 
 dependencies {
     def room = "2.2.3"
-    def retrofit = "2.6.1"
 
     // Database
     api "androidx.room:room-runtime:$room"
@@ -14,15 +13,9 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room"
     androidTestImplementation "androidx.room:room-testing:$room"
 
-    // Network
-    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation 'com.squareup.retrofit2:converter-simplexml:2.3.0'
-
-    // Crypto
+    // Crypto TODO remove
     implementation "org.jasypt:jasypt:1.9.2"
 
     implementation project(":core-common")
+    implementation project(":core-network")
 }

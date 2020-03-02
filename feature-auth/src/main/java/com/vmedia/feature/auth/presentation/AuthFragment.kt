@@ -18,6 +18,9 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
     layoutResource = R.layout.auth_fragment
 ) {
 
+    private val navigator: AuthNavigator
+        get() = activity as AuthNavigator
+
     override fun provideViewModel() = getViewModel<AuthViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +45,7 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
 
     override fun onSubscriptionReceived(subscription: AuthSubscription) {
         when (subscription) {
-            AuthSubscription.AuthSucceed -> goBack()
+            AuthSubscription.AuthSucceed -> navigator.onAuthSucceed()
             AuthSubscription.AuthFailed -> toast("there is AUTH error") //todo
         }
     }

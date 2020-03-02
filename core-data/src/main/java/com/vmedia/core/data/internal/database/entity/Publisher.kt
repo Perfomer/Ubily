@@ -4,8 +4,9 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vmedia.core.common.obj.Money
 import com.vmedia.core.data.KeyEntity
-import com.vmedia.core.data.obj.Money
+import com.vmedia.core.network.obj.RssToken
 
 @Entity(indices = [Index(value = ["label"], unique = true)])
 data class Publisher(
@@ -20,8 +21,3 @@ data class Publisher(
     @Embedded val balance: Money,
     @Embedded val rssToken: RssToken
 ) : KeyEntity<Long>
-
-data class RssToken(
-    val token: String,
-    val publisherName: String
-)

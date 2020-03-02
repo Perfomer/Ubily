@@ -4,8 +4,10 @@ import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import com.vmedia.feature.auth.data.AuthRepositoryImpl
 import com.vmedia.feature.auth.data.CookieExtractor
+import com.vmedia.feature.auth.data.browser.UnityWebViewSignInTask
 import com.vmedia.feature.auth.domain.AuthInteractor
 import com.vmedia.feature.auth.domain.AuthRepository
+import com.vmedia.feature.auth.domain.SignInTask
 import com.vmedia.feature.auth.presentation.AuthFragment
 import com.vmedia.feature.auth.presentation.AuthViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -20,6 +22,7 @@ val authModule = module {
 
     viewModel { AuthViewModel(get()) }
 
+    factory<SignInTask> { UnityWebViewSignInTask(get()) }
     factory { WebView(androidApplication()) }
     factory<Fragment>(DI_FRAGMENT_AUTH) { AuthFragment() }
 }

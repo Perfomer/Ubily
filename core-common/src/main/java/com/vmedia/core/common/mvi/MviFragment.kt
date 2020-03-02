@@ -1,9 +1,10 @@
 package com.vmedia.core.common.mvi
 
-import android.view.View
+import android.os.Bundle
+import android.os.Parcelable
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
-import com.vmedia.core.common.util.setOnClickListener
+import com.vmedia.core.common.util.put
 import com.vmedia.core.common.util.toObservable
 import com.vmedia.core.common.view.BaseFragment
 import io.reactivex.ObservableSource
@@ -12,7 +13,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-abstract class MviFragment<Intent : Any, State : Any, Subscription : Any>(
+abstract class MviFragment<Intent : Any, State : Parcelable, Subscription : Any>(
     @LayoutRes layoutResource: Int? = null,
     @MenuRes menuResource: Int? = null,
     private val initialIntent: Intent? = null
@@ -23,6 +24,21 @@ abstract class MviFragment<Intent : Any, State : Any, Subscription : Any>(
         private set
 
     private val viewModel by lazy(::provideViewModel)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        currentState?.let { outState.put(KEY_STATE, it) }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -56,6 +72,8 @@ abstract class MviFragment<Intent : Any, State : Any, Subscription : Any>(
 
 
     private companion object {
+
+        private const val KEY_STATE = "viewstate"
 
         private infix fun <T : Any> ObservableSource<T>.bindTo(consumer: (T) -> Unit): Disposable {
             return this.toObservable()

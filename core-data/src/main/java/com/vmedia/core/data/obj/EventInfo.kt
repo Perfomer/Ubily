@@ -1,5 +1,6 @@
 package com.vmedia.core.data.obj
 
+import com.vmedia.core.common.obj.Money
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.EventType
 import com.vmedia.core.data.internal.database.entity.Sale

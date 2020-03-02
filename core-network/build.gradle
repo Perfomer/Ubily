@@ -1,0 +1,21 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../android_commons.gradle'
+
+dependencies {
+    def retrofit = "2.6.1"
+
+    // Network
+    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation 'com.squareup.retrofit2:converter-simplexml:2.3.0'
+
+    // Crypto
+    implementation "org.jasypt:jasypt:1.9.2"
+
+    implementation project(":core-common")
+}

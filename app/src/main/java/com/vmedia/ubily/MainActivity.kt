@@ -3,15 +3,17 @@ package com.vmedia.ubily
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
-import com.vmedia.core.data.internal.network.UnityRssApi
+import com.vmedia.core.common.view.BaseFragment
+import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
+import com.vmedia.feature.auth.presentation.AuthNavigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AuthNavigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,21 +22,32 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.nav_host_fragment, get(DI_FRAGMENT_AUTH))
+            .addToBackStack("asdasda")
             .commit()
 
         nav_host_fragment.postDelayed(0) {
+
+            //            get<NetworkDataSource>().getRevenue()
             get<UnityRssApi>().getCommentsRss("wello-graphics", "ayrtrVzN1cIfk44lSmoJuOFlOSA")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onError = {
-//                        val i = 0
+                        val i = 0
                     },
                     onSuccess = {
-//                        val i = 0
+                        val i = 0
                     }
                 )
+
+
         }
     }
 
+    override fun onAuthSucceed() {
+    }
+
+    class FragmentTest : BaseFragment(layoutResource = R.layout.feed_fragment) {
+
+    }
 }

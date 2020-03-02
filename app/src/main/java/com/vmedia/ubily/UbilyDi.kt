@@ -1,12 +1,18 @@
 package com.vmedia.ubily
 
 import com.vmedia.core.data.dataModules
+import com.vmedia.core.network.networkModule
 import com.vmedia.feature.auth.authModule
+import org.koin.dsl.module.module
 
-val koinModules by lazy {
-    featureModules + dataModules
+internal val koinModules by lazy {
+    featureModules + dataModules + networkModule + appModule
 }
 
-val featureModules = listOf(
+internal val featureModules = listOf(
     authModule
 )
+
+internal val appModule = module {
+    single { NetworkCredentialsSynchronizer(get(), get(), get()) }
+}

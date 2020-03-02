@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import com.vmedia.core.data.internal.database.converter.*
 import com.vmedia.core.data.internal.database.dao.AssetDao
 import com.vmedia.core.data.internal.database.dao.EventDao
+import com.vmedia.core.data.internal.database.dao.PublisherDao
 import com.vmedia.core.data.internal.database.dao.SaleDao
 import com.vmedia.core.data.internal.database.entity.*
 
@@ -35,6 +36,7 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getEventDao(): EventDao
     abstract fun getAssetDao(): AssetDao
     abstract fun getSaleDao(): SaleDao
+    abstract fun getPublisherDao(): PublisherDao
 
     internal companion object {
 

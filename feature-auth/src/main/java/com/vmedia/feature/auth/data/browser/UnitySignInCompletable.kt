@@ -3,12 +3,18 @@ package com.vmedia.feature.auth.data.browser
 import android.webkit.WebView
 import com.vmedia.feature.auth.data.browser.controllers.AuthController
 import com.vmedia.feature.auth.data.browser.controllers.invokeController
+import com.vmedia.feature.auth.domain.SignInTask
+import io.reactivex.Completable
 
-internal fun WebView.unitySignIn(login: String, password: String): UnitySignInCompletable {
-    return UnitySignInCompletable(this, AuthController(login, password))
+internal class UnityWebViewSignInTask(private val webView: WebView) : SignInTask {
+
+    override fun signIn(login: String, password: String): Completable {
+        return UnitySignInCompletable(webView, AuthController(login, password))
+    }
+
 }
 
-internal class UnitySignInCompletable(
+private class UnitySignInCompletable(
     webView: WebView,
     private val authController: AuthController
 ) : BrowserRequestCompletable(webView, PACKAGES_URL) {
