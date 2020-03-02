@@ -2,12 +2,14 @@ package com.vmedia.core.network
 
 import com.google.gson.GsonBuilder
 import com.vmedia.core.common.BuildConfig
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.ListMapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.*
+import com.vmedia.core.network.api.entity.rest.PeriodModel
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
 import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
@@ -34,6 +36,7 @@ internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
 internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
 internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
+internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
 val networkModule = module {
     single { SynchronizationStatusDataSource() }
@@ -47,7 +50,8 @@ val networkModule = module {
             revenueMapper = get(BEAN_MAPPER_REVENUE),
             commentMapper = get(BEAN_MAPPER_COMMENT),
             assetMapper = get(BEAN_MAPPER_ASSET),
-            assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS)
+            assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS),
+            periodMapper = get(BEAN_MAPPER_PERIOD)
         )
     }
 
@@ -57,6 +61,7 @@ val networkModule = module {
     single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
     single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
+    single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
 
     single {
         val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
@@ -120,3 +125,4 @@ private const val BEAN_MAPPER_REVENUE = "RevenueMapper"
 private const val BEAN_MAPPER_COMMENT = "CommentMapper"
 private const val BEAN_MAPPER_ASSET = "AssetMapper"
 private const val BEAN_MAPPER_ASSETDETAILS = "AssetDetailsMapper"
+private const val BEAN_MAPPER_PERIOD = "PeriodMapper"

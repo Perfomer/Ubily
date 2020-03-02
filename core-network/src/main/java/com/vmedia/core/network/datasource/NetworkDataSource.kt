@@ -11,7 +11,6 @@ import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
 import com.vmedia.core.network.api.entity.rest.rss.RssChannelModel
 import com.vmedia.core.network.api.entity.rest.rss.RssModel
-import com.vmedia.core.network.util.toPeriods
 import io.reactivex.Single
 
 class NetworkDataSource(
@@ -25,12 +24,14 @@ class NetworkDataSource(
     private val revenueMapper: _RevenueMapper,
     private val commentMapper: _CommentMapper,
     private val assetMapper: _AssetMapper,
-    private val assetDetailsMapper: _AssetDetailsMapper
+    private val assetDetailsMapper: _AssetDetailsMapper,
+    private val periodMapper: _PeriodMapper
 ) {
 
     fun getPeriods(): Single<List<Period>> {
         return api.getPeriods(credentials.userId)
-            .map(PeriodsModel::toPeriods)
+            .map(PeriodsModel::periods)
+            .map(periodMapper::map)
     }
 
     fun getDownloads(period: Period): Single<List<DownloadDto>> {

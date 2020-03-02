@@ -16,6 +16,20 @@ data class Period(val year: Int, val month: Month) {
 
 }
 
+/**
+ * Creates a [Period] object
+ *
+ * Use like this: [Month.JANUARY of 2020]
+ *
+ * @receiver a month for [Period]
+ * @param year a year for [Period]
+ *
+ * @return [Period] with provided month and year
+ */
+infix fun Month.of(year: Int): Period {
+    return Period(year, this)
+}
+
 enum class Month {
     JANUARY,
     FEBRUARY,

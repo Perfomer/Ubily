@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
             .commit()
 
         nav_host_fragment.postDelayed(0) {
-            get<NetworkDataSource>().getAssetDetails(281940)
+            get<NetworkDataSource>().getPeriods()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
