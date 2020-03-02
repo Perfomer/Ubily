@@ -1,16 +1,6 @@
 package com.vmedia.core.common.util
 
-/**
- * Automatically turns simple mapper to list mapper
- *
- * @receiver simple mapper
- * @return list mapper
- */
-fun <FROM, TO> Mapper<FROM, TO>.toListMapper(): ListMapper<FROM, TO> {
-    return object : ListMapper<FROM, TO>() {
-        override fun mapItem(from: FROM): TO = this@toListMapper.map(from)
-    }
-}
+import io.reactivex.Single
 
 /**
  * Mapper interface
@@ -42,3 +32,17 @@ abstract class ListMapper<FROM, TO> : Mapper<List<FROM>, List<TO>> {
     protected abstract fun mapItem(from: FROM): TO
 
 }
+
+/**
+ * Automatically turns simple mapper to list mapper
+ *
+ * @receiver simple mapper
+ * @return list mapper
+ */
+fun <FROM, TO> Mapper<FROM, TO>.toListMapper(): ListMapper<FROM, TO> {
+    return object : ListMapper<FROM, TO>() {
+        override fun mapItem(from: FROM): TO = this@toListMapper.map(from)
+    }
+}
+
+fun <FROM, TO> Single<FROM>.mapWith(mapper: Mapper<FROM, TO>) = map(mapper::map)

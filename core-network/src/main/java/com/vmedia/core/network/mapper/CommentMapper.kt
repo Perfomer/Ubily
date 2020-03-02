@@ -6,16 +6,38 @@ import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.CommentDto
 import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 
-object CommentMapper : Mapper<RssItemModel, CommentDto> {
+internal object CommentMapper : Mapper<RssItemModel, CommentDto> {
 
     override fun map(from: RssItemModel): CommentDto {
+        val commentBody = from.description
+        val commentTitle = commentBody.extractTitle()
+        val isPublisherReply = commentTitle == "Reply from publisher"
+
         return CommentDto(
-            guid = from.guid,
-            noteTitle = from.title,
+            title = if (isPublisherReply) "" else commentTitle,
+            comment = commentBody.extractComment(),
+            rating = if (isPublisherReply) 0 else commentBody.extractRating(),
+            isPublisherReply = isPublisherReply,
+            authorName = from.title.extractAuthorName(),
             assetShortUrl = from.link,
-            comment = from.description,
             publishingDate = from.publishingDate.parse(FORMAT_RSS)
         )
+    }
+
+    private fun String.extractTitle() : String {
+        return drop(4).substringBefore("</h1>")
+    }
+
+    private fun String.extractComment() : String {
+        return substringAfter("<p>").substringBefore("</p>")
+    }
+
+    private fun String.extractRating(): Int {
+        return dropLast(4).substringAfterLast("user: ").length / 7
+    }
+
+    private fun String.extractAuthorName() : String {
+        return substringAfterLast("by ")
     }
 
 }

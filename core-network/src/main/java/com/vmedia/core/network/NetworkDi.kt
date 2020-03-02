@@ -3,6 +3,7 @@ package com.vmedia.core.network
 import com.google.gson.GsonBuilder
 import com.vmedia.core.common.BuildConfig
 import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.util.Filter
 import com.vmedia.core.common.util.ListMapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
@@ -18,6 +19,7 @@ import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.SynchronizationStatusDataSource
+import com.vmedia.core.network.filter.CommentFilter
 import com.vmedia.core.network.mapper.*
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
@@ -34,6 +36,7 @@ import java.util.concurrent.TimeUnit
 internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
 internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
 internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueDto>>
+internal typealias _DetailedCommentMapper = Mapper<List<CommentDto>, List<DetailedCommentDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
 internal typealias _PublisherMapper = Mapper<PublisherDetailsModel, PublisherDto>
 internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
@@ -54,7 +57,9 @@ val networkModule = module {
             assetMapper = get(BEAN_MAPPER_ASSET),
             assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS),
             periodMapper = get(BEAN_MAPPER_PERIOD),
-            publisherMapper = get(BEAN_MAPPER_PUBLISHER)
+            publisherMapper = get(BEAN_MAPPER_PUBLISHER),
+            commentFilter = get(BEAN_FILTER_COMMENT),
+            detailedCommentMapper = get(BEAN_MAPPER_DETAILEDCOMMENT)
         )
     }
 
@@ -63,9 +68,12 @@ val networkModule = module {
     single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
     single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
     single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
+    single<_DetailedCommentMapper>(BEAN_MAPPER_DETAILEDCOMMENT) { DetailedCommentMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
     single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
     single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
+
+    single<Filter<CommentDto>>(BEAN_FILTER_COMMENT) { CommentFilter }
 
     single {
         val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
@@ -126,8 +134,11 @@ val networkModule = module {
 private const val BEAN_MAPPER_SALE = "SaleMapper"
 private const val BEAN_MAPPER_DOWNLOAD = "DownloadMapper"
 private const val BEAN_MAPPER_REVENUE = "RevenueMapper"
+private const val BEAN_MAPPER_DETAILEDCOMMENT = "DetailedCommentMapper"
 private const val BEAN_MAPPER_COMMENT = "CommentMapper"
 private const val BEAN_MAPPER_ASSET = "AssetMapper"
 private const val BEAN_MAPPER_ASSETDETAILS = "AssetDetailsMapper"
 private const val BEAN_MAPPER_PUBLISHER = "PublisherMapper"
 private const val BEAN_MAPPER_PERIOD = "PeriodMapper"
+
+private const val BEAN_FILTER_COMMENT = "CommentFilter"
