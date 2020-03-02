@@ -1,4 +1,4 @@
-package com.vmedia.core.network.api.entity.rest
+package com.vmedia.core.network.api.entity
 
 data class AssetDetailsDto(
     val description: String,

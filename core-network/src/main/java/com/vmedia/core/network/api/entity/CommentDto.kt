@@ -1,4 +1,4 @@
-package com.vmedia.core.network.api.entity.rest
+package com.vmedia.core.network.api.entity
 
 import java.util.*
 

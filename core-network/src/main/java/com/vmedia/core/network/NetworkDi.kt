@@ -7,12 +7,7 @@ import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
-import com.vmedia.core.network.api.entity.DownloadDto
-import com.vmedia.core.network.api.entity.RevenueDto
-import com.vmedia.core.network.api.entity.SaleDto
-import com.vmedia.core.network.api.entity.rest.AssetDetailsDto
-import com.vmedia.core.network.api.entity.rest.AssetDto
-import com.vmedia.core.network.api.entity.rest.CommentDto
+import com.vmedia.core.network.api.entity.*
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
 import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions

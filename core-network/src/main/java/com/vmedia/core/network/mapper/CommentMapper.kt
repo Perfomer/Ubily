@@ -3,7 +3,7 @@ package com.vmedia.core.network.mapper
 import com.vmedia.core.common.util.FORMAT_RSS
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.api.entity.rest.CommentDto
+import com.vmedia.core.network.api.entity.CommentDto
 import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
 
 object CommentMapper : Mapper<RssItemModel, CommentDto> {

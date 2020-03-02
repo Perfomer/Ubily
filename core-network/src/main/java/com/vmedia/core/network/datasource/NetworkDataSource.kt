@@ -4,12 +4,7 @@ import com.vmedia.core.common.obj.Period
 import com.vmedia.core.network.*
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
-import com.vmedia.core.network.api.entity.DownloadDto
-import com.vmedia.core.network.api.entity.RevenueDto
-import com.vmedia.core.network.api.entity.SaleDto
-import com.vmedia.core.network.api.entity.rest.AssetDetailsDto
-import com.vmedia.core.network.api.entity.rest.AssetDto
-import com.vmedia.core.network.api.entity.rest.CommentDto
+import com.vmedia.core.network.api.entity.*
 import com.vmedia.core.network.api.entity.rest.PeriodsModel
 import com.vmedia.core.network.api.entity.rest.asset.*
 import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
