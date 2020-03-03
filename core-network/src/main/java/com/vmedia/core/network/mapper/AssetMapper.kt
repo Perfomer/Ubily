@@ -6,9 +6,9 @@ import com.vmedia.core.common.obj.toAssetStatus
 import com.vmedia.core.common.util.FORMAT_PACKAGEVERSION
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.api.entity.AssetDto
-import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
-import com.vmedia.core.network.api.entity.rest.asset.PackageVersionModel
+import com.vmedia.core.network.api.entity.asset.PackageModelWithVersions
+import com.vmedia.core.network.api.entity.asset.PackageVersionModel
+import com.vmedia.core.network.entity.AssetDto
 import java.math.BigDecimal
 
 internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {

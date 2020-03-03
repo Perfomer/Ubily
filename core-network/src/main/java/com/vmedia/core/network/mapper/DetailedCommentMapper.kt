@@ -1,8 +1,8 @@
 package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.network.api.entity.CommentDto
-import com.vmedia.core.network.api.entity.DetailedCommentDto
+import com.vmedia.core.network.entity.CommentDto
+import com.vmedia.core.network.entity.DetailedCommentDto
 import java.util.*
 
 internal object DetailedCommentMapper : Mapper<List<CommentDto>, List<DetailedCommentDto>> {

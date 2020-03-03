@@ -1,6 +1,6 @@
 package com.vmedia.core.network.api
 
-import com.vmedia.core.network.api.entity.rest.rss.RssModel
+import com.vmedia.core.network.api.entity.rss.RssModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

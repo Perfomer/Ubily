@@ -1,7 +1,7 @@
 package com.vmedia.core.network.filter
 
 import com.vmedia.core.common.util.Filter
-import com.vmedia.core.network.api.entity.CommentDto
+import com.vmedia.core.network.entity.CommentDto
 
 internal object CommentFilter : Filter<CommentDto> {
 

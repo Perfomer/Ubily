@@ -1,8 +1,8 @@
 package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.network.api.entity.PublisherDto
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherDetailsModel
+import com.vmedia.core.network.api.entity.publisher.PublisherDetailsModel
+import com.vmedia.core.network.entity.PublisherDto
 import com.vmedia.core.network.obj.RssToken
 import com.vmedia.core.network.util.fixUrl
 

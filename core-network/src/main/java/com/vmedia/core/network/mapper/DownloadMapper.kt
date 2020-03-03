@@ -2,7 +2,7 @@ package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.api.entity.DownloadDto
+import com.vmedia.core.network.entity.DownloadDto
 
 internal object DownloadMapper : TableValuesMapper<DownloadDto>() {
 

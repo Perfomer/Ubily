@@ -7,15 +7,15 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.network.*
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
-import com.vmedia.core.network.api.entity.*
-import com.vmedia.core.network.api.entity.rest.PeriodsModel
-import com.vmedia.core.network.api.entity.rest.asset.*
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherAccountModel
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherWrapModel
-import com.vmedia.core.network.api.entity.rest.rss.RssChannelModel
-import com.vmedia.core.network.api.entity.rest.rss.RssModel
+import com.vmedia.core.network.api.entity.PeriodsModel
+import com.vmedia.core.network.api.entity.asset.*
+import com.vmedia.core.network.api.entity.publisher.PublisherAccountModel
+import com.vmedia.core.network.api.entity.publisher.PublisherModel
+import com.vmedia.core.network.api.entity.publisher.PublisherResponseModel
+import com.vmedia.core.network.api.entity.publisher.PublisherWrapModel
+import com.vmedia.core.network.api.entity.rss.RssChannelModel
+import com.vmedia.core.network.api.entity.rss.RssModel
+import com.vmedia.core.network.entity.*
 import io.reactivex.Single
 
 internal class NetworkDataSourceImpl(

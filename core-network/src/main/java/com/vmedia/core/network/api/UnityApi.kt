@@ -1,11 +1,11 @@
 package com.vmedia.core.network.api
 
-import com.vmedia.core.network.api.entity.rest.PeriodsModel
-import com.vmedia.core.network.api.entity.rest.TableValuesModel
-import com.vmedia.core.network.api.entity.rest.asset.PackageDetailsModel
-import com.vmedia.core.network.api.entity.rest.asset.PackagesModel
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherModel
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherResponseModel
+import com.vmedia.core.network.api.entity.PeriodsModel
+import com.vmedia.core.network.api.entity.TableValuesModel
+import com.vmedia.core.network.api.entity.asset.PackageDetailsModel
+import com.vmedia.core.network.api.entity.asset.PackagesModel
+import com.vmedia.core.network.api.entity.publisher.PublisherModel
+import com.vmedia.core.network.api.entity.publisher.PublisherResponseModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -2,7 +2,7 @@ package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.api.entity.SaleDto
+import com.vmedia.core.network.entity.SaleDto
 
 internal object SaleMapper : TableValuesMapper<SaleDto>() {
 

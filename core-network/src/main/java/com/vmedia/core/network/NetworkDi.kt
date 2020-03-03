@@ -9,17 +9,17 @@ import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
-import com.vmedia.core.network.api.entity.*
-import com.vmedia.core.network.api.entity.rest.PeriodModel
-import com.vmedia.core.network.api.entity.rest.TableValuesModel
-import com.vmedia.core.network.api.entity.rest.asset.LanguageMetadataModel
-import com.vmedia.core.network.api.entity.rest.asset.PackageModelWithVersions
-import com.vmedia.core.network.api.entity.rest.publisher.PublisherDetailsModel
-import com.vmedia.core.network.api.entity.rest.rss.RssItemModel
+import com.vmedia.core.network.api.entity.PeriodModel
+import com.vmedia.core.network.api.entity.TableValuesModel
+import com.vmedia.core.network.api.entity.asset.LanguageMetadataModel
+import com.vmedia.core.network.api.entity.asset.PackageModelWithVersions
+import com.vmedia.core.network.api.entity.publisher.PublisherDetailsModel
+import com.vmedia.core.network.api.entity.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.datasource.SynchronizationStatusDataSource
+import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.filter.CommentFilter
 import com.vmedia.core.network.mapper.*
 import okhttp3.Dispatcher
@@ -108,7 +108,8 @@ val networkModule = module {
         val builder = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val header =
-                    "${BuildConfig.NETWORK_COOKIE_TOKEN}=${tokenProvider.token.tokenValue};${BuildConfig.NETWORK_COOKIE_SESSION}=${tokenProvider.token.session}"
+                    "${BuildConfig.NETWORK_COOKIE_TOKEN}=${tokenProvider.token.tokenValue};" +
+                            "${BuildConfig.NETWORK_COOKIE_SESSION}=${tokenProvider.token.session}"
 
                 val request = chain.request()
                     .newBuilder()
