@@ -6,10 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.vmedia.core.data.internal.database.converter.*
-import com.vmedia.core.data.internal.database.dao.AssetDao
-import com.vmedia.core.data.internal.database.dao.EventDao
-import com.vmedia.core.data.internal.database.dao.PublisherDao
-import com.vmedia.core.data.internal.database.dao.SaleDao
+import com.vmedia.core.data.internal.database.dao.*
 import com.vmedia.core.data.internal.database.entity.*
 
 @Database(
@@ -18,6 +15,7 @@ import com.vmedia.core.data.internal.database.entity.*
     entities = [
         Asset::class,
         Sale::class,
+        Comment::class,
         Event::class,
         EventEntity::class,
         Publisher::class,
@@ -37,6 +35,7 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getAssetDao(): AssetDao
     abstract fun getSaleDao(): SaleDao
     abstract fun getPublisherDao(): PublisherDao
+    abstract fun getCommentDao(): CommentDao
 
     internal companion object {
 

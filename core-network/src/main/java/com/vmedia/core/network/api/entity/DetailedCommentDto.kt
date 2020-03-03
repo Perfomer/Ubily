@@ -6,7 +6,7 @@ import java.util.*
 data class DetailedCommentDto(
     val title: String,
     val authorName: String,
-    @IntRange(from = 0, to = 5) val rating: Int,
+    @IntRange(from = 1, to = 5) val rating: Int,
     val comment: String,
     val publishingDate: Date,
     val assetShortUrl: String,
