@@ -4,8 +4,8 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vmedia.core.common.obj.creds.RssToken
 import com.vmedia.core.data.KeyEntity
-import com.vmedia.core.network.obj.RssToken
 import java.math.BigDecimal
 
 @Entity(indices = [Index(value = ["name"], unique = true)])

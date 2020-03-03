@@ -18,7 +18,6 @@ import com.vmedia.core.network.api.entity.rss.RssItemModel
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.NetworkDataSourceImpl
-import com.vmedia.core.network.datasource.SynchronizationStatusDataSource
 import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.filter.CommentFilter
 import com.vmedia.core.network.mapper.*
@@ -44,8 +43,9 @@ internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
 internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
 internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
-val networkModule = module {
-    single { SynchronizationStatusDataSource() }
+val networkModules by lazy { listOf(networkModule, utilsModule, retrofitModule) }
+
+private val networkModule = module {
     single<NetworkDataSource> {
         NetworkDataSourceImpl(
             api = get(),
@@ -63,7 +63,9 @@ val networkModule = module {
             detailedCommentMapper = get(BEAN_MAPPER_DETAILEDCOMMENT)
         )
     }
+}
 
+private val utilsModule = module {
     single<_SaleMapper>(BEAN_MAPPER_SALE) { SaleMapper }
     single<_DownloadMapper>(BEAN_MAPPER_DOWNLOAD) { DownloadMapper }
     single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
@@ -75,7 +77,9 @@ val networkModule = module {
     single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
 
     single<Filter<CommentDto>>(BEAN_FILTER_COMMENT) { CommentFilter }
+}
 
+private val retrofitModule = module {
     single {
         val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
         get.create(UnityApi::class.java)

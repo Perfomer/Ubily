@@ -1,4 +1,4 @@
-package com.vmedia.core.network.obj
+package com.vmedia.core.common.obj.creds
 
 data class Token(
     val tokenValue: String,

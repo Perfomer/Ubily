@@ -1,7 +1,7 @@
 package com.vmedia.feature.auth.domain
 
-import com.vmedia.core.network.obj.Credentials
-import com.vmedia.core.network.obj.Token
+import com.vmedia.core.common.obj.creds.Credentials
+import com.vmedia.core.common.obj.creds.Token
 import io.reactivex.Completable
 import io.reactivex.Single
 

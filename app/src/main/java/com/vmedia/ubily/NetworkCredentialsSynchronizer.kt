@@ -1,9 +1,9 @@
 package com.vmedia.ubily
 
+import com.vmedia.core.common.obj.creds.RssToken
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
-import com.vmedia.core.network.obj.RssToken
 import io.reactivex.Completable
 
 internal class NetworkCredentialsSynchronizer(

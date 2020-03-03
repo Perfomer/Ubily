@@ -1,6 +1,6 @@
 package com.vmedia.core.network.entity
 
-import com.vmedia.core.network.obj.RssToken
+import com.vmedia.core.common.obj.creds.RssToken
 
 data class PublisherDto(
     val organizationId: Long,

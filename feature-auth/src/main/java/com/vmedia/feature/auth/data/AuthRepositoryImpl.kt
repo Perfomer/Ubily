@@ -1,8 +1,8 @@
 package com.vmedia.feature.auth.data
 
+import com.vmedia.core.common.obj.creds.Credentials
+import com.vmedia.core.common.obj.creds.Token
 import com.vmedia.core.data.datasource.CredentialsDataSource
-import com.vmedia.core.network.obj.Credentials
-import com.vmedia.core.network.obj.Token
 import com.vmedia.feature.auth.BuildConfig
 import com.vmedia.feature.auth.domain.AuthRepository
 import com.vmedia.feature.auth.domain.SignInTask

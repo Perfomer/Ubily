@@ -1,4 +1,4 @@
-package com.vmedia.core.network.datasource
+package com.vmedia.core.sync
 
 class SynchronizationStatusDataSource {
 

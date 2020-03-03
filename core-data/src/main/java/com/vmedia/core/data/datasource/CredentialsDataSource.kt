@@ -3,12 +3,12 @@ package com.vmedia.core.data.datasource
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
+import com.vmedia.core.common.obj.creds.Credentials
+import com.vmedia.core.common.obj.creds.Token
 import com.vmedia.core.data.util.NO_VALUE_ENCRYPT
 import com.vmedia.core.data.util.decrypt
 import com.vmedia.core.data.util.encrypt
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
-import com.vmedia.core.network.obj.Credentials
-import com.vmedia.core.network.obj.Token
 import io.reactivex.Completable
 import io.reactivex.Single
 

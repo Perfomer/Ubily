@@ -1,4 +1,4 @@
-package com.vmedia.core.network.obj
+package com.vmedia.core.common.obj.creds
 
 data class Credentials(
     val login: String,
