@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit
 
 internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
 internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
-internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueDto>>
+internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueEventDto>>
 internal typealias _DetailedCommentMapper = Mapper<List<CommentDto>, List<DetailedCommentDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
 internal typealias _PublisherMapper = Mapper<PublisherDetailsModel, PublisherDto>

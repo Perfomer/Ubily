@@ -53,7 +53,7 @@ internal class NetworkDataSourceImpl(
             .mapWith(saleMapper)
     }
 
-    override fun getRevenue(): Single<List<RevenueDto>> {
+    override fun getRevenue(): Single<List<RevenueEventDto>> {
         return api.getRevenue(credentials.userId)
             .mapWith(revenueMapper)
     }

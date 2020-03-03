@@ -7,9 +7,13 @@ data class Money(
     val value: BigDecimal
 )
 
-enum class Currency(val symbol: String) {
-    USD("$"),
-    EUR("€"),
-    YUAN("¥"),
-    RUB("₽")
+enum class Currency(val symbol: Char) {
+    USD('$'),
+    EUR('€'),
+    YUAN('¥'),
+    RUB('₽')
+}
+
+fun Char.toCurrency() : Currency {
+    return Currency.values().find { it.symbol == this } ?: Currency.USD
 }

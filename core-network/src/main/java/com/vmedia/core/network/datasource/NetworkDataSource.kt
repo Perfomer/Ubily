@@ -12,7 +12,7 @@ interface NetworkDataSource {
 
     fun getSales(period: Period): Single<List<SaleDto>>
 
-    fun getRevenue(): Single<List<RevenueDto>>
+    fun getRevenue(): Single<List<RevenueEventDto>>
 
     fun getAssets(): Single<List<AssetDto>>
 

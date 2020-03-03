@@ -10,6 +10,7 @@ internal object PublisherMapper : Mapper<PublisherDetailsModel, PublisherDto> {
 
     override fun map(from: PublisherDetailsModel): PublisherDto {
         return PublisherDto(
+            organizationId = from.organizationId,
             name = from.name,
             description = from.description,
             url = from.shortUrl,

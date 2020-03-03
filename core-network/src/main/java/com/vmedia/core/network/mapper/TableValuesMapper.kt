@@ -1,7 +1,7 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.obj.Currency
 import com.vmedia.core.common.obj.Money
+import com.vmedia.core.common.obj.toCurrency
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.network.api.entity.rest.TableValuesModel
 import java.math.BigDecimal
@@ -18,7 +18,7 @@ internal abstract class TableValuesMapper<TO> : Mapper<TableValuesModel, List<TO
         if (isBlank()) return null
 
         return Money(
-            currency = Currency.USD,
+            currency = get(0).toCurrency(),
             value = BigDecimal(takeLast(length - 2))
         )
     }
