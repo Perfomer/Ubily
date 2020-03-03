@@ -6,6 +6,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.vmedia.core.data.KeyEntity
 import com.vmedia.core.network.obj.RssToken
+import java.math.BigDecimal
 
 @Entity(indices = [Index(value = ["name"], unique = true)])
 data class Publisher(
@@ -15,5 +16,6 @@ data class Publisher(
     val url: String,
     val smallImageUrl: String,
     val largeImageUrl: String,
+    val balanceUsd: BigDecimal,
     @Embedded val rssToken: RssToken
 ) : KeyEntity<Long>

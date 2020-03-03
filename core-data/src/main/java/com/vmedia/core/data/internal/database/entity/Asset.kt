@@ -17,7 +17,7 @@ data class Asset(
     val modificationDate: Date,
     val publishingDate: Date,
 
-    val price: BigDecimal,
+    val priceUsd: BigDecimal,
     val totalFileSize: Double,
     val status: AssetStatus,
 

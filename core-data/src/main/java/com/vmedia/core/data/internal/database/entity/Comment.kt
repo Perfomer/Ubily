@@ -1,25 +1,23 @@
 package com.vmedia.core.data.internal.database.entity
 
 import androidx.annotation.IntRange
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.vmedia.core.data.KeyEntity
 import java.util.*
 
 @Entity(
+    indices = [Index(value = ["authorId", "assetId"], unique = true)],
     foreignKeys = [
         ForeignKey(
             entity = Asset::class,
-            childColumns = arrayOf("assetId"),
-            parentColumns = arrayOf("id"),
+            childColumns = ["assetId"],
+            parentColumns = ["id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = User::class,
-            childColumns = arrayOf("authorId"),
-            parentColumns = arrayOf("id"),
+            childColumns = ["authorId"],
+            parentColumns = ["id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -32,7 +30,7 @@ data class Comment(
     val title: String,
     val comment: String,
     val publishingDate: Date,
-    @Embedded(prefix = "publisherreply_") val publisherReply: PublisherReply?
+    @Embedded(prefix = "reply_") val publisherReply: PublisherReply?
 ) : KeyEntity<Long>
 
 data class PublisherReply(

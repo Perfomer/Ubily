@@ -1,9 +1,7 @@
 package com.vmedia.core.data.obj
 
 import com.vmedia.core.common.obj.Money
-import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.EventType
-import com.vmedia.core.data.internal.database.entity.Sale
+import com.vmedia.core.data.internal.database.entity.*
 import java.util.*
 
 sealed class EventInfo(
@@ -24,11 +22,11 @@ sealed class EventInfo(
         val downloads: List<Sale>
     ): EventInfo(id, date, EventType.FREE_DOWNLOAD)
 
-//    data class EventComment(
-//        override val id: Long,
-//        override val date: Date,
-//        val comment: Comment
-//    ): EventInfo(id, date, EventType.COMMENT)
+    data class EventComment(
+        override val id: Long,
+        override val date: Date,
+        val comment: Comment
+    ): EventInfo(id, date, EventType.COMMENT)
 
     data class EventAsset(
         override val id: Long,
@@ -36,23 +34,23 @@ sealed class EventInfo(
         val assets: List<Asset>
     ): EventInfo(id, date, EventType.ASSET)
 
-//    data class EventPayout(
-//        override val id: Long,
-//        override val date: Date,
-//        val payout: Payout
-//    ): EventInfo(id, date, EventType.PAYOUT)
+    data class EventPayout(
+        override val id: Long,
+        override val date: Date,
+        val payout: Payout
+    ): EventInfo(id, date, EventType.PAYOUT)
 
-//    data class EventRevenue(
-//        override val id: Long,
-//        override val date: Date,
-//        val revenue: Revenue
-//    ): EventInfo(id, date, EventType.REVENUE)
+    data class EventRevenue(
+        override val id: Long,
+        override val date: Date,
+        val revenue: Revenue
+    ): EventInfo(id, date, EventType.REVENUE)
 
-//    data class EventAnniversarySale(
-//        override val id: Long,
-//        override val date: Date,
-//        val sale: Sale
-//    ): EventInfo(id, date, EventType.ANNIVERSARY_SALE)
+    data class EventAnniversarySale(
+        override val id: Long,
+        override val date: Date,
+        val sale: Sale
+    ): EventInfo(id, date, EventType.ANNIVERSARY_SALE)
 
     data class EventInitialization(
         override val id: Long,

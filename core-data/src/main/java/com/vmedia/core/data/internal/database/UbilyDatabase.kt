@@ -19,7 +19,9 @@ import com.vmedia.core.data.internal.database.entity.*
         Event::class,
         EventEntity::class,
         Publisher::class,
-        User::class
+        User::class,
+        Revenue::class,
+        Payout::class
     ]
 )
 @TypeConverters(
@@ -36,6 +38,8 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getSaleDao(): SaleDao
     abstract fun getPublisherDao(): PublisherDao
     abstract fun getCommentDao(): CommentDao
+    abstract fun getRevenueDao(): RevenueDao
+    abstract fun getPayoutDao(): PayoutDao
 
     internal companion object {
 

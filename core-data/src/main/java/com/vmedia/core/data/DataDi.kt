@@ -51,6 +51,8 @@ private val dataBaseModule = module {
     dao { getSaleDao() }
     dao { getPublisherDao() }
     dao { getCommentDao() }
+    dao { getRevenueDao() }
+    dao { getPayoutDao() }
 }
 
 private val networkModule = module {

@@ -7,11 +7,11 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    indices = [Index(value = arrayOf("eventId", "entityId"), unique = true)],
+    indices = [Index(value = ["eventId", "entityId"], unique = true)],
     foreignKeys = [ForeignKey(
         entity = Event::class,
-        childColumns = arrayOf("eventId"),
-        parentColumns = arrayOf("id"),
+        childColumns = ["eventId"],
+        parentColumns = ["id"],
         onDelete = CASCADE
     )]
 )

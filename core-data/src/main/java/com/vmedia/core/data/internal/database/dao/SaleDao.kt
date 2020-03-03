@@ -12,10 +12,10 @@ interface SaleDao {
     @Query("SELECT * FROM Sale ORDER BY date DESC")
     fun getProvisions(): Observable<List<Sale>>
 
-    @Query("SELECT * FROM Sale WHERE price > 0 ORDER BY date DESC")
+    @Query("SELECT * FROM Sale WHERE priceUsd > 0 ORDER BY date DESC")
     fun getPaidSales(): Observable<List<Sale>>
 
-    @Query("SELECT * FROM Sale WHERE price = 0 ORDER BY date DESC")
+    @Query("SELECT * FROM Sale WHERE priceUsd = 0 ORDER BY date DESC")
     fun getFreeDownloads(): Observable<List<Sale>>
 
     @Query("SELECT * FROM Sale WHERE date BETWEEN :startTimestamp AND :endTimestamp ORDER BY date DESC")
@@ -26,7 +26,7 @@ interface SaleDao {
         SELECT * FROM Sale 
         WHERE 
             date BETWEEN :startTimestamp AND :endTimestamp
-            AND price > 0
+            AND priceUsd > 0
         ORDER BY date DESC
         """
     )
@@ -37,16 +37,16 @@ interface SaleDao {
         SELECT * FROM Sale 
         WHERE 
             date BETWEEN :startTimestamp AND :endTimestamp
-            AND price = 0
+            AND priceUsd = 0
         ORDER BY date DESC
         """
     )
     fun getFreeDownloadsByPeriod(startTimestamp: Long, endTimestamp: Long): Observable<List<Sale>>
 
-    @Query("SELECT SUM(price * quantity) FROM Sale")
+    @Query("SELECT SUM(priceUsd * quantity) FROM Sale")
     fun getSalesAmount(): Single<Int>
 
-    @Query("SELECT SUM(price * quantity) FROM Sale WHERE date BETWEEN :startTimestamp AND :endTimestamp")
+    @Query("SELECT SUM(priceUsd * quantity) FROM Sale WHERE date BETWEEN :startTimestamp AND :endTimestamp")
     fun getSalesAmountByPeriod(startTimestamp: Long, endTimestamp: Long): Single<Int>
 
 }
