@@ -21,7 +21,11 @@ import com.vmedia.core.data.internal.database.entity.*
         Publisher::class,
         User::class,
         Revenue::class,
-        Payout::class
+        Payout::class,
+        PeriodWrap::class,
+        Keyword::class,
+        AssetImage::class,
+        AssetKeyword::class
     ]
 )
 @TypeConverters(
@@ -29,7 +33,8 @@ import com.vmedia.core.data.internal.database.entity.*
     BigDecimalConverter::class,
     CurrencyConverter::class,
     EventTypeConverter::class,
-    DateConverter::class
+    DateConverter::class,
+    MonthConverter::class
 )
 internal abstract class UbilyDatabase : RoomDatabase() {
 

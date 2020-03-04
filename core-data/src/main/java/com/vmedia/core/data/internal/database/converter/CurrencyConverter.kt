@@ -3,13 +3,12 @@ package com.vmedia.core.data.internal.database.converter
 import androidx.room.TypeConverter
 import com.vmedia.core.common.obj.Currency
 
-@Suppress("unused")
-class CurrencyConverter {
+class CurrencyConverter: StringConverter<Currency> {
 
     @TypeConverter
-    fun fromCurrency(currency: Currency) = currency.name
+    override fun to(item: Currency) = item.name
 
     @TypeConverter
-    fun fromString(source: String) = Currency.valueOf(source)
+    override fun from(source: String) = Currency.valueOf(source)
 
 }

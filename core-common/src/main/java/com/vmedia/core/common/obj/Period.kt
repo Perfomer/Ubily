@@ -4,9 +4,6 @@ import java.util.*
 
 data class Period(val year: Int, val month: Month) {
 
-    val startTimestamp: Long by lazy { startCalendar.timeInMillis }
-    val endTimestamp: Long by lazy { endCalendar.timeInMillis }
-
     // todo tests
     override fun toString(): String {
         val monthValue = month.ordinal + 1
@@ -44,6 +41,12 @@ enum class Month {
     NOVEMBER,
     DECEMBER
 }
+
+private val Period.startTimestamp: Long
+    get() = startCalendar.timeInMillis
+
+private val Period.endTimestamp: Long
+    get() = endCalendar.timeInMillis
 
 /**
  * Creates (every time) new [Calendar] instance for the end of the received [Period]

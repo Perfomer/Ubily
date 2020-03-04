@@ -26,14 +26,13 @@ data class Comment(
     @PrimaryKey(autoGenerate = true) override val id: Long,
     val assetId: Long,
     val authorId: Long,
-    @IntRange(from = 1, to = 5) val rating: Int,
     val title: String,
-    val comment: String,
-    val publishingDate: Date,
-    @Embedded(prefix = "reply_") val publisherReply: PublisherReply?
+    @IntRange(from = 1, to = 5) val rating: Int,
+    @Embedded val comment: CommentBody,
+    @Embedded(prefix = "reply_") val publisherReply: CommentBody?
 ) : KeyEntity<Long>
 
-data class PublisherReply(
-    val comment: String?,
-    val publishingDate: Date?
+data class CommentBody(
+    val comment: String,
+    val publishingDate: Date
 )

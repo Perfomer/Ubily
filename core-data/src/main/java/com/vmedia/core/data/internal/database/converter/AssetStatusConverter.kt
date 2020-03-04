@@ -3,13 +3,12 @@ package com.vmedia.core.data.internal.database.converter
 import androidx.room.TypeConverter
 import com.vmedia.core.common.obj.AssetStatus
 
-@Suppress("unused")
-class AssetStatusConverter {
+class AssetStatusConverter : StringConverter<AssetStatus> {
 
     @TypeConverter
-    fun fromAssetStatus(assetStatus: AssetStatus) = assetStatus.name
+    override fun from(source: String) = AssetStatus.valueOf(source)
 
     @TypeConverter
-    fun fromString(status: String) = AssetStatus.valueOf(status)
+    override fun to(item: AssetStatus) = item.name
 
 }

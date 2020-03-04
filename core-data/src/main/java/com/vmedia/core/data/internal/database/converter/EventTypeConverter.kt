@@ -3,13 +3,12 @@ package com.vmedia.core.data.internal.database.converter
 import androidx.room.TypeConverter
 import com.vmedia.core.data.internal.database.entity.EventType
 
-@Suppress("unused")
-class EventTypeConverter {
+class EventTypeConverter : StringConverter<EventType> {
 
     @TypeConverter
-    fun fromEventType(eventType: EventType) = eventType.name
+    override fun to(item: EventType) = item.name
 
     @TypeConverter
-    fun fromString(status: String) = EventType.valueOf(status)
+    override fun from(source: String) = EventType.valueOf(source)
 
 }
