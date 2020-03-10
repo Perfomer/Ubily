@@ -1,15 +1,23 @@
 package com.vmedia.core.data.datasource
 
-import com.vmedia.core.data.internal.database.dao.PublisherDao
+import com.vmedia.core.data.internal.database.entity.Asset
+import com.vmedia.core.data.internal.database.entity.AssetImage
 import com.vmedia.core.data.internal.database.entity.Publisher
+import io.reactivex.Completable
 import io.reactivex.Observable
 
-class DatabaseDataSource(
-    private val publisherDao: PublisherDao
-) {
+interface DatabaseDataSource {
 
-    fun getPublisher(): Observable<Publisher> {
-        return publisherDao.getPublishers().map { it[0] }
-    }
+    fun getPublisher(): Observable<Publisher>
+
+    fun getAsset(id: Long): Observable<Asset>
+
+    fun putPublisher(publisher: Publisher): Completable
+
+    fun putAsset(
+        asset: Asset,
+        images: Collection<AssetImage>,
+        keywords: Collection<String>
+    ): Completable
 
 }

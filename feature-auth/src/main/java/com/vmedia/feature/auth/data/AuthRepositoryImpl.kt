@@ -19,8 +19,14 @@ internal class AuthRepositoryImpl(
     override fun extractToken(): Single<Token> {
         return Single.fromCallable {
             Token(
-                tokenValue = cookieExtractor.getCookie(URL_UNITY_ASSET_STORE, BuildConfig.NETWORK_COOKIE_TOKEN)!!,
-                session = cookieExtractor.getCookie(URL_UNITY_ASSET_STORE, BuildConfig.NETWORK_COOKIE_SESSION)!!
+                tokenValue = cookieExtractor.getCookie(
+                    BuildConfig.NETWORK_COOKIE_BASE_URL,
+                    BuildConfig.NETWORK_COOKIE_TOKEN
+                )!!,
+                session = cookieExtractor.getCookie(
+                    BuildConfig.NETWORK_COOKIE_BASE_URL,
+                    BuildConfig.NETWORK_COOKIE_SESSION
+                )!!
             )
         }
     }
@@ -32,12 +38,6 @@ internal class AuthRepositoryImpl(
 
     override fun saveCredentials(credentials: Credentials): Completable {
         return credentialsDataSource.writeCredentials(credentials)
-    }
-
-    private companion object {
-
-        private const val URL_UNITY_ASSET_STORE = "https://assetstore.unity3d.com"
-
     }
 
 }

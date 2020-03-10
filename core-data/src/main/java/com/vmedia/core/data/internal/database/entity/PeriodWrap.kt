@@ -10,7 +10,7 @@ import com.vmedia.core.common.obj.Period
     tableName = "Period",
     indices = [Index(value = ["year", "month"], unique = true)]
 )
-class PeriodWrap(
+internal class PeriodWrap(
     @PrimaryKey val id: Long,
     @Embedded val period: Period
 )

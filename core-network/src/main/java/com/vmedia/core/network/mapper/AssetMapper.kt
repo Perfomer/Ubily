@@ -9,6 +9,7 @@ import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.asset.PackageModelWithVersions
 import com.vmedia.core.network.api.entity.asset.PackageVersionModel
 import com.vmedia.core.network.entity.AssetDto
+import com.vmedia.core.network.util.bytesToMegabytes
 import java.math.BigDecimal
 
 internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {
@@ -25,7 +26,7 @@ internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {
             reviewsQuantity = from.countRatings,
             shortUrl = from.shortUrl,
             status = currentVersion.status.toAssetStatus(),
-            sizeBytes = currentVersion.size ?: 0L,
+            sizeMb = currentVersion.size?.bytesToMegabytes() ?: 0.0,
             creationDate = currentVersion.created.parse(FORMAT_PACKAGEVERSION),
             modificationDate = currentVersion.modified.parse(FORMAT_PACKAGEVERSION),
             publishingDate = currentVersion.published?.parse(FORMAT_PACKAGEVERSION),

@@ -1,4 +1,4 @@
-package com.vmedia.ubily
+package com.vmedia.ubily.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.core.view.postDelayed
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthNavigator
+import com.vmedia.ubily.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

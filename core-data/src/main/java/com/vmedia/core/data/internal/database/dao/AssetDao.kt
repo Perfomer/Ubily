@@ -12,4 +12,7 @@ interface AssetDao: BaseDao<Asset> {
     @Query("SELECT * FROM Asset")
     fun getAssets(): Observable<List<Asset>>
 
+    @Query("SELECT * FROM Asset WHERE id = :id")
+    fun getAsset(id: Long) : Observable<Asset>
+
 }

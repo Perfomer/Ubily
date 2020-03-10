@@ -1,4 +1,4 @@
-package com.vmedia.core.data.internal
+package com.vmedia.ubily
 
 import com.vmedia.core.common.obj.creds.RssToken
 import com.vmedia.core.common.obj.creds.Token

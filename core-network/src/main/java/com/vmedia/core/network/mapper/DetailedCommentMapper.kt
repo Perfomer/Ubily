@@ -1,5 +1,6 @@
 package com.vmedia.core.network.mapper
 
+import android.annotation.SuppressLint
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.network.entity.CommentDto
 import com.vmedia.core.network.entity.DetailedCommentDto
@@ -40,6 +41,7 @@ internal object DetailedCommentMapper : Mapper<List<CommentDto>, List<DetailedCo
                 this.authorName == other.authorName
     }
 
+    @SuppressLint("Range")
     private fun CommentDto.toDetailedCommentDto(
         publisherReply: String? = null,
         publisherReplyDate: Date? = null

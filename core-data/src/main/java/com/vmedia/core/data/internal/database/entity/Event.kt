@@ -15,7 +15,6 @@ enum class EventType {
     SALE,
     FREE_DOWNLOAD,
     COMMENT,
-    UNRESOLVED_COMMENT,
     ASSET,
     PAYOUT,
     REVENUE,

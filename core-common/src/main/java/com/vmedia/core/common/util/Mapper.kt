@@ -1,5 +1,6 @@
 package com.vmedia.core.common.util
 
+import androidx.annotation.WorkerThread
 import io.reactivex.Single
 
 /**
@@ -11,7 +12,10 @@ import io.reactivex.Single
  */
 @FunctionalInterface
 interface Mapper<FROM, TO> {
+
+    @WorkerThread
     fun map(from: FROM): TO
+
 }
 
 /**

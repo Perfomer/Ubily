@@ -14,7 +14,7 @@ data class AssetDto(
     @IntRange(from = 0, to = 5) val averageRating: Int,
     val reviewsQuantity: Int,
     val status: AssetStatus,
-    val sizeBytes: Long,
+    val sizeMb: Double,
     val creationDate: Date,
     val modificationDate: Date,
     val publishingDate: Date?,

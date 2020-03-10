@@ -1,5 +1,6 @@
 package com.vmedia.core.common.util
 
+import androidx.annotation.WorkerThread
 import io.reactivex.Single
 
 /**
@@ -10,7 +11,10 @@ import io.reactivex.Single
  */
 @FunctionalInterface
 interface Filter<T> {
+
+    @WorkerThread
     fun filter(source: List<T>): List<T>
+
 }
 
 fun <T> Single<List<T>>.filterWith(filter: Filter<T>) = map(filter::filter)

@@ -12,6 +12,7 @@ android {
         buildConfigField "String", "DB_NAME", '"ubilydb"'
         buildConfigField "String", "NETWORK_COOKIE_SESSION", '"kharma_session"'
         buildConfigField "String", "NETWORK_COOKIE_TOKEN", '"kharma_token"'
+        buildConfigField "String", "NETWORK_COOKIE_BASE_URL", '"https://assetstore.unity3d.com"'
         buildConfigField "String", "NETWORK_BASE_URL", '"https://publisher.assetstore.unity3d.com/"'
         buildConfigField "int", "NETWORK_MAX_REQUESTS", '5'
         buildConfigField "long", "NETWORK_READ_TIMEOUT", '180'
