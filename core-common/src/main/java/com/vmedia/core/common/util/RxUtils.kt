@@ -17,6 +17,14 @@ inline fun <T, U, R> Observable<T>.flatWithLatestFrom(
     return withLatestFrom(other, combiner).flatMap { it }
 }
 
+fun <T> Observable<List<T>>.toFlattenList() : Single<List<T>> {
+    return toList().flatten()
+}
+
+fun <T> Single<List<List<T>>>.flatten() : Single<List<T>> {
+    return map { it.flatten() }
+}
+
 fun <T> Single<T>.actOnSuccess(action: (T) -> Completable): Single<T> {
     return flatMap { action.invoke(it).andThen(Single.just(it)) }
 }

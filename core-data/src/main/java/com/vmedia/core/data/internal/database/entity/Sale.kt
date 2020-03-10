@@ -17,7 +17,7 @@ import java.util.*
     )]
 )
 data class Sale(
-    @PrimaryKey(autoGenerate = true) override val id: Long,
+    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val assetId: Long,
     val priceUsd: BigDecimal,
     val date: Date,

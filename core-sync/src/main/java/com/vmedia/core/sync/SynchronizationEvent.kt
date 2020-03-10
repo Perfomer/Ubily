@@ -7,6 +7,8 @@ import com.vmedia.core.sync.synchronizer.asset.AssetModel
 sealed class SynchronizationEvent() {
 
     object Loading : SynchronizationEvent()
+    object Cancelled : SynchronizationEvent()
+    class Error(val error: Throwable) : SynchronizationEvent()
 
     class PublisherReceived(val item: Publisher) : SynchronizationEvent()
     class AssetsReceived(val items: List<AssetModel>) : SynchronizationEvent()

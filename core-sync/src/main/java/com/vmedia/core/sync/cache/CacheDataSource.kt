@@ -7,10 +7,10 @@ internal interface CacheDataSource {
     fun dropCache()
 }
 
-internal fun <T> extractWithCache(cachedValue: T?, query: Single<T>): Single<T> {
-    return Single.fromCallable { cachedValue!! }.onErrorResumeNext(query)
+internal fun <T> extractWithCache(cachedValue: T?, query: Single<T>, callback: (T) -> Unit): Single<T> {
+    return Single.fromCallable { cachedValue!! }.onErrorResumeNext(query.doOnSuccess(callback::invoke))
 }
 
-internal fun <T> extractWithCache(cachedValue: T?, query: Observable<T>): Observable<T> {
-    return Observable.fromCallable { cachedValue!! }.onErrorResumeNext(query)
+internal fun <T> extractWithCache(cachedValue: T?, query: Observable<T>, callback: (T) -> Unit): Observable<T> {
+    return Observable.fromCallable { cachedValue!! }.onErrorResumeNext(query.doOnNext(callback::invoke))
 }

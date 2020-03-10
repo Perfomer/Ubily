@@ -46,7 +46,7 @@ internal class AssetSynchronizer(
                 .flatMapObservable {
                     Observable
                         .fromIterable(it)
-                        .zipWith { companionSource.invoke(it) }
+                        .zipWith(companionSource::invoke)
                 }
                 .toList()
         }

@@ -20,24 +20,21 @@ internal class CachedNetworkDataSourceDecorator(
     }
 
     override fun getPublisherId(): Single<Long> {
-        return extractWithCache(
-            publisherId,
-            source.getPublisherId()
-        )
+        return extractWithCache(publisherId, source.getPublisherId()) {
+            publisherId = it
+        }
     }
 
     override fun getPeriods(): Single<List<Period>> {
-        return extractWithCache(
-            periods,
-            source.getPeriods()
-        )
+        return extractWithCache(periods, source.getPeriods()) {
+            periods = it
+        }
     }
 
     override fun getPublisherInfo(): Single<PublisherDto> {
-        return extractWithCache(
-            publisher,
-            source.getPublisherInfo()
-        )
+        return extractWithCache(publisher, source.getPublisherInfo()) {
+            publisher = it
+        }
     }
 
 }

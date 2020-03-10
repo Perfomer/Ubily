@@ -13,39 +13,16 @@ data class Period(val year: Int, val month: Month) {
 
 }
 
-/**
- * Creates a [Period] object
- *
- * Use like this: [Month.JANUARY of 2020]
- *
- * @receiver a month for [Period]
- * @param year a year for [Period]
- *
- * @return [Period] with provided month and year
- */
-infix fun Month.of(year: Int): Period {
-    return Period(year, this)
-}
+val Period.startDate: Date
+    get() = Date(startTimestamp)
 
-enum class Month {
-    JANUARY,
-    FEBRUARY,
-    MARCH,
-    APRIL,
-    MAY,
-    JUNE,
-    JULY,
-    AUGUST,
-    SEPTEMBER,
-    OCTOBER,
-    NOVEMBER,
-    DECEMBER
-}
+val Period.endDate: Date
+    get() = Date(endTimestamp)
 
-private val Period.startTimestamp: Long
+val Period.startTimestamp: Long
     get() = startCalendar.timeInMillis
 
-private val Period.endTimestamp: Long
+val Period.endTimestamp: Long
     get() = endCalendar.timeInMillis
 
 /**
@@ -81,3 +58,17 @@ private val emptyCalendar: Calendar
         clear(Calendar.SECOND)
         clear(Calendar.MILLISECOND)
     }
+
+/**
+ * Creates a [Period] object
+ *
+ * Use like this: [Month.JANUARY of 2020]
+ *
+ * @receiver a month for [Period]
+ * @param year a year for [Period]
+ *
+ * @return [Period] with provided month and year
+ */
+infix fun Month.of(year: Int): Period {
+    return Period(year, this)
+}

@@ -1,10 +1,14 @@
 package com.vmedia.core.sync
 
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.andThenMerge
 import com.vmedia.core.sync.SynchronizationEvent.Loading
+import com.vmedia.core.sync.SynchronizationEvent.PeriodsReceived
+import com.vmedia.core.sync.SynchronizationEventType.PERIODS_RECEIVED
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
+import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Completable
 import io.reactivex.subjects.BehaviorSubject
@@ -24,7 +28,13 @@ internal class SynchronizationDataSourceImpl(
     private val revenueSynchronizer: _RevenueSynchronizer,
     private val payoutSynchronizer: _PayoutSynchronizer,
     private val periodSynchronizer: _PeriodSynchronizer
-) : SynchronizationDataSource {
+) : SynchronizationDataSource, SynchronizationPeriodsProvider {
+
+    override val periods: List<Period>
+        get() {
+            val event = syncStatus.events[PERIODS_RECEIVED] as PeriodsReceived
+            return event.items
+        }
 
     @Volatile
     override var isSynchronizing = false
@@ -54,6 +64,8 @@ internal class SynchronizationDataSourceImpl(
     }
 
     private fun execute(): Completable {
+        val periods by lazy { }
+
         return credentialsSynchronizer.synchronize()
             .andThenMerge(
                 publisherSynchronizer.synchronize(),
