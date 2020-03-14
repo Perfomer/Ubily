@@ -17,4 +17,19 @@ interface Filter<T> {
 
 }
 
+/**
+ * Item Filter class
+ * Implements [Filter] interface
+ */
+abstract class ItemFilter<T> : Filter<T> {
+
+    @WorkerThread
+    final override fun filter(source: List<T>): List<T> {
+        return source.filter(::filter)
+    }
+
+    abstract fun filter(item: T): Boolean
+
+}
+
 fun <T> Single<List<T>>.filterWith(filter: Filter<T>) = map(filter::filter)

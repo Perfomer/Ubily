@@ -21,6 +21,7 @@ import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.filter.CommentFilter
 import com.vmedia.core.network.mapper.*
+import com.vmedia.core.network.util.addCookieInterceptor
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,7 +44,9 @@ internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
 internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
 internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
-val networkModules by lazy { listOf(networkModule, utilsModule, retrofitModule) }
+val networkModules by lazy {
+    listOf(networkModule, utilsModule, retrofitModule)
+}
 
 private val networkModule = module {
     single<NetworkDataSource> {
@@ -110,17 +113,11 @@ private val retrofitModule = module {
         val tokenProvider = get<NetworkCredentialsProvider>()
 
         val builder = OkHttpClient.Builder()
-            .addInterceptor { chain ->
-                val header =
-                    "${BuildConfig.NETWORK_COOKIE_TOKEN}=${tokenProvider.token.tokenValue};" +
-                            "${BuildConfig.NETWORK_COOKIE_SESSION}=${tokenProvider.token.session}"
-
-                val request = chain.request()
-                    .newBuilder()
-                    .addHeader("Cookie", header)
-                    .build()
-
-                chain.proceed(request)
+            .addCookieInterceptor {
+                arrayOf(
+                    BuildConfig.NETWORK_COOKIE_TOKEN to tokenProvider.token.tokenValue,
+                    BuildConfig.NETWORK_COOKIE_SESSION to tokenProvider.token.session
+                )
             }
             .dispatcher(get())
             .readTimeout(BuildConfig.NETWORK_READ_TIMEOUT, TimeUnit.SECONDS)
@@ -137,14 +134,14 @@ private val retrofitModule = module {
     }
 }
 
-private const val BEAN_MAPPER_SALE = "SaleMapper"
-private const val BEAN_MAPPER_DOWNLOAD = "DownloadMapper"
-private const val BEAN_MAPPER_REVENUE = "RevenueMapper"
-private const val BEAN_MAPPER_DETAILEDCOMMENT = "DetailedCommentMapper"
-private const val BEAN_MAPPER_COMMENT = "CommentMapper"
-private const val BEAN_MAPPER_ASSET = "AssetMapper"
-private const val BEAN_MAPPER_ASSETDETAILS = "AssetDetailsMapper"
-private const val BEAN_MAPPER_PUBLISHER = "PublisherMapper"
-private const val BEAN_MAPPER_PERIOD = "PeriodMapper"
+private const val BEAN_MAPPER_SALE = "NetworkSaleMapper"
+private const val BEAN_MAPPER_DOWNLOAD = "NetworkDownloadMapper"
+private const val BEAN_MAPPER_REVENUE = "NetworkRevenueMapper"
+private const val BEAN_MAPPER_DETAILEDCOMMENT = "NetworkDetailedCommentMapper"
+private const val BEAN_MAPPER_COMMENT = "NetworkCommentMapper"
+private const val BEAN_MAPPER_ASSET = "NetworkAssetMapper"
+private const val BEAN_MAPPER_ASSETDETAILS = "NetworkAssetDetailsMapper"
+private const val BEAN_MAPPER_PUBLISHER = "NetworkPublisherMapper"
+private const val BEAN_MAPPER_PERIOD = "NetworkPeriodMapper"
 
-private const val BEAN_FILTER_COMMENT = "CommentFilter"
+private const val BEAN_FILTER_COMMENT = "NetworkCommentFilter"

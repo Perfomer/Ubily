@@ -3,7 +3,7 @@ package com.vmedia.core.sync.synchronizer.sale
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.obj.endDate
 import com.vmedia.core.common.obj.startDate
-import com.vmedia.core.common.util.Filter
+import com.vmedia.core.common.util.ItemFilter
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync._LastSaleDateProvider
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -11,17 +11,13 @@ import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 internal class SaleFilter(
     private val periodsProvider: SynchronizationPeriodsProvider,
     private val lastSaleDateProvider: _LastSaleDateProvider
-) : Filter<Sale> {
+) : ItemFilter<Sale>() {
 
-    override fun filter(source: List<Sale>): List<Sale> {
-        return source.filter(::filterItem)
-    }
+    override fun filter(item: Sale): Boolean {
+        val salePeriod = periodsProvider.periods.find { item.isBelongToPeriod(it) }!!
+        val lastSaleDate = lastSaleDateProvider.invoke(salePeriod, item.assetId, item.priceUsd)
 
-    private fun filterItem(sale: Sale): Boolean {
-        val salePeriod = periodsProvider.periods.find { sale.isBelongToPeriod(it) }!!
-        val lastSaleDate = lastSaleDateProvider.invoke(salePeriod, sale.assetId, sale.priceUsd)
-
-        return sale.date >= lastSaleDate
+        return item.date >= lastSaleDate
     }
 
     private companion object {

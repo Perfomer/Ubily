@@ -1,9 +1,6 @@
 package com.vmedia.core.data.datasource
 
-import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.AssetImage
-import com.vmedia.core.data.internal.database.entity.Publisher
-import com.vmedia.core.data.internal.database.entity.Sale
+import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -24,5 +21,7 @@ interface DatabaseDataSource {
     ): Completable
 
     fun putSales(sales: List<Sale>): Completable
+
+    fun putRevenues(revenues: List<Revenue>): Completable
 
 }

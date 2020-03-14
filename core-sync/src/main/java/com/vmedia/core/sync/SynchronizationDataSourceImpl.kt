@@ -67,16 +67,16 @@ internal class SynchronizationDataSourceImpl(
         val periods by lazy { }
 
         return credentialsSynchronizer.synchronize()
-            .andThenMerge(
-                publisherSynchronizer.synchronize(),
-                assetSynchronizer.synchronize(),
-                periodSynchronizer.synchronize()
-            ).andThenMerge(
-                reviewSynchronizer.synchronize(),
-                saleSynchronizer.synchronize(),
-                downloadSynchronizer.synchronize(),
-                revenueSynchronizer.synchronize(),
-                payoutSynchronizer.synchronize()
+            .andThenSynchronizeWith(
+                publisherSynchronizer,
+                assetSynchronizer,
+                periodSynchronizer
+            ).andThenSynchronizeWith(
+                reviewSynchronizer,
+                saleSynchronizer,
+                downloadSynchronizer,
+                revenueSynchronizer,
+                payoutSynchronizer
             )
     }
 
@@ -92,6 +92,16 @@ internal class SynchronizationDataSourceImpl(
             .doOnSubscribe { syncStatus = syncStatus.update(eventType, Loading) }
             .doOnSuccess { syncStatus = syncStatus.update(eventType, it) }
             .ignoreElement()
+    }
+
+    private fun Completable.andThenSynchronizeWith(
+        vararg synchronizers: Synchronizer<*>
+    ): Completable {
+        val completables = synchronizers
+            .map { it.synchronize() }
+            .toTypedArray()
+
+        return andThenMerge(*completables)
     }
 
     private companion object {

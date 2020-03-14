@@ -5,6 +5,7 @@ import com.vmedia.core.data.internal.database.dao.PublisherDao
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.AssetImage
 import com.vmedia.core.data.internal.database.entity.Publisher
+import com.vmedia.core.data.internal.database.entity.Sale
 import io.reactivex.Completable
 import io.reactivex.Observable
 
@@ -22,6 +23,14 @@ class DatabaseDataSourceImpl(
     }
 
     override fun putPublisher(publisher: Publisher): Completable {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAsset(name: String): Observable<Asset> {
+        TODO("Not yet implemented")
+    }
+
+    override fun putSales(sales: List<Sale>): Completable {
         TODO("Not yet implemented")
     }
 

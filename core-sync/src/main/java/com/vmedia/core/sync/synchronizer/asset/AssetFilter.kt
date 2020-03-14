@@ -1,15 +1,15 @@
 package com.vmedia.core.sync.synchronizer.asset
 
-import com.vmedia.core.common.util.Filter
+import com.vmedia.core.common.util.ItemFilter
 import com.vmedia.core.network.entity.AssetDto
-import com.vmedia.core.sync._AssetProvider
+import com.vmedia.core.sync._AssetProviderById
 
 internal class AssetFilter(
-    private val assetProvider: _AssetProvider
-) : Filter<AssetDto> {
+    private val assetProvider: _AssetProviderById
+) : ItemFilter<AssetDto>() {
 
-    override fun filter(source: List<AssetDto>): List<AssetDto> {
-        return source.filter { it.isDateUpdated() || it.isStatusUpdated() }
+    override fun filter(item: AssetDto): Boolean {
+        return item.isDateUpdated() || item.isStatusUpdated()
     }
 
     private fun AssetDto.isDateUpdated(): Boolean {
