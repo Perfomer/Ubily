@@ -24,4 +24,6 @@ interface DatabaseDataSource {
 
     fun putRevenues(revenues: List<Revenue>): Completable
 
+    fun putPayouts(payouts: List<Payout>): Completable
+
 }
