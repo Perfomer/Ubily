@@ -46,7 +46,7 @@ private val dataBaseModule = module {
     dao { getEventDao() }
     dao { getSaleDao() }
     dao { getPublisherDao() }
-    dao { getCommentDao() }
+    dao { getReviewDao() }
     dao { getRevenueDao() }
     dao { getPayoutDao() }
 }

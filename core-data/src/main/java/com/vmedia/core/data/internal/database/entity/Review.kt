@@ -22,7 +22,7 @@ import java.util.*
         )
     ]
 )
-data class Comment(
+data class Review(
     @PrimaryKey(autoGenerate = true) override val id: Long,
     val assetId: Long,
     val authorId: Long,

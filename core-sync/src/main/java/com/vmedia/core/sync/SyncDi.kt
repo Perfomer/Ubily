@@ -60,7 +60,7 @@ internal typealias _PeriodFilter = Filter<Period>
 
 internal typealias _AssetSynchronizer = Synchronizer<AssetsReceived>
 internal typealias _PublisherSynchronizer = Synchronizer<PublisherReceived>
-internal typealias _ReviewSynchronizer = Synchronizer<CommentsReceived>
+internal typealias _ReviewSynchronizer = Synchronizer<ReviewsReceived>
 internal typealias _RevenueSynchronizer = Synchronizer<RevenuesReceived>
 internal typealias _PayoutSynchronizer = Synchronizer<PayoutsReceived>
 internal typealias _SaleSynchronizer = Synchronizer<SalesReceived>

@@ -19,7 +19,7 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.entity.*
-import com.vmedia.core.network.filter.CommentFilter
+import com.vmedia.core.network.filter.ReviewFilter
 import com.vmedia.core.network.mapper.*
 import com.vmedia.core.network.util.addCookieInterceptor
 import okhttp3.Dispatcher
@@ -37,11 +37,11 @@ import java.util.concurrent.TimeUnit
 internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
 internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
 internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueEventDto>>
-internal typealias _DetailedCommentMapper = Mapper<List<CommentDto>, List<DetailedCommentDto>>
+internal typealias _DetailedCommentMapper = Mapper<List<ReviewDto>, List<DetailedReviewDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
 internal typealias _PublisherMapper = Mapper<PublisherDetailsModel, PublisherDto>
 internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
-internal typealias _CommentMapper = ListMapper<RssItemModel, CommentDto>
+internal typealias _ReviewMapper = ListMapper<RssItemModel, ReviewDto>
 internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
 val networkModules by lazy {
@@ -74,12 +74,12 @@ private val utilsModule = module {
     single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
     single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
     single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
-    single<_DetailedCommentMapper>(BEAN_MAPPER_DETAILEDCOMMENT) { DetailedCommentMapper }
+    single<_DetailedCommentMapper>(BEAN_MAPPER_DETAILEDCOMMENT) { DetailedReviewMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
-    single(BEAN_MAPPER_COMMENT) { CommentMapper.toListMapper() }
+    single(BEAN_MAPPER_COMMENT) { ReviewMapper.toListMapper() }
     single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
 
-    single<Filter<CommentDto>>(BEAN_FILTER_COMMENT) { CommentFilter }
+    single<Filter<ReviewDto>>(BEAN_FILTER_COMMENT) { ReviewFilter }
 }
 
 private val retrofitModule = module {

@@ -15,7 +15,7 @@ import com.vmedia.core.data.internal.database.entity.*
     entities = [
         Asset::class,
         Sale::class,
-        Comment::class,
+        Review::class,
         Event::class,
         EventEntity::class,
         Publisher::class,
@@ -42,7 +42,7 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getAssetDao(): AssetDao
     abstract fun getSaleDao(): SaleDao
     abstract fun getPublisherDao(): PublisherDao
-    abstract fun getCommentDao(): CommentDao
+    abstract fun getReviewDao(): ReviewDao
     abstract fun getRevenueDao(): RevenueDao
     abstract fun getPayoutDao(): PayoutDao
 

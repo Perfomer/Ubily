@@ -40,8 +40,7 @@
     <string name="entities_publisher">Publisher</string>
     <string name="entities_periods">Periods</string>
     <string name="entities_assets">Assets</string>
-    <string name="entities_comments">Comments</string>
-    <string name="entities_unresolved_comments">Unresolved Comments</string>
+    <string name="entities_reviews">Reviews</string>
     <string name="entities_sales">Sales</string>
     <string name="entities_free_downloads">Free downloads</string>
     <string name="entities_revenue">Revenue</string>
@@ -64,11 +63,8 @@
     <string name="event_free_download_title">@string/entities_free_downloads</string>
     <string name="event_free_download_text"><![CDATA[<b>%1d</b> asset(s) were downloaded for free <b>%2d</b> times]]></string>
 
-    <string name="event_comment_title">Review</string>
-    <string name="event_comment_text"><![CDATA[New review from <b>%s</b>:]]></string>
-
-    <string name="event_comment_unresolved_title">@string/event_comment_title</string>
-    <string name="event_comment_unresolved_text"><![CDATA[New review with unresolved asset reference from <b>%s</b>:]]></string>
+    <string name="event_review_title">Review</string>
+    <string name="event_review_text"><![CDATA[New review from <b>%s</b>:]]></string>
 
     <string name="event_revenue_title">@string/entities_revenue</string>
     <string name="event_revenue_text"><![CDATA[You have earned <b>$%.2f</b> for <b>%s</b>]]></string>

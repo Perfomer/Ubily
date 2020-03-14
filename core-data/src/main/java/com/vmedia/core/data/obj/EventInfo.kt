@@ -22,11 +22,11 @@ sealed class EventInfo(
         val downloads: List<Sale>
     ): EventInfo(id, date, EventType.FREE_DOWNLOAD)
 
-    data class EventComment(
+    data class EventReview(
         override val id: Long,
         override val date: Date,
-        val comment: Comment
-    ): EventInfo(id, date, EventType.COMMENT)
+        val review: Review
+    ): EventInfo(id, date, EventType.REVIEW)
 
     data class EventAsset(
         override val id: Long,

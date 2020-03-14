@@ -8,7 +8,7 @@ import retrofit2.http.Path
 internal interface UnityRssApi {
 
     @GET("/feed/{publisherActivityName}/{publisherActivityToken}/activity.rss")
-    fun getCommentsRss(
+    fun getReviewsRss(
         @Path("publisherActivityName") userName: String,
         @Path("publisherActivityToken") token: String
     ): Single<RssModel>

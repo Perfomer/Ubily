@@ -4,16 +4,16 @@ import com.vmedia.core.common.util.FORMAT_RSS
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.rss.RssItemModel
-import com.vmedia.core.network.entity.CommentDto
+import com.vmedia.core.network.entity.ReviewDto
 
-internal object CommentMapper : Mapper<RssItemModel, CommentDto> {
+internal object ReviewMapper : Mapper<RssItemModel, ReviewDto> {
 
-    override fun map(from: RssItemModel): CommentDto {
+    override fun map(from: RssItemModel): ReviewDto {
         val commentBody = from.description
         val commentTitle = commentBody.extractTitle()
         val isPublisherReply = commentTitle == "Reply from publisher"
 
-        return CommentDto(
+        return ReviewDto(
             title = if (isPublisherReply) "" else commentTitle,
             comment = commentBody.extractComment(),
             rating = if (isPublisherReply) 0 else commentBody.extractRating(),

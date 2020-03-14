@@ -14,7 +14,7 @@ data class Event(
 enum class EventType {
     SALE,
     FREE_DOWNLOAD,
-    COMMENT,
+    REVIEW,
     ASSET,
     PAYOUT,
     REVENUE,

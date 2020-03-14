@@ -22,6 +22,6 @@ interface NetworkDataSource {
 
     fun getAssetDetails(versionId: Long): Single<AssetDetailsDto>
 
-    fun getComments(): Single<List<DetailedCommentDto>>
+    fun getReviews(): Single<List<DetailedReviewDto>>
 
 }

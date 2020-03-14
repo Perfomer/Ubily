@@ -27,14 +27,14 @@ internal class NetworkDataSourceImpl(
     private val saleMapper: _SaleMapper,
     private val downloadMapper: _DownloadMapper,
     private val revenueMapper: _RevenueMapper,
-    private val commentMapper: _CommentMapper,
+    private val reviewMapper: _ReviewMapper,
     private val detailedCommentMapper: _DetailedCommentMapper,
     private val assetMapper: _AssetMapper,
     private val assetDetailsMapper: _AssetDetailsMapper,
     private val periodMapper: _PeriodMapper,
     private val publisherMapper: _PublisherMapper,
 
-    private val commentFilter: Filter<CommentDto>
+    private val reviewFilter: Filter<ReviewDto>
 ) : NetworkDataSource {
 
     override fun getPeriods(): Single<List<Period>> {
@@ -86,14 +86,14 @@ internal class NetworkDataSourceImpl(
             .mapWith(assetDetailsMapper)
     }
 
-    override fun getComments(): Single<List<DetailedCommentDto>> {
+    override fun getReviews(): Single<List<DetailedReviewDto>> {
         val token = credentials.rssToken
 
-        return rssApi.getCommentsRss(token.publisherName, token.token)
+        return rssApi.getReviewsRss(token.publisherName, token.token)
             .map(RssModel::getChannel)
             .map(RssChannelModel::getItems)
-            .mapWith(commentMapper)
-            .filterWith(commentFilter)
+            .mapWith(reviewMapper)
+            .filterWith(reviewFilter)
             .mapWith(detailedCommentMapper)
     }
 
