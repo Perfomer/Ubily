@@ -21,6 +21,8 @@ import com.vmedia.core.sync.synchronizer.asset.AssetSynchronizer
 import com.vmedia.core.sync.synchronizer.payout.PayoutInstanceFilter
 import com.vmedia.core.sync.synchronizer.payout.PayoutMapper
 import com.vmedia.core.sync.synchronizer.payout.PayoutSynchronizer
+import com.vmedia.core.sync.synchronizer.period.PeriodFilter
+import com.vmedia.core.sync.synchronizer.period.PeriodSynchronizer
 import com.vmedia.core.sync.synchronizer.publisher.PublisherMapper
 import com.vmedia.core.sync.synchronizer.publisher.PublisherSynchronizer
 import com.vmedia.core.sync.synchronizer.revenue.RevenueDateFilter
@@ -42,6 +44,7 @@ internal typealias _AssetProviderById = (id: Long) -> Asset
 internal typealias _AssetProviderByName = (name: String) -> Asset
 internal typealias _LastSaleDateProvider = (period: Period, assetId: Long, priceUsd: BigDecimal) -> Date
 internal typealias _LastCreditDateProvider = () -> Date
+internal typealias _LastPeriodProvider = () -> Period?
 internal typealias _PeriodIdProvider = (period: Period) -> Long
 
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
@@ -53,6 +56,7 @@ internal typealias _PublisherMapper = Mapper<Pair<Long, PublisherDto>, Publisher
 internal typealias _AssetFilter = Filter<AssetDto>
 internal typealias _SaleFilter = Filter<Sale>
 internal typealias _RevenueFilter = Filter<RevenueEventDto>
+internal typealias _PeriodFilter = Filter<Period>
 
 internal typealias _AssetSynchronizer = Synchronizer<AssetsReceived>
 internal typealias _PublisherSynchronizer = Synchronizer<PublisherReceived>
@@ -77,12 +81,14 @@ private const val BEAN_FILTER_SALE = "SyncSaleFilter"
 private const val BEAN_FILTER_REVENUE_DATE = "SyncRevenueDateFilter"
 private const val BEAN_FILTER_REVENUE_INSTANCE = "SyncRevenueInstanceFilter"
 private const val BEAN_FILTER_PAYOUT_INSTANCE = "SyncPayoutInstanceFilter"
+private const val BEAN_FILTER_PERIOD = "SyncPeriodFilter"
 
 private const val BEAN_PROVIDER_ASSET_BY_ID = "SyncAssetProviderById"
 private const val BEAN_PROVIDER_ASSET_BY_NAME = "SyncAssetProviderByName"
 private const val BEAN_PROVIDER_SALE_DATE_LAST = "SyncLastSaleDateProvider"
 private const val BEAN_PROVIDER_CREDIT_DATE_LAST = "SyncLastCreditDateProvider"
 private const val BEAN_PROVIDER_PERIOD_ID = "SyncPeriodIdProvider"
+private const val BEAN_PROVIDER_PERIOD_LAST = "SyncLastPeriodProvider"
 
 private const val BEAN_SYNCHRONIZER_ASSET = "SyncAssetSynchronizer"
 private const val BEAN_SYNCHRONIZER_PUBLISHER = "SyncPublisherSynchronizer"
@@ -172,6 +178,14 @@ private val synchronizerModule = module {
             filterByDate = get(BEAN_FILTER_REVENUE_DATE)
         )
     }
+
+    single(BEAN_SYNCHRONIZER_PERIOD) {
+        PeriodSynchronizer(
+            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
+            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
+            filter = get(BEAN_FILTER_PERIOD)
+        )
+    }
 }
 
 private val mapperModule = module {
@@ -183,6 +197,7 @@ private val mapperModule = module {
 }
 
 private val filterModule = module {
+    single<_PeriodFilter>(BEAN_FILTER_PERIOD) { PeriodFilter(get(BEAN_PROVIDER_PERIOD_LAST)) }
     single<_AssetFilter>(BEAN_FILTER_ASSET) { AssetFilter(get(BEAN_PROVIDER_ASSET_BY_ID)) }
     single<_SaleFilter>(BEAN_FILTER_SALE) { SaleFilter(get(), get(BEAN_PROVIDER_SALE_DATE_LAST)) }
     single<_RevenueFilter>(BEAN_FILTER_REVENUE_DATE) { RevenueDateFilter(get(BEAN_PROVIDER_CREDIT_DATE_LAST)) }

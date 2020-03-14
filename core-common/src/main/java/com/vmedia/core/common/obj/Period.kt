@@ -72,3 +72,8 @@ private val emptyCalendar: Calendar
 infix fun Month.of(year: Int): Period {
     return Period(year, this)
 }
+
+fun Period.isAfter(period: Period): Boolean {
+    return year > period.year ||
+            year == period.year && month.ordinal > period.month.ordinal
+}
