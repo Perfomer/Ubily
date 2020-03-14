@@ -18,6 +18,8 @@ import com.vmedia.core.sync.synchronizer.asset.AssetFilter
 import com.vmedia.core.sync.synchronizer.asset.AssetMapper
 import com.vmedia.core.sync.synchronizer.asset.AssetModel
 import com.vmedia.core.sync.synchronizer.asset.AssetSynchronizer
+import com.vmedia.core.sync.synchronizer.download.DownloadMapper
+import com.vmedia.core.sync.synchronizer.download.DownloadSynchronizer
 import com.vmedia.core.sync.synchronizer.payout.PayoutInstanceFilter
 import com.vmedia.core.sync.synchronizer.payout.PayoutMapper
 import com.vmedia.core.sync.synchronizer.payout.PayoutSynchronizer
@@ -57,6 +59,7 @@ internal typealias _ReviewProvider = (authorId: Long, assetId: Long) -> Review?
 
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
 internal typealias _SaleMapper = ListMapper<SaleDto, Sale>
+internal typealias _DownloadMapper = ListMapper<DownloadDto, Sale>
 internal typealias _RevenueMapper = ListMapper<RevenueEventDto, Revenue>
 internal typealias _PayoutMapper = ListMapper<RevenueEventDto, Payout>
 internal typealias _ReviewMapper = ListMapper<DetailedReviewDto, Review>
@@ -84,6 +87,7 @@ private const val BEAN_CACHED_NETWORK_DATASOURCE = "SyncCachedNetworkDataSource"
 
 private const val BEAN_MAPPER_ASSET = "SyncAssetMapper"
 private const val BEAN_MAPPER_SALE = "SyncSaleMapper"
+private const val BEAN_MAPPER_DOWNLOAD = "SyncDownloadMapper"
 private const val BEAN_MAPPER_PUBLISHER = "SyncPublisherMapper"
 private const val BEAN_MAPPER_REVENUE = "SyncRevenueMapper"
 private const val BEAN_MAPPER_PAYOUT = "SyncPayoutMapper"
@@ -223,6 +227,16 @@ private val synchronizerModule = module {
             filter = get(BEAN_FILTER_REVIEW)
         )
     }
+
+    single(BEAN_SYNCHRONIZER_DOWNLOAD) {
+        DownloadSynchronizer(
+            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
+            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
+            periodsProvider = get(),
+            mapper = get(BEAN_MAPPER_DOWNLOAD),
+            filter = get(BEAN_FILTER_SALE)
+        )
+    }
 }
 
 private val mapperModule = module {
@@ -232,6 +246,7 @@ private val mapperModule = module {
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
     single(BEAN_MAPPER_USER) { UserMapper.toListMapper() }
     single(BEAN_MAPPER_SALE) { SaleMapper(get(BEAN_PROVIDER_ASSET_BY_NAME)).toListMapper() }
+    single(BEAN_MAPPER_DOWNLOAD) { DownloadMapper(get(BEAN_PROVIDER_ASSET_BY_NAME)).toListMapper() }
     single(BEAN_MAPPER_REVENUE) { RevenueMapper(get(BEAN_PROVIDER_PERIOD_ID)).toListMapper() }
     single(BEAN_MAPPER_PAYOUT) { PayoutMapper(get(BEAN_PROVIDER_PERIOD_ID)).toListMapper() }
     single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
