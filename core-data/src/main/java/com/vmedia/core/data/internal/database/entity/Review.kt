@@ -23,7 +23,7 @@ import java.util.*
     ]
 )
 data class Review(
-    @PrimaryKey(autoGenerate = true) override val id: Long,
+    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val assetId: Long,
     val authorId: Long,
     val title: String,

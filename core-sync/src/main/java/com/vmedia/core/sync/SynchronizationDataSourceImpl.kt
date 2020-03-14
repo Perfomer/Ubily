@@ -2,8 +2,7 @@ package com.vmedia.core.sync
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.andThenMerge
-import com.vmedia.core.sync.SynchronizationEvent.Loading
-import com.vmedia.core.sync.SynchronizationEvent.PeriodsReceived
+import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.SynchronizationEventType.PERIODS_RECEIVED
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
@@ -27,7 +26,8 @@ internal class SynchronizationDataSourceImpl(
     private val downloadSynchronizer: _DownloadSynchronizer,
     private val revenueSynchronizer: _RevenueSynchronizer,
     private val payoutSynchronizer: _PayoutSynchronizer,
-    private val periodSynchronizer: _PeriodSynchronizer
+    private val periodSynchronizer: _PeriodSynchronizer,
+    private val userSynchronizer: _UserSynchronizer
 ) : SynchronizationDataSource, SynchronizationPeriodsProvider {
 
     override val periods: List<Period>
@@ -64,13 +64,12 @@ internal class SynchronizationDataSourceImpl(
     }
 
     private fun execute(): Completable {
-        val periods by lazy { }
-
         return credentialsSynchronizer.synchronize()
             .andThenSynchronizeWith(
                 publisherSynchronizer,
                 assetSynchronizer,
-                periodSynchronizer
+                periodSynchronizer,
+                userSynchronizer
             ).andThenSynchronizeWith(
                 reviewSynchronizer,
                 saleSynchronizer,
@@ -90,8 +89,10 @@ internal class SynchronizationDataSourceImpl(
     private fun <T : SynchronizationEvent> Synchronizer<T>.synchronize(): Completable {
         return execute()
             .doOnSubscribe { syncStatus = syncStatus.update(eventType, Loading) }
+            .doOnError { syncStatus = syncStatus.update(eventType, Error(it)) }
             .doOnSuccess { syncStatus = syncStatus.update(eventType, it) }
             .ignoreElement()
+            .onErrorComplete()
     }
 
     private fun Completable.andThenSynchronizeWith(

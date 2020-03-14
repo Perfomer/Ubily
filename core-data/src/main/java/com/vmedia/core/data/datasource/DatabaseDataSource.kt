@@ -29,4 +29,8 @@ interface DatabaseDataSource {
 
     fun putPeriods(periods: Collection<Period>): Completable
 
+    fun putReviews(reviews: List<Review>): Completable
+
+    fun putUsers(users: List<User>): Completable
+
 }

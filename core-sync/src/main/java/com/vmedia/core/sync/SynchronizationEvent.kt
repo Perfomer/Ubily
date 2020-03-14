@@ -13,6 +13,7 @@ sealed class SynchronizationEvent() {
     class PublisherReceived(val item: Publisher) : SynchronizationEvent()
     class AssetsReceived(val items: List<AssetModel>) : SynchronizationEvent()
     class PeriodsReceived(val items: List<Period>) : SynchronizationEvent()
+    class UsersReceived(val items: List<User>) : SynchronizationEvent()
     class ReviewsReceived(val items: List<Review>) : SynchronizationEvent()
     class SalesReceived(val items: List<Sale>) : SynchronizationEvent()
     class FreeDownloadsReceived(val items: List<Sale>) : SynchronizationEvent()
@@ -25,6 +26,7 @@ enum class SynchronizationEventType {
     PUBLISHER_RECEIVED,
     ASSETS_RECEIVED,
     PERIODS_RECEIVED,
+    USERS_RECEIVED,
     REVIEWS_RECEIVED,
     SALES_RECEIVED,
     FREE_DOWNLOADS_RECEIVED,
