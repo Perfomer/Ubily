@@ -25,11 +25,6 @@ abstract class MviFragment<Intent : Any, State : Parcelable, Subscription : Any>
 
     private val viewModel by lazy(::provideViewModel)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)
-    }
-
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)

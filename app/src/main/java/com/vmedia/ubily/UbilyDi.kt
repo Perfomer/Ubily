@@ -12,11 +12,11 @@ internal val koinModules by lazy {
     featureModules + dataModules + networkModules + syncModules + appModule
 }
 
-internal val featureModules = listOf(
+private val featureModules = listOf(
     authModule
 )
 
-internal val appModule = module {
+private val appModule = module {
     single { NetworkCredentialsSynchronizer(get(), get(), get()) }
     single<NetworkCredentialsProvider> { get<MutableNetworkCredentialsProvider>() }
     single<MutableNetworkCredentialsProvider> { NetworkCredentialsHolder() }

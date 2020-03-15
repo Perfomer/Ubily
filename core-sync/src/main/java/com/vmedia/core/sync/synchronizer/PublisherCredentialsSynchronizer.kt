@@ -7,7 +7,7 @@ import io.reactivex.Completable
 internal class PublisherCredentialsSynchronizer(
     private val networkDataSource: NetworkDataSource,
     private val credentials: MutableNetworkCredentialsProvider
-){
+) {
 
     fun synchronize(): Completable {
         return networkDataSource.getPublisherId()

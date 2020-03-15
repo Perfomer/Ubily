@@ -1,48 +1,56 @@
 package com.vmedia.core.sync.cache
 
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.datasource.DatabaseDataSource
-import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.User
-import io.reactivex.Single
+import java.math.BigDecimal
 
 internal class CachedDatabaseDataSourceDecorator(
     private val source: DatabaseDataSource
-) : DatabaseDataSource by source, CacheDataSource {
+) : CachedDataSource(), DatabaseDataSource by source {
 
-    private val assetsWithIds: MutableMap<Long, Asset> = mutableMapOf()
-    private val assetsWithUrls: MutableMap<String, Asset> = mutableMapOf()
-    private val assetsWithNames: MutableMap<String, Asset> = mutableMapOf()
-    private val usersWithNames: MutableMap<String, User> = mutableMapOf()
+    private val lastPayoutCache by cachedSingle(source.getLastPayout())
+    private val lastRevenueCache by cachedSingle(source.getLastRevenue())
+    private val lastPeriodCache by cachedSingle(source.getLastPeriod())
 
-    override fun dropCache() {
-        assetsWithIds.clear()
-        assetsWithUrls.clear()
-        assetsWithNames.clear()
-        usersWithNames.clear()
+    private val assetsWithIds by cachedMapSingle(source::getAsset)
+    private val assetsWithUrls by cachedMapSingle(source::getAssetByUrl)
+    private val assetsWithNames by cachedMapSingle(source::getAssetByName)
+    private val usersWithNames by cachedMapSingle(source::getUserByName)
+
+    private val lastSales by cachedMapSingle { arguments: Triple<Long, Period, BigDecimal> ->
+        source.getLastSale(
+            assetId = arguments.first,
+            period = arguments.second,
+            priceUsd = arguments.third
+        )
     }
 
-    override fun getAsset(id: Long): Single<Asset> {
-        return extractWithCache(assetsWithIds[id], source.getAsset(id)) {
-            assetsWithIds[id] = it
-        }
+    private val reviews by cachedMapSingle { arguments: Pair<Long, Long> ->
+        source.getReview(
+            authorId = arguments.first,
+            assetId = arguments.second
+        )
     }
 
-    override fun getAssetByUrl(url: String): Single<Asset> {
-        return extractWithCache(assetsWithUrls[url], source.getAssetByUrl(url)) {
-            assetsWithUrls[url] = it
-        }
-    }
 
-    override fun getAssetByName(name: String): Single<Asset> {
-        return extractWithCache(assetsWithNames[name], source.getAssetByName(name)) {
-            assetsWithNames[name] = it
-        }
-    }
+    override fun getLastPayout() = lastPayoutCache
+    override fun getLastRevenue() = lastRevenueCache
+    override fun getLastPeriod() = lastPeriodCache
 
-    override fun getUserByName(name: String): Single<User> {
-        return extractWithCache(usersWithNames[name], source.getUserByName(name)) {
-            usersWithNames[name] = it
-        }
-    }
+    override fun getAsset(id: Long) = assetsWithIds[id]
+    override fun getAssetByUrl(url: String) = assetsWithUrls[url]
+    override fun getAssetByName(name: String) = assetsWithNames[name]
+    override fun getUserByName(name: String) = usersWithNames[name]
+
+    override fun getLastSale(
+        assetId: Long,
+        period: Period,
+        priceUsd: BigDecimal
+    ) = lastSales[Triple(assetId, period, priceUsd)]
+
+    override fun getReview(
+        authorId: Long,
+        assetId: Long
+    ) = reviews[Pair(authorId, assetId)]
 
 }

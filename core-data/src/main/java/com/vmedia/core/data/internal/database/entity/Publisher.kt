@@ -22,4 +22,3 @@ data class Publisher(
 
     val balanceUsd: BigDecimal = BigDecimal(0)
 ) : KeyEntity<Long>
-

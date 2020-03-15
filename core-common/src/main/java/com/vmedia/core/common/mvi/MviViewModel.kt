@@ -26,7 +26,7 @@ abstract class MviViewModel<Intent : Any, Action : Any, State : Parcelable, Subs
         get() = subscriptionSubject
 
     val state: ObservableSource<State>
-        get() = stateSubject
+        get() = stateSubject.distinctUntilChanged()
 
     private val intentSubject = PublishSubject.create<Intent>()
     private val subscriptionSubject = PublishSubject.create<Subscription>()
