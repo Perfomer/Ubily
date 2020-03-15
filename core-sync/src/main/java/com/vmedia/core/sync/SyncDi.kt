@@ -1,10 +1,7 @@
 package com.vmedia.core.sync
 
 import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.Filter
-import com.vmedia.core.common.util.ListMapper
-import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.common.util.toListMapper
+import com.vmedia.core.common.util.*
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.entity.*
@@ -20,6 +17,7 @@ import com.vmedia.core.sync.synchronizer.asset.AssetModel
 import com.vmedia.core.sync.synchronizer.asset.AssetSynchronizer
 import com.vmedia.core.sync.synchronizer.download.DownloadMapper
 import com.vmedia.core.sync.synchronizer.download.DownloadSynchronizer
+import com.vmedia.core.sync.synchronizer.payout.PayoutDateFilter
 import com.vmedia.core.sync.synchronizer.payout.PayoutInstanceFilter
 import com.vmedia.core.sync.synchronizer.payout.PayoutMapper
 import com.vmedia.core.sync.synchronizer.payout.PayoutSynchronizer
@@ -39,6 +37,8 @@ import com.vmedia.core.sync.synchronizer.sale.SaleMapper
 import com.vmedia.core.sync.synchronizer.sale.SaleSynchronizer
 import com.vmedia.core.sync.synchronizer.user.UserMapper
 import com.vmedia.core.sync.synchronizer.user.UserSynchronizer
+import org.koin.dsl.context.ModuleDefinition
+import org.koin.dsl.definition.BeanDefinition
 import org.koin.dsl.module.module
 import java.math.BigDecimal
 import java.util.*
@@ -51,10 +51,11 @@ internal typealias _AssetProviderById = (id: Long) -> Asset
 internal typealias _AssetProviderByName = (name: String) -> Asset
 internal typealias _AssetProviderByUrl = (url: String) -> Asset
 internal typealias _UserProviderByName = (name: String) -> User
-internal typealias _LastSaleDateProvider = (period: Period, assetId: Long, priceUsd: BigDecimal) -> Date
-internal typealias _LastCreditDateProvider = () -> Date
-internal typealias _LastPeriodProvider = () -> Period?
 internal typealias _PeriodIdProvider = (period: Period) -> Long
+internal typealias _LastSaleDateProvider = (period: Period, assetId: Long, priceUsd: BigDecimal) -> Date?
+internal typealias _LastPayoutDateProvider = () -> Date?
+internal typealias _LastRevenueDateProvider = () -> Date?
+internal typealias _LastPeriodProvider = () -> Period?
 internal typealias _ReviewProvider = (authorId: Long, assetId: Long) -> Review?
 
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
@@ -97,6 +98,7 @@ private const val BEAN_MAPPER_USER = "SyncUserMapper"
 private const val BEAN_FILTER_ASSET = "SyncAssetFilter"
 private const val BEAN_FILTER_SALE = "SyncSaleFilter"
 private const val BEAN_FILTER_REVENUE_DATE = "SyncRevenueDateFilter"
+private const val BEAN_FILTER_PAYOUT_DATE = "SyncPayoutDateFilter"
 private const val BEAN_FILTER_REVENUE_INSTANCE = "SyncRevenueInstanceFilter"
 private const val BEAN_FILTER_PAYOUT_INSTANCE = "SyncPayoutInstanceFilter"
 private const val BEAN_FILTER_PERIOD = "SyncPeriodFilter"
@@ -107,7 +109,8 @@ private const val BEAN_PROVIDER_ASSET_BY_NAME = "SyncAssetProviderByName"
 private const val BEAN_PROVIDER_ASSET_BY_URL = "SyncAssetProviderByUrl"
 private const val BEAN_PROVIDER_USER_BY_NAME = "SyncUserProviderByName"
 private const val BEAN_PROVIDER_SALE_DATE_LAST = "SyncLastSaleDateProvider"
-private const val BEAN_PROVIDER_CREDIT_DATE_LAST = "SyncLastCreditDateProvider"
+private const val BEAN_PROVIDER_PAYOUT_DATE_LAST = "SyncLastPayoutDateProvider"
+private const val BEAN_PROVIDER_REVENUE_DATE_LAST = "SyncLastRevenueDateProvider"
 private const val BEAN_PROVIDER_PERIOD_ID = "SyncPeriodIdProvider"
 private const val BEAN_PROVIDER_PERIOD_LAST = "SyncLastPeriodProvider"
 private const val BEAN_PROVIDER_REVIEW = "SyncReviewProvider"
@@ -199,7 +202,7 @@ private val synchronizerModule = module {
             databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
             mapper = get(BEAN_MAPPER_PAYOUT),
             filterByInstance = get(BEAN_FILTER_PAYOUT_INSTANCE),
-            filterByDate = get(BEAN_FILTER_REVENUE_DATE)
+            filterByDate = get(BEAN_FILTER_PAYOUT_DATE)
         )
     }
 
@@ -257,25 +260,62 @@ private val filterModule = module {
     single<_AssetFilter>(BEAN_FILTER_ASSET) { AssetFilter(get(BEAN_PROVIDER_ASSET_BY_ID)) }
     single<_SaleFilter>(BEAN_FILTER_SALE) { SaleFilter(get(), get(BEAN_PROVIDER_SALE_DATE_LAST)) }
     single<_ReviewFilter>(BEAN_FILTER_REVIEW) { ReviewFilter(get(BEAN_PROVIDER_REVIEW)) }
-    single<_RevenueFilter>(BEAN_FILTER_REVENUE_DATE) {
-        RevenueDateFilter(
-            get(
-                BEAN_PROVIDER_CREDIT_DATE_LAST
-            )
-        )
-    }
     single<_RevenueFilter>(BEAN_FILTER_REVENUE_INSTANCE) { RevenueInstanceFilter }
     single<_RevenueFilter>(BEAN_FILTER_PAYOUT_INSTANCE) { PayoutInstanceFilter }
+    single<_RevenueFilter>(BEAN_FILTER_REVENUE_DATE) {
+        RevenueDateFilter(get(BEAN_PROVIDER_REVENUE_DATE_LAST))
+    }
+    single<_RevenueFilter>(BEAN_FILTER_PAYOUT_DATE) {
+        PayoutDateFilter(get(BEAN_PROVIDER_PAYOUT_DATE_LAST))
+    }
 }
 
 private val providerModule = module {
-    single<_AssetProviderById>(BEAN_PROVIDER_ASSET_BY_ID) {
-        val datasource: DatabaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE)
-        return@single { id: Long -> datasource.getAsset(id).blockingSingle() }
+    databaseProvider<_AssetProviderById>(BEAN_PROVIDER_ASSET_BY_ID) {
+        { id: Long -> getAsset(id).blockingGet() }
     }
 
-    single<_AssetProviderByName>(BEAN_PROVIDER_ASSET_BY_NAME) {
-        val datasource: DatabaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE)
-        return@single { name: String -> datasource.getAsset(name).blockingSingle() }
+    databaseProvider<_AssetProviderByUrl>(BEAN_PROVIDER_ASSET_BY_URL) {
+        { url: String -> getAssetByUrl(url).blockingGet() }
     }
+
+    databaseProvider<_AssetProviderByName>(BEAN_PROVIDER_ASSET_BY_NAME) {
+        { name: String -> getAssetByName(name).blockingGet() }
+    }
+
+    databaseProvider<_UserProviderByName>(BEAN_PROVIDER_USER_BY_NAME) {
+        { name: String -> getUserByName(name).blockingGet() }
+    }
+
+    databaseProvider<_LastSaleDateProvider>(BEAN_PROVIDER_SALE_DATE_LAST) {
+        { period: Period, assetId: Long, priceUsd: BigDecimal ->
+            getLastSale(assetId, period, priceUsd)
+                .map(Sale::date)
+                .blockingNullable()
+        }
+    }
+
+    databaseProvider<_LastPayoutDateProvider>(BEAN_PROVIDER_PAYOUT_DATE_LAST) {
+        { getLastPayout().map(Payout::date).blockingNullable() }
+    }
+
+    databaseProvider<_LastRevenueDateProvider>(BEAN_PROVIDER_REVENUE_DATE_LAST) {
+        { getLastRevenue().map(Revenue::date).blockingNullable() }
+    }
+
+    databaseProvider<_LastPeriodProvider>(BEAN_PROVIDER_PERIOD_LAST) {
+        { getLastPeriod().blockingNullable() }
+    }
+
+    databaseProvider<_ReviewProvider>(BEAN_PROVIDER_REVIEW) {
+        { authorId: Long, assetId: Long -> getReview(authorId, assetId).blockingNullable() }
+    }
+}
+
+private inline fun <reified T : Any> ModuleDefinition.databaseProvider(
+    name: String = "",
+    noinline definition: DatabaseDataSource.() -> T
+): BeanDefinition<T> {
+    val datasource: DatabaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE)
+    return single(name) { definition.invoke(datasource) }
 }
