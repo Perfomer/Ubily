@@ -3,7 +3,7 @@ package com.vmedia.core.data.internal.database.converter
 import androidx.room.TypeConverter
 import java.util.*
 
-class DateConverter : Converter<Date, Long> {
+internal class DateConverter : Converter<Date, Long> {
 
     @TypeConverter
     override fun to(item: Date) = item.time

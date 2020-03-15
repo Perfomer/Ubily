@@ -57,12 +57,12 @@ private val networkModule = module {
             saleMapper = get(BEAN_MAPPER_SALE),
             downloadMapper = get(BEAN_MAPPER_DOWNLOAD),
             revenueMapper = get(BEAN_MAPPER_REVENUE),
-            commentMapper = get(BEAN_MAPPER_COMMENT),
+            reviewMapper = get(BEAN_MAPPER_REVIEW),
             assetMapper = get(BEAN_MAPPER_ASSET),
             assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS),
             periodMapper = get(BEAN_MAPPER_PERIOD),
             publisherMapper = get(BEAN_MAPPER_PUBLISHER),
-            commentFilter = get(BEAN_FILTER_COMMENT),
+            reviewFilter = get(BEAN_FILTER_REVIEW),
             detailedCommentMapper = get(BEAN_MAPPER_DETAILEDCOMMENT)
         )
     }
@@ -76,10 +76,10 @@ private val utilsModule = module {
     single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
     single<_DetailedCommentMapper>(BEAN_MAPPER_DETAILEDCOMMENT) { DetailedReviewMapper }
     single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
-    single(BEAN_MAPPER_COMMENT) { ReviewMapper.toListMapper() }
+    single(BEAN_MAPPER_REVIEW) { ReviewMapper.toListMapper() }
     single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
 
-    single<Filter<ReviewDto>>(BEAN_FILTER_COMMENT) { ReviewFilter }
+    single<Filter<ReviewDto>>(BEAN_FILTER_REVIEW) { ReviewFilter }
 }
 
 private val retrofitModule = module {
@@ -138,10 +138,10 @@ private const val BEAN_MAPPER_SALE = "NetworkSaleMapper"
 private const val BEAN_MAPPER_DOWNLOAD = "NetworkDownloadMapper"
 private const val BEAN_MAPPER_REVENUE = "NetworkRevenueMapper"
 private const val BEAN_MAPPER_DETAILEDCOMMENT = "NetworkDetailedCommentMapper"
-private const val BEAN_MAPPER_COMMENT = "NetworkCommentMapper"
+private const val BEAN_MAPPER_REVIEW = "NetworkReviewMapper"
 private const val BEAN_MAPPER_ASSET = "NetworkAssetMapper"
 private const val BEAN_MAPPER_ASSETDETAILS = "NetworkAssetDetailsMapper"
 private const val BEAN_MAPPER_PUBLISHER = "NetworkPublisherMapper"
 private const val BEAN_MAPPER_PERIOD = "NetworkPeriodMapper"
 
-private const val BEAN_FILTER_COMMENT = "NetworkCommentFilter"
+private const val BEAN_FILTER_REVIEW = "NetworkReviewFilter"
