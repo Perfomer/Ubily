@@ -3,7 +3,6 @@ package com.vmedia.core.network
 import com.google.gson.GsonBuilder
 import com.vmedia.core.common.BuildConfig
 import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.Filter
 import com.vmedia.core.common.util.ListMapper
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.toListMapper
@@ -26,7 +25,7 @@ import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -54,32 +53,32 @@ private val networkModule = module {
             api = get(),
             rssApi = get(),
             credentials = get(),
-            saleMapper = get(BEAN_MAPPER_SALE),
-            downloadMapper = get(BEAN_MAPPER_DOWNLOAD),
-            revenueMapper = get(BEAN_MAPPER_REVENUE),
-            reviewMapper = get(BEAN_MAPPER_REVIEW),
-            assetMapper = get(BEAN_MAPPER_ASSET),
-            assetDetailsMapper = get(BEAN_MAPPER_ASSETDETAILS),
-            periodMapper = get(BEAN_MAPPER_PERIOD),
-            publisherMapper = get(BEAN_MAPPER_PUBLISHER),
-            reviewFilter = get(BEAN_FILTER_REVIEW),
-            detailedCommentMapper = get(BEAN_MAPPER_DETAILEDCOMMENT)
+            saleMapper = get<SaleMapper>(),
+            downloadMapper = get<DownloadMapper>(),
+            revenueMapper = get<RevenueMapper>(),
+            periodMapper = get<PeriodMapper>().toListMapper(),
+            reviewMapper = get<ReviewMapper>().toListMapper(),
+            assetMapper = get<AssetMapper>().toListMapper(),
+            assetDetailsMapper = get<AssetDetailsMapper>(),
+            publisherMapper = get<PublisherMapper>(),
+            detailedCommentMapper = get<DetailedReviewMapper>(),
+            reviewFilter = get<ReviewFilter>()
         )
     }
 }
 
 private val utilsModule = module {
-    single<_SaleMapper>(BEAN_MAPPER_SALE) { SaleMapper }
-    single<_DownloadMapper>(BEAN_MAPPER_DOWNLOAD) { DownloadMapper }
-    single<_RevenueMapper>(BEAN_MAPPER_REVENUE) { RevenueMapper }
-    single<_AssetDetailsMapper>(BEAN_MAPPER_ASSETDETAILS) { AssetDetailsMapper }
-    single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
-    single<_DetailedCommentMapper>(BEAN_MAPPER_DETAILEDCOMMENT) { DetailedReviewMapper }
-    single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
-    single(BEAN_MAPPER_REVIEW) { ReviewMapper.toListMapper() }
-    single(BEAN_MAPPER_PERIOD) { PeriodMapper.toListMapper() }
+    single { SaleMapper }
+    single { DownloadMapper }
+    single { RevenueMapper }
+    single { AssetDetailsMapper }
+    single { PublisherMapper }
+    single { DetailedReviewMapper }
+    single { AssetMapper }
+    single { ReviewMapper }
+    single { PeriodMapper }
 
-    single<Filter<ReviewDto>>(BEAN_FILTER_REVIEW) { ReviewFilter }
+    single { ReviewFilter }
 }
 
 private val retrofitModule = module {
@@ -133,15 +132,3 @@ private val retrofitModule = module {
         return@factory builder.build()
     }
 }
-
-private const val BEAN_MAPPER_SALE = "NetworkSaleMapper"
-private const val BEAN_MAPPER_DOWNLOAD = "NetworkDownloadMapper"
-private const val BEAN_MAPPER_REVENUE = "NetworkRevenueMapper"
-private const val BEAN_MAPPER_DETAILEDCOMMENT = "NetworkDetailedCommentMapper"
-private const val BEAN_MAPPER_REVIEW = "NetworkReviewMapper"
-private const val BEAN_MAPPER_ASSET = "NetworkAssetMapper"
-private const val BEAN_MAPPER_ASSETDETAILS = "NetworkAssetDetailsMapper"
-private const val BEAN_MAPPER_PUBLISHER = "NetworkPublisherMapper"
-private const val BEAN_MAPPER_PERIOD = "NetworkPeriodMapper"
-
-private const val BEAN_FILTER_REVIEW = "NetworkReviewFilter"

@@ -2,25 +2,31 @@ package com.vmedia.ubily
 
 import android.annotation.SuppressLint
 import android.app.Application
+import com.facebook.stetho.Stetho
 import io.reactivex.rxkotlin.subscribeBy
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
-@Suppress("unused")
-@SuppressLint("CheckResult")
 class UbilyApplication : Application() {
 
     private val networkCredentialsSynchronizer: NetworkCredentialsSynchronizer by inject()
 
+    @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
 
-        startKoin(
-            androidContext = this,
-            modules = koinModules
-        )
+        Stetho.initializeWithDefaults(this);
 
-        networkCredentialsSynchronizer.execute()
+        startKoin {
+            if (BuildConfig.DEBUG) androidLogger()
+            modules(koinModules)
+            androidContext(this@UbilyApplication)
+        }
+
+        get<NetworkCredentialsSynchronizer>().execute()
             .subscribeBy(Throwable::printStackTrace)
     }
 

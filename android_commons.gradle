@@ -66,8 +66,8 @@ dependencies {
     implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0"
 
     // Koin
-    implementation "org.koin:koin-androidx-scope:1.0.2"
-    implementation "org.koin:koin-androidx-viewmodel:1.0.2"
+    implementation "org.koin:koin-androidx-scope:2.1.5"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.5"
 
     // Test
     testImplementation 'junit:junit:4.12'

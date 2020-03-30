@@ -10,6 +10,9 @@ android {
 }
 
 dependencies {
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
     implementation project(':core-common')
     implementation project(':core-data')
     implementation project(':core-network')

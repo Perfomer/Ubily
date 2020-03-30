@@ -8,6 +8,7 @@ import com.vmedia.core.network.entity.*
 import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
+import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -35,11 +36,14 @@ import com.vmedia.core.sync.synchronizer.review.ReviewSynchronizer
 import com.vmedia.core.sync.synchronizer.sale.SaleFilter
 import com.vmedia.core.sync.synchronizer.sale.SaleMapper
 import com.vmedia.core.sync.synchronizer.sale.SaleSynchronizer
+import com.vmedia.core.sync.synchronizer.user.UserFilter
 import com.vmedia.core.sync.synchronizer.user.UserMapper
 import com.vmedia.core.sync.synchronizer.user.UserSynchronizer
-import org.koin.dsl.context.ModuleDefinition
-import org.koin.dsl.definition.BeanDefinition
-import org.koin.dsl.module.module
+import org.koin.core.definition.BeanDefinition
+import org.koin.core.module.Module
+import org.koin.core.qualifier.Qualifier
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import java.math.BigDecimal
 import java.util.*
 
@@ -47,7 +51,7 @@ val syncModules by lazy {
     listOf(syncModule, synchronizerModule, mapperModule, filterModule, providerModule)
 }
 
-internal typealias _AssetProviderById = (id: Long) -> Asset
+internal typealias _AssetProviderById = (id: Long) -> Asset?
 internal typealias _AssetProviderByName = (name: String) -> Asset
 internal typealias _AssetProviderByUrl = (url: String) -> Asset
 internal typealias _UserProviderByName = (name: String) -> User
@@ -56,6 +60,7 @@ internal typealias _LastSaleDateProvider = (period: Period, assetId: Long, price
 internal typealias _LastPayoutDateProvider = () -> Date?
 internal typealias _LastRevenueDateProvider = () -> Date?
 internal typealias _LastPeriodProvider = () -> Period?
+internal typealias _FreeDownloadsPeriodsProvider = () -> List<Period>
 internal typealias _ReviewProvider = (authorId: Long, assetId: Long) -> Review?
 
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
@@ -72,6 +77,7 @@ internal typealias _SaleFilter = Filter<Sale>
 internal typealias _RevenueFilter = Filter<RevenueEventDto>
 internal typealias _PeriodFilter = Filter<Period>
 internal typealias _ReviewFilter = Filter<Review>
+internal typealias _UserFilter = Filter<DetailedReviewDto>
 
 internal typealias _AssetSynchronizer = Synchronizer<AssetsReceived>
 internal typealias _PublisherSynchronizer = Synchronizer<PublisherReceived>
@@ -81,28 +87,7 @@ internal typealias _PayoutSynchronizer = Synchronizer<PayoutsReceived>
 internal typealias _SaleSynchronizer = Synchronizer<SalesReceived>
 internal typealias _DownloadSynchronizer = Synchronizer<FreeDownloadsReceived>
 internal typealias _PeriodSynchronizer = Synchronizer<PeriodsReceived>
-internal typealias _UserSynchronizer = Synchronizer<PeriodsReceived>
-
-private const val BEAN_CACHED_DATABASE_DATASOURCE = "SyncCachedDatabaseDataSource"
-private const val BEAN_CACHED_NETWORK_DATASOURCE = "SyncCachedNetworkDataSource"
-
-private const val BEAN_MAPPER_ASSET = "SyncAssetMapper"
-private const val BEAN_MAPPER_SALE = "SyncSaleMapper"
-private const val BEAN_MAPPER_DOWNLOAD = "SyncDownloadMapper"
-private const val BEAN_MAPPER_PUBLISHER = "SyncPublisherMapper"
-private const val BEAN_MAPPER_REVENUE = "SyncRevenueMapper"
-private const val BEAN_MAPPER_PAYOUT = "SyncPayoutMapper"
-private const val BEAN_MAPPER_REVIEW = "SyncReviewMapper"
-private const val BEAN_MAPPER_USER = "SyncUserMapper"
-
-private const val BEAN_FILTER_ASSET = "SyncAssetFilter"
-private const val BEAN_FILTER_SALE = "SyncSaleFilter"
-private const val BEAN_FILTER_REVENUE_DATE = "SyncRevenueDateFilter"
-private const val BEAN_FILTER_PAYOUT_DATE = "SyncPayoutDateFilter"
-private const val BEAN_FILTER_REVENUE_INSTANCE = "SyncRevenueInstanceFilter"
-private const val BEAN_FILTER_PAYOUT_INSTANCE = "SyncPayoutInstanceFilter"
-private const val BEAN_FILTER_PERIOD = "SyncPeriodFilter"
-private const val BEAN_FILTER_REVIEW = "SyncReviewFilter"
+internal typealias _UserSynchronizer = Synchronizer<UsersReceived>
 
 private const val BEAN_PROVIDER_ASSET_BY_ID = "SyncAssetProviderById"
 private const val BEAN_PROVIDER_ASSET_BY_NAME = "SyncAssetProviderByName"
@@ -114,180 +99,175 @@ private const val BEAN_PROVIDER_REVENUE_DATE_LAST = "SyncLastRevenueDateProvider
 private const val BEAN_PROVIDER_PERIOD_ID = "SyncPeriodIdProvider"
 private const val BEAN_PROVIDER_PERIOD_LAST = "SyncLastPeriodProvider"
 private const val BEAN_PROVIDER_REVIEW = "SyncReviewProvider"
-
-private const val BEAN_SYNCHRONIZER_ASSET = "SyncAssetSynchronizer"
-private const val BEAN_SYNCHRONIZER_PUBLISHER = "SyncPublisherSynchronizer"
-private const val BEAN_SYNCHRONIZER_REVIEW = "SyncReviewSynchronizer"
-private const val BEAN_SYNCHRONIZER_REVENUE = "SyncRevenueSynchronizer"
-private const val BEAN_SYNCHRONIZER_PAYOUT = "SyncPayoutSynchronizer"
-private const val BEAN_SYNCHRONIZER_SALE = "SyncSaleSynchronizer"
-private const val BEAN_SYNCHRONIZER_DOWNLOAD = "SyncFreeDownloadSynchronizer"
-private const val BEAN_SYNCHRONIZER_PERIOD = "SyncPeriodSynchronizer"
-private const val BEAN_SYNCHRONIZER_USER = "SyncUserSynchronizer"
+private const val BEAN_PROVIDER_PERIODS_FREEDOWNLOADS = "SyncFreeDownloadsPeriodsProvider"
 
 private val syncModule = module {
-    single(BEAN_CACHED_DATABASE_DATASOURCE) { CachedDatabaseDataSourceDecorator(get()) }
-    single(BEAN_CACHED_NETWORK_DATASOURCE) { CachedNetworkDataSourceDecorator(get()) }
+    single { CachedDatabaseDataSourceDecorator(get()) }
+    single { CachedNetworkDataSourceDecorator(get()) }
 
-    single { get<SynchronizationDataSource>() as SynchronizationPeriodsProvider }
+    single<MutableSynchronizationPeriodsProvider> { SynchronizationPeriodsProviderImpl }
+    single<SynchronizationPeriodsProvider> { get<MutableSynchronizationPeriodsProvider>() }
 
     single<SynchronizationDataSource> {
         SynchronizationDataSourceImpl(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
+            networkDataSource = get(),
+            databaseDataSource = get(),
+            periodsProvider = get(),
 
             credentialsSynchronizer = get(),
 
-            publisherSynchronizer = get(BEAN_SYNCHRONIZER_PUBLISHER),
-            assetSynchronizer = get(BEAN_SYNCHRONIZER_ASSET),
-            downloadSynchronizer = get(BEAN_SYNCHRONIZER_DOWNLOAD),
-            payoutSynchronizer = get(BEAN_SYNCHRONIZER_PAYOUT),
-            periodSynchronizer = get(BEAN_SYNCHRONIZER_PERIOD),
-            revenueSynchronizer = get(BEAN_SYNCHRONIZER_REVENUE),
-            reviewSynchronizer = get(BEAN_SYNCHRONIZER_REVIEW),
-            saleSynchronizer = get(BEAN_SYNCHRONIZER_SALE),
-            userSynchronizer = get(BEAN_SYNCHRONIZER_USER)
+            publisherSynchronizer = get<PublisherSynchronizer>(),
+            assetSynchronizer = get<AssetSynchronizer>(),
+            downloadSynchronizer = get<DownloadSynchronizer>(),
+            payoutSynchronizer = get<PayoutSynchronizer>(),
+            periodSynchronizer = get<PeriodSynchronizer>(),
+            revenueSynchronizer = get<RevenueSynchronizer>(),
+            reviewSynchronizer = get<ReviewSynchronizer>(),
+            saleSynchronizer = get<SaleSynchronizer>(),
+            userSynchronizer = get<UserSynchronizer>()
         )
     }
 
     single {
         PublisherCredentialsSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
             credentials = get()
         )
     }
 }
 
 private val synchronizerModule = module {
-    single(BEAN_SYNCHRONIZER_ASSET) {
+    single {
         AssetSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_ASSET),
-            filter = get(BEAN_FILTER_ASSET)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<AssetMapper>().toListMapper(),
+            filter = get<AssetFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_PUBLISHER) {
+    single {
         PublisherSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_PUBLISHER)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<PublisherMapper>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_SALE) {
+    single {
         SaleSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
             periodsProvider = get(),
-            mapper = get(BEAN_MAPPER_SALE),
-            filter = get(BEAN_FILTER_SALE)
+            mapper = get<SaleMapper>().toListMapper(),
+            filter = get<SaleFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_REVENUE) {
+    single {
         RevenueSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_REVENUE),
-            filterByInstance = get(BEAN_FILTER_REVENUE_INSTANCE),
-            filterByDate = get(BEAN_FILTER_REVENUE_DATE)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<RevenueMapper>().toListMapper(),
+            filterByInstance = get<RevenueInstanceFilter>(),
+            filterByDate = get<RevenueDateFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_PAYOUT) {
+    single {
         PayoutSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_PAYOUT),
-            filterByInstance = get(BEAN_FILTER_PAYOUT_INSTANCE),
-            filterByDate = get(BEAN_FILTER_PAYOUT_DATE)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<PayoutMapper>().toListMapper(),
+            filterByInstance = get<PayoutInstanceFilter>(),
+            filterByDate = get<PayoutDateFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_PERIOD) {
+    single {
         PeriodSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            filter = get(BEAN_FILTER_PERIOD)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            filter = get<PeriodFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_USER) {
+    single {
         UserSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_USER)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<UserMapper>().toListMapper(),
+            filter = get<UserFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_REVIEW) {
+    single {
         ReviewSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
-            mapper = get(BEAN_MAPPER_REVIEW),
-            filter = get(BEAN_FILTER_REVIEW)
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<ReviewMapper>().toListMapper(),
+            filter = get<ReviewFilter>()
         )
     }
 
-    single(BEAN_SYNCHRONIZER_DOWNLOAD) {
+    single {
         DownloadSynchronizer(
-            networkDataSource = get(BEAN_CACHED_NETWORK_DATASOURCE),
-            databaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE),
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
             periodsProvider = get(),
-            mapper = get(BEAN_MAPPER_DOWNLOAD),
-            filter = get(BEAN_FILTER_SALE)
+            freePeriodsProvider = get(named(BEAN_PROVIDER_PERIODS_FREEDOWNLOADS)),
+            mapper = get<DownloadMapper>().toListMapper(),
+            filter = get<SaleFilter>()
         )
     }
 }
 
 private val mapperModule = module {
-    single(BEAN_MAPPER_REVIEW) {
-        ReviewMapper(get(BEAN_PROVIDER_ASSET_BY_URL), get(BEAN_PROVIDER_USER_BY_NAME))
+    single { AssetMapper }
+    single { UserMapper }
+    single { PublisherMapper }
+    single { SaleMapper(get(named(BEAN_PROVIDER_ASSET_BY_NAME))) }
+    single { DownloadMapper(get(named(BEAN_PROVIDER_ASSET_BY_NAME))) }
+    single { RevenueMapper(get(named(BEAN_PROVIDER_PERIOD_ID))) }
+    single { PayoutMapper(get(named(BEAN_PROVIDER_PERIOD_ID))) }
+    single {
+        ReviewMapper(
+            assetProvider = get(named(BEAN_PROVIDER_ASSET_BY_URL)),
+            userProvider = get(named(BEAN_PROVIDER_USER_BY_NAME))
+        )
     }
-    single(BEAN_MAPPER_ASSET) { AssetMapper.toListMapper() }
-    single(BEAN_MAPPER_USER) { UserMapper.toListMapper() }
-    single(BEAN_MAPPER_SALE) { SaleMapper(get(BEAN_PROVIDER_ASSET_BY_NAME)).toListMapper() }
-    single(BEAN_MAPPER_DOWNLOAD) { DownloadMapper(get(BEAN_PROVIDER_ASSET_BY_NAME)).toListMapper() }
-    single(BEAN_MAPPER_REVENUE) { RevenueMapper(get(BEAN_PROVIDER_PERIOD_ID)).toListMapper() }
-    single(BEAN_MAPPER_PAYOUT) { PayoutMapper(get(BEAN_PROVIDER_PERIOD_ID)).toListMapper() }
-    single<_PublisherMapper>(BEAN_MAPPER_PUBLISHER) { PublisherMapper }
 }
 
 private val filterModule = module {
-    single<_PeriodFilter>(BEAN_FILTER_PERIOD) { PeriodFilter(get(BEAN_PROVIDER_PERIOD_LAST)) }
-    single<_AssetFilter>(BEAN_FILTER_ASSET) { AssetFilter(get(BEAN_PROVIDER_ASSET_BY_ID)) }
-    single<_SaleFilter>(BEAN_FILTER_SALE) { SaleFilter(get(), get(BEAN_PROVIDER_SALE_DATE_LAST)) }
-    single<_ReviewFilter>(BEAN_FILTER_REVIEW) { ReviewFilter(get(BEAN_PROVIDER_REVIEW)) }
-    single<_RevenueFilter>(BEAN_FILTER_REVENUE_INSTANCE) { RevenueInstanceFilter }
-    single<_RevenueFilter>(BEAN_FILTER_PAYOUT_INSTANCE) { PayoutInstanceFilter }
-    single<_RevenueFilter>(BEAN_FILTER_REVENUE_DATE) {
-        RevenueDateFilter(get(BEAN_PROVIDER_REVENUE_DATE_LAST))
-    }
-    single<_RevenueFilter>(BEAN_FILTER_PAYOUT_DATE) {
-        PayoutDateFilter(get(BEAN_PROVIDER_PAYOUT_DATE_LAST))
-    }
+    single { PeriodFilter(get(named(BEAN_PROVIDER_PERIOD_LAST))) }
+    single { AssetFilter(get(named(BEAN_PROVIDER_ASSET_BY_ID))) }
+    single { SaleFilter(get(), get(named(BEAN_PROVIDER_SALE_DATE_LAST))) }
+    single { ReviewFilter(get(named(BEAN_PROVIDER_REVIEW))) }
+    single { RevenueInstanceFilter }
+    single { PayoutInstanceFilter }
+    single { UserFilter }
+    single { RevenueDateFilter(get(named(BEAN_PROVIDER_REVENUE_DATE_LAST))) }
+    single { PayoutDateFilter(get(named(BEAN_PROVIDER_PAYOUT_DATE_LAST))) }
 }
 
 private val providerModule = module {
-    databaseProvider<_AssetProviderById>(BEAN_PROVIDER_ASSET_BY_ID) {
-        { id: Long -> getAsset(id).blockingGet() }
+    databaseProvider<_AssetProviderById>(named(BEAN_PROVIDER_ASSET_BY_ID)) {
+        { id: Long -> getAsset(id).blockingNullable() }
     }
 
-    databaseProvider<_AssetProviderByUrl>(BEAN_PROVIDER_ASSET_BY_URL) {
+    databaseProvider<_AssetProviderByUrl>(named(BEAN_PROVIDER_ASSET_BY_URL)) {
         { url: String -> getAssetByUrl(url).blockingGet() }
     }
 
-    databaseProvider<_AssetProviderByName>(BEAN_PROVIDER_ASSET_BY_NAME) {
+    databaseProvider<_AssetProviderByName>(named(BEAN_PROVIDER_ASSET_BY_NAME)) {
         { name: String -> getAssetByName(name).blockingGet() }
     }
 
-    databaseProvider<_UserProviderByName>(BEAN_PROVIDER_USER_BY_NAME) {
+    databaseProvider<_UserProviderByName>(named(BEAN_PROVIDER_USER_BY_NAME)) {
         { name: String -> getUserByName(name).blockingGet() }
     }
 
-    databaseProvider<_LastSaleDateProvider>(BEAN_PROVIDER_SALE_DATE_LAST) {
+    databaseProvider<_LastSaleDateProvider>(named(BEAN_PROVIDER_SALE_DATE_LAST)) {
         { period: Period, assetId: Long, priceUsd: BigDecimal ->
             getLastSale(assetId, period, priceUsd)
                 .map(Sale::date)
@@ -295,27 +275,36 @@ private val providerModule = module {
         }
     }
 
-    databaseProvider<_LastPayoutDateProvider>(BEAN_PROVIDER_PAYOUT_DATE_LAST) {
+    databaseProvider<_LastPayoutDateProvider>(named(BEAN_PROVIDER_PAYOUT_DATE_LAST)) {
         { getLastPayout().map(Payout::date).blockingNullable() }
     }
 
-    databaseProvider<_LastRevenueDateProvider>(BEAN_PROVIDER_REVENUE_DATE_LAST) {
+    databaseProvider<_LastRevenueDateProvider>(named(BEAN_PROVIDER_REVENUE_DATE_LAST)) {
         { getLastRevenue().map(Revenue::date).blockingNullable() }
     }
 
-    databaseProvider<_LastPeriodProvider>(BEAN_PROVIDER_PERIOD_LAST) {
+    databaseProvider<_LastPeriodProvider>(named(BEAN_PROVIDER_PERIOD_LAST)) {
         { getLastPeriod().blockingNullable() }
     }
 
-    databaseProvider<_ReviewProvider>(BEAN_PROVIDER_REVIEW) {
+    databaseProvider<_ReviewProvider>(named(BEAN_PROVIDER_REVIEW)) {
         { authorId: Long, assetId: Long -> getReview(authorId, assetId).blockingNullable() }
+    }
+
+    databaseProvider<_PeriodIdProvider>(named(BEAN_PROVIDER_PERIOD_ID)) {
+        { period: Period -> getPeriodId(period).blockingGet() }
+    }
+
+    databaseProvider<_FreeDownloadsPeriodsProvider>(named(BEAN_PROVIDER_PERIODS_FREEDOWNLOADS)) {
+        { getFreeDownloadsPeriods().blockingGet() }
     }
 }
 
-private inline fun <reified T : Any> ModuleDefinition.databaseProvider(
-    name: String = "",
+private inline fun <reified T : Any> Module.databaseProvider(
+    qualifier: Qualifier? = null,
     noinline definition: DatabaseDataSource.() -> T
 ): BeanDefinition<T> {
-    val datasource: DatabaseDataSource = get(BEAN_CACHED_DATABASE_DATASOURCE)
-    return single(name) { definition.invoke(datasource) }
+    return single(qualifier) {
+        definition.invoke(get<CachedDatabaseDataSourceDecorator>())
+    }
 }

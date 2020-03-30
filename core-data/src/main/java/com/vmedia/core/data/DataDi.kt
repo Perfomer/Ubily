@@ -7,14 +7,16 @@ import com.vmedia.core.data.datasource.DatabaseDataSourceImpl
 import com.vmedia.core.data.datasource.SettingsDataSource
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.context.ModuleDefinition
-import org.koin.dsl.definition.BeanDefinition
-import org.koin.dsl.module.module
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.definition.BeanDefinition
+import org.koin.core.module.Module
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
 val dataModules by lazy {
     listOf(
         preferencesModule,
-        dataBaseModule
+        databaseModule
     )
 }
 
@@ -22,36 +24,58 @@ private const val BEAN_PREF_CREDENTIALS = "PREF_CREDENTIALS"
 private const val BEAN_PREF_SETTINGS = "PREF_SETTINGS"
 
 private val preferencesModule = module {
-    single { CredentialsDataSource(get(BEAN_PREF_CREDENTIALS), get()) }
-    single { SettingsDataSource(get(BEAN_PREF_SETTINGS)) }
+    single { CredentialsDataSource(get(named(BEAN_PREF_CREDENTIALS)), get()) }
+    single { SettingsDataSource(get(named(BEAN_PREF_SETTINGS))) }
 
-    single(BEAN_PREF_CREDENTIALS) {
+    single(named(BEAN_PREF_CREDENTIALS)) {
         androidApplication().getSharedPreferences(
             "248a648a38292ebc637233f00ff34546",
             Context.MODE_PRIVATE
         )
     }
 
-    single(BEAN_PREF_SETTINGS) {
+    single(named(BEAN_PREF_SETTINGS)) {
         androidApplication().getSharedPreferences("ubily_settings", Context.MODE_PRIVATE)
     }
 }
 
-private val dataBaseModule = module {
-    single<DatabaseDataSource> { DatabaseDataSourceImpl(get(), get()) }
+private val databaseModule = module {
+    single<DatabaseDataSource> {
+        DatabaseDataSourceImpl(
+            database = get(),
+            publisherDao = get(),
+            userDao = get(),
+            saleDao = get(),
+            periodDao = get(),
+            revenueDao = get(),
+            payoutDao = get(),
+            reviewDao = get(),
+            assetDao = get(),
+            assetImageDao = get(),
+            keywordDao = get(),
+            assetKeywordDao = get()
+        )
+    }
 
-    single { UbilyDatabase.getInstance(androidApplication(), "ubily_db") }
+    single {
+        UbilyDatabase.getInstance(androidContext(), BuildConfig.DB_NAME, inMemory = true)
+    }
 
     dao { getAssetDao() }
+    dao { getAssetImageDao() }
+    dao { getAssetKeywordDao() }
+    dao { getKeywordDao() }
     dao { getEventDao() }
     dao { getSaleDao() }
+    dao { getPeriodDao() }
     dao { getPublisherDao() }
+    dao { getUserDao() }
     dao { getReviewDao() }
     dao { getRevenueDao() }
     dao { getPayoutDao() }
 }
 
-private inline fun <reified T : Any> ModuleDefinition.dao(
+private inline fun <reified T : Any> Module.dao(
     noinline definition: UbilyDatabase.() -> T
 ): BeanDefinition<T> {
     return single { definition.invoke(get()) }

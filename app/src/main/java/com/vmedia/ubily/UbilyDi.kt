@@ -6,10 +6,10 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.authModule
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 internal val koinModules by lazy {
-    featureModules + dataModules + networkModules + syncModules + appModule
+    appModule + featureModules + dataModules + networkModules + syncModules
 }
 
 private val featureModules = listOf(

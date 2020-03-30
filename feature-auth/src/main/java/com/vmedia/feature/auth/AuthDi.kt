@@ -11,8 +11,9 @@ import com.vmedia.feature.auth.domain.SignInTask
 import com.vmedia.feature.auth.presentation.AuthFragment
 import com.vmedia.feature.auth.presentation.AuthViewModel
 import org.koin.android.ext.koin.androidApplication
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
 const val DI_FRAGMENT_AUTH = "AuthFragment"
 
@@ -24,5 +25,5 @@ val authModule = module {
 
     factory<SignInTask> { UnityWebViewSignInTask(get()) }
     factory { WebView(androidApplication()) }
-    factory<Fragment>(DI_FRAGMENT_AUTH) { AuthFragment() }
+    factory<Fragment>(named(DI_FRAGMENT_AUTH)) { AuthFragment() }
 }
