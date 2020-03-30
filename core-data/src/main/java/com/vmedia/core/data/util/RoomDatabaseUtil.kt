@@ -1,6 +1,8 @@
 package com.vmedia.core.data.util
 
+import androidx.annotation.WorkerThread
 import androidx.room.RoomDatabase
+import com.vmedia.core.data.internal.database.dao.base.BaseDao
 import io.reactivex.Completable
 
 /**
@@ -13,4 +15,10 @@ import io.reactivex.Completable
  */
 fun RoomDatabase.completableTransaction(body: () -> Unit): Completable {
     return Completable.fromAction { runInTransaction(body) }
+}
+
+@WorkerThread
+fun <T> BaseDao<T>.upsert(contains: Boolean, item: T) {
+    if (contains) update(item)
+    else insert(item)
 }

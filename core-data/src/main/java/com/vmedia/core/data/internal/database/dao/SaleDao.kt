@@ -1,5 +1,6 @@
 package com.vmedia.core.data.internal.database.dao
 
+import androidx.annotation.WorkerThread
 import androidx.room.Dao
 import androidx.room.Query
 import com.vmedia.core.data.internal.database.dao.base.BaseDao
@@ -7,6 +8,7 @@ import com.vmedia.core.data.internal.database.entity.Sale
 import io.reactivex.Observable
 import io.reactivex.Single
 import java.math.BigDecimal
+import java.util.*
 
 @Dao
 interface SaleDao : BaseDao<Sale> {
@@ -68,5 +70,17 @@ interface SaleDao : BaseDao<Sale> {
         startTimestamp: Long,
         endTimestamp: Long
     ): Single<Sale>
+
+    @WorkerThread
+    @Query(
+        """
+            SELECT id FROM Sale
+            WHERE
+                assetId = :assetId
+                AND priceUsd = :priceUsd
+                AND date = :date
+        """
+    )
+    fun getSaleId(assetId: Long, priceUsd: BigDecimal, date: Date): Long
 
 }

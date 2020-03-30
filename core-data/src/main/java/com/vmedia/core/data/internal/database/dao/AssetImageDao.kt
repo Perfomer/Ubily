@@ -8,4 +8,5 @@ import com.vmedia.core.data.internal.database.entity.AssetImage
 interface AssetImageDao : BaseDao<AssetImage> {
 
 
+
 }

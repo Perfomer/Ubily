@@ -27,8 +27,7 @@ class SaleSynchronizer(
     override val eventType = SynchronizationEventType.SALES_RECEIVED
 
     override fun execute(): Single<SalesReceived> {
-        return Observable.defer { Observable.fromIterable(periodsProvider.periods)
-            .take(1) /** TODO remove */ }
+        return Observable.defer { Observable.fromIterable(periodsProvider.periods) }
             .flatMapSingle(networkDataSource::getSales)
             .toFlattenList()
             .mapWith(mapper)

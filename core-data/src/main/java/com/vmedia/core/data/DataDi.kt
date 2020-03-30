@@ -58,7 +58,11 @@ private val databaseModule = module {
     }
 
     single {
-        UbilyDatabase.getInstance(androidContext(), BuildConfig.DB_NAME, inMemory = true)
+        UbilyDatabase.getInstance(
+            appContext = androidContext(),
+            databaseName = BuildConfig.DB_NAME,
+            inMemory = false
+        )
     }
 
     dao { getAssetDao() }

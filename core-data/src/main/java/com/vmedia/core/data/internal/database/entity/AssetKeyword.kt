@@ -2,9 +2,14 @@ package com.vmedia.core.data.internal.database.entity
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(
     primaryKeys = ["assetId", "keywordId"],
+    indices = [
+        Index(value = ["assetId"]),
+        Index(value = ["keywordId"])
+    ],
     foreignKeys = [
         ForeignKey(
             entity = Asset::class,

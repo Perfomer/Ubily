@@ -5,9 +5,13 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vmedia.core.data.KeyEntity
 
 @Entity(
-    indices = [Index(value = ["url"], unique = true)],
+    indices = [
+        Index(value = ["url"], unique = true),
+        Index(value = ["assetId"])
+    ],
     foreignKeys = [ForeignKey(
         entity = Asset::class,
         parentColumns = ["id"],
@@ -16,7 +20,7 @@ import androidx.room.PrimaryKey
     )]
 )
 data class AssetImage(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val assetId: Long,
     val url: String
-)
+) : KeyEntity<Long>

@@ -18,6 +18,7 @@ import io.reactivex.Single
 class DownloadSynchronizer(
     private val networkDataSource: NetworkDataSource,
     private val databaseDataSource: DatabaseDataSource,
+
     private val periodsProvider: SynchronizationPeriodsProvider,
     private val freePeriodsProvider: _FreeDownloadsPeriodsProvider,
 
@@ -42,7 +43,7 @@ class DownloadSynchronizer(
         val synchronizationPeriods = periodsProvider.periods
 
         return freePeriodsProvider.invoke()
-            .filter { synchronizationPeriods.contains(it) }
+            .filter(synchronizationPeriods::contains)
     }
 
 }

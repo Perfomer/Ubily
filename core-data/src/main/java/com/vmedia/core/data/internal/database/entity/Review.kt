@@ -6,7 +6,11 @@ import com.vmedia.core.data.KeyEntity
 import java.util.*
 
 @Entity(
-    indices = [Index(value = ["authorId", "assetId"], unique = true)],
+    indices = [
+        Index(value = ["authorId", "assetId"], unique = true),
+        Index(value = ["authorId"]),
+        Index(value = ["assetId"])
+    ],
     foreignKeys = [
         ForeignKey(
             entity = Asset::class,

@@ -9,11 +9,11 @@ import androidx.room.Update
 interface BaseDao<T> {
 
     @WorkerThread
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     fun update(item: T)
 
     @WorkerThread
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update
     fun update(items: List<T>)
 
     @WorkerThread

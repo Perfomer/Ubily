@@ -1,5 +1,6 @@
 package com.vmedia.core.data.internal.database.dao
 
+import androidx.annotation.WorkerThread
 import androidx.room.Dao
 import androidx.room.Query
 import com.vmedia.core.common.obj.creds.RssToken
@@ -10,6 +11,10 @@ import io.reactivex.Single
 
 @Dao
 interface PublisherDao : BaseDao<Publisher> {
+
+    @WorkerThread
+    @Query("SELECT COUNT(*) FROM Publisher")
+    fun getCount() : Long
 
     @Query("SELECT * FROM Publisher LIMIT 1")
     fun getPublisher(): Single<Publisher>

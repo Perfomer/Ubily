@@ -1,5 +1,6 @@
 package com.vmedia.core.data.internal.database.dao
 
+import androidx.annotation.WorkerThread
 import androidx.room.Dao
 import androidx.room.Query
 import com.vmedia.core.data.internal.database.dao.base.BaseDao
@@ -26,11 +27,15 @@ interface AssetDao : BaseDao<Asset> {
         """
             SELECT * FROM Asset
             WHERE 
-                priceUsd = 0
+                priceUsd = "0.00"
                 AND publishingDate != 0
             ORDER BY publishingDate DESC
             LIMIT 1
         """
     )
     fun getFirstFreeAsset(): Single<Asset>
+
+    @WorkerThread
+    @Query("SELECT COUNT(*) FROM Asset WHERE id = :id")
+    fun contains(id: Long): Long
 }

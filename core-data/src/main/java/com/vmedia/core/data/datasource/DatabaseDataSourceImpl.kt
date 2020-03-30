@@ -1,5 +1,6 @@
 package com.vmedia.core.data.datasource
 
+import androidx.annotation.WorkerThread
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.obj.endTimestamp
 import com.vmedia.core.common.obj.startTimestamp
@@ -9,6 +10,7 @@ import com.vmedia.core.data.internal.database.UbilyDatabase
 import com.vmedia.core.data.internal.database.dao.*
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.data.util.completableTransaction
+import com.vmedia.core.data.util.upsert
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.math.BigDecimal
@@ -84,11 +86,16 @@ internal class DatabaseDataSourceImpl(
 
 
     override fun putPublisher(publisher: Publisher): Completable {
-        return Completable.fromAction { publisherDao.insertWithReplace(publisher) }
+        return database.completableTransaction {
+            val contains = publisherDao.getCount() == 0L
+            publisherDao.upsert(contains, publisher)
+        }
     }
 
     override fun putSales(sales: Collection<Sale>): Completable {
-        return Completable.fromAction { saleDao.insertWithReplace(sales) }
+        return database.completableTransaction {
+            sales.forEach(::putSale)
+        }
     }
 
     override fun putAsset(
@@ -97,34 +104,33 @@ internal class DatabaseDataSourceImpl(
         keywords: Collection<String>
     ): Completable {
         return database.completableTransaction {
-            val id = assetDao.insertWithReplace(asset)
-            val keywordsIds = keywordDao.insert(keywords.map { Keyword(value = it) })
-            assetKeywordDao.insert(keywordsIds.map { AssetKeyword(id, it) })
-            assetImageDao.insert(images.map { it.copy(assetId = id) })
+            putAsset(asset)
+            assetImageDao.insert(images)
+            keywords.forEach { putKeyword(it, asset.id) }
         }
     }
 
     override fun putRevenues(revenues: Collection<Revenue>): Completable {
         return Completable.fromAction {
-            revenueDao.insert(revenues)
+            revenueDao.insert(revenues) //todo think
         }
     }
 
     override fun putPayouts(payouts: Collection<Payout>): Completable {
         return Completable.fromAction {
-            payoutDao.insert(payouts)
+            payoutDao.insert(payouts) //todo think
         }
     }
 
     override fun putPeriods(periods: Collection<Period>): Completable {
         return Completable.fromAction {
-            periodDao.insert(periods.map { PeriodWrap(period = it) })
+            periodDao.insert(periods.map(Period::wrap))
         }
     }
 
     override fun putReviews(reviews: Collection<Review>): Completable {
-        return Completable.fromAction {
-            reviewDao.insert(reviews)
+        return database.completableTransaction {
+            reviews.forEach(::putReview)
         }
     }
 
@@ -132,6 +138,52 @@ internal class DatabaseDataSourceImpl(
         return Completable.fromAction {
             userDao.insert(users)
         }
+    }
+
+
+    @WorkerThread
+    private fun putAsset(asset: Asset) {
+        val contains = assetDao.contains(asset.id) == 1L
+        assetDao.upsert(contains, asset)
+    }
+
+    @WorkerThread
+    private fun putKeyword(keyword: String, assetId: Long) {
+        var keywordId = keywordDao.getId(keyword)
+
+        if (keywordId == 0L) {
+            keywordId = keywordDao.insert(Keyword(value = keyword))
+        }
+
+        putAssetKeyword(keywordId, assetId)
+    }
+
+    @WorkerThread
+    private fun putAssetKeyword(keywordId: Long, assetId: Long) {
+        val contains = assetKeywordDao.contains(keywordId, assetId) == 1L
+        if (contains) return
+
+        assetKeywordDao.insert(
+            AssetKeyword(
+                assetId = assetId,
+                keywordId = keywordId
+            )
+        )
+    }
+
+    @WorkerThread
+    private fun putReview(review: Review) {
+        val contains = reviewDao.contains(review.authorId, review.assetId) == 1L
+        reviewDao.upsert(contains, review)
+    }
+
+    @WorkerThread
+    private fun putSale(sale: Sale) {
+        val saleId = saleDao.getSaleId(sale.assetId, sale.priceUsd, sale.date)
+        val contains = saleId != 0L
+        val saleActual = if (!contains) sale else sale.copy(id = saleId)
+
+        saleDao.upsert(contains, saleActual)
     }
 
 }

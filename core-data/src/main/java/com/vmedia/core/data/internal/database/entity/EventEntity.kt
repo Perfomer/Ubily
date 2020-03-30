@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.vmedia.core.data.KeyEntity
 
 @Entity(
     indices = [Index(value = ["eventId", "entityId"], unique = true)],
@@ -16,7 +17,7 @@ import androidx.room.PrimaryKey
     )]
 )
 data class EventEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) override val id: Long,
     val eventId: Long,
     val entityId: Long
-)
+): KeyEntity<Long>
