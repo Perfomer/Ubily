@@ -73,6 +73,21 @@ infix fun Month.of(year: Int): Period {
     return Period(year, this)
 }
 
+fun Date.toPeriod(): Period {
+    val calendar = Calendar.getInstance().apply {
+        time = this@toPeriod
+    }
+
+    return calendar.toPeriod()
+}
+
+fun Calendar.toPeriod() : Period {
+    return Period(
+        year = get(Calendar.YEAR),
+        month = Month.values()[get(Calendar.MONTH)]
+    )
+}
+
 fun Period.isAfter(period: Period): Boolean {
     return year > period.year ||
             year == period.year && month.ordinal > period.month.ordinal

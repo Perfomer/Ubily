@@ -12,7 +12,7 @@ import com.vmedia.core.sync._ReviewMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Single
 
-internal class ReviewSynchronizer(
+class ReviewSynchronizer(
     private val networkDataSource: NetworkDataSource,
     private val databaseDataSource: DatabaseDataSource,
 

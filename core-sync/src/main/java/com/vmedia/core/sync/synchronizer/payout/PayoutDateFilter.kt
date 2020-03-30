@@ -9,7 +9,7 @@ internal class PayoutDateFilter(
 ) : Filter<RevenueEventDto> {
 
     override fun filter(source: List<RevenueEventDto>): List<RevenueEventDto> {
-        val lastCreditDate = lastPayoutDateProvider.invoke()
+        val lastCreditDate = lastPayoutDateProvider.invoke() ?: return source
         return source.filter { it.date > lastCreditDate }
     }
 

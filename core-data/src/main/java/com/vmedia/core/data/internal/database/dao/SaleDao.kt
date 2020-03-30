@@ -2,12 +2,14 @@ package com.vmedia.core.data.internal.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.vmedia.core.data.internal.database.dao.base.BaseDao
 import com.vmedia.core.data.internal.database.entity.Sale
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.math.BigDecimal
 
 @Dao
-interface SaleDao {
+interface SaleDao : BaseDao<Sale> {
 
     @Query("SELECT * FROM Sale ORDER BY date DESC")
     fun getProvisions(): Observable<List<Sale>>
@@ -48,5 +50,23 @@ interface SaleDao {
 
     @Query("SELECT SUM(priceUsd * quantity) FROM Sale WHERE date BETWEEN :startTimestamp AND :endTimestamp")
     fun getSalesAmountByPeriod(startTimestamp: Long, endTimestamp: Long): Single<Int>
+
+    @Query(
+        """
+            SELECT * FROM Sale 
+            WHERE
+                assetId = :assetId
+                AND priceUsd = :price
+                AND date BETWEEN :startTimestamp AND :endTimestamp
+            ORDER BY date DESC
+            LIMIT 1
+        """
+    )
+    fun getLastSale(
+        assetId: Long,
+        price: BigDecimal,
+        startTimestamp: Long,
+        endTimestamp: Long
+    ): Single<Sale>
 
 }

@@ -4,7 +4,7 @@ import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.sync.synchronizer.asset.AssetModel
 
-sealed class SynchronizationEvent() {
+sealed class SynchronizationEvent {
 
     object Loading : SynchronizationEvent()
     object Cancelled : SynchronizationEvent()

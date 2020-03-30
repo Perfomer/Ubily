@@ -1,13 +1,12 @@
 package com.vmedia.core.sync
 
-import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.andThenMerge
 import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.SynchronizationEventType.PERIODS_RECEIVED
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
+import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
-import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Completable
 import io.reactivex.subjects.BehaviorSubject
@@ -16,6 +15,7 @@ import io.reactivex.subjects.Subject
 internal class SynchronizationDataSourceImpl(
     private val networkDataSource: CachedNetworkDataSourceDecorator,
     private val databaseDataSource: CachedDatabaseDataSourceDecorator,
+    private val periodsProvider: MutableSynchronizationPeriodsProvider,
 
     private val credentialsSynchronizer: PublisherCredentialsSynchronizer,
 
@@ -28,13 +28,7 @@ internal class SynchronizationDataSourceImpl(
     private val payoutSynchronizer: _PayoutSynchronizer,
     private val periodSynchronizer: _PeriodSynchronizer,
     private val userSynchronizer: _UserSynchronizer
-) : SynchronizationDataSource, SynchronizationPeriodsProvider {
-
-    override val periods: List<Period>
-        get() {
-            val event = syncStatus.events[PERIODS_RECEIVED] as PeriodsReceived
-            return event.items
-        }
+) : SynchronizationDataSource {
 
     @Volatile
     override var isSynchronizing = false
@@ -60,7 +54,7 @@ internal class SynchronizationDataSourceImpl(
         return execute()
             .doOnSubscribe { isSynchronizing = true }
             .doOnTerminate { isSynchronizing = false }
-            .doOnTerminate { clear() }
+            .doOnTerminate(::clear)
     }
 
     private fun execute(): Completable {
@@ -68,9 +62,16 @@ internal class SynchronizationDataSourceImpl(
             .andThenSynchronizeWith(
                 publisherSynchronizer,
                 assetSynchronizer,
-                periodSynchronizer,
                 userSynchronizer
-            ).andThenSynchronizeWith(
+            )
+            .andThen(
+                periodSynchronizer.synchronize()
+                    .doOnComplete {
+                        val event = syncStatus.events[PERIODS_RECEIVED] as PeriodsReceived
+                        periodsProvider.periods = event.items
+                    }
+            )
+            .andThenSynchronizeWith(
                 reviewSynchronizer,
                 saleSynchronizer,
                 downloadSynchronizer,

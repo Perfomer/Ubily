@@ -3,7 +3,8 @@ package com.vmedia.ubily.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
-import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.common.util.toast
+import com.vmedia.core.sync.SynchronizationDataSource
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthNavigator
 import com.vmedia.ubily.R
@@ -12,6 +13,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
+import org.koin.core.qualifier.named
 
 class MainActivity : AppCompatActivity(), AuthNavigator {
 
@@ -21,24 +23,31 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.nav_host_fragment, get(DI_FRAGMENT_AUTH))
+            .add(R.id.nav_host_fragment, get(named(DI_FRAGMENT_AUTH)))
             .addToBackStack("asdasda")
             .commit()
 
         nav_host_fragment.postDelayed(0) {
-            get<NetworkDataSource>().getRevenue()
+            get<SynchronizationDataSource>().synchronize()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onError = {
-                        val i = 0
+                        toast(it)
                     },
-                    onSuccess = {
-                        val i = 0
+                    onComplete = {
+                        toast("Success")
                     }
                 )
 
-
+            get<SynchronizationDataSource>().getSynchronizationStatus()
+                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onNext = {
+                        toast(it)
+                    }
+                )
         }
     }
 

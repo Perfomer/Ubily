@@ -16,6 +16,7 @@ internal class CachedDatabaseDataSourceDecorator(
     private val assetsWithUrls by cachedMapSingle(source::getAssetByUrl)
     private val assetsWithNames by cachedMapSingle(source::getAssetByName)
     private val usersWithNames by cachedMapSingle(source::getUserByName)
+    private val periodIds by cachedMapSingle(source::getPeriodId)
 
     private val lastSales by cachedMapSingle { arguments: Triple<Long, Period, BigDecimal> ->
         source.getLastSale(
@@ -41,6 +42,7 @@ internal class CachedDatabaseDataSourceDecorator(
     override fun getAssetByUrl(url: String) = assetsWithUrls[url]
     override fun getAssetByName(name: String) = assetsWithNames[name]
     override fun getUserByName(name: String) = usersWithNames[name]
+    override fun getPeriodId(period: Period) = periodIds[period]
 
     override fun getLastSale(
         assetId: Long,

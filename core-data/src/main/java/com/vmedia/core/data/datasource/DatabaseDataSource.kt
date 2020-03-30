@@ -20,11 +20,15 @@ interface DatabaseDataSource {
 
     fun getReview(authorId: Long, assetId: Long): Single<Review>
 
-    fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal) : Single<Sale>
-
     fun getLastPayout() : Single<Payout>
 
     fun getLastRevenue() : Single<Revenue>
+
+    fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal) : Single<Sale>
+
+    fun getFreeDownloadsPeriods(): Single<List<Period>>
+
+    fun getPeriodId(period: Period) : Single<Long>
 
     fun getLastPeriod() : Single<Period>
 
@@ -44,8 +48,8 @@ interface DatabaseDataSource {
 
     fun putPeriods(periods: Collection<Period>): Completable
 
-    fun putReviews(reviews: List<Review>): Completable
+    fun putReviews(reviews: Collection<Review>): Completable
 
-    fun putUsers(users: List<User>): Completable
+    fun putUsers(users: Collection<User>): Completable
 
 }

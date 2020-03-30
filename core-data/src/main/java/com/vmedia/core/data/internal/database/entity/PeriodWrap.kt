@@ -11,6 +11,6 @@ import com.vmedia.core.common.obj.Period
     indices = [Index(value = ["year", "month"], unique = true)]
 )
 internal class PeriodWrap(
-    @PrimaryKey val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     @Embedded val period: Period
 )

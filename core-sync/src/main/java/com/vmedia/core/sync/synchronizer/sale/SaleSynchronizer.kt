@@ -15,7 +15,7 @@ import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Observable
 import io.reactivex.Single
 
-internal class SaleSynchronizer(
+class SaleSynchronizer(
     private val networkDataSource: NetworkDataSource,
     private val databaseDataSource: DatabaseDataSource,
     private val periodsProvider: SynchronizationPeriodsProvider,
@@ -27,7 +27,8 @@ internal class SaleSynchronizer(
     override val eventType = SynchronizationEventType.SALES_RECEIVED
 
     override fun execute(): Single<SalesReceived> {
-        return Observable.fromIterable(periodsProvider.periods)
+        return Observable.defer { Observable.fromIterable(periodsProvider.periods)
+            .take(1) /** TODO remove */ }
             .flatMapSingle(networkDataSource::getSales)
             .toFlattenList()
             .mapWith(mapper)

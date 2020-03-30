@@ -12,7 +12,8 @@ import java.util.*
         parentColumns = ["id"],
         childColumns = ["periodId"]
     )]
-)data class Payout(
+)
+data class Payout(
     @PrimaryKey val periodId: Long,
     val valueUsd: BigDecimal,
     val date: Date,

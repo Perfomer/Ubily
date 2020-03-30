@@ -13,11 +13,13 @@ internal class AssetFilter(
     }
 
     private fun AssetDto.isDateUpdated(): Boolean {
-        return assetProvider.invoke(id).modificationDate != modificationDate
+        val oldAsset = assetProvider.invoke(id) ?: return true
+        return oldAsset.modificationDate != modificationDate
     }
 
     private fun AssetDto.isStatusUpdated(): Boolean {
-        return assetProvider.invoke(id).status != status
+        val oldAsset = assetProvider.invoke(id) ?: return true
+        return oldAsset.status != status
     }
 
 }

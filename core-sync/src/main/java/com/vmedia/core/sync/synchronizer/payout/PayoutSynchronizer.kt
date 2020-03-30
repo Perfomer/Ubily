@@ -12,7 +12,7 @@ import com.vmedia.core.sync._RevenueFilter
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Single
 
-internal class PayoutSynchronizer(
+class PayoutSynchronizer(
     private val networkDataSource: NetworkDataSource,
     private val databaseDataSource: DatabaseDataSource,
 

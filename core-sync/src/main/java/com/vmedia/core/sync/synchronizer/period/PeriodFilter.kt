@@ -11,7 +11,10 @@ internal class PeriodFilter(
 
     override fun filter(source: List<Period>): List<Period> {
         val lastPeriod = lastPeriodProvider.invoke()
-        return source.filter { lastPeriod == null || it.isAfter(lastPeriod) || it == lastPeriod }
+
+        return source.filter {
+            lastPeriod == null || it.isAfter(lastPeriod) || it == lastPeriod
+        }
     }
 
 }

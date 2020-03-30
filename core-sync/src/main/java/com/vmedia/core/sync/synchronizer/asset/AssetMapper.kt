@@ -5,12 +5,14 @@ import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.AssetImage
 import com.vmedia.core.network.entity.AssetDetailsDto
 import com.vmedia.core.network.entity.AssetDto
+import java.util.*
 
 internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel> {
 
+    private val EMPTY_DATE = Date(0L)
+
     override fun map(from: Pair<AssetDto, AssetDetailsDto>): AssetModel {
-        val asset = from.first
-        val details = from.second
+        val (asset, details) = from
 
         return AssetModel(
             asset = Asset(
@@ -19,7 +21,7 @@ internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel
                 versionId = asset.packageVersionId,
                 creationDate = asset.creationDate,
                 modificationDate = asset.modificationDate,
-                publishingDate = asset.publishingDate,
+                publishingDate = asset.publishingDate ?: EMPTY_DATE,
                 priceUsd = asset.price.value,
                 totalFileSize = asset.sizeMb,
                 status = asset.status,
@@ -30,7 +32,12 @@ internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel
                 smallImage = details.smallImageUrl,
                 iconImage = details.iconImageUrl
             ),
-            images = details.artworksUrls.map { AssetImage(asset.id, it) },
+            images = details.artworksUrls.map {
+                AssetImage(
+                    assetId = asset.id,
+                    url = it
+                )
+            },
             keywords = details.tags
         )
     }

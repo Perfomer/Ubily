@@ -41,14 +41,12 @@ internal class MapSingleCachedProperty<K, V>(
     private val cachedValues: MutableMap<K, CachedValue<V>> = mutableMapOf()
 
     override fun get(key: K): Single<V> {
-        val currentValue = cachedValues.get(key, CachedValue.Invalid)
-
-        return when (currentValue) {
-            CachedValue.Invalid -> {
-                queryProvider.invoke(key).doOnSuccess { cachedValues[key] = CachedValue.Value(it) }
+        return when (val currentValue = cachedValues.get(key, Invalid)) {
+            Invalid -> {
+                queryProvider.invoke(key).doOnSuccess { cachedValues[key] = Value(it) }
             }
 
-            is CachedValue.Value<V> -> {
+            is Value<V> -> {
                 Single.just(currentValue.value)
             }
         }
@@ -69,24 +67,22 @@ private class SingleCachedProperty<T>(
     private val query: Single<T>
 ) : ReadOnlyProperty<Any, Single<T>>, CacheHolder {
 
-    private var cachedValue: CachedValue<T> = CachedValue.Invalid
+    private var cachedValue: CachedValue<T> = Invalid
 
     override fun getValue(thisRef: Any, property: KProperty<*>): Single<T> {
-        val currentValue = cachedValue
-
-        return when (currentValue) {
-            CachedValue.Invalid -> {
-                query.doOnSuccess { cachedValue = CachedValue.Value(it) }
+        return when (val currentValue = cachedValue) {
+            Invalid -> {
+                query.doOnSuccess { cachedValue = Value(it) }
             }
 
-            is CachedValue.Value<T> -> {
+            is Value<T> -> {
                 Single.just(currentValue.value)
             }
         }
     }
 
     override fun invalidate() {
-        cachedValue = CachedValue.Invalid
+        cachedValue = Invalid
     }
 
 }

@@ -18,11 +18,19 @@ interface BaseDao<T> {
 
     @WorkerThread
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: T)
+    fun insertWithReplace(item: T): Long
 
     @WorkerThread
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(items: List<T>)
+    fun insertWithReplace(items: Collection<T>): List<Long>
+
+    @WorkerThread
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(item: T): Long
+
+    @WorkerThread
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insert(items: Collection<T>): List<Long>
 
     @WorkerThread
     @Delete

@@ -8,8 +8,8 @@ class NetworkCredentialsHolder : MutableNetworkCredentialsProvider {
 
     override var userId: Long = 0L
 
-    override var token: Token = Token("", "")
+    override var token: Token = Token()
 
-    override var rssToken: RssToken = RssToken("", "")
+    override var rssToken: RssToken = RssToken()
 
 }

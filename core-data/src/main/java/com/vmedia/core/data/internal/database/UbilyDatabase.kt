@@ -40,8 +40,13 @@ internal abstract class UbilyDatabase : RoomDatabase() {
 
     abstract fun getEventDao(): EventDao
     abstract fun getAssetDao(): AssetDao
+    abstract fun getAssetImageDao(): AssetImageDao
+    abstract fun getAssetKeywordDao(): AssetKeywordDao
+    abstract fun getKeywordDao(): KeywordDao
     abstract fun getSaleDao(): SaleDao
+    abstract fun getPeriodDao(): PeriodDao
     abstract fun getPublisherDao(): PublisherDao
+    abstract fun getUserDao(): UserDao
     abstract fun getReviewDao(): ReviewDao
     abstract fun getRevenueDao(): RevenueDao
     abstract fun getPayoutDao(): PayoutDao

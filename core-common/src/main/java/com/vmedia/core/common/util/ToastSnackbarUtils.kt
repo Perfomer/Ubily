@@ -15,12 +15,20 @@ fun Context.toast(text: String, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, text, duration).show()
 }
 
+fun Context.toast(obj: Any, duration: Int = Toast.LENGTH_LONG) {
+    toast(obj.toString(), duration)
+}
+
 fun Fragment.toast(@StringRes stringId: Int, duration: Int = Toast.LENGTH_LONG) {
     context?.toast(stringId, duration)
 }
 
 fun Fragment.toast(text: String, duration: Int = Toast.LENGTH_LONG) {
     context?.toast(text, duration)
+}
+
+fun Fragment.toast(obj: Any, duration: Int = Toast.LENGTH_LONG) {
+    toast(obj.toString(), duration)
 }
 
 

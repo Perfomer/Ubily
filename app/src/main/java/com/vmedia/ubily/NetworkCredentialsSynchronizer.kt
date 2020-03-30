@@ -36,7 +36,6 @@ internal class NetworkCredentialsSynchronizer(
         }
 
         return databaseDataSource.getPublisher()
-            .singleOrError()
             .doOnSuccess { networkCredentialsProvider.userId = it.id }
             .doOnSuccess { networkCredentialsProvider.rssToken = it.rssToken }
             .ignoreElement()
