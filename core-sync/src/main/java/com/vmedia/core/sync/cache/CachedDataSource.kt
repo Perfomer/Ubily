@@ -4,6 +4,7 @@ import com.vmedia.core.common.util.get
 import com.vmedia.core.sync.cache.CachedValue.Invalid
 import com.vmedia.core.sync.cache.CachedValue.Value
 import io.reactivex.Single
+import java.io.Closeable
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -36,7 +37,9 @@ internal abstract class CachedDataSource {
  */
 internal class MapSingleCachedProperty<K, V>(
     private val queryProvider: (K) -> Single<V>
-) : ReadOnlyProperty<Any, SingleValueHolder<K, V>>, CacheHolder, SingleValueHolder<K, V> {
+) : ReadOnlyProperty<Any, SingleValueHolder<K, V>>,
+    Closeable,
+    SingleValueHolder<K, V> {
 
     private val cachedValues: MutableMap<K, CachedValue<V>> = mutableMapOf()
 
@@ -54,7 +57,7 @@ internal class MapSingleCachedProperty<K, V>(
 
     override fun getValue(thisRef: Any, property: KProperty<*>) = this
 
-    override fun invalidate() = cachedValues.clear()
+    override fun close() = cachedValues.clear()
 
 }
 
@@ -65,7 +68,7 @@ internal class MapSingleCachedProperty<K, V>(
  */
 private class SingleCachedProperty<T>(
     private val query: Single<T>
-) : ReadOnlyProperty<Any, Single<T>>, CacheHolder {
+) : ReadOnlyProperty<Any, Single<T>>, Closeable {
 
     private var cachedValue: CachedValue<T> = Invalid
 
@@ -81,7 +84,7 @@ private class SingleCachedProperty<T>(
         }
     }
 
-    override fun invalidate() {
+    override fun close() {
         cachedValue = Invalid
     }
 
@@ -105,25 +108,16 @@ private sealed class CachedValue<out T> {
  */
 private class CacheDropper {
 
-    private val listeners = mutableListOf<CacheHolder>()
+    private val listeners = mutableListOf<Closeable>()
 
-    fun listen(action: CacheHolder) {
+    fun listen(action: Closeable) {
         listeners += action
     }
 
     fun dropCache() {
-        listeners.forEach(CacheHolder::invalidate)
+        listeners.forEach(Closeable::close)
     }
 
-}
-
-/**
- * Cache holder
- *
- * You can invalidate cache for any object that holds cached values
- */
-private interface CacheHolder {
-    fun invalidate()
 }
 
 private interface SingleValueHolder<K, V> {
