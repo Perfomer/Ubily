@@ -5,9 +5,9 @@ import com.vmedia.core.common.util.filterWith
 import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.common.util.toFlattenList
 import com.vmedia.core.data.datasource.DatabaseDataSource
+import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.sync.SynchronizationDataType
-import com.vmedia.core.sync.SynchronizationEvent.SalesReceived
 import com.vmedia.core.sync._SaleFilter
 import com.vmedia.core.sync._SaleMapper
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -20,20 +20,19 @@ class SaleSynchronizer(
     private val databaseDataSource: DatabaseDataSource,
     private val periodsProvider: SynchronizationPeriodsProvider,
 
-    private val filter: _SaleFilter,
-    private val mapper: _SaleMapper
-) : Synchronizer<SalesReceived> {
+    private val mapper: _SaleMapper,
+    private val filter: _SaleFilter
+) : Synchronizer<List<Sale>> {
 
     override val dataType = SynchronizationDataType.SALES
 
-    override fun execute(): Single<SalesReceived> {
+    override fun execute(): Single<List<Sale>> {
         return Observable.defer { Observable.fromIterable(periodsProvider.periods) }
             .flatMapSingle(networkDataSource::getSales)
             .toFlattenList()
             .mapWith(mapper)
             .filterWith(filter)
             .actOnSuccess(databaseDataSource::putSales)
-            .map(::SalesReceived)
     }
 
 }

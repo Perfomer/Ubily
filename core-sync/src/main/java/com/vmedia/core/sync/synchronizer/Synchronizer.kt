@@ -1,10 +1,9 @@
 package com.vmedia.core.sync.synchronizer
 
 import com.vmedia.core.sync.SynchronizationDataType
-import com.vmedia.core.sync.SynchronizationEvent
 import io.reactivex.Single
 
-interface Synchronizer<T : SynchronizationEvent> {
+interface Synchronizer<T> {
 
     val dataType: SynchronizationDataType
 

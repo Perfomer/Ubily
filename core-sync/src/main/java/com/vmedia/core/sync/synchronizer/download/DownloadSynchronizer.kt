@@ -7,9 +7,12 @@ import com.vmedia.core.common.util.filterWith
 import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.common.util.toFlattenList
 import com.vmedia.core.data.datasource.DatabaseDataSource
+import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.datasource.NetworkDataSource
-import com.vmedia.core.sync.*
-import com.vmedia.core.sync.SynchronizationEvent.FreeDownloadsReceived
+import com.vmedia.core.sync.SynchronizationDataType
+import com.vmedia.core.sync._DownloadMapper
+import com.vmedia.core.sync._FreeDownloadsPeriodsProvider
+import com.vmedia.core.sync._SaleFilter
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Observable
@@ -22,20 +25,19 @@ class DownloadSynchronizer(
     private val periodsProvider: SynchronizationPeriodsProvider,
     private val freePeriodsProvider: _FreeDownloadsPeriodsProvider,
 
-    private val filter: _SaleFilter,
-    private val mapper: _DownloadMapper
-) : Synchronizer<FreeDownloadsReceived> {
+    private val mapper: _DownloadMapper,
+    private val filter: _SaleFilter
+) : Synchronizer<List<Sale>> {
 
     override val dataType = SynchronizationDataType.FREE_DOWNLOADS
 
-    override fun execute(): Single<FreeDownloadsReceived> {
+    override fun execute(): Single<List<Sale>> {
         return Observable.defer { Observable.fromIterable(extractFreePeriods()) }
             .flatMapSingle(networkDataSource::getDownloads)
             .toFlattenList()
             .mapWith(mapper)
             .filterWith(filter)
             .actOnSuccess(databaseDataSource::putSales)
-            .map(SynchronizationEvent::FreeDownloadsReceived)
     }
 
     @WorkerThread

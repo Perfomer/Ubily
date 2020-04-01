@@ -1,5 +1,6 @@
 package com.vmedia.core.sync
 
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.andThenMerge
 import com.vmedia.core.sync.SynchronizationDataType.PERIODS
 import com.vmedia.core.sync.SynchronizationEvent.*
@@ -59,6 +60,7 @@ internal class SynchronizationDataSourceImpl(
             .doOnTerminate(::clear)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun execute(): Completable {
         return credentialsSynchronizer.synchronize()
             .andThenSynchronizeWith(
@@ -69,7 +71,7 @@ internal class SynchronizationDataSourceImpl(
             .andThen(
                 periodSynchronizer.synchronize()
                     .doOnComplete {
-                        val event = syncStatus.events[PERIODS] as PeriodsReceived
+                        val event = syncStatus.events[PERIODS] as Data<List<Period>>
                         periodsProvider.periods = event.data
                     }
             )
@@ -89,13 +91,13 @@ internal class SynchronizationDataSourceImpl(
         syncStatus = SynchronizationStatus(emptyMap())
     }
 
-    private fun <T : SynchronizationEvent> Synchronizer<T>.synchronize(): Completable {
+    private fun <T> Synchronizer<T>.synchronize(): Completable {
         return checkCancellation { syncStatus = syncStatus.update(dataType, Cancelled) }
             .flatMapSingle {
                 execute()
                     .doOnSubscribe { syncStatus = syncStatus.update(dataType, Loading) }
                     .doOnError { syncStatus = syncStatus.update(dataType, Error(it)) }
-                    .doOnSuccess { syncStatus = syncStatus.update(dataType, it) }
+                    .doOnSuccess { syncStatus = syncStatus.update(dataType, Data(it)) }
             }
             .ignoreElement()
             .onErrorComplete()

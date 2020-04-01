@@ -6,7 +6,6 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.sync.SynchronizationDataType
-import com.vmedia.core.sync.SynchronizationEvent.AssetsReceived
 import com.vmedia.core.sync._AssetFilter
 import com.vmedia.core.sync._AssetMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -21,17 +20,16 @@ class AssetSynchronizer(
 
     private val mapper: _AssetMapper,
     private val filter: _AssetFilter
-) : Synchronizer<AssetsReceived> {
+) : Synchronizer<List<AssetModel>> {
 
     override val dataType = SynchronizationDataType.ASSETS
 
-    override fun execute(): Single<AssetsReceived> {
+    override fun execute(): Single<List<AssetModel>> {
         return networkDataSource.getAssets()
             .filterWith(filter)
             .associateWith { networkDataSource.getAssetDetails(it.packageVersionId) }
             .mapWith(mapper)
             .actOnSuccess(::save)
-            .map(::AssetsReceived)
     }
 
     private fun save(assets: List<AssetModel>): Completable {

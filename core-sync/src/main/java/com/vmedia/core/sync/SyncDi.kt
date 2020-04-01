@@ -6,7 +6,6 @@ import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.entity.internal.RevenueEventDto
-import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
@@ -79,15 +78,15 @@ internal typealias _PeriodFilter = Filter<Period>
 internal typealias _ReviewFilter = Filter<Review>
 internal typealias _UserFilter = Filter<DetailedReviewDto>
 
-internal typealias _AssetSynchronizer = Synchronizer<AssetsReceived>
-internal typealias _PublisherSynchronizer = Synchronizer<PublisherReceived>
-internal typealias _ReviewSynchronizer = Synchronizer<ReviewsReceived>
-internal typealias _RevenueSynchronizer = Synchronizer<RevenuesReceived>
-internal typealias _PayoutSynchronizer = Synchronizer<PayoutsReceived>
-internal typealias _SaleSynchronizer = Synchronizer<SalesReceived>
-internal typealias _DownloadSynchronizer = Synchronizer<FreeDownloadsReceived>
-internal typealias _PeriodSynchronizer = Synchronizer<PeriodsReceived>
-internal typealias _UserSynchronizer = Synchronizer<UsersReceived>
+internal typealias _AssetSynchronizer = Synchronizer<List<AssetModel>>
+internal typealias _PublisherSynchronizer = Synchronizer<Publisher>
+internal typealias _ReviewSynchronizer = Synchronizer<List<Review>>
+internal typealias _RevenueSynchronizer = Synchronizer<List<Revenue>>
+internal typealias _PayoutSynchronizer = Synchronizer<List<Payout>>
+internal typealias _SaleSynchronizer = Synchronizer<List<Sale>>
+internal typealias _DownloadSynchronizer = Synchronizer<List<Sale>>
+internal typealias _PeriodSynchronizer = Synchronizer<List<Period>>
+internal typealias _UserSynchronizer = Synchronizer<List<User>>
 
 private const val BEAN_PROVIDER_ASSET_BY_ID = "SyncAssetProviderById"
 private const val BEAN_PROVIDER_ASSET_BY_NAME = "SyncAssetProviderByName"
