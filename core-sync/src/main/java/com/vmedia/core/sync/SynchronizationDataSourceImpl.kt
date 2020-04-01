@@ -50,7 +50,10 @@ internal class SynchronizationDataSourceImpl(
     override fun synchronize(): Completable {
         if (isSynchronizing) {
             return Completable.error(
-                Throwable("There's already running synchronization. You can't run the second one until the first one is finished.")
+                IllegalStateException(
+                    "There's already running synchronization. " +
+                            "You can't run the second one until the first one is finished."
+                )
             )
         }
 
@@ -60,7 +63,6 @@ internal class SynchronizationDataSourceImpl(
             .doOnTerminate(::clear)
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun execute(): Completable {
         return credentialsSynchronizer.synchronize()
             .andThenSynchronizeWith(
@@ -70,10 +72,7 @@ internal class SynchronizationDataSourceImpl(
             )
             .andThen(
                 periodSynchronizer.synchronize()
-                    .doOnComplete {
-                        val event = syncStatus.events[PERIODS] as Data<List<Period>>
-                        periodsProvider.periods = event.data
-                    }
+                    .doOnComplete(::publishPeriods)
             )
             .andThenSynchronizeWith(
                 reviewSynchronizer,
@@ -89,6 +88,12 @@ internal class SynchronizationDataSourceImpl(
         databaseDataSource.dropCache()
 
         syncStatus = SynchronizationStatus(emptyMap())
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun publishPeriods() {
+        val event = syncStatus.events[PERIODS] as Data<List<Period>>
+        periodsProvider.periods = event.data
     }
 
     private fun <T> Synchronizer<T>.synchronize(): Completable {
