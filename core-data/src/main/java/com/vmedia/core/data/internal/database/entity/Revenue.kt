@@ -17,6 +17,5 @@ data class Revenue(
     @PrimaryKey val periodId: Long,
     val date: Date,
     val valueUsd: BigDecimal,
-    val isSale: Boolean,
-    val isFixing: Boolean
+    val isSale: Boolean
 )

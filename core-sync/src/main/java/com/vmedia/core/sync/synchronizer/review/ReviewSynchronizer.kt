@@ -5,8 +5,8 @@ import com.vmedia.core.common.util.filterWith
 import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationEvent.ReviewsReceived
-import com.vmedia.core.sync.SynchronizationEventType
 import com.vmedia.core.sync._ReviewFilter
 import com.vmedia.core.sync._ReviewMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -20,7 +20,7 @@ class ReviewSynchronizer(
     private val filter: _ReviewFilter
 ) : Synchronizer<ReviewsReceived> {
 
-    override val eventType = SynchronizationEventType.REVIEWS_RECEIVED
+    override val dataType = SynchronizationDataType.REVIEWS
 
     override fun execute(): Single<ReviewsReceived> {
         return networkDataSource.getReviews()

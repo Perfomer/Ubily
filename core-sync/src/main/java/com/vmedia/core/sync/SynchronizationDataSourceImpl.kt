@@ -1,14 +1,15 @@
 package com.vmedia.core.sync
 
 import com.vmedia.core.common.util.andThenMerge
+import com.vmedia.core.sync.SynchronizationDataType.PERIODS
 import com.vmedia.core.sync.SynchronizationEvent.*
-import com.vmedia.core.sync.SynchronizationEventType.PERIODS_RECEIVED
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 
@@ -67,8 +68,8 @@ internal class SynchronizationDataSourceImpl(
             .andThen(
                 periodSynchronizer.synchronize()
                     .doOnComplete {
-                        val event = syncStatus.events[PERIODS_RECEIVED] as PeriodsReceived
-                        periodsProvider.periods = event.items
+                        val event = syncStatus.events[PERIODS] as PeriodsReceived
+                        periodsProvider.periods = event.data
                     }
             )
             .andThenSynchronizeWith(
@@ -109,10 +110,10 @@ internal class SynchronizationDataSourceImpl(
     private companion object {
 
         private fun SynchronizationStatus.update(
-            eventType: SynchronizationEventType,
+            dataType: SynchronizationDataType,
             event: SynchronizationEvent
         ): SynchronizationStatus {
-            val updatedEvents = events.toMutableMap().apply { this[eventType] = event }
+            val updatedEvents = events.toMutableMap().apply { this[dataType] = event }
             return copy(events = updatedEvents)
         }
 

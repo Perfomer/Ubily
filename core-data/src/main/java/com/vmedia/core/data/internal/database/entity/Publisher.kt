@@ -20,5 +20,5 @@ data class Publisher(
     val smallImageUrl: String,
     val largeImageUrl: String,
 
-    val balanceUsd: BigDecimal = BigDecimal(0)
+    val balanceUsd: BigDecimal = BigDecimal.ZERO
 ) : KeyEntity<Long>

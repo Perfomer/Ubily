@@ -61,7 +61,7 @@ private val databaseModule = module {
         UbilyDatabase.getInstance(
             appContext = androidContext(),
             databaseName = BuildConfig.DB_NAME,
-            inMemory = false
+            inMemory = true
         )
     }
 

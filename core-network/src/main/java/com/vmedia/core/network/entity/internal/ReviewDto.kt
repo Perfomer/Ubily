@@ -1,4 +1,4 @@
-package com.vmedia.core.network.entity
+package com.vmedia.core.network.entity.internal
 
 import androidx.annotation.IntRange
 import java.util.*

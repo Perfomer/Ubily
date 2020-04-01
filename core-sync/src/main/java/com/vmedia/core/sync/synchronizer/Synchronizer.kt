@@ -1,12 +1,12 @@
 package com.vmedia.core.sync.synchronizer
 
+import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationEvent
-import com.vmedia.core.sync.SynchronizationEventType
 import io.reactivex.Single
 
 interface Synchronizer<T : SynchronizationEvent> {
 
-    val eventType: SynchronizationEventType
+    val dataType: SynchronizationDataType
 
     fun execute(): Single<T>
 

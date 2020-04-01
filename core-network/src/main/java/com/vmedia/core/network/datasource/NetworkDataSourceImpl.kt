@@ -16,6 +16,8 @@ import com.vmedia.core.network.api.entity.publisher.PublisherWrapModel
 import com.vmedia.core.network.api.entity.rss.RssChannelModel
 import com.vmedia.core.network.api.entity.rss.RssModel
 import com.vmedia.core.network.entity.*
+import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.ReviewDto
 import io.reactivex.Single
 
 internal class NetworkDataSourceImpl(
@@ -34,7 +36,8 @@ internal class NetworkDataSourceImpl(
     private val periodMapper: _PeriodMapper,
     private val publisherMapper: _PublisherMapper,
 
-    private val reviewFilter: Filter<ReviewDto>
+    private val reviewFilter: Filter<ReviewDto>,
+    private val revenueFilter: Filter<RevenueEventDto>
 ) : NetworkDataSource {
 
     override fun getPeriods(): Single<List<Period>> {
@@ -56,6 +59,7 @@ internal class NetworkDataSourceImpl(
     override fun getRevenue(): Single<List<RevenueEventDto>> {
         return api.getRevenue(credentials.userId)
             .mapWith(revenueMapper)
+            .filterWith(revenueFilter)
     }
 
     override fun getAssets(): Single<List<AssetDto>> {

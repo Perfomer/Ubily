@@ -18,6 +18,9 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.entity.*
+import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.ReviewDto
+import com.vmedia.core.network.filter.RevenueFilter
 import com.vmedia.core.network.filter.ReviewFilter
 import com.vmedia.core.network.mapper.*
 import com.vmedia.core.network.util.addCookieInterceptor
@@ -62,7 +65,8 @@ private val networkModule = module {
             assetDetailsMapper = get<AssetDetailsMapper>(),
             publisherMapper = get<PublisherMapper>(),
             detailedCommentMapper = get<DetailedReviewMapper>(),
-            reviewFilter = get<ReviewFilter>()
+            reviewFilter = get<ReviewFilter>(),
+            revenueFilter = get<RevenueFilter>()
         )
     }
 }
@@ -79,6 +83,7 @@ private val utilsModule = module {
     single { PeriodMapper }
 
     single { ReviewFilter }
+    single { RevenueFilter }
 }
 
 private val retrofitModule = module {

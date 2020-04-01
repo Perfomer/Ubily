@@ -3,12 +3,12 @@ package com.vmedia.core.sync
 import com.vmedia.core.sync.SynchronizationEvent.Loading
 
 data class SynchronizationStatus(
-    val events: Map<SynchronizationEventType, SynchronizationEvent>
+    val events: Map<SynchronizationDataType, SynchronizationEvent>
 ) {
 
     val isFinished: Boolean
         get() {
-            val correctSize = events.size == SynchronizationEventType.values().size
+            val correctSize = events.size == SynchronizationDataType.values().size
             return correctSize && !events.containsValue(Loading)
         }
 

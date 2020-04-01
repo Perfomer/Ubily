@@ -13,7 +13,7 @@ internal class DownloadMapper(
     override fun map(from: DownloadDto): Sale {
         return Sale(
             assetId = assetProvider.invoke(from.assetName).id,
-            priceUsd = BigDecimal(0),
+            priceUsd = BigDecimal.ZERO,
             date = from.lastDownload,
             quantity = from.downloadsQuantity
         )

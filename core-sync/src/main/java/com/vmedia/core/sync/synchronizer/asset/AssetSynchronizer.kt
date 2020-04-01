@@ -5,8 +5,8 @@ import com.vmedia.core.common.util.filterWith
 import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationEvent.AssetsReceived
-import com.vmedia.core.sync.SynchronizationEventType
 import com.vmedia.core.sync._AssetFilter
 import com.vmedia.core.sync._AssetMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -23,7 +23,7 @@ class AssetSynchronizer(
     private val filter: _AssetFilter
 ) : Synchronizer<AssetsReceived> {
 
-    override val eventType = SynchronizationEventType.ASSETS_RECEIVED
+    override val dataType = SynchronizationDataType.ASSETS
 
     override fun execute(): Single<AssetsReceived> {
         return networkDataSource.getAssets()

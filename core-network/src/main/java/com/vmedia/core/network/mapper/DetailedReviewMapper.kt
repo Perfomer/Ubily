@@ -2,8 +2,8 @@ package com.vmedia.core.network.mapper
 
 import android.annotation.SuppressLint
 import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.network.entity.ReviewDto
 import com.vmedia.core.network.entity.DetailedReviewDto
+import com.vmedia.core.network.entity.internal.ReviewDto
 import java.util.*
 
 internal object DetailedReviewMapper : Mapper<List<ReviewDto>, List<DetailedReviewDto>> {

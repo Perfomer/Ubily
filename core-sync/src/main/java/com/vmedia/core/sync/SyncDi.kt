@@ -5,6 +5,7 @@ import com.vmedia.core.common.util.*
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.entity.*
+import com.vmedia.core.network.entity.internal.RevenueEventDto
 import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
@@ -19,7 +20,6 @@ import com.vmedia.core.sync.synchronizer.asset.AssetSynchronizer
 import com.vmedia.core.sync.synchronizer.download.DownloadMapper
 import com.vmedia.core.sync.synchronizer.download.DownloadSynchronizer
 import com.vmedia.core.sync.synchronizer.payout.PayoutDateFilter
-import com.vmedia.core.sync.synchronizer.payout.PayoutInstanceFilter
 import com.vmedia.core.sync.synchronizer.payout.PayoutMapper
 import com.vmedia.core.sync.synchronizer.payout.PayoutSynchronizer
 import com.vmedia.core.sync.synchronizer.period.PeriodFilter
@@ -27,7 +27,6 @@ import com.vmedia.core.sync.synchronizer.period.PeriodSynchronizer
 import com.vmedia.core.sync.synchronizer.publisher.PublisherMapper
 import com.vmedia.core.sync.synchronizer.publisher.PublisherSynchronizer
 import com.vmedia.core.sync.synchronizer.revenue.RevenueDateFilter
-import com.vmedia.core.sync.synchronizer.revenue.RevenueInstanceFilter
 import com.vmedia.core.sync.synchronizer.revenue.RevenueMapper
 import com.vmedia.core.sync.synchronizer.revenue.RevenueSynchronizer
 import com.vmedia.core.sync.synchronizer.review.ReviewFilter
@@ -66,15 +65,16 @@ internal typealias _ReviewProvider = (authorId: Long, assetId: Long) -> Review?
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
 internal typealias _SaleMapper = ListMapper<SaleDto, Sale>
 internal typealias _DownloadMapper = ListMapper<DownloadDto, Sale>
-internal typealias _RevenueMapper = ListMapper<RevenueEventDto, Revenue>
-internal typealias _PayoutMapper = ListMapper<RevenueEventDto, Payout>
+internal typealias _RevenueMapper = ListMapper<RevenueEventDto.Revenue, Revenue>
+internal typealias _PayoutMapper = ListMapper<RevenueEventDto.Payout, Payout>
 internal typealias _ReviewMapper = ListMapper<DetailedReviewDto, Review>
 internal typealias _UserMapper = ListMapper<DetailedReviewDto, User>
 internal typealias _PublisherMapper = Mapper<Pair<Long, PublisherDto>, Publisher>
 
 internal typealias _AssetFilter = Filter<AssetDto>
 internal typealias _SaleFilter = Filter<Sale>
-internal typealias _RevenueFilter = Filter<RevenueEventDto>
+internal typealias _RevenueFilter = Filter<RevenueEventDto.Revenue>
+internal typealias _PayoutFilter = Filter<RevenueEventDto.Payout>
 internal typealias _PeriodFilter = Filter<Period>
 internal typealias _ReviewFilter = Filter<Review>
 internal typealias _UserFilter = Filter<DetailedReviewDto>
@@ -112,6 +112,7 @@ private val syncModule = module {
         SynchronizationDataSourceImpl(
             networkDataSource = get(),
             databaseDataSource = get(),
+            synchronizationDataTypeProvider = get(),
             periodsProvider = get(),
 
             credentialsSynchronizer = get(),
@@ -169,8 +170,7 @@ private val synchronizerModule = module {
             networkDataSource = get<CachedNetworkDataSourceDecorator>(),
             databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
             mapper = get<RevenueMapper>().toListMapper(),
-            filterByInstance = get<RevenueInstanceFilter>(),
-            filterByDate = get<RevenueDateFilter>()
+            filter = get<RevenueDateFilter>()
         )
     }
 
@@ -179,8 +179,7 @@ private val synchronizerModule = module {
             networkDataSource = get<CachedNetworkDataSourceDecorator>(),
             databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
             mapper = get<PayoutMapper>().toListMapper(),
-            filterByInstance = get<PayoutInstanceFilter>(),
-            filterByDate = get<PayoutDateFilter>()
+            filter = get<PayoutDateFilter>()
         )
     }
 
@@ -243,8 +242,6 @@ private val filterModule = module {
     single { AssetFilter(get(named(BEAN_PROVIDER_ASSET_BY_ID))) }
     single { SaleFilter(get(), get(named(BEAN_PROVIDER_SALE_DATE_LAST))) }
     single { ReviewFilter(get(named(BEAN_PROVIDER_REVIEW))) }
-    single { RevenueInstanceFilter }
-    single { PayoutInstanceFilter }
     single { UserFilter }
     single { RevenueDateFilter(get(named(BEAN_PROVIDER_REVENUE_DATE_LAST))) }
     single { PayoutDateFilter(get(named(BEAN_PROVIDER_PAYOUT_DATE_LAST))) }

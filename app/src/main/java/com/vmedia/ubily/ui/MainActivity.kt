@@ -28,7 +28,9 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
             .commit()
 
         nav_host_fragment.postDelayed(0) {
-            get<SynchronizationDataSource>().synchronize()
+            val synchronizationDataSource = get<SynchronizationDataSource>()
+
+            synchronizationDataSource.synchronize()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
                     }
                 )
 
-            get<SynchronizationDataSource>().getSynchronizationStatus()
+            synchronizationDataSource.getSynchronizationStatus()
                 .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(

@@ -26,7 +26,7 @@ class DownloadSynchronizer(
     private val mapper: _DownloadMapper
 ) : Synchronizer<FreeDownloadsReceived> {
 
-    override val eventType = SynchronizationEventType.FREE_DOWNLOADS_RECEIVED
+    override val dataType = SynchronizationDataType.FREE_DOWNLOADS
 
     override fun execute(): Single<FreeDownloadsReceived> {
         return Observable.defer { Observable.fromIterable(extractFreePeriods()) }

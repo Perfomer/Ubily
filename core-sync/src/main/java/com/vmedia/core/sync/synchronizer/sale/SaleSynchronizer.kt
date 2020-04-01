@@ -6,8 +6,8 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.common.util.toFlattenList
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationEvent.SalesReceived
-import com.vmedia.core.sync.SynchronizationEventType
 import com.vmedia.core.sync._SaleFilter
 import com.vmedia.core.sync._SaleMapper
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -24,7 +24,7 @@ class SaleSynchronizer(
     private val mapper: _SaleMapper
 ) : Synchronizer<SalesReceived> {
 
-    override val eventType = SynchronizationEventType.SALES_RECEIVED
+    override val dataType = SynchronizationDataType.SALES
 
     override fun execute(): Single<SalesReceived> {
         return Observable.defer { Observable.fromIterable(periodsProvider.periods) }

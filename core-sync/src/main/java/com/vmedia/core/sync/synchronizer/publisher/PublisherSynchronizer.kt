@@ -4,8 +4,8 @@ import com.vmedia.core.common.util.actOnSuccess
 import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationEvent.PublisherReceived
-import com.vmedia.core.sync.SynchronizationEventType
 import com.vmedia.core.sync._PublisherMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
 import io.reactivex.Single
@@ -17,7 +17,7 @@ class PublisherSynchronizer(
     private val mapper: _PublisherMapper
 ) : Synchronizer<PublisherReceived> {
 
-    override val eventType = SynchronizationEventType.PUBLISHER_RECEIVED
+    override val dataType = SynchronizationDataType.PUBLISHER
 
     override fun execute(): Single<PublisherReceived> {
         return networkDataSource.getPublisherId()

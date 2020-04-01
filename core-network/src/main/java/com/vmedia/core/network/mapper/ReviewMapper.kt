@@ -4,7 +4,7 @@ import com.vmedia.core.common.util.FORMAT_RSS
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.rss.RssItemModel
-import com.vmedia.core.network.entity.ReviewDto
+import com.vmedia.core.network.entity.internal.ReviewDto
 
 internal object ReviewMapper : Mapper<RssItemModel, ReviewDto> {
 

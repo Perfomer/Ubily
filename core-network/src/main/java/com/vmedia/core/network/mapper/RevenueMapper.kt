@@ -1,11 +1,13 @@
 package com.vmedia.core.network.mapper
 
+import android.annotation.SuppressLint
 import com.vmedia.core.common.obj.Month
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.entity.RevenueEventDto
-import com.vmedia.core.network.entity.RevenueEventDto.*
+import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.RevenueEventDto.Payout
+import com.vmedia.core.network.entity.internal.RevenueEventDto.Revenue
 
 internal object RevenueMapper : TableValuesMapper<RevenueEventDto>() {
 
@@ -16,23 +18,44 @@ internal object RevenueMapper : TableValuesMapper<RevenueEventDto>() {
 
         val debit by lazy { tableValues[2].toMoney()!! }
         val credit by lazy { tableValues[3].toMoney()!! }
-        val balance by lazy { tableValues[4].toMoney()!! }
         val isSale by lazy { description.contains("Sale") }
 
         return when {
-            description.contains("Fixing") -> FixingRevenue(date, period, credit, balance, isSale)
-            description.contains("Failed") -> FailedPayout(date, period, debit, balance)
-            description.contains("Revenue") -> Revenue(date, period, debit, balance, isSale)
+            description.contains("Fixing") -> Revenue(
+                date = date,
+                period = period,
+                value = credit,
+                isSale = isSale
+            )
+
+            description.contains("Revenue") -> Revenue(
+                date = date,
+                period = period,
+                value = debit,
+                isSale = isSale
+            )
+
+            description.contains("Failed") -> Payout(
+                date = date,
+                period = period,
+                value = debit,
+                autoPayout = false,
+                paypal = false,
+                isFailed = true
+            )
+
             else -> Payout(
                 date = date,
                 period = period,
-                credit = credit,
+                value = credit,
                 autoPayout = description.contains("auto"),
-                paypal = description.contains("paypal")
+                paypal = description.contains("paypal"),
+                isFailed = false
             )
         }
     }
 
+    @SuppressLint("DefaultLocale")
     private fun String.extractPeriod(): Period {
         val words = split(" ")
         val months = Month.values()

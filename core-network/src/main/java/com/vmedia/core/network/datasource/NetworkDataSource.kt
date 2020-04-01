@@ -2,6 +2,7 @@ package com.vmedia.core.network.datasource
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.network.entity.*
+import com.vmedia.core.network.entity.internal.RevenueEventDto
 import io.reactivex.Single
 
 interface NetworkDataSource {
