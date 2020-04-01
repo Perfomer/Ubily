@@ -8,6 +8,9 @@ import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.entity.internal.RevenueEventDto
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
+import com.vmedia.core.sync.datasource.SynchronizationDataSource
+import com.vmedia.core.sync.datasource.SynchronizationDataSourceImpl
+import com.vmedia.core.sync.datasource.SynchronizationPeriodsProviderImpl
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider

@@ -1,5 +1,6 @@
-package com.vmedia.core.sync
+package com.vmedia.core.sync.datasource
 
+import com.vmedia.core.sync.SynchronizationStatus
 import io.reactivex.Completable
 import io.reactivex.Observable
 

@@ -2,7 +2,7 @@ package com.vmedia.ubily
 
 import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationDataType.*
-import com.vmedia.core.sync.SynchronizationDataTypeProvider
+import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import io.reactivex.Single
 
 internal class SynchronizationDataTypeProviderImpl : SynchronizationDataTypeProvider{

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
 import com.vmedia.core.common.util.toast
-import com.vmedia.core.sync.SynchronizationDataSource
+import com.vmedia.core.sync.datasource.SynchronizationDataSource
 import com.vmedia.feature.auth.DI_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthNavigator
 import com.vmedia.ubily.R

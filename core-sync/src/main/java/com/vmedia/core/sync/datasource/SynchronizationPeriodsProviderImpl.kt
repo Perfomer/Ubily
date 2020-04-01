@@ -1,4 +1,4 @@
-package com.vmedia.core.sync
+package com.vmedia.core.sync.datasource
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
