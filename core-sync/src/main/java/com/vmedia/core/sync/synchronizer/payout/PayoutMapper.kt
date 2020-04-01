@@ -15,7 +15,7 @@ internal class PayoutMapper(
         return Payout(
             periodId = periodId,
             date = from.date,
-            valueUsd = from.value.value,
+            valueUsd = from.value.value.abs(),
             autoPayout = from.autoPayout,
             paypal = from.paypal,
             isFailed = from.isFailed
