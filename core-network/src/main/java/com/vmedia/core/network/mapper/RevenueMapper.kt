@@ -5,7 +5,7 @@ import com.vmedia.core.common.obj.Month
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
-import com.vmedia.core.network.api.entity.AdditionalTableValuesModel
+import com.vmedia.core.network.api.entity.ExtraTableValues
 import com.vmedia.core.network.entity.internal.RevenueEventDto
 import com.vmedia.core.network.entity.internal.RevenueEventDto.Payout
 import com.vmedia.core.network.entity.internal.RevenueEventDto.Revenue
@@ -14,7 +14,7 @@ internal object RevenueMapper : TableValuesMapper<RevenueEventDto>() {
 
     override fun mapItem(
         dataRow: List<String>,
-        extraRow: AdditionalTableValuesModel
+        extraRow: ExtraTableValues?
     ): RevenueEventDto {
         val description = dataRow[1]
         val date = dataRow[0].parse(FORMAT_TABLEVALUES)
