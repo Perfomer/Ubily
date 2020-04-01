@@ -11,13 +11,13 @@ internal class SynchronizationDataTypeProviderImpl : SynchronizationDataTypeProv
         return Single.fromCallable {
             when(type) {
                 PUBLISHER, PERIODS -> true
-                ASSETS -> false
-                USERS -> false
-                REVIEWS -> false
+                ASSETS -> true
+                USERS -> true
+                REVIEWS -> true
                 SALES -> false
                 FREE_DOWNLOADS -> false
-                REVENUES -> true
-                PAYOUTS -> true
+                REVENUES -> false
+                PAYOUTS -> false
             }
         }
     }

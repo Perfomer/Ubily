@@ -1,10 +1,10 @@
 package com.vmedia.core.sync.cache
 
-import com.vmedia.core.common.util.get
-import com.vmedia.core.sync.cache.CachedValue.Invalid
-import com.vmedia.core.sync.cache.CachedValue.Value
 import io.reactivex.Single
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.Subject
 import java.io.Closeable
+import kotlin.collections.set
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -41,63 +41,69 @@ internal class MapSingleCachedProperty<K, V>(
     Closeable,
     SingleValueHolder<K, V> {
 
-    private val cachedValues: MutableMap<K, CachedValue<V>> = mutableMapOf()
+    private val cachedValues: MutableMap<K, CachedSingleValue<V>> = mutableMapOf()
 
     override fun get(key: K): Single<V> {
-        return when (val currentValue = cachedValues.get(key, Invalid)) {
-            Invalid -> {
-                queryProvider.invoke(key).doOnSuccess { cachedValues[key] = Value(it) }
-            }
-
-            is Value<V> -> {
-                Single.just(currentValue.value)
-            }
+        if (!cachedValues.containsKey(key)) {
+            cachedValues[key] = CachedSingleValue(queryProvider.invoke(key))
         }
+
+        return cachedValues[key]!!.getValue()
     }
 
     override fun getValue(thisRef: Any, property: KProperty<*>) = this
 
-    override fun close() = cachedValues.clear()
+    override fun close() {
+        cachedValues.values.forEach(CachedSingleValue<V>::close)
+        cachedValues.clear()
+    }
 
 }
 
 /**
  * Caches [Single]'s query result
  *
- * @param query [Single] query
+ * @param source [Single] query
  */
 private class SingleCachedProperty<T>(
-    private val query: Single<T>
-) : ReadOnlyProperty<Any, Single<T>>, Closeable {
+    private val source: Single<T>
+) : ReadOnlyProperty<Any, Single<T>>,
+    Closeable {
 
-    private var cachedValue: CachedValue<T> = Invalid
+    private val cache = CachedSingleValue(source)
 
     override fun getValue(thisRef: Any, property: KProperty<*>): Single<T> {
-        return when (val currentValue = cachedValue) {
-            Invalid -> {
-                query.doOnSuccess { cachedValue = Value(it) }
-            }
-
-            is Value<T> -> {
-                Single.just(currentValue.value)
-            }
-        }
+        return cache.getValue()
     }
 
     override fun close() {
-        cachedValue = Invalid
+        cache.close()
     }
 
 }
 
-/**
- * Two states of the cached data:
- * - [Invalid] (there's no any cached value)
- * - [Value] (there is cached value)
- */
-private sealed class CachedValue<out T> {
-    object Invalid : CachedValue<Nothing>()
-    class Value<out T>(val value: T) : CachedValue<T>()
+private class CachedSingleValue<T>(
+    private val source: Single<T>
+): Closeable {
+
+    private var subject: Subject<T> = BehaviorSubject.create()
+    private var isQueried = false
+
+    fun getValue(): Single<T> {
+        return if (isQueried) {
+            subject.firstOrError()
+        } else {
+            Single.fromCallable { source.blockingGet() }
+                .doOnSubscribe { isQueried = true }
+                .doOnSuccess(subject::onNext)
+        }
+    }
+
+    override fun close() {
+        subject = BehaviorSubject.create()
+        isQueried = false
+    }
+
 }
 
 /**
