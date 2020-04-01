@@ -27,7 +27,7 @@ class SaleSynchronizer(
     override val dataType = SynchronizationDataType.SALES
 
     override fun execute(): Single<List<Sale>> {
-        return Observable.defer { Observable.fromIterable(periodsProvider.periods) }
+        return Observable.defer { Observable.fromIterable(periodsProvider.periods).take(2) }
             .flatMapSingle(networkDataSource::getSales)
             .toFlattenList()
             .mapWith(mapper)

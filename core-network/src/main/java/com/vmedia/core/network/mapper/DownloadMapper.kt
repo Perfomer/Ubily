@@ -2,16 +2,18 @@ package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
+import com.vmedia.core.network.api.entity.AdditionalTableValuesModel
 import com.vmedia.core.network.entity.DownloadDto
 
 internal object DownloadMapper : TableValuesMapper<DownloadDto>() {
 
-    override fun mapItem(tableValues: List<String>): DownloadDto {
+    override fun mapItem(dataRow: List<String>, extraRow: AdditionalTableValuesModel): DownloadDto {
         return DownloadDto(
-            assetName = tableValues[0],
-            downloadsQuantity = tableValues[1].toInt(),
-            firstDownload = tableValues[2].parse(FORMAT_TABLEVALUES),
-            lastDownload = tableValues[3].parse(FORMAT_TABLEVALUES)
+            assetName = dataRow[0],
+            assetUrl = extraRow.shortUrl,
+            downloadsQuantity = dataRow[1].toInt(),
+            firstDownload = dataRow[2].parse(FORMAT_TABLEVALUES),
+            lastDownload = dataRow[3].parse(FORMAT_TABLEVALUES)
         )
     }
 

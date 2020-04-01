@@ -17,9 +17,6 @@ interface AssetDao : BaseDao<Asset> {
     @Query("SELECT * FROM Asset WHERE id = :id")
     fun getAsset(id: Long): Single<Asset>
 
-    @Query("SELECT * FROM Asset WHERE name = :name")
-    fun getAssetByName(name: String): Single<Asset>
-
     @Query("SELECT * FROM Asset WHERE shortUrl = :url")
     fun getAssetByUrl(url: String): Single<Asset>
 

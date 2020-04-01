@@ -44,10 +44,6 @@ internal class DatabaseDataSourceImpl(
         return assetDao.getAsset(id)
     }
 
-    override fun getAssetByName(name: String): Single<Asset> {
-        return assetDao.getAssetByName(name)
-    }
-
     override fun getAssetByUrl(url: String): Single<Asset> {
         return assetDao.getAssetByUrl(url)
     }

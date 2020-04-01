@@ -89,7 +89,6 @@ internal typealias _PeriodSynchronizer = Synchronizer<List<Period>>
 internal typealias _UserSynchronizer = Synchronizer<List<User>>
 
 private const val BEAN_PROVIDER_ASSET_BY_ID = "SyncAssetProviderById"
-private const val BEAN_PROVIDER_ASSET_BY_NAME = "SyncAssetProviderByName"
 private const val BEAN_PROVIDER_ASSET_BY_URL = "SyncAssetProviderByUrl"
 private const val BEAN_PROVIDER_USER_BY_NAME = "SyncUserProviderByName"
 private const val BEAN_PROVIDER_SALE_DATE_LAST = "SyncLastSaleDateProvider"
@@ -224,8 +223,8 @@ private val mapperModule = module {
     single { AssetMapper }
     single { UserMapper }
     single { PublisherMapper }
-    single { SaleMapper(get(named(BEAN_PROVIDER_ASSET_BY_NAME))) }
-    single { DownloadMapper(get(named(BEAN_PROVIDER_ASSET_BY_NAME))) }
+    single { SaleMapper(get(named(BEAN_PROVIDER_ASSET_BY_URL))) }
+    single { DownloadMapper(get(named(BEAN_PROVIDER_ASSET_BY_URL))) }
     single { RevenueMapper(get(named(BEAN_PROVIDER_PERIOD_ID))) }
     single { PayoutMapper(get(named(BEAN_PROVIDER_PERIOD_ID))) }
     single {
@@ -253,10 +252,6 @@ private val providerModule = module {
 
     databaseProvider<_AssetProviderByUrl>(named(BEAN_PROVIDER_ASSET_BY_URL)) {
         { url: String -> getAssetByUrl(url).blockingGet() }
-    }
-
-    databaseProvider<_AssetProviderByName>(named(BEAN_PROVIDER_ASSET_BY_NAME)) {
-        { name: String -> getAssetByName(name).blockingGet() }
     }
 
     databaseProvider<_UserProviderByName>(named(BEAN_PROVIDER_USER_BY_NAME)) {

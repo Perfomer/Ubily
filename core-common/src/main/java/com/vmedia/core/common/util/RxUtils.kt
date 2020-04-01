@@ -26,6 +26,10 @@ fun <T, R> Single<List<T>>.mapItems(action: (T) -> R): Single<List<R>> {
     return map { it.map(action::invoke) }
 }
 
+fun <T> Single<List<T>>.filterItems(predicate: (T) -> Boolean): Single<List<T>> {
+    return map { it.filter(predicate::invoke) }
+}
+
 fun <T, R: Any> Single<List<T>>.filterItemsAreInstance(clazz: KClass<R>): Single<List<R>> {
     return map { it.filterIsInstance(clazz.java) }
 }

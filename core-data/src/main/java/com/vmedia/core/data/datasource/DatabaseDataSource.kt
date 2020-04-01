@@ -12,8 +12,6 @@ interface DatabaseDataSource {
 
     fun getAsset(id: Long): Single<Asset>
 
-    fun getAssetByName(name: String): Single<Asset>
-
     fun getAssetByUrl(url: String): Single<Asset>
 
     fun getUserByName(name: String): Single<User>

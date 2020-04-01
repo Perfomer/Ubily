@@ -32,7 +32,7 @@ class DownloadSynchronizer(
     override val dataType = SynchronizationDataType.FREE_DOWNLOADS
 
     override fun execute(): Single<List<Sale>> {
-        return Observable.defer { Observable.fromIterable(extractFreePeriods()) }
+        return Observable.defer { Observable.fromIterable(extractFreePeriods()).take(2) }
             .flatMapSingle(networkDataSource::getDownloads)
             .toFlattenList()
             .mapWith(mapper)

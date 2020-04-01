@@ -12,10 +12,10 @@ internal class SynchronizationDataTypeProviderImpl : SynchronizationDataTypeProv
             when(type) {
                 PUBLISHER, PERIODS -> true
                 ASSETS -> true
-                USERS -> true
-                REVIEWS -> true
-                SALES -> false
-                FREE_DOWNLOADS -> false
+                USERS -> false
+                REVIEWS -> false
+                SALES -> true
+                FREE_DOWNLOADS -> true
                 REVENUES -> false
                 PAYOUTS -> false
             }

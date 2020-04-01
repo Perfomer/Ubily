@@ -2,19 +2,24 @@ package com.vmedia.core.network.mapper
 
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
+import com.vmedia.core.network.api.entity.AdditionalTableValuesModel
 import com.vmedia.core.network.entity.SaleDto
 
 internal object SaleMapper : TableValuesMapper<SaleDto>() {
 
-    override fun mapItem(tableValues: List<String>): SaleDto {
+    override fun mapItem(
+        dataRow: List<String>,
+        extraRow: AdditionalTableValuesModel
+    ): SaleDto {
         return SaleDto(
-            assetName = tableValues[0],
-            price = tableValues[1].toMoney()!!,
-            salesQuantity = tableValues[2].toInt(),
-            refundsQuantity = tableValues[3].toInt(),
-            chargebacksQuantity = tableValues[4].toInt(),
-            firstSale = tableValues[6].parse(FORMAT_TABLEVALUES),
-            lastSale = tableValues[7].parse(FORMAT_TABLEVALUES)
+            assetName = dataRow[0],
+            assetUrl = extraRow.shortUrl,
+            price = dataRow[1].toMoney()!!,
+            salesQuantity = dataRow[2].toInt(),
+            refundsQuantity = dataRow[3].toInt(),
+            chargebacksQuantity = dataRow[4].toInt(),
+            firstSale = dataRow[6].parse(FORMAT_TABLEVALUES),
+            lastSale = dataRow[7].parse(FORMAT_TABLEVALUES)
         )
     }
 

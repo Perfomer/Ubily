@@ -5,19 +5,23 @@ import com.vmedia.core.common.obj.Month
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
+import com.vmedia.core.network.api.entity.AdditionalTableValuesModel
 import com.vmedia.core.network.entity.internal.RevenueEventDto
 import com.vmedia.core.network.entity.internal.RevenueEventDto.Payout
 import com.vmedia.core.network.entity.internal.RevenueEventDto.Revenue
 
 internal object RevenueMapper : TableValuesMapper<RevenueEventDto>() {
 
-    override fun mapItem(tableValues: List<String>): RevenueEventDto {
-        val description = tableValues[1]
-        val date = tableValues[0].parse(FORMAT_TABLEVALUES)
+    override fun mapItem(
+        dataRow: List<String>,
+        extraRow: AdditionalTableValuesModel
+    ): RevenueEventDto {
+        val description = dataRow[1]
+        val date = dataRow[0].parse(FORMAT_TABLEVALUES)
         val period = description.extractPeriod()
 
-        val debit by lazy { tableValues[2].toMoney()!! }
-        val credit by lazy { tableValues[3].toMoney()!! }
+        val debit by lazy { dataRow[2].toMoney()!! }
+        val credit by lazy { dataRow[3].toMoney()!! }
         val isSale by lazy { description.contains("Sale") }
 
         return when {
