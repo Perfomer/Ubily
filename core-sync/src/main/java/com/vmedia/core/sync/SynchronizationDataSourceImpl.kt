@@ -16,6 +16,7 @@ import io.reactivex.subjects.Subject
 internal class SynchronizationDataSourceImpl(
     private val networkDataSource: CachedNetworkDataSourceDecorator,
     private val databaseDataSource: CachedDatabaseDataSourceDecorator,
+    private val synchronizationDataTypeProvider: SynchronizationDataTypeProvider,
     private val periodsProvider: MutableSynchronizationPeriodsProvider,
 
     private val credentialsSynchronizer: PublisherCredentialsSynchronizer,
@@ -89,12 +90,21 @@ internal class SynchronizationDataSourceImpl(
     }
 
     private fun <T : SynchronizationEvent> Synchronizer<T>.synchronize(): Completable {
-        return execute()
-            .doOnSubscribe { syncStatus = syncStatus.update(eventType, Loading) }
-            .doOnError { syncStatus = syncStatus.update(eventType, Error(it)) }
-            .doOnSuccess { syncStatus = syncStatus.update(eventType, it) }
+        return checkCancellation { syncStatus = syncStatus.update(dataType, Cancelled) }
+            .flatMapSingle {
+                execute()
+                    .doOnSubscribe { syncStatus = syncStatus.update(dataType, Loading) }
+                    .doOnError { syncStatus = syncStatus.update(dataType, Error(it)) }
+                    .doOnSuccess { syncStatus = syncStatus.update(dataType, it) }
+            }
             .ignoreElement()
             .onErrorComplete()
+    }
+
+    private fun Synchronizer<*>.checkCancellation(fallback: () -> Unit): Maybe<Boolean> {
+        return synchronizationDataTypeProvider.shouldSynchronize(dataType)
+            .doOnSuccess { if (!it) fallback.invoke() }
+            .filter { it }
     }
 
     private fun Completable.andThenSynchronizeWith(

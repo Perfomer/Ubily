@@ -9,7 +9,6 @@ sealed class SynchronizationEvent {
     abstract class Data<T> : SynchronizationEvent() {
         abstract val data: T
     }
-
     object Loading : SynchronizationEvent()
     object Cancelled : SynchronizationEvent()
     class Error(val error: Throwable) : SynchronizationEvent()
