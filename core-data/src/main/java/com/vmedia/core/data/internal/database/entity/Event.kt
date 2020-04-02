@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class Event(
-    @PrimaryKey(autoGenerate = true) override val id: Long,
+    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val type: EventType,
     val date: Date
 ): KeyEntity<Long>

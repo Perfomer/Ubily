@@ -1,5 +1,6 @@
 package com.vmedia.core.data.datasource
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.obj.endTimestamp
@@ -19,6 +20,8 @@ import java.util.*
 internal class DatabaseDataSourceImpl(
     private val database: UbilyDatabase,
 
+    private val eventDao: EventDao,
+    private val eventEntityDao: EventEntityDao,
     private val publisherDao: PublisherDao,
     private val userDao: UserDao,
     private val saleDao: SaleDao,
@@ -52,6 +55,10 @@ internal class DatabaseDataSourceImpl(
         return reviewDao.getReview(authorId, assetId)
     }
 
+    override fun getReviewId(authorId: Long, assetId: Long): Single<Long> {
+        return reviewDao.getReviewId(authorId, assetId)
+    }
+
     override fun getLastPayout(): Single<Payout> {
         return payoutDao.getLastPayout()
     }
@@ -62,6 +69,10 @@ internal class DatabaseDataSourceImpl(
 
     override fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal): Single<Sale> {
         return saleDao.getLastSale(assetId, priceUsd, period.startTimestamp, period.endTimestamp)
+    }
+
+    override fun getSaleId(assetId: Long, date: Date, priceUsd: BigDecimal): Single<Long> {
+        return Single.fromCallable { saleDao.getSaleId(assetId, priceUsd, date) }
     }
 
     override fun getFreeDownloadsPeriods(): Single<List<Period>> {
@@ -80,6 +91,14 @@ internal class DatabaseDataSourceImpl(
         return periodDao.getPeriodId(period.year, period.month)
     }
 
+
+    override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
+        return database.completableTransaction {
+            val eventId = eventDao.insert(Event(type = type, date = date))
+            Log.d(DatabaseDataSource::class.simpleName, "event saved: $eventId $type $entityIds")
+            eventEntityDao.insert(entityIds.map { EventEntity(eventId, it) })
+        }
+    }
 
     override fun putPublisher(publisher: Publisher): Completable {
         return database.completableTransaction {

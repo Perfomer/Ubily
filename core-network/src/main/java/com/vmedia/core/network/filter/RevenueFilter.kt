@@ -3,13 +3,13 @@ package com.vmedia.core.network.filter
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.Filter
 import com.vmedia.core.common.util.sumByBigDecimal
-import com.vmedia.core.network.entity.internal.RevenueEventDto
-import com.vmedia.core.network.entity.internal.RevenueEventDto.Payout
-import com.vmedia.core.network.entity.internal.RevenueEventDto.Revenue
+import com.vmedia.core.network.entity.internal.IncomeDto
+import com.vmedia.core.network.entity.internal.IncomeDto.Payout
+import com.vmedia.core.network.entity.internal.IncomeDto.Revenue
 
-internal object RevenueFilter : Filter<RevenueEventDto> {
+internal object RevenueFilter : Filter<IncomeDto> {
 
-    override fun filter(source: List<RevenueEventDto>): List<RevenueEventDto> {
+    override fun filter(source: List<IncomeDto>): List<IncomeDto> {
         val revenues = mutableMapOf<Period, MutableSet<Revenue>>()
         val payouts = mutableMapOf<Period, MutableSet<Payout>>()
 

@@ -39,6 +39,7 @@ import com.vmedia.core.data.internal.database.entity.*
 internal abstract class UbilyDatabase : RoomDatabase() {
 
     abstract fun getEventDao(): EventDao
+    abstract fun getEventEntityDao(): EventEntityDao
     abstract fun getAssetDao(): AssetDao
     abstract fun getAssetImageDao(): AssetImageDao
     abstract fun getAssetKeywordDao(): AssetKeywordDao

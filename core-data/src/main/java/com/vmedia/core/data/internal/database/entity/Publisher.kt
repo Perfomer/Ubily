@@ -11,14 +11,14 @@ import java.math.BigDecimal
 @Entity(indices = [Index(value = ["name"], unique = true)])
 data class Publisher(
     @PrimaryKey override val id: Long,
-    @Embedded val rssToken: RssToken,
+    @Embedded val rssToken: RssToken = RssToken(),
 
-    val name: String,
-    val description: String,
-    val url: String,
+    val name: String = "",
+    val description: String = "",
+    val url: String = "",
 
-    val smallImageUrl: String,
-    val largeImageUrl: String,
+    val smallImageUrl: String = "",
+    val largeImageUrl: String = "",
 
     val balanceUsd: BigDecimal = BigDecimal.ZERO
 ) : KeyEntity<Long>

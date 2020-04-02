@@ -16,7 +16,7 @@ import com.vmedia.core.network.api.entity.publisher.PublisherWrapModel
 import com.vmedia.core.network.api.entity.rss.RssChannelModel
 import com.vmedia.core.network.api.entity.rss.RssModel
 import com.vmedia.core.network.entity.*
-import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.network.entity.internal.ReviewDto
 import io.reactivex.Single
 
@@ -28,7 +28,7 @@ internal class NetworkDataSourceImpl(
 
     private val saleMapper: _SaleMapper,
     private val downloadMapper: _DownloadMapper,
-    private val revenueMapper: _RevenueMapper,
+    private val incomeMapper: _IncomeMapper,
     private val reviewMapper: _ReviewMapper,
     private val detailedCommentMapper: _DetailedCommentMapper,
     private val assetMapper: _AssetMapper,
@@ -37,7 +37,7 @@ internal class NetworkDataSourceImpl(
     private val publisherMapper: _PublisherMapper,
 
     private val reviewFilter: Filter<ReviewDto>,
-    private val revenueFilter: Filter<RevenueEventDto>
+    private val incomeFilter: Filter<IncomeDto>
 ) : NetworkDataSource {
 
     override fun getPeriods(): Single<List<Period>> {
@@ -56,10 +56,10 @@ internal class NetworkDataSourceImpl(
             .mapWith(saleMapper)
     }
 
-    override fun getRevenue(): Single<List<RevenueEventDto>> {
-        return api.getRevenue(credentials.userId)
-            .mapWith(revenueMapper)
-            .filterWith(revenueFilter)
+    override fun getIncome(): Single<List<IncomeDto>> {
+        return api.getIncome(credentials.userId)
+            .mapWith(incomeMapper)
+            .filterWith(incomeFilter)
     }
 
     override fun getAssets(): Single<List<AssetDto>> {

@@ -4,7 +4,7 @@ import com.vmedia.core.common.obj.Money
 import com.vmedia.core.common.obj.Period
 import java.util.*
 
-sealed class RevenueEventDto {
+sealed class IncomeDto {
 
     abstract val date: Date
     abstract val period: Period
@@ -15,7 +15,7 @@ sealed class RevenueEventDto {
         override val period: Period,
         override val value: Money,
         val isSale: Boolean
-    ) : RevenueEventDto()
+    ) : IncomeDto()
 
     data class Payout(
         override val date: Date,
@@ -24,6 +24,6 @@ sealed class RevenueEventDto {
         val autoPayout: Boolean,
         val paypal: Boolean,
         val isFailed: Boolean
-    ) : RevenueEventDto()
+    ) : IncomeDto()
 
 }

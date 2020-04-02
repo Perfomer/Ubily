@@ -5,12 +5,16 @@ import com.vmedia.core.common.util.*
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.entity.*
-import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
 import com.vmedia.core.sync.datasource.SynchronizationDataSource
 import com.vmedia.core.sync.datasource.SynchronizationDataSourceImpl
 import com.vmedia.core.sync.datasource.SynchronizationPeriodsProviderImpl
+import com.vmedia.core.sync.event.EventExtractor
+import com.vmedia.core.sync.event.SynchronizationEventProducer
+import com.vmedia.core.sync.event.SynchronizationEventProducerImpl
+import com.vmedia.core.sync.event.producer.*
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -49,34 +53,42 @@ import java.math.BigDecimal
 import java.util.*
 
 val syncModules by lazy {
-    listOf(syncModule, synchronizerModule, mapperModule, filterModule, providerModule)
+    listOf(
+        syncModule,
+        synchronizerModule,
+        eventExtractorModule,
+        mapperModule,
+        filterModule,
+        providerModule
+    )
 }
 
 internal typealias _AssetProviderById = (id: Long) -> Asset?
-internal typealias _AssetProviderByName = (name: String) -> Asset
 internal typealias _AssetProviderByUrl = (url: String) -> Asset
 internal typealias _UserProviderByName = (name: String) -> User
 internal typealias _PeriodIdProvider = (period: Period) -> Long
-internal typealias _LastSaleDateProvider = (period: Period, assetId: Long, priceUsd: BigDecimal) -> Date?
-internal typealias _LastPayoutDateProvider = () -> Date?
-internal typealias _LastRevenueDateProvider = () -> Date?
-internal typealias _LastPeriodProvider = () -> Period?
-internal typealias _FreeDownloadsPeriodsProvider = () -> List<Period>
+internal typealias _PeriodLastProvider = () -> Period?
+internal typealias _PeriodsFreeDownloadsProvider = () -> List<Period>
+internal typealias _SaleIdProvider = (date: Date, assetId: Long, priceUsd: BigDecimal) -> Long
+internal typealias _SaleLastDateProvider = (period: Period, assetId: Long, priceUsd: BigDecimal) -> Date?
+internal typealias _PayoutLastDateProvider = () -> Date?
+internal typealias _RevenueLastDateProvider = () -> Date?
 internal typealias _ReviewProvider = (authorId: Long, assetId: Long) -> Review?
+internal typealias _ReviewIdProvider = (authorId: Long, assetId: Long) -> Long
 
 internal typealias _AssetMapper = ListMapper<Pair<AssetDto, AssetDetailsDto>, AssetModel>
 internal typealias _SaleMapper = ListMapper<SaleDto, Sale>
 internal typealias _DownloadMapper = ListMapper<DownloadDto, Sale>
-internal typealias _RevenueMapper = ListMapper<RevenueEventDto.Revenue, Revenue>
-internal typealias _PayoutMapper = ListMapper<RevenueEventDto.Payout, Payout>
+internal typealias _RevenueMapper = ListMapper<IncomeDto.Revenue, Revenue>
+internal typealias _PayoutMapper = ListMapper<IncomeDto.Payout, Payout>
 internal typealias _ReviewMapper = ListMapper<DetailedReviewDto, Review>
 internal typealias _UserMapper = ListMapper<DetailedReviewDto, User>
 internal typealias _PublisherMapper = Mapper<Pair<Long, PublisherDto>, Publisher>
 
 internal typealias _AssetFilter = Filter<AssetDto>
 internal typealias _SaleFilter = Filter<Sale>
-internal typealias _RevenueFilter = Filter<RevenueEventDto.Revenue>
-internal typealias _PayoutFilter = Filter<RevenueEventDto.Payout>
+internal typealias _RevenueFilter = Filter<IncomeDto.Revenue>
+internal typealias _PayoutFilter = Filter<IncomeDto.Payout>
 internal typealias _PeriodFilter = Filter<Period>
 internal typealias _ReviewFilter = Filter<Review>
 internal typealias _UserFilter = Filter<DetailedReviewDto>
@@ -91,15 +103,24 @@ internal typealias _DownloadSynchronizer = Synchronizer<List<Sale>>
 internal typealias _PeriodSynchronizer = Synchronizer<List<Period>>
 internal typealias _UserSynchronizer = Synchronizer<List<User>>
 
+internal typealias _AssetEventExtractor = EventExtractor<List<AssetModel>>
+internal typealias _ReviewEventExtractor = EventExtractor<List<Review>>
+internal typealias _RevenueEventExtractor = EventExtractor<List<Revenue>>
+internal typealias _PayoutEventExtractor = EventExtractor<List<Payout>>
+internal typealias _SaleEventExtractor = EventExtractor<List<Sale>>
+internal typealias _DownloadEventExtractor = EventExtractor<List<Sale>>
+
 private const val BEAN_PROVIDER_ASSET_BY_ID = "SyncAssetProviderById"
 private const val BEAN_PROVIDER_ASSET_BY_URL = "SyncAssetProviderByUrl"
 private const val BEAN_PROVIDER_USER_BY_NAME = "SyncUserProviderByName"
 private const val BEAN_PROVIDER_SALE_DATE_LAST = "SyncLastSaleDateProvider"
+private const val BEAN_PROVIDER_SALE_ID = "SyncSaleIdProvider"
 private const val BEAN_PROVIDER_PAYOUT_DATE_LAST = "SyncLastPayoutDateProvider"
 private const val BEAN_PROVIDER_REVENUE_DATE_LAST = "SyncLastRevenueDateProvider"
 private const val BEAN_PROVIDER_PERIOD_ID = "SyncPeriodIdProvider"
 private const val BEAN_PROVIDER_PERIOD_LAST = "SyncLastPeriodProvider"
 private const val BEAN_PROVIDER_REVIEW = "SyncReviewProvider"
+private const val BEAN_PROVIDER_REVIEW_ID = "SyncReviewIdProvider"
 private const val BEAN_PROVIDER_PERIODS_FREEDOWNLOADS = "SyncFreeDownloadsPeriodsProvider"
 
 private val syncModule = module {
@@ -115,6 +136,7 @@ private val syncModule = module {
             databaseDataSource = get(),
             synchronizationDataTypeProvider = get(),
             periodsProvider = get(),
+            eventProducer = get(),
 
             credentialsSynchronizer = get(),
 
@@ -130,12 +152,34 @@ private val syncModule = module {
         )
     }
 
+    single<SynchronizationEventProducer> {
+        SynchronizationEventProducerImpl(
+            databaseDataSource = get(),
+
+            assetEventExtractor = get<AssetEventExtractor>(),
+            saleEventExtractor = get<SaleEventExtractor>(),
+            downloadEventExtractor = get<DownloadEventExtractor>(),
+            reviewEventExtractor = get<ReviewEventExtractor>(),
+            revenueEventExtractor = get<RevenueEventExtractor>(),
+            payoutEventExtractor = get<PayoutEventExtractor>()
+        )
+    }
+
     single {
         PublisherCredentialsSynchronizer(
             networkDataSource = get<CachedNetworkDataSourceDecorator>(),
             credentials = get()
         )
     }
+}
+
+private val eventExtractorModule = module {
+    single { AssetEventExtractor }
+    single { SaleEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
+    single { DownloadEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
+    single { ReviewEventExtractor(get(named(BEAN_PROVIDER_REVIEW_ID))) }
+    single { RevenueEventExtractor(get(named(BEAN_PROVIDER_PERIOD_ID))) }
+    single { PayoutEventExtractor(get(named(BEAN_PROVIDER_PERIOD_ID))) }
 }
 
 private val synchronizerModule = module {
@@ -261,7 +305,7 @@ private val providerModule = module {
         { name: String -> getUserByName(name).blockingGet() }
     }
 
-    databaseProvider<_LastSaleDateProvider>(named(BEAN_PROVIDER_SALE_DATE_LAST)) {
+    databaseProvider<_SaleLastDateProvider>(named(BEAN_PROVIDER_SALE_DATE_LAST)) {
         { period: Period, assetId: Long, priceUsd: BigDecimal ->
             getLastSale(assetId, period, priceUsd)
                 .map(Sale::date)
@@ -269,15 +313,21 @@ private val providerModule = module {
         }
     }
 
-    databaseProvider<_LastPayoutDateProvider>(named(BEAN_PROVIDER_PAYOUT_DATE_LAST)) {
+    databaseProvider<_SaleIdProvider>(named(BEAN_PROVIDER_SALE_ID)) {
+        { date: Date, assetId: Long, priceUsd: BigDecimal ->
+            getSaleId(assetId, date, priceUsd).blockingGet()
+        }
+    }
+
+    databaseProvider<_PayoutLastDateProvider>(named(BEAN_PROVIDER_PAYOUT_DATE_LAST)) {
         { getLastPayout().map(Payout::date).blockingNullable() }
     }
 
-    databaseProvider<_LastRevenueDateProvider>(named(BEAN_PROVIDER_REVENUE_DATE_LAST)) {
+    databaseProvider<_RevenueLastDateProvider>(named(BEAN_PROVIDER_REVENUE_DATE_LAST)) {
         { getLastRevenue().map(Revenue::date).blockingNullable() }
     }
 
-    databaseProvider<_LastPeriodProvider>(named(BEAN_PROVIDER_PERIOD_LAST)) {
+    databaseProvider<_PeriodLastProvider>(named(BEAN_PROVIDER_PERIOD_LAST)) {
         { getLastPeriod().blockingNullable() }
     }
 
@@ -285,11 +335,15 @@ private val providerModule = module {
         { authorId: Long, assetId: Long -> getReview(authorId, assetId).blockingNullable() }
     }
 
+    databaseProvider<_ReviewIdProvider>(named(BEAN_PROVIDER_REVIEW_ID)) {
+        { authorId: Long, assetId: Long -> getReviewId(authorId, assetId).blockingGet() }
+    }
+
     databaseProvider<_PeriodIdProvider>(named(BEAN_PROVIDER_PERIOD_ID)) {
         { period: Period -> getPeriodId(period).blockingGet() }
     }
 
-    databaseProvider<_FreeDownloadsPeriodsProvider>(named(BEAN_PROVIDER_PERIODS_FREEDOWNLOADS)) {
+    databaseProvider<_PeriodsFreeDownloadsProvider>(named(BEAN_PROVIDER_PERIODS_FREEDOWNLOADS)) {
         { getFreeDownloadsPeriods().blockingGet() }
     }
 }

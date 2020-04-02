@@ -5,6 +5,7 @@ import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.math.BigDecimal
+import java.util.*
 
 interface DatabaseDataSource {
 
@@ -18,17 +19,24 @@ interface DatabaseDataSource {
 
     fun getReview(authorId: Long, assetId: Long): Single<Review>
 
-    fun getLastPayout() : Single<Payout>
+    fun getReviewId(authorId: Long, assetId: Long): Single<Long>
 
-    fun getLastRevenue() : Single<Revenue>
+    fun getLastPayout(): Single<Payout>
 
-    fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal) : Single<Sale>
+    fun getLastRevenue(): Single<Revenue>
+
+    fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal): Single<Sale>
+
+    fun getSaleId(assetId: Long, date: Date, priceUsd: BigDecimal): Single<Long>
 
     fun getFreeDownloadsPeriods(): Single<List<Period>>
 
-    fun getPeriodId(period: Period) : Single<Long>
+    fun getPeriodId(period: Period): Single<Long>
 
-    fun getLastPeriod() : Single<Period>
+    fun getLastPeriod(): Single<Period>
+
+
+    fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable
 
     fun putPublisher(publisher: Publisher): Completable
 

@@ -21,3 +21,7 @@ fun <T, R> List<T>.zipWithNullable(otherSource: List<R>?): List<Pair<T, R?>> {
 
     return result
 }
+
+fun <T> List<T>.each(predicate: (T) -> Boolean): Boolean {
+    return count(predicate) == size
+}

@@ -7,7 +7,7 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.network.datasource.NetworkDataSource
-import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync._PayoutFilter
 import com.vmedia.core.sync._PayoutMapper
@@ -25,8 +25,8 @@ class PayoutSynchronizer(
     override val dataType = SynchronizationDataType.PAYOUTS
 
     override fun execute(): Single<List<Payout>> {
-        return networkDataSource.getRevenue()
-            .filterItemsAreInstance(RevenueEventDto.Payout::class)
+        return networkDataSource.getIncome()
+            .filterItemsAreInstance(IncomeDto.Payout::class)
             .filterWith(filter)
             .mapWith(mapper)
             .actOnSuccess(databaseDataSource::putPayouts)

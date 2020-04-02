@@ -47,13 +47,14 @@ class MainActivity : AppCompatActivity(), AuthNavigator {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        toast(it)
+                        toast("isFinished: ${it.isFinished}\nhasErrors: ${it.hasErrors}\n${it.events.keys.joinToString("\n")}")
                     }
                 )
         }
     }
 
     override fun onAuthSucceed() {
+        toast("Auth Succeed")
     }
 
 }

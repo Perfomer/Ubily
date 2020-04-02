@@ -1,15 +1,15 @@
 package com.vmedia.core.sync.synchronizer.payout
 
 import com.vmedia.core.common.util.Filter
-import com.vmedia.core.network.entity.internal.RevenueEventDto
-import com.vmedia.core.sync._LastPayoutDateProvider
+import com.vmedia.core.network.entity.internal.IncomeDto
+import com.vmedia.core.sync._PayoutLastDateProvider
 
 internal class PayoutDateFilter(
-    private val lastPayoutDateProvider: _LastPayoutDateProvider
-) : Filter<RevenueEventDto.Payout> {
+    private val payoutLastDateProvider: _PayoutLastDateProvider
+) : Filter<IncomeDto.Payout> {
 
-    override fun filter(source: List<RevenueEventDto.Payout>): List<RevenueEventDto.Payout> {
-        val lastCreditDate = lastPayoutDateProvider.invoke() ?: return source
+    override fun filter(source: List<IncomeDto.Payout>): List<IncomeDto.Payout> {
+        val lastCreditDate = payoutLastDateProvider.invoke() ?: return source
         return source.filter { it.date > lastCreditDate }
     }
 

@@ -18,7 +18,7 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.network.datasource.NetworkDataSourceImpl
 import com.vmedia.core.network.entity.*
-import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.network.entity.internal.ReviewDto
 import com.vmedia.core.network.filter.RevenueFilter
 import com.vmedia.core.network.filter.ReviewFilter
@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit
 
 internal typealias _SaleMapper = Mapper<TableValuesModel, List<SaleDto>>
 internal typealias _DownloadMapper = Mapper<TableValuesModel, List<DownloadDto>>
-internal typealias _RevenueMapper = Mapper<TableValuesModel, List<RevenueEventDto>>
+internal typealias _IncomeMapper = Mapper<TableValuesModel, List<IncomeDto>>
 internal typealias _DetailedCommentMapper = Mapper<List<ReviewDto>, List<DetailedReviewDto>>
 internal typealias _AssetDetailsMapper = Mapper<LanguageMetadataModel, AssetDetailsDto>
 internal typealias _PublisherMapper = Mapper<PublisherDetailsModel, PublisherDto>
@@ -58,7 +58,7 @@ private val networkModule = module {
             credentials = get(),
             saleMapper = get<SaleMapper>(),
             downloadMapper = get<DownloadMapper>(),
-            revenueMapper = get<RevenueMapper>(),
+            incomeMapper = get<IncomeMapper>(),
             periodMapper = get<PeriodMapper>().toListMapper(),
             reviewMapper = get<ReviewMapper>().toListMapper(),
             assetMapper = get<AssetMapper>().toListMapper(),
@@ -66,7 +66,7 @@ private val networkModule = module {
             publisherMapper = get<PublisherMapper>(),
             detailedCommentMapper = get<DetailedReviewMapper>(),
             reviewFilter = get<ReviewFilter>(),
-            revenueFilter = get<RevenueFilter>()
+            incomeFilter = get<RevenueFilter>()
         )
     }
 }
@@ -74,7 +74,7 @@ private val networkModule = module {
 private val utilsModule = module {
     single { SaleMapper }
     single { DownloadMapper }
-    single { RevenueMapper }
+    single { IncomeMapper }
     single { AssetDetailsMapper }
     single { PublisherMapper }
     single { DetailedReviewMapper }

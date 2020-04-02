@@ -7,6 +7,7 @@ import com.vmedia.core.sync.SynchronizationDataType.PERIODS
 import com.vmedia.core.sync.SynchronizationEvent.*
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
 import com.vmedia.core.sync.cache.CachedNetworkDataSourceDecorator
+import com.vmedia.core.sync.event.SynchronizationEventProducer
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -20,6 +21,7 @@ internal class SynchronizationDataSourceImpl(
     private val databaseDataSource: CachedDatabaseDataSourceDecorator,
     private val synchronizationDataTypeProvider: SynchronizationDataTypeProvider,
     private val periodsProvider: MutableSynchronizationPeriodsProvider,
+    private val eventProducer: SynchronizationEventProducer,
 
     private val credentialsSynchronizer: PublisherCredentialsSynchronizer,
 
@@ -59,6 +61,7 @@ internal class SynchronizationDataSourceImpl(
         }
 
         return execute()
+            .andThen(Completable.defer { eventProducer.produce(syncStatus) })
             .doOnSubscribe { isSynchronizing = true }
             .doOnTerminate { isSynchronizing = false }
             .doOnTerminate(::clear)

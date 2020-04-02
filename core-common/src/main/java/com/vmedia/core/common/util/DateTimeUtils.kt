@@ -8,6 +8,8 @@ const val FORMAT_TABLEVALUES = "yyyy-MM-dd"
 const val FORMAT_PACKAGEVERSION = "yyyy-MM-dd HH:mm:ss"
 const val FORMAT_RSS = "EEE, d MMM yyyy HH:mm:ss Z"
 
+val EMPTY_DATE = Date(0L)
+
 val currentDate: Date
     get() = Calendar.getInstance().time
 

@@ -43,6 +43,9 @@ private val databaseModule = module {
     single<DatabaseDataSource> {
         DatabaseDataSourceImpl(
             database = get(),
+
+            eventDao = get(),
+            eventEntityDao = get(),
             publisherDao = get(),
             userDao = get(),
             saleDao = get(),
@@ -70,6 +73,7 @@ private val databaseModule = module {
     dao { getAssetKeywordDao() }
     dao { getKeywordDao() }
     dao { getEventDao() }
+    dao { getEventEntityDao() }
     dao { getSaleDao() }
     dao { getPeriodDao() }
     dao { getPublisherDao() }

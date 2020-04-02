@@ -2,7 +2,7 @@ package com.vmedia.core.network.datasource
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.network.entity.*
-import com.vmedia.core.network.entity.internal.RevenueEventDto
+import com.vmedia.core.network.entity.internal.IncomeDto
 import io.reactivex.Single
 
 interface NetworkDataSource {
@@ -13,7 +13,7 @@ interface NetworkDataSource {
 
     fun getSales(period: Period): Single<List<SaleDto>>
 
-    fun getRevenue(): Single<List<RevenueEventDto>>
+    fun getIncome(): Single<List<IncomeDto>>
 
     fun getAssets(): Single<List<AssetDto>>
 

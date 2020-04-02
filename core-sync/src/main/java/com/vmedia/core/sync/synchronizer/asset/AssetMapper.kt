@@ -1,15 +1,13 @@
 package com.vmedia.core.sync.synchronizer.asset
 
+import com.vmedia.core.common.util.EMPTY_DATE
 import com.vmedia.core.common.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.AssetImage
 import com.vmedia.core.network.entity.AssetDetailsDto
 import com.vmedia.core.network.entity.AssetDto
-import java.util.*
 
 internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel> {
-
-    private val EMPTY_DATE = Date(0L)
 
     override fun map(from: Pair<AssetDto, AssetDetailsDto>): AssetModel {
         val (asset, details) = from

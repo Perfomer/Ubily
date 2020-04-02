@@ -6,16 +6,16 @@ import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.FORMAT_TABLEVALUES
 import com.vmedia.core.common.util.parse
 import com.vmedia.core.network.api.entity.ExtraTableValues
-import com.vmedia.core.network.entity.internal.RevenueEventDto
-import com.vmedia.core.network.entity.internal.RevenueEventDto.Payout
-import com.vmedia.core.network.entity.internal.RevenueEventDto.Revenue
+import com.vmedia.core.network.entity.internal.IncomeDto
+import com.vmedia.core.network.entity.internal.IncomeDto.Payout
+import com.vmedia.core.network.entity.internal.IncomeDto.Revenue
 
-internal object RevenueMapper : TableValuesMapper<RevenueEventDto>() {
+internal object IncomeMapper : TableValuesMapper<IncomeDto>() {
 
     override fun mapItem(
         dataRow: List<String>,
         extraRow: ExtraTableValues?
-    ): RevenueEventDto {
+    ): IncomeDto {
         val description = dataRow[1]
         val date = dataRow[0].parse(FORMAT_TABLEVALUES)
         val period = description.extractPeriod()

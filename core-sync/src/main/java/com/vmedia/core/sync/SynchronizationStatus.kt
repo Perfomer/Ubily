@@ -12,4 +12,7 @@ data class SynchronizationStatus(
             return correctSize && !events.containsValue(Loading)
         }
 
+    val hasErrors: Boolean
+        get() = events.values.find { it is SynchronizationEvent.Error } != null
+
 }

@@ -3,6 +3,7 @@ package com.vmedia.core.data.internal.database.entity
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.vmedia.core.common.util.EMPTY_DATE
 import java.math.BigDecimal
 import java.util.*
 
@@ -15,9 +16,9 @@ import java.util.*
 )
 data class Payout(
     @PrimaryKey val periodId: Long,
-    val valueUsd: BigDecimal,
-    val date: Date,
-    val autoPayout: Boolean,
-    val paypal: Boolean,
-    val isFailed: Boolean
+    val valueUsd: BigDecimal = BigDecimal.ZERO,
+    val date: Date = EMPTY_DATE,
+    val autoPayout: Boolean = false,
+    val paypal: Boolean = false,
+    val isFailed: Boolean = false
 )

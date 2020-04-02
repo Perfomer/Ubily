@@ -1,15 +1,15 @@
 package com.vmedia.core.sync.synchronizer.revenue
 
 import com.vmedia.core.common.util.Filter
-import com.vmedia.core.network.entity.internal.RevenueEventDto
-import com.vmedia.core.sync._LastRevenueDateProvider
+import com.vmedia.core.network.entity.internal.IncomeDto
+import com.vmedia.core.sync._RevenueLastDateProvider
 
 internal class RevenueDateFilter(
-    private val lastRevenueDateProvider: _LastRevenueDateProvider
-) : Filter<RevenueEventDto.Revenue> {
+    private val revenueLastDateProvider: _RevenueLastDateProvider
+) : Filter<IncomeDto.Revenue> {
 
-    override fun filter(source: List<RevenueEventDto.Revenue>): List<RevenueEventDto.Revenue> {
-        val lastCreditDate = lastRevenueDateProvider.invoke() ?: return source
+    override fun filter(source: List<IncomeDto.Revenue>): List<IncomeDto.Revenue> {
+        val lastCreditDate = revenueLastDateProvider.invoke() ?: return source
         return source.filter { it.date > lastCreditDate }
     }
 

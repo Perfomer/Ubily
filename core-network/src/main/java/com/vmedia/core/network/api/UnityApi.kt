@@ -28,7 +28,7 @@ internal interface UnityApi {
     ): Single<TableValuesModel>
 
     @GET("/api/publisher-info/revenue/{userId}.json")
-    fun getRevenue(@Path("userId") userId: Long): Single<TableValuesModel>
+    fun getIncome(@Path("userId") userId: Long): Single<TableValuesModel>
 
     @GET("/api/management/packages.json")
     fun getPackages(): Single<PackagesModel>

@@ -11,7 +11,7 @@ import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync._DownloadMapper
-import com.vmedia.core.sync._FreeDownloadsPeriodsProvider
+import com.vmedia.core.sync._PeriodsFreeDownloadsProvider
 import com.vmedia.core.sync._SaleFilter
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -23,7 +23,7 @@ class DownloadSynchronizer(
     private val databaseDataSource: DatabaseDataSource,
 
     private val periodsProvider: SynchronizationPeriodsProvider,
-    private val freePeriodsProvider: _FreeDownloadsPeriodsProvider,
+    private val freePeriodsProvider: _PeriodsFreeDownloadsProvider,
 
     private val mapper: _DownloadMapper,
     private val filter: _SaleFilter
