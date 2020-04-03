@@ -32,7 +32,7 @@ abstract class MviViewModel<Intent : Any, Action : Any, State : Parcelable, Subs
     private val subscriptionSubject = PublishSubject.create<Subscription>()
     private val stateSubject = BehaviorSubject.create<State>()
 
-    private val flows = mutableMapOf<KClass<out Intent>, Observable<*>>()
+    private val flows = mutableMapOf<KClass<out Intent>, SwitchableObservable<*>>()
 
     private val disposable = CompositeDisposable()
 
@@ -49,6 +49,7 @@ abstract class MviViewModel<Intent : Any, Action : Any, State : Parcelable, Subs
     final override fun onCleared() {
         super.onCleared()
         disposable.clear()
+        flows.values.forEach { it.dispose() }
     }
 
 

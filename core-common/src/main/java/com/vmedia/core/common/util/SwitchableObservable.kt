@@ -7,11 +7,13 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-fun <T : Any> Observable<T>.switchSource(source: Observable<T>): Observable<T> =
-    if (this is SwitchableObservable<T>) this.apply { switchSourceObservable(source) }
-    else from(source)
-
-fun <T : Any> from(source: Observable<T>) = SwitchableObservable(source)
+fun <T : Any> Observable<T>.switchSource(source: Observable<T>): Observable<T> {
+    return if (this is SwitchableObservable<T>) {
+        this.apply { switchSourceObservable(source) }
+    } else {
+        SwitchableObservable(source)
+    }
+}
 
 class SwitchableObservable<T : Any> internal constructor(
     private var source: Observable<T>
@@ -26,13 +28,17 @@ class SwitchableObservable<T : Any> internal constructor(
         updateSubscription()
     }
 
+    fun dispose() {
+        disposable.dispose()
+    }
+
     internal fun switchSourceObservable(source: Observable<T>) {
         this.source = source
         updateSubscription()
     }
 
     private fun updateSubscription() {
-        disposable.clear()
+        dispose()
 
         if (observer == null) return
 
