@@ -7,6 +7,13 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
+var Snackbar.isVisible: Boolean
+    get() = isShown
+    set(value) {
+        if (value) show()
+        else dismiss()
+    }
+
 fun Context.toast(@StringRes stringId: Int, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, stringId, duration).show()
 }
@@ -31,20 +38,49 @@ fun Fragment.toast(obj: Any, duration: Int = Toast.LENGTH_LONG) {
     toast(obj.toString(), duration)
 }
 
+fun View.createSnackbar(
+    text: CharSequence,
+    duration: Int = Snackbar.LENGTH_LONG,
+    actionText: CharSequence? = null,
+    action: (() -> Unit)? = null
+): Snackbar {
+    val snackbar = Snackbar.make(this, text, duration)
 
+    if (action != null && actionText != null) {
+        snackbar.setAction(actionText) { action.invoke() }
+    }
 
-fun View.snackbar(text: String, duration: Int = Snackbar.LENGTH_LONG) {
-    Snackbar.make(this, text, duration).show()
+    return snackbar
 }
 
-fun View.snackbar(@StringRes textResource: Int, duration: Int = Snackbar.LENGTH_LONG) {
-    Snackbar.make(this, textResource, duration).show()
+fun View.createSnackbar(
+    @StringRes textResource: Int,
+    duration: Int = Snackbar.LENGTH_LONG,
+    @StringRes actionTextResource: Int? = null,
+    action: (() -> Unit)? = null
+): Snackbar {
+    return createSnackbar(
+        text = resources.getText(textResource),
+        duration = duration,
+        actionText = actionTextResource?.let(resources::getText),
+        action = action
+    )
 }
 
-fun Fragment.snackbar(text: String, duration: Int = Snackbar.LENGTH_LONG) {
-    view?.snackbar(text, duration)
+fun Fragment.createSnackbar(
+    text: CharSequence,
+    duration: Int = Snackbar.LENGTH_LONG,
+    actionText: CharSequence? = null,
+    action: (() -> Unit)? = null
+): Snackbar {
+    return view!!.createSnackbar(text, duration, actionText, action)
 }
 
-fun Fragment.snackbar(@StringRes textResource: Int, duration: Int = Snackbar.LENGTH_LONG) {
-    view?.snackbar(textResource, duration)
+fun Fragment.createSnackbar(
+    @StringRes textResource: Int,
+    duration: Int = Snackbar.LENGTH_LONG,
+    @StringRes actionTextResource: Int? = null,
+    action: (() -> Unit)? = null
+): Snackbar {
+    return view!!.createSnackbar(textResource, duration, actionTextResource, action)
 }
