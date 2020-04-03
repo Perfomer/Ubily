@@ -91,6 +91,9 @@ internal class DatabaseDataSourceImpl(
         return periodDao.getPeriodId(period.year, period.month)
     }
 
+    override fun hasEvents(): Single<Boolean> {
+        return eventDao.getEventsCount().map { it > 0 }
+    }
 
     override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
         return database.completableTransaction {

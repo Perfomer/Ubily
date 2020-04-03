@@ -37,6 +37,8 @@
         <item>December</item>
     </string-array>
 
+    <string name="erroraction_tryagain">Try again</string>
+
     <string name="entities_publisher">Publisher</string>
     <string name="entities_periods">Periods</string>
     <string name="entities_assets">Assets</string>

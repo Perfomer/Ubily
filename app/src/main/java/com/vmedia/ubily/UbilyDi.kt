@@ -7,6 +7,7 @@ import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.authModule
+import com.vmedia.feature.splash.splashModule
 import org.koin.dsl.module
 
 internal val koinModules by lazy {
@@ -14,11 +15,11 @@ internal val koinModules by lazy {
 }
 
 private val featureModules = listOf(
+    splashModule,
     authModule
 )
 
 private val appModule = module {
-    single { NetworkCredentialsSynchronizer(get(), get(), get()) }
     single<NetworkCredentialsProvider> { get<MutableNetworkCredentialsProvider>() }
     single<MutableNetworkCredentialsProvider> { NetworkCredentialsHolder() }
     single<SynchronizationDataTypeProvider> { SynchronizationDataTypeProviderImpl() }

@@ -35,6 +35,8 @@ interface DatabaseDataSource {
 
     fun getLastPeriod(): Single<Period>
 
+    fun hasEvents(): Single<Boolean>
+
 
     fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable
 

@@ -1,7 +1,6 @@
 package com.vmedia.feature.auth
 
 import android.webkit.WebView
-import androidx.fragment.app.Fragment
 import com.vmedia.feature.auth.data.AuthRepositoryImpl
 import com.vmedia.feature.auth.data.CookieExtractor
 import com.vmedia.feature.auth.data.browser.UnityWebViewSignInTask
@@ -15,7 +14,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-const val DI_FRAGMENT_AUTH = "AuthFragment"
+const val BEAN_FRAGMENT_AUTH = "AuthFragment"
 
 val authModule = module {
     single<AuthRepository> { AuthRepositoryImpl(get(), CookieExtractor, get()) }
@@ -25,5 +24,5 @@ val authModule = module {
 
     factory<SignInTask> { UnityWebViewSignInTask(get()) }
     factory { WebView(androidApplication()) }
-    factory<Fragment>(named(DI_FRAGMENT_AUTH)) { AuthFragment() }
+    factory(named(BEAN_FRAGMENT_AUTH)) { AuthFragment() }
 }
