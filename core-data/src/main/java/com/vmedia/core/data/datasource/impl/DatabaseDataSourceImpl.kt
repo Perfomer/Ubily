@@ -1,4 +1,4 @@
-package com.vmedia.core.data.datasource
+package com.vmedia.core.data.datasource.impl
 
 import android.util.Log
 import androidx.annotation.WorkerThread
@@ -7,6 +7,7 @@ import com.vmedia.core.common.obj.endTimestamp
 import com.vmedia.core.common.obj.startTimestamp
 import com.vmedia.core.common.obj.toPeriod
 import com.vmedia.core.common.util.mapItems
+import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import com.vmedia.core.data.internal.database.dao.*
 import com.vmedia.core.data.internal.database.entity.*

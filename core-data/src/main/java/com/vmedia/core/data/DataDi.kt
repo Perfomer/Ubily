@@ -3,8 +3,12 @@ package com.vmedia.core.data
 import android.content.Context
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
-import com.vmedia.core.data.datasource.DatabaseDataSourceImpl
+import com.vmedia.core.data.datasource.PublisherDataSource
 import com.vmedia.core.data.datasource.SettingsDataSource
+import com.vmedia.core.data.datasource.impl.CredentialsDataSourceImpl
+import com.vmedia.core.data.datasource.impl.DatabaseDataSourceImpl
+import com.vmedia.core.data.datasource.impl.PublisherDataSourceImpl
+import com.vmedia.core.data.datasource.impl.SettingsDataSourceImpl
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -22,10 +26,20 @@ val dataModules by lazy {
 
 private const val BEAN_PREF_CREDENTIALS = "PREF_CREDENTIALS"
 private const val BEAN_PREF_SETTINGS = "PREF_SETTINGS"
+private const val BEAN_PREF_PUBLISHER = "PREF_PUBLISHER"
 
 private val preferencesModule = module {
-    single { CredentialsDataSource(get(named(BEAN_PREF_CREDENTIALS)), get()) }
-    single { SettingsDataSource(get(named(BEAN_PREF_SETTINGS))) }
+    single<CredentialsDataSource> {
+        CredentialsDataSourceImpl(get(named(BEAN_PREF_CREDENTIALS)), get())
+    }
+
+    single<SettingsDataSource> {
+        SettingsDataSourceImpl(get(named(BEAN_PREF_SETTINGS)))
+    }
+
+    single<PublisherDataSource> {
+        PublisherDataSourceImpl(get(named(BEAN_PREF_PUBLISHER)))
+    }
 
     single(named(BEAN_PREF_CREDENTIALS)) {
         androidApplication().getSharedPreferences(
@@ -36,6 +50,10 @@ private val preferencesModule = module {
 
     single(named(BEAN_PREF_SETTINGS)) {
         androidApplication().getSharedPreferences("ubily_settings", Context.MODE_PRIVATE)
+    }
+
+    single(named(BEAN_PREF_PUBLISHER)) {
+        androidApplication().getSharedPreferences("publisher", Context.MODE_PRIVATE)
     }
 }
 
