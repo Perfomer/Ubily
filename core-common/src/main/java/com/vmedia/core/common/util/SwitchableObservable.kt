@@ -29,7 +29,7 @@ class SwitchableObservable<T : Any> internal constructor(
     }
 
     fun dispose() {
-        disposable.dispose()
+        disposable.clear()
     }
 
     internal fun switchSourceObservable(source: Observable<T>) {
