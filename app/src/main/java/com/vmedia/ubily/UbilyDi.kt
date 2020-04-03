@@ -8,10 +8,20 @@ import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.authModule
 import com.vmedia.feature.splash.splashModule
+import com.vmedia.ubily.presentation.navigation.navigationModule
 import org.koin.dsl.module
 
 internal val koinModules by lazy {
-    appModule + featureModules + dataModules + networkModules + syncModules
+    appModules + featureModules + coreModules
+}
+
+
+private val appModules by lazy {
+    appModule + navigationModule
+}
+
+private val coreModules by lazy {
+    dataModules + networkModules + syncModules
 }
 
 private val featureModules = listOf(
