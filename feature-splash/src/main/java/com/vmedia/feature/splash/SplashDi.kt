@@ -22,7 +22,7 @@ val splashModule = module {
             databaseDataSource = get()
         )
     }
-    single<SplashRepository> { SplashRepositoryImpl(get(), get()) }
+    single<SplashRepository> { SplashRepositoryImpl(get(), get(), get()) }
     single { SplashInteractor(get()) }
     viewModel { SplashViewModel(get()) }
     factory<Fragment>(named(BEAN_FRAGMENT_SPLASH)) { SplashFragment() }

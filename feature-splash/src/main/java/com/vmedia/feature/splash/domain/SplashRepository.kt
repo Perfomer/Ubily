@@ -11,4 +11,6 @@ internal interface SplashRepository {
 
     fun isSynchronizationSucceedAtLeastOnce(): Single<Boolean>
 
+    fun isOnboardingAlreadyShown(): Single<Boolean>
+
 }
