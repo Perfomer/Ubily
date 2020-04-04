@@ -17,16 +17,16 @@ class MainActivity : BaseActivity(
         isUserDataSynchronized: Boolean,
         onboardingAlreadyShown: Boolean
     ) {
-        if (isUserAuthorized) {
-            if (isUserDataSynchronized) {
-                navigateTo(ScreenDestination.Feed)
-            } else {
-                if (onboardingAlreadyShown) navigateTo(ScreenDestination.Sync)
-                else navigateTo(ScreenDestination.Onboarding)
-            }
-        } else {
+//        if (isUserAuthorized) {
+//            if (isUserDataSynchronized) {
+//                navigateTo(ScreenDestination.Feed)
+//            } else {
+//                if (onboardingAlreadyShown) navigateTo(ScreenDestination.Sync)
+//                else navigateTo(ScreenDestination.Onboarding)
+//            }
+//        } else {
             navigateTo(ScreenDestination.Auth)
-        }
+//        }
     }
 
     override fun onAuthSucceed() {

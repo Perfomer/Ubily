@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_triangle_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_triangle_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/splash_logo_sign"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@drawable/logo_ubily"
         app:layout_constraintBottom_toTopOf="@id/splash_logo_subtitle"
         app:layout_constraintEnd_toStartOf="@id/splash_logo_text"
@@ -21,8 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="ubily"
-        android:textColor="@android:color/black"
+        android:fontFamily="@font/rubik_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/brand_black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/splash_logo_sign"
@@ -34,9 +51,10 @@
         android:id="@+id/splash_logo_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Unity Billionaire"
-        android:textColor="@android:color/black"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/rubik"
+        android:text="@string/app_name_full"
+        android:textColor="@color/brand_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +74,14 @@
         android:id="@+id/splash_copyright"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="© Wello Graphics 2020"
-        android:textColor="@android:color/black"
+        android:fontFamily="@font/rubik"
+        android:layout_marginBottom="64dp"
+        android:text="@string/app_copyright"
+        android:textColor="@color/brand_black"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:textStyle="bold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

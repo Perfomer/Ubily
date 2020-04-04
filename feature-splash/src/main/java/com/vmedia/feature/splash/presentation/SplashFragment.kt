@@ -1,10 +1,13 @@
 package com.vmedia.feature.splash.presentation
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.util.createSnackbar
 import com.vmedia.core.common.util.isVisible
+import com.vmedia.core.common.util.toSpan
 import com.vmedia.feature.splash.R
 import com.vmedia.feature.splash.presentation.mvi.SplashIntent
 import com.vmedia.feature.splash.presentation.mvi.SplashState
@@ -24,6 +27,11 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
     private var errorSnackbar: Snackbar? = null
 
     override fun provideViewModel() = getViewModel<SplashViewModel>()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        splash_copyright.text = getString(R.string.app_copyright).toSpan()
+    }
 
     override fun onStart() {
         super.onStart()
