@@ -39,7 +39,7 @@ class AssetSynchronizer(
 
     private companion object {
 
-        private fun <T1, T2> Single<List<T1>>.associateWith(
+        private fun <T1 : Any, T2 : Any> Single<List<T1>>.associateWith(
             companionSource: (T1) -> Single<T2>
         ): Single<List<Pair<T1, T2>>> {
             return this
@@ -51,7 +51,7 @@ class AssetSynchronizer(
                 .toList()
         }
 
-        private fun <T1, T2> Observable<T1>.zipWith(
+        private fun <T1 : Any, T2 : Any> Observable<T1>.zipWith(
             companionSource: (T1) -> Single<T2>
         ): Observable<Pair<T1, T2>> {
             return flatMapSingle { Single.just(it).zipWith(companionSource.invoke(it)) }

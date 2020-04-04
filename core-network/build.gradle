@@ -5,10 +5,10 @@ apply plugin: 'kotlin-kapt'
 apply from: '../android_commons.gradle'
 
 dependencies {
-    def retrofit = "2.6.1"
+    def retrofit = "2.6.2"
 
     // Network
-    implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"

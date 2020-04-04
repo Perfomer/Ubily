@@ -4,7 +4,7 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Single
-import io.reactivex.rxkotlin.withLatestFrom
+import io.reactivex.functions.BiFunction
 import kotlin.reflect.KClass
 
 fun <T> ObservableSource<T>.toObservable() = Observable.wrap(this)
@@ -15,7 +15,8 @@ inline fun <T, U, R> Observable<T>.flatWithLatestFrom(
     other: ObservableSource<U>,
     crossinline combiner: (T, U) -> ObservableSource<out R>
 ): Observable<R> {
-    return withLatestFrom(other, combiner).flatMap { it }
+    val biFunction = BiFunction<T, U, ObservableSource<out R>> { t, u -> combiner.invoke(t, u) }
+    return withLatestFrom(other, biFunction).flatMap { it }
 }
 
 fun <T> Single<List<List<T>>>.flatten(): Single<List<T>> {
@@ -30,7 +31,7 @@ fun <T> Single<List<T>>.filterItems(predicate: (T) -> Boolean): Single<List<T>> 
     return map { it.filter(predicate::invoke) }
 }
 
-fun <T, R: Any> Single<List<T>>.filterItemsAreInstance(clazz: KClass<R>): Single<List<R>> {
+fun <T, R : Any> Single<List<T>>.filterItemsAreInstance(clazz: KClass<R>): Single<List<R>> {
     return map { it.filterIsInstance(clazz.java) }
 }
 
