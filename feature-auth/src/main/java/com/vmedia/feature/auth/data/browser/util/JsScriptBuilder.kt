@@ -4,16 +4,15 @@ internal class JsScriptBuilder(
     private val evaluator: (script: String) -> Unit
 ) {
 
-    private var script: String = ""
+    private var script = StringBuilder()
 
     fun evaluate() {
-        evaluator.invoke(script)
-        script = ""
+        evaluator.invoke(script.toString())
+        script.clear()
     }
 
-    private fun addOperation(operation: String): JsScriptBuilder {
-        script += "\n" + operation
-        return this
+    private fun addOperation(operation: String) {
+        script.append("\n").append(operation)
     }
 
     fun fill(fieldId: String, value: String): JsScriptBuilder {
@@ -47,7 +46,8 @@ internal class JsScriptBuilder(
     }
 
     fun printPublisherDescription(): JsScriptBuilder {
-        return addOperation("console.log(u3d.publisher.overview);")
+        addOperation("console.log(u3d.publisher.overview);")
+        return this
     }
 
 }

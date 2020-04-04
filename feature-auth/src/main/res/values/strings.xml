@@ -3,6 +3,7 @@
     <string name="auth_login">Login</string>
     <string name="auth_password">Password</string>
     <string name="auth_signin">Sign in</string>
+    <string name="auth_signin_subtitle">Authorize your publisher account</string>
 
     <string name="auth_error_incorrect_login">Login should contain \'@\'</string>
     <string name="auth_error_incorrect_password">Password should be longer than 8 symbols</string>

@@ -14,6 +14,6 @@ internal sealed class AuthAction {
 
     object AuthSucceed : AuthAction()
 
-    object AuthFailed : AuthAction()
+    class AuthFailed(val error: Throwable) : AuthAction()
 
 }

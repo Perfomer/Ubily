@@ -45,7 +45,7 @@ internal class CredentialsDataSourceImpl(
                 .write(KEY_TOKEN, credentials.token.tokenValue)
                 .write(KEY_SESSION, credentials.token.session)
                 .commit()
-        }.andThen {
+
             credentialsProvider.token = credentials.token
         }
     }

@@ -4,6 +4,6 @@ internal sealed class AuthSubscription {
 
     object AuthSucceed : AuthSubscription()
 
-    object AuthFailed : AuthSubscription()
+    class AuthFailed(val error: Throwable) : AuthSubscription()
 
 }

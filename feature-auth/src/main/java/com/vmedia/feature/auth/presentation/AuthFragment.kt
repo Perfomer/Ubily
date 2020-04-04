@@ -11,6 +11,8 @@ import com.vmedia.feature.auth.R
 import com.vmedia.feature.auth.presentation.mvi.AuthIntent
 import com.vmedia.feature.auth.presentation.mvi.AuthState
 import com.vmedia.feature.auth.presentation.mvi.AuthSubscription
+import com.vmedia.feature.auth.presentation.mvi.AuthSubscription.AuthFailed
+import com.vmedia.feature.auth.presentation.mvi.AuthSubscription.AuthSucceed
 import kotlinx.android.synthetic.main.auth_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -45,8 +47,8 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
 
     override fun onSubscriptionReceived(subscription: AuthSubscription) {
         when (subscription) {
-            AuthSubscription.AuthSucceed -> navigator.onAuthSucceed()
-            AuthSubscription.AuthFailed -> toast("there is AUTH error") //todo
+            AuthSucceed -> navigator.onAuthSucceed()
+            is AuthFailed -> toast("there is AUTH error") //todo
         }
     }
 

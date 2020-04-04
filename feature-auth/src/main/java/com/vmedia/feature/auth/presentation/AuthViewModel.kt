@@ -19,7 +19,7 @@ internal class AuthViewModel(
     override fun act(state: AuthState, intent: AuthIntent) = when (intent) {
         is AuthIntent.UpdateLogin -> LoginUpdated(intent.login).toObservable()
         is AuthIntent.UpdatePassword -> PasswordUpdated(intent.password).toObservable()
-        AuthIntent.SignIn -> getInputErrors(state) ?: signIn(state)
+        AuthIntent.SignIn -> /*getInputErrors(state) ?:*/ signIn(state)
     }
 
     override fun reduce(oldState: AuthState, action: AuthAction) = when (action) {
@@ -27,20 +27,20 @@ internal class AuthViewModel(
         is PasswordUpdated -> oldState.copy(password = action.password)
         is InputErrorsFound -> oldState.copy(inputErrors = action.errors)
         AuthStarted -> oldState.copy(isLoading = true)
-        AuthFailed, AuthSucceed -> oldState.copy(isLoading = false)
+        is AuthFailed, AuthSucceed -> oldState.copy(isLoading = false)
     }
 
     override fun publishSubscription(state: AuthState, action: AuthAction) = when (action) {
         AuthSucceed -> AuthSubscription.AuthSucceed
-        AuthFailed -> AuthSubscription.AuthFailed
+        is AuthFailed -> AuthSubscription.AuthFailed(action.error)
         else -> super.publishSubscription(state, action)
     }
 
     private fun signIn(state: AuthState): Observable<AuthAction> {
         return interactor.signIn(state.login, state.password)
-            .andThen(Observable.just<AuthAction>(AuthSucceed))
+            .andThen(AuthSucceed.toObservable<AuthAction>())
             .startWith(AuthStarted)
-            .onErrorReturnItem(AuthFailed)
+            .onErrorReturn(::AuthFailed)
     }
 
     private fun getInputErrors(state: AuthState): Observable<InputErrorsFound>? {
