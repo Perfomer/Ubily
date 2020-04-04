@@ -1,6 +1,7 @@
 package com.vmedia.feature.auth
 
 import android.webkit.WebView
+import androidx.fragment.app.Fragment
 import com.vmedia.feature.auth.data.AuthRepositoryImpl
 import com.vmedia.feature.auth.data.CookieExtractor
 import com.vmedia.feature.auth.data.browser.UnityWebViewSignInTask
@@ -24,5 +25,5 @@ val authModule = module {
 
     factory<SignInTask> { UnityWebViewSignInTask(get()) }
     factory { WebView(androidApplication()) }
-    factory(named(BEAN_FRAGMENT_AUTH)) { AuthFragment() }
+    factory<Fragment>(named(BEAN_FRAGMENT_AUTH)) { AuthFragment() }
 }
