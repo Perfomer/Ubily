@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">ubily</string>
+    <string name="app_name_full">Unity Billionaire</string>
+    <string name="app_copyright"><![CDATA[© <b>Wello Graphics</b> 2020]]></string>
+
     <string name="summary">Summary</string>
     <string name="more_assets">And %d more assets…</string>
 
