@@ -1,6 +1,5 @@
 package com.vmedia.core.data.datasource.impl
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.obj.endTimestamp
@@ -14,6 +13,7 @@ import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.data.util.completableTransaction
 import com.vmedia.core.data.util.upsert
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import java.math.BigDecimal
 import java.util.*
@@ -92,14 +92,18 @@ internal class DatabaseDataSourceImpl(
         return periodDao.getPeriodId(period.year, period.month)
     }
 
+    override fun getEvents(): Observable<List<Event>> {
+        return eventDao.getEvents()
+    }
+
     override fun hasEvents(): Single<Boolean> {
         return eventDao.getEventsCount().map { it > 0 }
     }
 
+
     override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
         return database.completableTransaction {
             val eventId = eventDao.insert(Event(type = type, date = date))
-            Log.d(DatabaseDataSource::class.simpleName, "event saved: $eventId $type $entityIds")
             eventEntityDao.insert(entityIds.map { EventEntity(eventId, it) })
         }
     }

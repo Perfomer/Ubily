@@ -1,8 +1,14 @@
 package com.vmedia.core.common.obj
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-data class Period(val year: Int, val month: Month) {
+@Parcelize
+data class Period(
+    val year: Int,
+    val month: Month
+) : Parcelable {
 
     // todo tests
     override fun toString(): String {
@@ -81,7 +87,7 @@ fun Date.toPeriod(): Period {
     return calendar.toPeriod()
 }
 
-fun Calendar.toPeriod() : Period {
+fun Calendar.toPeriod(): Period {
     return Period(
         year = get(Calendar.YEAR),
         month = Month.values()[get(Calendar.MONTH)]

@@ -22,6 +22,7 @@ data class Asset(
     val publishingDate: Date = EMPTY_DATE,
 
     val priceUsd: BigDecimal = BigDecimal.ZERO,
+    val versionName: String = "",
     val totalFileSize: Double = 0.0,
     val status: AssetStatus = AssetStatus.NONE,
 

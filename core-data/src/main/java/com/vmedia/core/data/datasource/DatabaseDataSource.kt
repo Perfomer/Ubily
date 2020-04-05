@@ -3,6 +3,7 @@ package com.vmedia.core.data.datasource
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
 import java.math.BigDecimal
 import java.util.*
@@ -34,6 +35,8 @@ interface DatabaseDataSource {
     fun getPeriodId(period: Period): Single<Long>
 
     fun getLastPeriod(): Single<Period>
+
+    fun getEvents(): Observable<List<Event>>
 
     fun hasEvents(): Single<Boolean>
 
