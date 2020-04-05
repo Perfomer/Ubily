@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sync_initial_title">Initial receipt of the publisher\'s data</string>
+    <string name="sync_regular_title">Receipt of the publisher\'s data</string>
+    <string name="sync_hint_longtime"><![CDATA[This may take a few minutes, so you can <b>minimize</b> the app.]]></string>
+
+    <string name="sync_data_publisher">Publisher</string>
+    <string name="sync_data_assets">Assets</string>
+    <string name="sync_data_sales">Sales</string>
+    <string name="sync_data_downloads">Downloads</string>
+    <string name="sync_data_revenue">Revenue</string>
+    <string name="sync_data_reviews">Reviews</string>
+
+    <string name="sync_action_retry">Retry</string>
+    <string name="sync_action_start">Start sync</string>
+    <string name="sync_action_cancel">Cancel</string>
+</resources>

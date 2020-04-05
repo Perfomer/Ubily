@@ -2,28 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:gravity="center"
-    android:orientation="vertical"
     android:paddingStart="32dp"
     android:paddingTop="72dp"
     android:paddingEnd="32dp">
 
     <ImageView
-        android:id="@+id/splash_logo_sign"
+        android:id="@+id/auth_logo_sign"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/logo_ubily"
-        app:layout_constraintEnd_toStartOf="@id/splash_logo_text"
+        app:layout_constraintEnd_toStartOf="@id/auth_logo_text"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/splash_logo_text"
+        android:id="@+id/auth_logo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -32,13 +31,13 @@
         android:textColor="@color/brand_black"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/splash_logo_sign"
+        app:layout_constraintBottom_toBottomOf="@id/auth_logo_sign"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/splash_logo_sign"
-        app:layout_constraintTop_toTopOf="@id/splash_logo_sign" />
+        app:layout_constraintStart_toEndOf="@id/auth_logo_sign"
+        app:layout_constraintTop_toTopOf="@id/auth_logo_sign" />
 
     <ProgressBar
-        android:id="@+id/auth_progressbar"
+        android:id="@+id/auth_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -47,16 +46,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/auth_signin"
         tools:visibility="visible" />
-
-    <WebView
-        android:id="@+id/auth_webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/auth_title"
@@ -139,6 +128,8 @@
         android:text="@string/auth_signin"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_password_wrap" />
+        app:layout_constraintTop_toBottomOf="@id/auth_password_wrap"
+        tools:backgroundTint="@color/brand_green"
+        tools:textColor="@color/brand_grey_lightest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,10 @@ android {
             minifyEnabled true
         }
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {

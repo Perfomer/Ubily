@@ -1,6 +1,7 @@
 package com.vmedia.core.common.util
 
 import androidx.annotation.WorkerThread
+import io.reactivex.Observable
 import io.reactivex.Single
 
 /**
@@ -48,5 +49,7 @@ fun <FROM, TO> Mapper<FROM, TO>.toListMapper(): ListMapper<FROM, TO> {
         override fun mapItem(from: FROM): TO = this@toListMapper.map(from)
     }
 }
+
+fun <FROM, TO> Observable<FROM>.mapWith(mapper: Mapper<FROM, TO>) = map(mapper::map)
 
 fun <FROM, TO> Single<FROM>.mapWith(mapper: Mapper<FROM, TO>) = map(mapper::map)

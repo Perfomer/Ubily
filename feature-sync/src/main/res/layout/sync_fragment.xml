@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingHorizontal="56dp"
+        android:paddingTop="72dp"
+        tools:ignore="ContentDescription">
+
+        <ImageView
+            android:id="@+id/sync_logo_sign"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/logo_ubily"
+            app:layout_constraintEnd_toStartOf="@id/sync_logo_text"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/sync_logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/rubik_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/brand_black"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/sync_logo_sign"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/sync_logo_sign"
+            app:layout_constraintTop_toTopOf="@id/sync_logo_sign" />
+
+        <TextView
+            android:id="@+id/sync_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/rubik_medium"
+            android:gravity="center"
+            android:text="@string/sync_initial_title"
+            android:textColor="@color/brand_black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/sync_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sync_logo_sign"
+            app:layout_constraintVertical_bias="0.45"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sync_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toTopOf="@id/sync_action"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sync_title"
+            tools:itemCount="6"
+            tools:listitem="@layout/sync_item" />
+
+        <FrameLayout
+            android:id="@+id/sync_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toTopOf="@id/sync_hint_longtime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sync_data">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sync_action_start"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="@string/sync_action_start"
+                android:visibility="gone"
+                app:icon="@drawable/ic_retry"
+                app:iconGravity="textStart"
+                tools:backgroundTint="@color/brand_green"
+                tools:textColor="@color/brand_grey_lightest"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sync_action_retry"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="@string/sync_action_retry"
+                android:visibility="gone"
+                app:icon="@drawable/ic_retry"
+                app:iconGravity="textStart"
+                tools:backgroundTint="@color/brand_green"
+                tools:textColor="@color/brand_grey_lightest" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sync_action_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="@string/sync_action_cancel"
+                android:visibility="gone"
+                app:backgroundTint="@color/brand_grey"
+                app:icon="@drawable/ic_retry"
+                app:iconGravity="textStart"
+                tools:textColor="@color/brand_grey_lightest" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/sync_hint_longtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="64dp"
+            android:fontFamily="@font/rubik"
+            android:gravity="center"
+            android:text="@string/sync_hint_longtime"
+            android:textColor="@color/brand_grey_dark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sync_action" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

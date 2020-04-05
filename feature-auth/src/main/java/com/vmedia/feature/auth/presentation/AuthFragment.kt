@@ -37,7 +37,7 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
         auth_login.diffedValue = state.login
         auth_password.diffedValue = state.password
 
-        auth_progressbar.isVisible = state.isLoading
+        auth_loading.isVisible = state.isLoading
         auth_signin.isEnabled = !state.isLoading
 
         if (state.inputErrors.isNotEmpty()) {

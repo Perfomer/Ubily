@@ -8,6 +8,7 @@ import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.authModule
 import com.vmedia.feature.splash.splashModule
+import com.vmedia.feature.sync.syncModule
 import com.vmedia.ubily.presentation.navigation.navigationModule
 import org.koin.dsl.module
 
@@ -26,7 +27,8 @@ private val coreModules by lazy {
 
 private val featureModules = listOf(
     splashModule,
-    authModule
+    authModule,
+    syncModule
 )
 
 private val appModule = module {
