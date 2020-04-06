@@ -28,6 +28,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingTop="12dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/feed_item" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

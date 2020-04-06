@@ -1,5 +1,6 @@
 package com.vmedia.ubily
 
+import com.example.feature.feed.feedModule
 import com.vmedia.core.data.dataModules
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
@@ -28,7 +29,8 @@ private val coreModules by lazy {
 private val featureModules = listOf(
     splashModule,
     authModule,
-    syncModule
+    syncModule,
+    feedModule
 )
 
 private val appModule = module {
