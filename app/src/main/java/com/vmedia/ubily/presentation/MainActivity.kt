@@ -1,5 +1,8 @@
 package com.vmedia.ubily.presentation
 
+import com.example.feature.feed.presentation.FeedNavigator
+import com.vmedia.core.common.obj.Period
+import com.vmedia.core.data.obj.EventInfo
 import com.vmedia.feature.auth.presentation.AuthNavigator
 import com.vmedia.feature.splash.presentation.SplashNavigator
 import com.vmedia.feature.sync.presentation.SyncNavigator
@@ -12,7 +15,7 @@ class MainActivity : BaseActivity(
     screenLayoutResource = R.layout.activity_main,
     frameLayoutResource = R.id.nav_host_fragment,
     startScreen = ScreenDestination.Splash
-), SplashNavigator, SyncNavigator, AuthNavigator {
+), SplashNavigator, SyncNavigator, AuthNavigator, FeedNavigator {
 
     private var isUserAuthorized: Boolean = false
     private var isUserDataSynchronized: Boolean = false
@@ -29,6 +32,18 @@ class MainActivity : BaseActivity(
         this.onboardingAlreadyShown = onboardingAlreadyShown
 
         navigateThroughStartGraph()
+    }
+
+    override fun navigateToEventDetails(eventInfo: EventInfo) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToAsset(assetId: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToStatistics(period: Period) {
+        TODO("Not yet implemented")
     }
 
     override fun onSynchronizationSucceed() {
