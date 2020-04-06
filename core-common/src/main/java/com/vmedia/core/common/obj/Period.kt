@@ -1,5 +1,6 @@
 package com.vmedia.core.common.obj
 
+import android.content.Context
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import java.util.*
@@ -97,4 +98,8 @@ fun Calendar.toPeriod(): Period {
 fun Period.isAfter(period: Period): Boolean {
     return year > period.year ||
             year == period.year && month.ordinal > period.month.ordinal
+}
+
+fun Period.getString(context: Context): String {
+    return "${context.getString(month.labelResource)} $year"
 }

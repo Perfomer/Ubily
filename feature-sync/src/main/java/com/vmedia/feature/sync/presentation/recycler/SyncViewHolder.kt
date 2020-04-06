@@ -3,9 +3,9 @@ package com.vmedia.feature.sync.presentation.recycler
 import android.view.View
 import androidx.core.view.isVisible
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.getColorCompat
 import com.vmedia.core.common.util.getDrawableCompat
 import com.vmedia.core.common.util.getFontCompat
+import com.vmedia.core.common.util.setTextColorCompat
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.feature.sync.R
 import com.vmedia.feature.sync.presentation.model.SyncDataItem
@@ -55,7 +55,7 @@ internal class SyncViewHolder(
         sync_item_icon.isVisible = icon != null
         sync_item_label.diffedValue = getString(type.labelResource)
         sync_item_label.typeface = context.getFontCompat(typeface)
-        sync_item_label.setTextColor(context.getColorCompat(textColor))
+        sync_item_label.setTextColorCompat(textColor)
 
         icon?.let { sync_item_icon.setImageResource(it) }
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:background="@android:color/white"
+    tools:padding="24dp">
+
+    <include
+        android:id="@+id/feed_item_asset_1"
+        layout="@layout/feed_item_asset_item" />
+
+    <include
+        android:id="@+id/feed_item_asset_2"
+        layout="@layout/feed_item_asset_item" />
+
+    <include
+        android:id="@+id/feed_item_asset_3"
+        layout="@layout/feed_item_asset_item" />
+
+</LinearLayout>

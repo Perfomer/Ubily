@@ -23,7 +23,7 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
     }
 
     object Onboarding : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(TODO()))
+        override fun getFragment() = TODO()
     }
 
     class Sync(private val mode: SyncScreenMode) : ScreenDestination() {
@@ -34,6 +34,10 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object Feed : ScreenDestination() {
         override fun getFragment() = get<Fragment>((named(BEAN_FRAGMENT_FEED)))
+    }
+
+    class EventDetails(val eventId: Long) : ScreenDestination() {
+        override fun getFragment() = TODO()
     }
 
 }

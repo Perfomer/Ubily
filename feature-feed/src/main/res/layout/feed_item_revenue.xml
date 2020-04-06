@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@android:color/white"
+    tools:ignore="ContentDescription"
+    tools:padding="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feed_item_revenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_event_item"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/feed_item_revenue_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_pie_chart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/feed_item_revenue_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/brand_black"
+            app:layout_constraintBottom_toTopOf="@id/feed_item_revenue_growth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/feed_item_revenue_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Statistics for March 2018" />
+
+        <TextView
+            android:id="@+id/feed_item_revenue_growth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/event_revenue_statistics_growth"
+            android:textColor="@color/brand_black_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/feed_item_revenue_title"
+            app:layout_constraintTop_toBottomOf="@id/feed_item_revenue_title" />
+
+        <TextView
+            android:id="@+id/feed_item_revenue_growth_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/brand_green_darker"
+            app:layout_constraintBaseline_toBaselineOf="@id/feed_item_revenue_growth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/feed_item_revenue_growth"
+            tools:text="11,24%↑" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

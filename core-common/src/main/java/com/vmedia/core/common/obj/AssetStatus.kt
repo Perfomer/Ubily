@@ -26,7 +26,7 @@ fun String.toAssetStatus(): AssetStatus {
     }
 }
 
-val AssetStatus.stringResource: Int
+val AssetStatus.labelResource: Int
     @StringRes get() = when (this) {
         PUBLISHED -> R.string.asset_status_published
         DISABLED -> R.string.asset_status_disabled

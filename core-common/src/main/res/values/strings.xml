@@ -25,21 +25,18 @@
         <item quantity="other">sales</item>
     </plurals>
 
-    <string-array name="event_revenue_months">
-        <item>@string/event_revenue_statistics_all_time</item>
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
+    <string name="month_january">January</string>
+    <string name="month_february">February</string>
+    <string name="month_march">March</string>
+    <string name="month_april">April</string>
+    <string name="month_may">May</string>
+    <string name="month_june">June</string>
+    <string name="month_july">July</string>
+    <string name="month_august">August</string>
+    <string name="month_september">September</string>
+    <string name="month_october">October</string>
+    <string name="month_november">November</string>
+    <string name="month_december">December</string>
 
     <string name="erroraction_tryagain">Try again</string>
 
@@ -64,7 +61,7 @@
     <string name="event_asset_text"><![CDATA[<b>%d</b> assets have been updated]]></string>
 
     <string name="event_sale_title">@string/entities_sales</string>
-    <string name="event_sale_text"><![CDATA[You have sold the <b>%d</b> asset(s) in the amount of <b>$%.2f</b>]]></string>
+    <string name="event_sale_text"><![CDATA[You have sold the <b>%d</b> asset(s) in the amount of <b>$%s</b>]]></string>
 
     <string name="event_free_download_title">@string/entities_free_downloads</string>
     <string name="event_free_download_text"><![CDATA[<b>%1d</b> asset(s) were downloaded for free <b>%2d</b> times]]></string>
@@ -80,7 +77,9 @@
     <string name="event_revenue_statistics_all_time">all time</string>
 
     <string name="event_payout_title">@string/entities_payout</string>
-    <string name="event_payout_text"><![CDATA[Unity have sent you <b>$%.2f</b>]]></string>
+    <string name="event_payout_text"><![CDATA[Unity have sent you <b>$%s</b>]]></string>
+    <string name="event_payout_auto_true"><![CDATA[Auto payout: <b>yes</b>]]></string>
+    <string name="event_payout_auto_false"><![CDATA[Auto payout: <b>no</b>]]></string>
 
     <string name="event_initialized_title">Unity data is initialized</string>
     <string name="event_initialized_text"><![CDATA[Welcome to <b>Unity Billionaire</b>! Let\'s start with your statistics. Just click it to see details]]></string>

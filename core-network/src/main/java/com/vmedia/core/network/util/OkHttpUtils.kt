@@ -18,12 +18,11 @@ private fun Array<Pair<String, String>>.formatCookies(): String {
     val result = StringBuilder()
 
     for (cookie in this) {
-        result += "${cookie.first}=${cookie.second};"
+        result.append(cookie.first)
+            .append('=')
+            .append(cookie.second)
+            .append(';')
     }
 
     return result.toString()
-}
-
-private operator fun StringBuilder.plusAssign(value: String) {
-    append(value)
 }
