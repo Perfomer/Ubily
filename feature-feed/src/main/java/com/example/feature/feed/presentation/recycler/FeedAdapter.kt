@@ -4,7 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.example.feature.feed.R
-import com.example.feature.feed.presentation.recycler.holder.*
+import com.example.feature.feed.presentation.recycler.holder.PayoutViewHolder
+import com.example.feature.feed.presentation.recycler.holder.RevenueViewHolder
+import com.example.feature.feed.presentation.recycler.holder.ReviewViewHolder
+import com.example.feature.feed.presentation.recycler.holder.asset.AssetViewHolder
+import com.example.feature.feed.presentation.recycler.holder.asset.DownloadViewHolder
+import com.example.feature.feed.presentation.recycler.holder.asset.SaleViewHolder
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.EventType.*
 import com.vmedia.core.common.obj.Period
@@ -12,15 +17,18 @@ import com.vmedia.core.common.util.inflate
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.core.common.view.recycler.diffedListBy
 import com.vmedia.core.data.obj.EventInfo
+import com.vmedia.core.data.obj.EventInfo.EventListInfo.*
+import com.vmedia.core.data.obj.EventInfo.EventRevenue
+import com.vmedia.core.data.obj.EventInfo.EventReview
 import kotlinx.android.synthetic.main.feed_item.view.*
 
 internal class FeedAdapter(
-    private val onItemClick: (item: EventInfo) -> Unit,
+    private val onItemClick: (item: EventInfo<*>) -> Unit,
     private val onAssetClick: (assetId: Long) -> Unit,
     private val onRevenueClick: (periodRevenue: Period) -> Unit
-) : BaseAdapter<FeedViewHolder<out EventInfo>>() {
+) : BaseAdapter<FeedViewHolder<out EventInfo<*>>>() {
 
-    var items by diffedListBy(EventInfo::id)
+    var items by diffedListBy(EventInfo<*>::id)
 
     private val types = values()
 
@@ -31,7 +39,7 @@ internal class FeedAdapter(
 
     override fun onLayoutRequested(viewType: Int) = R.layout.feed_item
 
-    override fun onCreateViewHolder(view: View, viewType: Int): FeedViewHolder<out EventInfo> {
+    override fun onCreateViewHolder(view: View, viewType: Int): FeedViewHolder<out EventInfo<*>> {
         val eventType = types[viewType]
         val viewGroup = view as ViewGroup
 
@@ -50,7 +58,7 @@ internal class FeedAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: FeedViewHolder<out EventInfo>, position: Int) {
+    override fun onBindViewHolder(holder: FeedViewHolder<out EventInfo<*>>, position: Int) {
         holder.bind(items[position])
     }
 
@@ -73,10 +81,10 @@ internal class FeedAdapter(
     }
 
     private fun onAssetClick(position: Int, assetIndex: Int) {
-        val assetId = when(val item = items[position]) {
-            is EventInfo.EventAsset -> item.assets[assetIndex].id
-            is EventInfo.EventSale -> item.sales[assetIndex].assetId
-            is EventInfo.EventFreeDownload -> item.downloads[assetIndex].assetId
+        val assetId = when (val item = items[position]) {
+            is EventAsset -> item.content[assetIndex].id
+            is EventSale -> item.content[assetIndex].assetId
+            is EventFreeDownload -> item.content[assetIndex].assetId
             else -> throw IllegalArgumentException()
         }
 
@@ -84,13 +92,13 @@ internal class FeedAdapter(
     }
 
     private fun onReviewAssetClick(position: Int) {
-        val eventInfo = items[position] as EventInfo.EventReview
-        onAssetClick.invoke(eventInfo.review.assetId)
+        val eventInfo = items[position] as EventReview
+        onAssetClick.invoke(eventInfo.content.assetId)
     }
 
     private fun onRevenueClick(position: Int) {
-        val revenueItem = items[position] as EventInfo.EventRevenue
-        onRevenueClick.invoke(revenueItem.revenue.period)
+        val revenueItem = items[position] as EventRevenue
+        onRevenueClick.invoke(revenueItem.content.period)
     }
 
 

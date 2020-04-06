@@ -20,7 +20,7 @@ internal class RevenueViewHolder(
     }
 
     override fun bindContent(item: EventRevenue) {
-        val revenue = item.revenue
+        val revenue = item.content
         val delta = revenue.revenueDelta
         val periodString = revenue.period.getString(context)
 

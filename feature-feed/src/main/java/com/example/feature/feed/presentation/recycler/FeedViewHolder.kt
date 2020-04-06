@@ -8,7 +8,7 @@ import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.core.data.obj.EventInfo
 import kotlinx.android.synthetic.main.feed_item.*
 
-internal abstract class FeedViewHolder<T : EventInfo>(
+internal abstract class FeedViewHolder<T : EventInfo<*>>(
     containerView: View,
     onClick: (position: Int) -> Unit
 ) : BaseViewHolder(containerView) {
@@ -18,7 +18,7 @@ internal abstract class FeedViewHolder<T : EventInfo>(
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun bind(event: EventInfo) {
+    fun bind(event: EventInfo<*>) {
         val type = event.type
 
         feed_item_icon.setImageResource(type.iconResource)

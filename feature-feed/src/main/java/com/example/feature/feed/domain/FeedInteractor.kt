@@ -8,7 +8,7 @@ internal class FeedInteractor(
     private val dataSource: DatabaseDataSource
 ) {
 
-    fun getEvents(): Observable<List<EventInfo>> {
+    fun getEvents(): Observable<List<EventInfo<*>>> {
         TODO()
     }
 

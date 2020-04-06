@@ -19,7 +19,7 @@ internal class ReviewViewHolder(
     }
 
     override fun bindContent(item: EventReview) {
-        val review = item.review
+        val review = item.content
         feed_item_review_title.diffedValue = review.reviewTitle
         feed_item_review_body.diffedValue = review.reviewBody
         feed_item_review_rating.rating = review.rating.toFloat()

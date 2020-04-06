@@ -15,7 +15,7 @@ internal class PayoutViewHolder(
 ) : FeedViewHolder<EventPayout>(containerView, onClick) {
 
     override fun bindContent(item: EventPayout) {
-        val payout = item.payout
+        val payout = item.content
 
         val autoPayoutText = getString(
             if (payout.auto) R.string.event_payout_auto_true
@@ -24,7 +24,7 @@ internal class PayoutViewHolder(
 
         val descriptionText = resources.getString(
             R.string.event_payout_text,
-            item.payout.amount.toString()
+            item.content.amount.toString()
         ).toSpan()
 
         feed_item_payout_auto.text = autoPayoutText

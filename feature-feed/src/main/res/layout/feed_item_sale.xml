@@ -7,16 +7,10 @@
     tools:background="@android:color/white"
     tools:padding="24dp">
 
-    <include
-        android:id="@+id/feed_item_sale_1"
-        layout="@layout/feed_item_sale_item" />
+    <include layout="@layout/feed_item_sale_item" />
 
-    <include
-        android:id="@+id/feed_item_sale_2"
-        layout="@layout/feed_item_sale_item" />
+    <include layout="@layout/feed_item_sale_item" />
 
-    <include
-        android:id="@+id/feed_item_sale_3"
-        layout="@layout/feed_item_sale_item" />
+    <include layout="@layout/feed_item_sale_item" />
 
 </LinearLayout>

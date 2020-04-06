@@ -11,16 +11,13 @@ import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
-import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import java.util.concurrent.TimeUnit
 
 var TextView.diffedValue: String
     get() = text.toString()
@@ -57,19 +54,36 @@ var RecyclerView.diffedAdapter: RecyclerView.Adapter<*>?
     }
     get() = adapter
 
-fun Fragment.inflate(@LayoutRes resource: Int, root: ViewGroup? = null, attachToRoot: Boolean = false): View {
+/** Returns a [Sequence] over the child views in this view group. */
+val View.children: Sequence<View>
+    get() = object : Sequence<View> {
+        override fun iterator() = (this@children as ViewGroup).iterator()
+    }
+
+fun Fragment.inflate(
+    @LayoutRes resource: Int,
+    root: ViewGroup? = null,
+    attachToRoot: Boolean = false
+): View {
     return context!!.inflate(resource, root, attachToRoot)
 }
 
-fun Context.inflate(@LayoutRes resource: Int, root: ViewGroup? = null, attachToRoot: Boolean = false): View {
+fun Context.inflate(
+    @LayoutRes resource: Int,
+    root: ViewGroup? = null,
+    attachToRoot: Boolean = false
+): View {
     val inflater = LayoutInflater.from(this)
     return inflater.inflate(resource, root, attachToRoot)
 }
 
-fun View.inflate(@LayoutRes resource: Int, root: ViewGroup? = null, attachToRoot: Boolean = false): View {
+fun View.inflate(
+    @LayoutRes resource: Int,
+    root: ViewGroup? = null,
+    attachToRoot: Boolean = false
+): View {
     return context.inflate(resource, root, attachToRoot)
 }
-
 
 fun EditText.addTextChangedListener(listener: (String) -> Unit) {
     addTextChangedListener(object : TextWatcher {
@@ -97,7 +111,6 @@ fun View.setOnClickListener(listener: () -> Unit) {
     setOnClickListener { listener.invoke() }
 }
 
-
 fun View.setBackgroundTint(@ColorRes colorRes: Int) {
     backgroundTintList = resources.getColorStateList(colorRes)
 }
@@ -106,7 +119,9 @@ fun ImageView.setTint(@ColorRes colorRes: Int) {
     imageTintList = resources.getColorStateList(colorRes)
 }
 
-fun TextView.setTextColorCompat(@ColorRes color: Int) = setTextColor(context.getColorCompat(color))
+fun TextView.setTextColorCompat(@ColorRes color: Int) {
+    setTextColor(context.getColorCompat(color))
+}
 
 fun Button.setBackgroundTint(@ColorRes color: Int) {
     backgroundTintList = ContextCompat.getColorStateList(context, color)
@@ -125,23 +140,6 @@ fun RecyclerView.init(
 
 fun RecyclerView.addItemTouchHelper(callback: ItemTouchHelper.Callback) {
     ItemTouchHelper(callback).attachToRecyclerView(this)
-}
-
-fun TextView.listenChanges(
-    stateDifferentiator: () -> String,
-    debounceMs: Long = 0L,
-    resultApplier: (String) -> Unit
-): Disposable {
-    var textChangedListener: Observable<CharSequence> = textChanges()
-
-    if (debounceMs > 0L) textChangedListener = textChangedListener.debounce(
-        debounceMs, TimeUnit.MILLISECONDS
-    )
-
-    return textChangedListener
-        .map(CharSequence::toString)
-        .distinctByValue(stateDifferentiator::invoke)
-        .subscribeBy(onNext = resultApplier::invoke)
 }
 
 fun <T> Observable<T>.distinctByValue(valueReceiver: () -> T): Observable<T> {

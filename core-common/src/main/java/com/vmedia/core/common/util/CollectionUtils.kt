@@ -25,3 +25,10 @@ fun <T, R> List<T>.zipWithNullable(otherSource: List<R>?): List<Pair<T, R?>> {
 fun <T> List<T>.each(predicate: (T) -> Boolean): Boolean {
     return count(predicate) == size
 }
+
+fun <T> Sequence<T>.onEachIndexed(action: (index: Int, item: T) -> Unit): Sequence<T> {
+    return mapIndexed { index: Int, item: T ->
+        action(index, item)
+        item
+    }
+}

@@ -6,66 +6,76 @@ import com.vmedia.core.common.obj.Money
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-sealed class EventInfo(
+sealed class EventInfo<Content>(
     open val id: Long,
     open val date: Date,
-    val type: EventType
+    open val content: Content,
+    open val type: EventType
 ) : Parcelable {
 
-    @Parcelize
-    data class EventSale(
+    sealed class EventListInfo<Content>(
         override val id: Long,
         override val date: Date,
-        val sales: List<SaleInfo>
-    ) : EventInfo(id, date, EventType.SALE)
+        override val content: List<Content>,
+        override val type: EventType
+    ) : EventInfo<List<Content>>(id, date, content, type) {
 
-    @Parcelize
-    data class EventFreeDownload(
-        override val id: Long,
-        override val date: Date,
-        val downloads: List<SaleInfo>
-    ) : EventInfo(id, date, EventType.FREE_DOWNLOAD)
+        @Parcelize
+        data class EventSale(
+            override val id: Long,
+            override val date: Date,
+            override val content: List<SaleInfo>
+        ) : EventListInfo<SaleInfo>(id, date, content, EventType.SALE)
+
+        @Parcelize
+        data class EventFreeDownload(
+            override val id: Long,
+            override val date: Date,
+            override val content: List<SaleInfo>
+        ) : EventListInfo<SaleInfo>(id, date, content, EventType.FREE_DOWNLOAD)
+
+        @Parcelize
+        data class EventAsset(
+            override val id: Long,
+            override val date: Date,
+            override val content: List<AssetInfo>
+        ) : EventListInfo<AssetInfo>(id, date, content, EventType.ASSET)
+
+    }
 
     @Parcelize
     data class EventReview(
         override val id: Long,
         override val date: Date,
-        val review: ReviewInfo
-    ) : EventInfo(id, date, EventType.REVIEW)
-
-    @Parcelize
-    data class EventAsset(
-        override val id: Long,
-        override val date: Date,
-        val assets: List<AssetInfo>
-    ) : EventInfo(id, date, EventType.ASSET)
+        override val content: ReviewInfo
+    ) : EventInfo<ReviewInfo>(id, date, content, EventType.REVIEW)
 
     @Parcelize
     data class EventPayout(
         override val id: Long,
         override val date: Date,
-        val payout: PayoutInfo
-    ) : EventInfo(id, date, EventType.PAYOUT)
+        override val content: PayoutInfo
+    ) : EventInfo<PayoutInfo>(id, date, content, EventType.PAYOUT)
 
     @Parcelize
     data class EventRevenue(
         override val id: Long,
         override val date: Date,
-        val revenue: RevenueInfo
-    ) : EventInfo(id, date, EventType.REVENUE)
+        override val content: RevenueInfo
+    ) : EventInfo<RevenueInfo>(id, date, content, EventType.REVENUE)
 
     @Parcelize
     data class EventAnniversarySale(
         override val id: Long,
         override val date: Date,
-        val sale: SaleInfo
-    ) : EventInfo(id, date, EventType.ANNIVERSARY_SALE)
+        override val content: SaleInfo
+    ) : EventInfo<SaleInfo>(id, date, content, EventType.ANNIVERSARY_SALE)
 
     @Parcelize
     data class EventInitialization(
         override val id: Long,
         override val date: Date,
-        val salesAmount: Money
-    ) : EventInfo(id, date, EventType.INITIALIZATION)
+        override val content: Money
+    ) : EventInfo<Money>(id, date, content, EventType.INITIALIZATION)
 
 }
