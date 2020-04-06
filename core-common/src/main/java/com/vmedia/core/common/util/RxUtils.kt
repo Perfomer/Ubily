@@ -39,6 +39,10 @@ fun <T> Single<T>.actOnSuccess(action: (T) -> Completable): Single<T> {
     return flatMap { action.invoke(it).andThen(Single.just(it)) }
 }
 
+fun <T, R> Observable<List<T>>.mapItems(action: (T) -> R): Observable<List<R>> {
+    return map { it.map(action::invoke) }
+}
+
 fun <T> Observable<List<T>>.toFlattenList(): Single<List<T>> {
     return toList().flatten()
 }
