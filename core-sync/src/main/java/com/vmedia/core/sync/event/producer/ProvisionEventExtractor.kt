@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.event.producer
 
+import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.toPeriod
-import com.vmedia.core.data.internal.database.entity.EventType
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync._SaleIdProvider
 import com.vmedia.core.sync.event.EventExtractor

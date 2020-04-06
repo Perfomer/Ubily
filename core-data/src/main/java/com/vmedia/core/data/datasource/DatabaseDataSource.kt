@@ -1,5 +1,6 @@
 package com.vmedia.core.data.datasource
 
+import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Completable

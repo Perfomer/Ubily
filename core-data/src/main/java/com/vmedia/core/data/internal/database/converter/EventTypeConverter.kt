@@ -1,6 +1,5 @@
 package com.vmedia.core.data.internal.database.converter
 
-import com.vmedia.core.data.internal.database.entity.EventType
+import com.vmedia.core.common.obj.EventType
 
-internal class EventTypeConverter
-    : EnumConverter<EventType>(EventType::class.java)
+internal class EventTypeConverter : EnumConverter<EventType>(EventType::class.java)
