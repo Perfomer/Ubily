@@ -8,7 +8,7 @@ import java.math.BigDecimal
 data class SaleInfo(
     val assetId: Long,
     val assetName: String,
-    val assetIcon: String,
+    val assetIcon: String?,
     val quantity: Int,
     val summaryPrice: BigDecimal
 ): Parcelable
