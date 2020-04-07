@@ -2,6 +2,7 @@ package com.example.feature.feed.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import com.example.feature.feed.R
 import com.example.feature.feed.presentation.mvi.FeedIntent
 import com.example.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
@@ -42,6 +43,7 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     }
 
     override fun render(state: FeedState) {
+        feed_loading.isVisible = state.isLoading
         adapter.items = state.payload
     }
 
