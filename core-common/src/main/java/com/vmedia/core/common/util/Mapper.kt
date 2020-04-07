@@ -38,6 +38,9 @@ abstract class ListMapper<FROM, TO> : Mapper<List<FROM>, List<TO>> {
 
 }
 
+interface ObservableMapper<FROM, TO> : Mapper<FROM, Observable<TO>>
+interface ObservableListMapper<FROM, TO> : Mapper<List<FROM>, Observable<List<TO>>>
+
 /**
  * Automatically turns simple mapper to list mapper
  *
@@ -50,6 +53,18 @@ fun <FROM, TO> Mapper<FROM, TO>.toListMapper(): ListMapper<FROM, TO> {
     }
 }
 
-fun <FROM, TO> Observable<FROM>.mapWith(mapper: Mapper<FROM, TO>) = map(mapper::map)
+fun <FROM, TO> Observable<FROM>.mapWith(mapper: Mapper<FROM, TO>): Observable<TO> {
+    return map(mapper::map)
+}
 
-fun <FROM, TO> Single<FROM>.mapWith(mapper: Mapper<FROM, TO>) = map(mapper::map)
+fun <FROM, TO> Observable<FROM>.flatMapWith(mapper: ObservableMapper<FROM, TO>): Observable<TO> {
+    return flatMap(mapper::map)
+}
+
+fun <FROM, TO> Observable<List<FROM>>.flatMapWith(mapper: ObservableListMapper<FROM, TO>): Observable<List<TO>> {
+    return flatMap(mapper::map)
+}
+
+fun <FROM, TO> Single<FROM>.mapWith(mapper: Mapper<FROM, TO>): Single<TO> {
+    return map(mapper::map)
+}
