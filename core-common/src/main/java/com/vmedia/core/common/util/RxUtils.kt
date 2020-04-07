@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
+import io.reactivex.rxkotlin.zipWith
 import kotlin.reflect.KClass
 
 fun <T> ObservableSource<T>.toObservable() = Observable.wrap(this)
@@ -18,6 +19,30 @@ inline fun <T, U, R> Observable<T>.flatWithLatestFrom(
     val biFunction = BiFunction<T, U, ObservableSource<out R>> { t, u -> combiner.invoke(t, u) }
     return withLatestFrom(other, biFunction).flatMap { it }
 }
+
+fun <T, R> Observable<List<T>>.mapItems(action: (T) -> R): Observable<List<R>> {
+    return map { it.map(action::invoke) }
+}
+
+fun <T> Observable<List<T>>.toFlattenList(): Single<List<T>> {
+    return toList().flatten()
+}
+
+fun <T> Observable<T>.blockingNullable(): T? {
+    return try {
+        blockingSingle()
+    } catch (e: Exception) {
+        null
+    }
+}
+
+fun <T1 : Any, T2 : Any> Observable<T1>.zipWith(
+    companionSource: (T1) -> Single<T2>
+): Observable<Pair<T1, T2>> {
+    return flatMapSingle { Single.just(it).zipWith(companionSource.invoke(it)) }
+}
+
+
 
 fun <T> Single<List<List<T>>>.flatten(): Single<List<T>> {
     return map { it.flatten() }
@@ -39,22 +64,6 @@ fun <T> Single<T>.actOnSuccess(action: (T) -> Completable): Single<T> {
     return flatMap { action.invoke(it).andThen(Single.just(it)) }
 }
 
-fun <T, R> Observable<List<T>>.mapItems(action: (T) -> R): Observable<List<R>> {
-    return map { it.map(action::invoke) }
-}
-
-fun <T> Observable<List<T>>.toFlattenList(): Single<List<T>> {
-    return toList().flatten()
-}
-
-fun <T> Observable<T>.blockingNullable(): T? {
-    return try {
-        blockingSingle()
-    } catch (e: Exception) {
-        null
-    }
-}
-
 fun <T> Single<T>.blockingNullable(): T? {
     return try {
         blockingGet()
@@ -62,6 +71,20 @@ fun <T> Single<T>.blockingNullable(): T? {
         null
     }
 }
+
+fun <T1 : Any, T2 : Any> Single<List<T1>>.associateWith(
+    companionSource: (T1) -> Single<T2>
+): Single<List<Pair<T1, T2>>> {
+    return this
+        .flatMapObservable {
+            Observable
+                .fromIterable(it)
+                .zipWith(companionSource::invoke)
+        }
+        .toList()
+}
+
+
 
 fun Completable.andThenMerge(vararg completables: Completable): Completable {
     return andThen(Completable.mergeArray(*completables))
