@@ -98,6 +98,10 @@ internal class DatabaseDataSourceImpl(
     }
 
 
+    override fun getEventSales(eventId: Long): Single<List<Sale>> {
+        return saleDao.getEventSales(eventId)
+    }
+
     override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
         return database.completableTransaction {
             val eventId = eventDao.insert(Event(type = type, date = date))

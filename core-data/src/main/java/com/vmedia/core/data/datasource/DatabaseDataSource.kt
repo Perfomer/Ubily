@@ -42,6 +42,9 @@ interface DatabaseDataSource {
     fun hasEvents(): Single<Boolean>
 
 
+    fun getEventSales(eventId: Long) : Single<List<Sale>>
+
+
     fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable
 
     fun putPublisher(publisher: Publisher): Completable

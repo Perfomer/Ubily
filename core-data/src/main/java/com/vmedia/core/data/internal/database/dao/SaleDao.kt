@@ -83,4 +83,13 @@ interface SaleDao : BaseDao<Sale> {
     )
     fun getSaleId(assetId: Long, priceUsd: BigDecimal, date: Date): Long
 
+    @Query(
+        """
+            SELECT * FROM EventEntity eventEntity
+                LEFT JOIN Sale sale ON (sale.id = eventEntity.entityId)
+            WHERE eventEntity.eventId = :eventId
+        """
+    )
+    fun getEventSales(eventId: Long): Single<List<Sale>>
+
 }
