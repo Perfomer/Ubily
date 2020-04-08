@@ -106,6 +106,19 @@ internal class DatabaseDataSourceImpl(
         return assetDao.getEventAssets(eventId)
     }
 
+    override fun getEventReview(eventId: Long): Single<Review> {
+        return reviewDao.getEventReview(eventId)
+    }
+
+    override fun getEventRevenue(eventId: Long): Single<Revenue> {
+        return revenueDao.getEventRevenue(eventId)
+    }
+
+    override fun getEventPayout(eventId: Long): Single<Payout> {
+        return payoutDao.getEventPayout(eventId)
+    }
+
+
     override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
         return database.completableTransaction {
             val eventId = eventDao.insert(Event(type = type, date = date))

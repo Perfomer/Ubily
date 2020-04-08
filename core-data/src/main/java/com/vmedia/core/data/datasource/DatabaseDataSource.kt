@@ -46,6 +46,12 @@ interface DatabaseDataSource {
 
     fun getEventAssets(eventId: Long) : Single<List<Asset>>
 
+    fun getEventReview(eventId: Long): Single<Review>
+
+    fun getEventRevenue(eventId: Long): Single<Revenue>
+
+    fun getEventPayout(eventId: Long): Single<Payout>
+
 
     fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable
 

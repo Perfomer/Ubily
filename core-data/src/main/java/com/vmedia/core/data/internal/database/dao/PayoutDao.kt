@@ -12,4 +12,13 @@ interface PayoutDao : BaseDao<Payout> {
     @Query("SELECT * FROM Payout WHERE date = (SELECT MAX(date) FROM Payout)")
     fun getLastPayout(): Single<Payout>
 
+    @Query(
+        """
+            SELECT * FROM EventEntity eventEntity
+                LEFT JOIN Payout payout ON (payout.periodId = eventEntity.entityId)
+            WHERE eventEntity.eventId = :eventId
+        """
+    )
+    fun getEventPayout(eventId: Long): Single<Payout>
+
 }

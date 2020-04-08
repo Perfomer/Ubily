@@ -16,6 +16,15 @@ interface ReviewDao : BaseDao<Review> {
     @Query("SELECT id FROM Review WHERE authorId = :authorId AND assetId = :assetId LIMIT 1")
     fun getReviewId(authorId: Long, assetId: Long): Single<Long>
 
+    @Query(
+        """
+            SELECT * FROM EventEntity eventEntity
+                LEFT JOIN Review review ON (review.id = eventEntity.entityId)
+            WHERE eventEntity.eventId = :eventId
+        """
+    )
+    fun getEventReview(eventId: Long): Single<Review>
+
     @WorkerThread
     @Query("SELECT COUNT(*) FROM Review WHERE authorId = :authorId AND assetId = :assetId")
     fun contains(authorId: Long, assetId: Long): Long

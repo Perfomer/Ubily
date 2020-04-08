@@ -12,4 +12,13 @@ interface RevenueDao : BaseDao<Revenue> {
     @Query("SELECT * FROM Revenue WHERE date = (SELECT MAX(date) FROM Revenue)")
     fun getLastRevenue(): Single<Revenue>
 
+    @Query(
+        """
+            SELECT * FROM EventEntity eventEntity
+                LEFT JOIN Revenue revenue ON (revenue.periodId = eventEntity.entityId)
+            WHERE eventEntity.eventId = :eventId
+        """
+    )
+    fun getEventRevenue(eventId: Long): Single<Revenue>
+
 }

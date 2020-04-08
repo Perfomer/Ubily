@@ -2,9 +2,7 @@ package com.example.feature.feed.data
 
 import com.example.feature.feed.domain.FeedRepository
 import com.vmedia.core.data.datasource.DatabaseDataSource
-import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.internal.database.entity.Sale
+import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -23,6 +21,18 @@ internal class FeedRepositoryImpl(
 
     override fun getEventAssets(eventId: Long): Single<List<Asset>> {
         return databaseDataSource.getEventAssets(eventId)
+    }
+
+    override fun getEventReview(eventId: Long): Single<Review> {
+        return databaseDataSource.getEventReview(eventId)
+    }
+
+    override fun getEventRevenue(eventId: Long): Single<Revenue> {
+        return databaseDataSource.getEventRevenue(eventId)
+    }
+
+    override fun getEventPayout(eventId: Long): Single<Payout> {
+        return databaseDataSource.getEventPayout(eventId)
     }
 
 

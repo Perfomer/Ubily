@@ -1,8 +1,6 @@
 package com.example.feature.feed.domain
 
-import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.internal.database.entity.Sale
+import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -14,6 +12,12 @@ internal interface FeedRepository {
     fun getEventSales(eventId: Long): Single<List<Sale>>
 
     fun getEventAssets(eventId: Long): Single<List<Asset>>
+
+    fun getEventReview(eventId: Long): Single<Review>
+
+    fun getEventRevenue(eventId: Long): Single<Revenue>
+
+    fun getEventPayout(eventId: Long): Single<Payout>
 
 
     fun getAsset(id: Long): Single<Asset>
