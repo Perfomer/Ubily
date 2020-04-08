@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import com.example.feature.feed.data.FeedRepositoryImpl
 import com.example.feature.feed.domain.FeedInteractor
 import com.example.feature.feed.domain.FeedRepository
-import com.example.feature.feed.domain.mapper.EventMapper
+import com.example.feature.feed.domain.mapper.*
 import com.example.feature.feed.presentation.FeedFragment
 import com.example.feature.feed.presentation.FeedViewModel
 import com.vmedia.core.common.util.ObservableListMapper
@@ -34,4 +34,22 @@ val feedModule = module {
     viewModel { FeedViewModel(get()) }
     single { FeedInteractor(get(), get<EventMapper>()) }
     single<FeedRepository> { FeedRepositoryImpl(get()) }
+
+    single {
+        EventMapper(
+            saleMapper = get<SaleMapper>(),
+            downloadMapper = get<DownloadMapper>(),
+            assetMapper = get<AssetMapper>(),
+            reviewMapper = get<ReviewMapper>(),
+            revenueMapper = get<RevenueMapper>(),
+            payoutMapper = get<PayoutMapper>()
+        )
+    }
+
+    single { AssetMapper(get()) }
+    single { DownloadMapper(get()) }
+    single { PayoutMapper(get()) }
+    single { RevenueMapper(get()) }
+    single { ReviewMapper(get()) }
+    single { SaleMapper(get()) }
 }
