@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class AssetInfo(
     val id: Long,
-    val icon: String,
+    val icon: String?,
     val name: String,
     val version: String,
     val status: AssetStatus

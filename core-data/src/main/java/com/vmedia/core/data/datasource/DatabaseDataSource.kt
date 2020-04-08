@@ -44,6 +44,8 @@ interface DatabaseDataSource {
 
     fun getEventSales(eventId: Long) : Single<List<Sale>>
 
+    fun getEventAssets(eventId: Long) : Single<List<Asset>>
+
 
     fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable
 

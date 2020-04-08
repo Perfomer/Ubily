@@ -32,6 +32,15 @@ interface AssetDao : BaseDao<Asset> {
     )
     fun getFirstFreeAsset(): Single<Asset>
 
+    @Query(
+        """
+            SELECT * FROM EventEntity eventEntity
+                LEFT JOIN Asset asset ON (asset.id = eventEntity.entityId)
+            WHERE eventEntity.eventId = :eventId
+        """
+    )
+    fun getEventAssets(eventId: Long): Single<List<Asset>>
+
     @WorkerThread
     @Query("SELECT COUNT(*) FROM Asset WHERE id = :id")
     fun contains(id: Long): Long

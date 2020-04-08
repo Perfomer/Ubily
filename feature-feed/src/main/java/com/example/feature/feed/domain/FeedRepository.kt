@@ -13,6 +13,8 @@ internal interface FeedRepository {
 
     fun getEventSales(eventId: Long): Single<List<Sale>>
 
+    fun getEventAssets(eventId: Long): Single<List<Asset>>
+
 
     fun getAsset(id: Long): Single<Asset>
 

@@ -21,6 +21,10 @@ internal class FeedRepositoryImpl(
         return databaseDataSource.getEventSales(eventId)
     }
 
+    override fun getEventAssets(eventId: Long): Single<List<Asset>> {
+        return databaseDataSource.getEventAssets(eventId)
+    }
+
 
     override fun getAsset(id: Long): Single<Asset> {
         return databaseDataSource.getAsset(id) // todo cache
