@@ -1,5 +1,6 @@
 package com.example.feature.feed.domain
 
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -23,5 +24,9 @@ internal interface FeedRepository {
     fun getAsset(id: Long): Single<Asset>
 
     fun getUser(id: Long): Single<User>
+
+    fun getPeriod(id: Long): Single<Period>
+
+    fun getRevenue(id: Long): Single<Revenue>
 
 }

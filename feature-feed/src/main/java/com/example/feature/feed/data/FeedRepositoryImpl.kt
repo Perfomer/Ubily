@@ -1,6 +1,7 @@
 package com.example.feature.feed.data
 
 import com.example.feature.feed.domain.FeedRepository
+import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import io.reactivex.Observable
@@ -42,6 +43,14 @@ internal class FeedRepositoryImpl(
 
     override fun getUser(id: Long): Single<User> {
         return databaseDataSource.getUser(id)
+    }
+
+    override fun getPeriod(id: Long): Single<Period> {
+        return databaseDataSource.getPeriod(id)
+    }
+
+    override fun getRevenue(id: Long): Single<Revenue> {
+        return databaseDataSource.getRevenue(id)
     }
 
 }

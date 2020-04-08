@@ -9,6 +9,9 @@ import io.reactivex.Single
 @Dao
 interface RevenueDao : BaseDao<Revenue> {
 
+    @Query("SELECT * FROM Revenue WHERE periodId = :id")
+    fun getRevenue(id: Long): Single<Revenue>
+
     @Query("SELECT * FROM Revenue WHERE date = (SELECT MAX(date) FROM Revenue)")
     fun getLastRevenue(): Single<Revenue>
 

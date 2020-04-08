@@ -65,6 +65,10 @@ internal class DatabaseDataSourceImpl(
         return payoutDao.getLastPayout()
     }
 
+    override fun getRevenue(id: Long): Single<Revenue> {
+        return revenueDao.getRevenue(id)
+    }
+
     override fun getLastRevenue(): Single<Revenue> {
         return revenueDao.getLastRevenue()
     }
@@ -87,6 +91,10 @@ internal class DatabaseDataSourceImpl(
 
     override fun getLastPeriod(): Single<Period> {
         return periodDao.getLastPeriod().map(PeriodWrap::period)
+    }
+
+    override fun getPeriod(id: Long): Single<Period> {
+        return periodDao.getPeriod(id).map(PeriodWrap::period)
     }
 
     override fun getPeriodId(period: Period): Single<Long> {

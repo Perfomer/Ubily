@@ -27,6 +27,8 @@ interface DatabaseDataSource {
 
     fun getLastPayout(): Single<Payout>
 
+    fun getRevenue(id: Long): Single<Revenue>
+
     fun getLastRevenue(): Single<Revenue>
 
     fun getLastSale(assetId: Long, period: Period, priceUsd: BigDecimal): Single<Sale>
@@ -34,6 +36,8 @@ interface DatabaseDataSource {
     fun getSaleId(assetId: Long, date: Date, priceUsd: BigDecimal): Single<Long>
 
     fun getFreeDownloadsPeriods(): Single<List<Period>>
+
+    fun getPeriod(id: Long): Single<Period>
 
     fun getPeriodId(period: Period): Single<Long>
 
@@ -44,9 +48,9 @@ interface DatabaseDataSource {
     fun hasEvents(): Single<Boolean>
 
 
-    fun getEventSales(eventId: Long) : Single<List<Sale>>
+    fun getEventSales(eventId: Long): Single<List<Sale>>
 
-    fun getEventAssets(eventId: Long) : Single<List<Asset>>
+    fun getEventAssets(eventId: Long): Single<List<Asset>>
 
     fun getEventReview(eventId: Long): Single<Review>
 
