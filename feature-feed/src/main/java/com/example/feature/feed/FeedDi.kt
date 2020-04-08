@@ -1,6 +1,10 @@
 package com.example.feature.feed
 
 import androidx.fragment.app.Fragment
+import com.example.feature.feed.data.FeedRepositoryImpl
+import com.example.feature.feed.domain.FeedInteractor
+import com.example.feature.feed.domain.FeedRepository
+import com.example.feature.feed.domain.mapper.EventMapper
 import com.example.feature.feed.presentation.FeedFragment
 import com.example.feature.feed.presentation.FeedViewModel
 import com.vmedia.core.common.util.ObservableListMapper
@@ -28,4 +32,6 @@ const val BEAN_FRAGMENT_FEED = "FeedFragment"
 val feedModule = module {
     single<Fragment>(named(BEAN_FRAGMENT_FEED)) { FeedFragment() }
     viewModel { FeedViewModel(get()) }
+    single { FeedInteractor(get(), get<EventMapper>()) }
+    single<FeedRepository> { FeedRepositoryImpl(get()) }
 }
