@@ -1,11 +1,11 @@
 package com.vmedia.core.sync.event.producer
 
+import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.Month.*
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.obj.of
 import com.vmedia.core.common.obj.startDate
 import com.vmedia.core.common.util.each
-import com.vmedia.core.data.internal.database.entity.EventType
 import com.vmedia.core.data.internal.database.entity.Revenue
 import com.vmedia.core.sync.event.EventModel
 import org.junit.Test

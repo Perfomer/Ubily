@@ -1,10 +1,11 @@
 package com.vmedia.core.sync.event
 
 import com.nhaarman.mockitokotlin2.*
+import com.vmedia.core.common.obj.EventType
+import com.vmedia.core.common.obj.EventType.*
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
-import com.vmedia.core.data.internal.database.entity.EventType.*
 import com.vmedia.core.sync.*
 import com.vmedia.core.sync.SynchronizationDataType.*
 import com.vmedia.core.sync.SynchronizationEvent.Data

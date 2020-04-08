@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.event.producer
 
+import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.EventType
 import com.vmedia.core.sync.synchronizer.asset.AssetModel
 import org.junit.Test
 
