@@ -1,6 +1,7 @@
 package com.example.feature.feed.presentation.recycler.holder
 
 import android.view.View
+import androidx.core.view.isVisible
 import coil.api.load
 import coil.transform.RoundedCornersTransformation
 import com.example.feature.feed.presentation.recycler.FeedViewHolder
@@ -20,12 +21,20 @@ internal class ReviewViewHolder(
 
     override fun bindContent(item: EventReview) {
         val review = item.content
+        val hasReply = review.publisherReplyBody != null
+
         feed_item_review_title.diffedValue = review.reviewTitle
         feed_item_review_body.diffedValue = review.reviewBody
         feed_item_review_rating.rating = review.rating.toFloat()
 
         feed_item_review_asset_name.diffedValue = review.assetName
         feed_item_review_asset_rating.diffedValue = review.assetAverageRating.toString()
+
+        feed_item_review_reply.isVisible = hasReply
+
+        if (hasReply) {
+            feed_item_review_reply_body.diffedValue = review.publisherReplyBody!!
+        }
 
         feed_item_review_asset_icon.load(review.assetIcon) {
             crossfade(true)

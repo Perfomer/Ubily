@@ -9,9 +9,53 @@
     tools:ignore="ContentDescription"
     tools:padding="24dp">
 
+    <LinearLayout
+        android:id="@+id/feed_item_review_asset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_event_item"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:id="@+id/feed_item_review_asset_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@color/brand_grey"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/feed_item_review_asset_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:maxLines="1"
+            android:textColor="@color/brand_black"
+            android:textSize="12sp"
+            tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
+
+        <TextView
+            android:id="@+id/feed_item_review_asset_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="3"
+            android:textColor="@color/brand_black_light"
+            android:textSize="12sp"
+            tools:text="4.8" />
+
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@drawable/bg_event_item"
         android:padding="16dp">
 
@@ -59,46 +103,39 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/feed_item_review_asset"
+        android:id="@+id/feed_item_review_reply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:background="@drawable/bg_event_item"
-        android:foreground="?selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="8dp">
-
-        <ImageView
-            android:id="@+id/feed_item_review_asset_icon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:background="@color/brand_grey"
-            tools:src="@tools:sample/avatars" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/feed_item_review_asset_name"
-            android:layout_width="0dp"
+            android:id="@+id/feed_item_review_reply_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="14dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
-            android:fontFamily="@font/rubik_medium"
+            android:fontFamily="@font/rubik_bold"
             android:maxLines="1"
+            android:text="@string/event_review_reply_title"
             android:textColor="@color/brand_black"
-            android:textSize="12sp"
-            tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/feed_item_review_asset_rating"
-            android:layout_width="wrap_content"
+            android:id="@+id/feed_item_review_reply_body"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="3"
-            android:textColor="@color/brand_black_light"
-            android:textSize="12sp"
-            tools:text="4.8" />
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:textColor="@color/brand_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/feed_item_review_title"
+            tools:text="Thanks. Will be glad to continue our cooperation!" />
 
     </LinearLayout>
 

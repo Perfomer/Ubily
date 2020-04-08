@@ -68,6 +68,7 @@
 
     <string name="event_review_title">Review</string>
     <string name="event_review_text"><![CDATA[New review from <b>%s</b>:]]></string>
+    <string name="event_review_reply_title">Publisher reply:</string>
 
     <string name="event_revenue_title">@string/entities_revenue</string>
     <string name="event_revenue_text"><![CDATA[You have earned <b>$%.2f</b> for <b>%s</b>]]></string>
