@@ -27,7 +27,7 @@ internal class SaleMapper(
     private fun createEventSale(event: Event, detailedSales: List<Pair<Sale, Asset>>): EventSale {
         val salesInfo = detailedSales.groupBy { it.first.assetId }
             .values
-            .map { it.map { it.first } to it[0].second }
+            .map { it.map(Pair<Sale, Asset>::first) to it[0].second }
             .map { (sales, asset) -> createSaleInfo(asset, sales) }
 
         return EventSale(
