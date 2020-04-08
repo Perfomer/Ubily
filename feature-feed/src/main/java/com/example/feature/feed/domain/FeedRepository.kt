@@ -22,4 +22,6 @@ internal interface FeedRepository {
 
     fun getAsset(id: Long): Single<Asset>
 
+    fun getUser(id: Long): Single<User>
+
 }

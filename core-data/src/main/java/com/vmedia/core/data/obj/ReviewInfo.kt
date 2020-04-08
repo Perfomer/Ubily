@@ -10,8 +10,9 @@ data class ReviewInfo(
     val authorName: String,
     val reviewTitle: String,
     val reviewBody: String,
+    val publisherReplyBody: String?,
     val assetId: Long,
-    val assetIcon: String,
+    val assetIcon: String?,
     val assetName: String,
-    val assetAverageRating: Double
+    val assetAverageRating: Int
 ): Parcelable

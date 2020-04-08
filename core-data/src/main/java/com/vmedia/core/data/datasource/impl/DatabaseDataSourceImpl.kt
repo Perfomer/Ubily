@@ -37,6 +37,10 @@ internal class DatabaseDataSourceImpl(
         return publisherDao.getPublisher()
     }
 
+    override fun getUser(id: Long): Single<User> {
+        return userDao.getUser(id)
+    }
+
     override fun getUserByName(name: String): Single<User> {
         return userDao.getUserByName(name)
     }

@@ -84,6 +84,11 @@ fun <T1 : Any, T2 : Any> Single<List<T1>>.associateWith(
         .toList()
 }
 
+fun <T1 : Any, T2 : Any> Single<T1>.zipWith(
+    companionSource: (T1) -> Single<T2>
+): Single<Pair<T1, T2>> {
+    return flatMap { Single.just(it).zipWith(companionSource.invoke(it)) }
+}
 
 
 fun Completable.andThenMerge(vararg completables: Completable): Completable {

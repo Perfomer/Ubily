@@ -1,5 +1,6 @@
 package com.vmedia.core.data.internal.database.entity
 
+import androidx.annotation.IntRange
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
@@ -25,6 +26,7 @@ data class Asset(
     val versionName: String = "",
     val totalFileSize: Double = 0.0,
     val status: AssetStatus = AssetStatus.NONE,
+    @IntRange(from = 0, to = 5) val averageRating: Int = 0,
 
     val name: String = "",
     val description: String = "",

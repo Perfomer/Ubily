@@ -9,6 +9,9 @@ import io.reactivex.Single
 @Dao
 interface UserDao : BaseDao<User> {
 
+    @Query("SELECT * FROM User WHERE id = :id")
+    fun getUser(id: Long): Single<User>
+
     @Query("SELECT * FROM User WHERE name = :name")
     fun getUserByName(name: String): Single<User>
 

@@ -40,4 +40,8 @@ internal class FeedRepositoryImpl(
         return databaseDataSource.getAsset(id) // todo cache
     }
 
+    override fun getUser(id: Long): Single<User> {
+        return databaseDataSource.getUser(id)
+    }
+
 }
