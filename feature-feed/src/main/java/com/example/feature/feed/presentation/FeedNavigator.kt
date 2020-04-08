@@ -5,7 +5,7 @@ import com.vmedia.core.data.obj.EventInfo
 
 interface FeedNavigator {
 
-    fun navigateToEventDetails(eventInfo: EventInfo)
+    fun navigateToEventDetails(eventInfo: EventInfo<*>)
 
     fun navigateToAsset(assetId: Long)
 

@@ -6,7 +6,7 @@ internal sealed class FeedAction {
 
     object EventsLoadingStarted : FeedAction()
 
-    class EventsLoadingSucceed(val events: List<EventInfo>) : FeedAction()
+    class EventsLoadingSucceed(val events: List<EventInfo<*>>) : FeedAction()
 
     class EventsLoadingFailed(val error: Throwable) : FeedAction()
 

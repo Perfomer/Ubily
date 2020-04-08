@@ -7,6 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 internal data class FeedState(
     val isLoading: Boolean = false,
-    val payload: List<EventInfo> = emptyList(),
+    val payload: List<EventInfo<*>> = emptyList(),
     val error: Throwable? = null
 ) : Parcelable
