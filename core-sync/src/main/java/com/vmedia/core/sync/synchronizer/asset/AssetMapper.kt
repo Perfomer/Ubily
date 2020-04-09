@@ -17,6 +17,8 @@ internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel
                 id = asset.id,
                 categoryId = asset.categoryId,
                 versionId = asset.packageVersionId,
+                versionName = asset.versionName,
+                averageRating = asset.averageRating,
                 creationDate = asset.creationDate,
                 modificationDate = asset.modificationDate,
                 publishingDate = asset.publishingDate ?: EMPTY_DATE,

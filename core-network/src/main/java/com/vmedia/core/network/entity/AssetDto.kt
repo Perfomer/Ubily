@@ -10,6 +10,7 @@ data class AssetDto(
     val packageVersionId: Long,
     val categoryId: Long,
     val name: String,
+    val versionName: String,
     val shortUrl: String,
     @IntRange(from = 0, to = 5) val averageRating: Int,
     val reviewsQuantity: Int,

@@ -22,6 +22,7 @@ internal object AssetMapper : Mapper<PackageModelWithVersions, AssetDto> {
             packageVersionId = currentVersion.packageVersionId,
             categoryId = from.categoryId,
             name = from.name,
+            versionName = currentVersion.versionName,
             averageRating = from.averageRating,
             reviewsQuantity = from.countRatings,
             shortUrl = from.shortUrl,
