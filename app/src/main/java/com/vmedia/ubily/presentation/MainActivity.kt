@@ -34,7 +34,7 @@ class MainActivity : BaseActivity(
         navigateThroughStartGraph()
     }
 
-    override fun navigateToEventDetails(eventInfo: EventInfo) {
+    override fun navigateToEventDetails(eventInfo: EventInfo<*>) {
         TODO("Not yet implemented")
     }
 
