@@ -6,32 +6,31 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.vmedia.core.common.obj.EventType
-import com.vmedia.core.common.obj.Month
-import com.vmedia.core.common.obj.of
+import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.internal.database.entity.Revenue
+import com.vmedia.core.data.internal.database.entity.Review
+import com.vmedia.core.data.internal.database.entity.User
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
-import java.math.BigDecimal
 
 @RunWith(MockitoJUnitRunner::class)
-internal class RevenueMapperTest {
+internal class ReviewMapperTest {
 
     private val repository: FeedRepository = mock {
-        on { getPeriod(any()) } doReturn Single.just(MOCKY_PERIOD)
-        on { getRevenue(any()) } doReturn Single.just(MOCKY_REVENUE_PREVIOUS)
+        on { getAsset(any()) } doReturn Single.just(MOCKY_ASSET)
+        on { getUser(any()) } doReturn Single.just(MOCKY_AUTHOR)
     }
 
-    private val mapper: RevenueMapper
-        get() = RevenueMapper(repository)
+    private val mapper: ReviewMapper
+        get() = ReviewMapper(repository)
 
     @Test
     fun map_empty() {
         // Given
         val error = Throwable()
-        whenever(repository.getEventRevenue(any())).thenReturn(Single.error(error))
+        whenever(repository.getEventReview(any())).thenReturn(Single.error(error))
 
         // When
         val mapping = mapper.map(MOCKY_EVENT)
@@ -45,7 +44,7 @@ internal class RevenueMapperTest {
     @Test
     fun map() {
         // Given
-        whenever(repository.getEventRevenue(any())).thenReturn(Single.just(MOCKY_REVENUE_CURRENT))
+        whenever(repository.getEventReview(any())).thenReturn(Single.just(MOCKY_REVIEW))
 
         // When
         val mapping = mapper.map(MOCKY_EVENT)
@@ -55,25 +54,25 @@ internal class RevenueMapperTest {
             .assertComplete()
             .assertValue { it.id == MOCKY_EVENT.id }
             .assertValue { it.date == MOCKY_EVENT.date }
-            .assertValue { it.content.amount == MOCKY_REVENUE_CURRENT.valueUsd }
-            .assertValue { it.content.revenueDelta == 20.0 }
-            .dispose()
+            .assertValue { it.content.reviewBody == MOCKY_REVIEW.title }
+            .assertValue { it.content.assetIcon == MOCKY_ASSET.iconImage }
+            .assertValue { it.content.authorName == MOCKY_AUTHOR.name }
     }
 
     private companion object {
 
-        private val MOCKY_PERIOD = Month.APRIL of 2020
+        private val MOCKY_EVENT = Event(type = EventType.REVIEW)
 
-        private val MOCKY_EVENT = Event(type = EventType.REVENUE)
+        private val MOCKY_AUTHOR = User(name = "username")
 
-        private val MOCKY_REVENUE_CURRENT = Revenue(
-            periodId = 2L,
-            valueUsd = BigDecimal(120)
+        private val MOCKY_ASSET = Asset(
+            id = 10,
+            iconImage = "image"
         )
 
-        private val MOCKY_REVENUE_PREVIOUS = Revenue(
-            periodId = 1L,
-            valueUsd = BigDecimal(100)
+        private val MOCKY_REVIEW = Review(
+            assetId = MOCKY_ASSET.id,
+            authorId = MOCKY_AUTHOR.id
         )
 
     }
