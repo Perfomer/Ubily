@@ -10,5 +10,5 @@ package com.vmedia.core.network.util
   */
 internal fun String.fixUrl(): String {
     if (isBlank()) return this
-    return "http:$this"
+    return "https:$this"
 }
