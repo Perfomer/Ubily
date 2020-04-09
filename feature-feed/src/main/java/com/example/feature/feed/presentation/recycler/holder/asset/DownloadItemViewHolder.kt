@@ -2,12 +2,11 @@ package com.example.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
 import androidx.core.view.isVisible
-import coil.api.load
-import coil.transform.RoundedCornersTransformation
 import com.example.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.example.feature.feed.presentation.recycler.holder.ItemViewHolder
 import com.vmedia.core.common.obj.descriptionResource
 import com.vmedia.core.common.util.diffedValue
+import com.vmedia.core.common.util.loadRoundedCorners
 import com.vmedia.core.common.util.toSpan
 import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventFreeDownload
 import com.vmedia.core.data.obj.SaleInfo
@@ -50,11 +49,7 @@ internal class DownloadItemViewHolder(
         feed_item_sale_price.diffedValue = "$${content.summaryPrice}"
         feed_item_sale_quantity.diffedValue = "x${content.quantity}"
         feed_item_sale_title.diffedValue = content.assetName
-
-        feed_item_sale_icon.load(content.assetIcon) {
-            crossfade(true)
-            transformations(RoundedCornersTransformation(8.0f))
-        }
+        feed_item_sale_icon.loadRoundedCorners(content.assetIcon)
     }
 
 }

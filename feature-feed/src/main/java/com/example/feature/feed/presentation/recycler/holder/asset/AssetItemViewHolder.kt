@@ -1,13 +1,12 @@
 package com.example.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
-import coil.api.load
-import coil.transform.RoundedCornersTransformation
 import com.example.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.example.feature.feed.presentation.recycler.holder.ItemViewHolder
 import com.vmedia.core.common.obj.descriptionResource
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.diffedValue
+import com.vmedia.core.common.util.loadRoundedCorners
 import com.vmedia.core.common.util.toSpan
 import com.vmedia.core.data.obj.AssetInfo
 import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventAsset
@@ -45,11 +44,7 @@ internal class AssetItemViewHolder(
         feed_item_asset_title.diffedValue = content.name
         feed_item_asset_version.diffedValue = content.version
         feed_item_asset_status.diffedValue = getString(content.status.labelResource)
-
-        feed_item_asset_icon.load(content.icon) {
-            crossfade(true)
-            transformations(RoundedCornersTransformation(8.0f))
-        }
+        feed_item_asset_icon.loadRoundedCorners(content.icon)
     }
 
 }
