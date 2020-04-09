@@ -43,6 +43,7 @@ internal class NetworkDataSourceImpl(
     override fun getPeriods(): Single<List<Period>> {
         return api.getPeriods(credentials.userId)
             .map(PeriodsModel::periods)
+            .map { it.asReversed() }
             .mapWith(periodMapper)
     }
 
