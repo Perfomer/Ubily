@@ -8,7 +8,7 @@ import java.math.BigDecimal
 @Parcelize
 data class RevenueInfo(
     val period: Period,
-    val amount: BigDecimal,
-    val sale: Boolean,
-    val revenueDelta: Double
+    val amount: BigDecimal = BigDecimal.ZERO,
+    val sale: Boolean = false,
+    val revenueDelta: Double = 0.0
 ): Parcelable

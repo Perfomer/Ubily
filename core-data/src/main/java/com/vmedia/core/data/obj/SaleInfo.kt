@@ -7,8 +7,8 @@ import java.math.BigDecimal
 @Parcelize
 data class SaleInfo(
     val assetId: Long,
-    val assetName: String,
-    val assetIcon: String?,
-    val quantity: Int,
-    val summaryPrice: BigDecimal
+    val assetName: String = "",
+    val assetIcon: String? = null,
+    val quantity: Int = 1,
+    val summaryPrice: BigDecimal = BigDecimal.ZERO
 ): Parcelable

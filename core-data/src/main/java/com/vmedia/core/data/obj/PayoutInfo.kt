@@ -8,8 +8,8 @@ import java.math.BigDecimal
 @Parcelize
 data class PayoutInfo(
     val period: Period,
-    val amount: BigDecimal,
-    val auto: Boolean,
-    val paypal: Boolean,
-    val failed: Boolean
+    val amount: BigDecimal = BigDecimal.ZERO,
+    val auto: Boolean = false,
+    val paypal: Boolean = false,
+    val failed: Boolean = false
 ): Parcelable
