@@ -10,6 +10,7 @@ import com.vmedia.core.common.util.sumByBigDecimal
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Sale
+import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventSale
 import com.vmedia.core.data.obj.SaleInfo
 import io.reactivex.Single
 import org.junit.Test
@@ -18,7 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import java.math.BigDecimal
 
 @RunWith(MockitoJUnitRunner::class)
-internal class SaleMapperTest {
+internal class ProvisionMapperTest {
 
     private val repository: FeedRepository = mock {
         on { getAsset(any()) } doAnswer {
@@ -27,7 +28,7 @@ internal class SaleMapperTest {
         }
     }
 
-    private val mapper: SaleMapper
+    private val mapper: ProvisionMapper<EventSale>
         get() = SaleMapper(repository)
 
     @Test
