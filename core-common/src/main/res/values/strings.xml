@@ -25,6 +25,21 @@
         <item quantity="other">sales</item>
     </plurals>
 
+    <string name="timeago_future">in future</string>
+    <string name="timeago_now">just now</string>
+    <string name="timeago_minute">a minute ago</string>
+    <string name="timeago_minutes">%d minutes ago</string>
+    <string name="timeago_hour">an hour ago</string>
+    <string name="timeago_hours">%d hours ago</string>
+    <string name="timeago_day">yesterday</string>
+    <string name="timeago_days">%d days ago</string>
+    <string name="timeago_week">a week ago</string>
+    <string name="timeago_weeks">%d weeks ago</string>
+    <string name="timeago_month">a month ago</string>
+    <string name="timeago_months">%d months ago</string>
+    <string name="timeago_year">a year ago</string>
+    <string name="timeago_years">%d years ago</string>
+
     <string name="month_january">January</string>
     <string name="month_february">February</string>
     <string name="month_march">March</string>
