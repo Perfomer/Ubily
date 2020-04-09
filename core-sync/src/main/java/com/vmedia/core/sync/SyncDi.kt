@@ -178,8 +178,8 @@ private val eventExtractorModule = module {
     single { SaleEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
     single { DownloadEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
     single { ReviewEventExtractor(get(named(BEAN_PROVIDER_REVIEW_ID))) }
-    single { RevenueEventExtractor(get(named(BEAN_PROVIDER_PERIOD_ID))) }
-    single { PayoutEventExtractor(get(named(BEAN_PROVIDER_PERIOD_ID))) }
+    single { RevenueEventExtractor }
+    single { PayoutEventExtractor }
 }
 
 private val synchronizerModule = module {

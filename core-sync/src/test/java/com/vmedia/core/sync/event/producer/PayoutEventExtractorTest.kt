@@ -12,7 +12,7 @@ import org.junit.Test
 
 internal class PayoutEventExtractorTest {
 
-    private val extractor = PayoutEventExtractor(::getPeriodId)
+    private val extractor = PayoutEventExtractor
 
     @Test
     fun extract_zero() {
@@ -65,8 +65,6 @@ internal class PayoutEventExtractorTest {
                 date = it.startDate
             )
         }
-
-        private fun getPeriodId(period: Period): Long = period.id
 
     }
 

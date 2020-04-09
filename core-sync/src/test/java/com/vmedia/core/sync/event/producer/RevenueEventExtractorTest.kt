@@ -12,7 +12,7 @@ import org.junit.Test
 
 internal class RevenueEventExtractorTest {
 
-    private val extractor = RevenueEventExtractor(::getPeriodId)
+    private val extractor = RevenueEventExtractor
 
     @Test
     fun extract_zero() {
@@ -65,8 +65,6 @@ internal class RevenueEventExtractorTest {
                 date = it.startDate
             )
         }
-
-        private fun getPeriodId(period: Period): Long = period.id
 
     }
 
