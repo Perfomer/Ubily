@@ -16,10 +16,12 @@ import kotlinx.android.synthetic.main.feed_item_asset_item.*
 internal class AssetViewHolder(
     containerView: View,
     onClick: (position: Int) -> Unit,
+    onOptionsClick: (position: Int) -> Unit,
     onAssetClick: (position: Int, assetIndex: Int) -> Unit
 ) : AssetListViewHolder<AssetInfo, EventAsset, AssetItemViewHolder>(
     containerView,
     onClick,
+    onOptionsClick,
     onAssetClick
 ) {
 

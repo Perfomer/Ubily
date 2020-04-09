@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.feed_item.*
 internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Content>, ItemVH : ItemViewHolder<Content>>(
     containerView: View,
     onClick: (position: Int) -> Unit,
+    onOptionsClick: (position: Int) -> Unit,
     private val onAssetClick: (position: Int, assetIndex: Int) -> Unit
-) : FeedViewHolder<Event>(containerView, onClick) {
+) : FeedViewHolder<Event>(containerView, onClick, onOptionsClick) {
 
     private val assetViewHolders = feed_item_content.getChildAt(0).children
         .map(::onItemViewHolderCreate)

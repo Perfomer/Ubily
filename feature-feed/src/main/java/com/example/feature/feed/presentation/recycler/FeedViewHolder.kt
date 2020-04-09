@@ -10,11 +10,13 @@ import kotlinx.android.synthetic.main.feed_item.*
 
 internal abstract class FeedViewHolder<T : EventInfo<*>>(
     containerView: View,
-    onClick: (position: Int) -> Unit
+    onClick: (position: Int) -> Unit,
+    onOptionsClick: (position: Int) -> Unit
 ) : BaseViewHolder(containerView) {
 
     init {
         containerView.setOnClickListener { onClick.safeInvoke(adapterPosition) }
+        feed_item_options.setOnClickListener { onOptionsClick.safeInvoke(adapterPosition) }
     }
 
     @Suppress("UNCHECKED_CAST")

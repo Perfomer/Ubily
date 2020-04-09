@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.feed_item.view.*
 
 internal class FeedAdapter(
     private val onItemClick: (item: EventInfo<*>) -> Unit,
+    private val onOptionsClick: (item: EventInfo<*>) -> Unit,
     private val onAssetClick: (assetId: Long) -> Unit,
     private val onRevenueClick: (periodRevenue: Period) -> Unit
 ) : BaseAdapter<FeedViewHolder<out EventInfo<*>>>() {
@@ -48,12 +49,12 @@ internal class FeedAdapter(
         }
 
         return when (eventType) {
-            SALE -> SaleViewHolder(view, ::onClick, ::onAssetClick)
-            FREE_DOWNLOAD -> DownloadViewHolder(view, ::onClick, ::onAssetClick)
-            REVIEW -> ReviewViewHolder(view, ::onClick, ::onReviewAssetClick)
-            ASSET -> AssetViewHolder(view, ::onClick, ::onAssetClick)
-            PAYOUT -> PayoutViewHolder(view, ::onClick)
-            REVENUE -> RevenueViewHolder(view, ::onClick, ::onRevenueClick)
+            SALE -> SaleViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
+            FREE_DOWNLOAD -> DownloadViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
+            REVIEW -> ReviewViewHolder(view, ::onClick, ::onOptionsClick, ::onReviewAssetClick)
+            ASSET -> AssetViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
+            PAYOUT -> PayoutViewHolder(view, ::onOptionsClick, ::onClick)
+            REVENUE -> RevenueViewHolder(view, ::onClick, ::onOptionsClick, ::onRevenueClick)
             else -> TODO()
         }
     }
@@ -78,6 +79,10 @@ internal class FeedAdapter(
 
     private fun onClick(position: Int) {
         onItemClick.invoke(items[position])
+    }
+
+    private fun onOptionsClick(position: Int) {
+        onOptionsClick.invoke(items[position])
     }
 
     private fun onAssetClick(position: Int, assetIndex: Int) {

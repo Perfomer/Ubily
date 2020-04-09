@@ -16,10 +16,12 @@ import kotlinx.android.synthetic.main.feed_item_sale_item.*
 internal class SaleViewHolder(
     containerView: View,
     onClick: (position: Int) -> Unit,
+    onOptionsClick: (position: Int) -> Unit,
     onAssetClick: (position: Int, assetIndex: Int) -> Unit
 ) : AssetListViewHolder<SaleInfo, EventSale, SaleItemViewHolder>(
     containerView,
     onClick,
+    onOptionsClick,
     onAssetClick
 ) {
 

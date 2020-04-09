@@ -10,6 +10,7 @@ import com.example.feature.feed.presentation.mvi.FeedState
 import com.example.feature.feed.presentation.recycler.FeedAdapter
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.util.init
+import com.vmedia.core.data.obj.EventInfo
 import kotlinx.android.synthetic.main.feed_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -21,6 +22,7 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     private val adapter by lazy {
         FeedAdapter(
             onItemClick = navigator::navigateToEventDetails,
+            onOptionsClick = ::onOptionsClick,
             onAssetClick = navigator::navigateToAsset,
             onRevenueClick = navigator::navigateToStatistics
         )
@@ -45,6 +47,10 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     override fun render(state: FeedState) {
         feed_loading.isVisible = state.isLoading
         adapter.items = state.payload
+    }
+
+    private fun onOptionsClick(eventInfo: EventInfo<*>) {
+
     }
 
 }
