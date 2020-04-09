@@ -33,10 +33,7 @@ internal class AssetViewHolder(
         ).toSpan()
     }
 
-    override fun onItemViewHolderCreate(view: View) =
-        AssetItemViewHolder(
-            view
-        )
+    override fun onItemViewHolderCreate(view: View) = AssetItemViewHolder(view)
 
 }
 

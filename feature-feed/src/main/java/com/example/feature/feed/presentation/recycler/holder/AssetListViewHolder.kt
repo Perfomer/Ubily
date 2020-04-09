@@ -11,6 +11,7 @@ import com.vmedia.core.common.util.getDrawableCompat
 import com.vmedia.core.common.util.onEachIndexed
 import com.vmedia.core.data.obj.EventInfo.EventListInfo
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.feed_item.*
 
 internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Content>, ItemVH : ItemViewHolder<Content>>(
     containerView: View,
@@ -18,7 +19,7 @@ internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Conte
     private val onAssetClick: (position: Int, assetIndex: Int) -> Unit
 ) : FeedViewHolder<Event>(containerView, onClick) {
 
-    private val assetViewHolders = containerView.children
+    private val assetViewHolders = feed_item_content.getChildAt(0).children
         .map(::onItemViewHolderCreate)
         .onEachIndexed { index, item ->
             item.containerView.setOnClickListener { safeOnClick(index) }
@@ -58,7 +59,7 @@ internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Conte
 
 internal abstract class ItemViewHolder<Content>(
     override val containerView: View
-): LayoutContainer {
+) : LayoutContainer {
 
     abstract fun bind(content: Content)
 
