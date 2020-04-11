@@ -1,6 +1,7 @@
 package com.vmedia.core.data
 
 import android.content.Context
+import androidx.room.RoomDatabase
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.datasource.PublisherDataSource
@@ -77,6 +78,8 @@ private val databaseModule = module {
             assetKeywordDao = get()
         )
     }
+
+    single<RoomDatabase> { get<UbilyDatabase>()}
 
     single {
         UbilyDatabase.getInstance(
