@@ -3,6 +3,7 @@ package com.example.feature.feed.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.room.RoomDatabase
 import com.example.feature.feed.R
 import com.example.feature.feed.presentation.mvi.FeedIntent
 import com.example.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
@@ -11,7 +12,10 @@ import com.example.feature.feed.presentation.recycler.FeedAdapter
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.util.init
 import com.vmedia.core.data.obj.EventInfo
+import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.feed_fragment.*
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
@@ -50,7 +54,9 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     }
 
     private fun onOptionsClick(eventInfo: EventInfo<*>) {
-
+        Completable.fromAction { get<RoomDatabase>().clearAllTables() }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
     }
 
 }
