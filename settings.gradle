@@ -13,6 +13,9 @@ include ':feature:auth:data'
 include ':feature:auth:domain'
 include ':feature:auth:presentation'
 
+include ':feature:sync:api'
+include ':feature:sync:domain'
+include ':feature:sync:presentation'
+
 include ':feature-splash'
 include ':feature-feed'
-include ':feature-sync'

@@ -7,10 +7,10 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
-import com.vmedia.feature.auth.api.authModules
+import com.vmedia.feature.auth.api.featureAuthModules
 import com.vmedia.feature.feed.feedModule
 import com.vmedia.feature.splash.splashModule
-import com.vmedia.feature.sync.syncModule
+import com.vmedia.feature.sync.api.featureSyncModules
 import org.koin.dsl.module
 
 internal val koinModules by lazy {
@@ -27,12 +27,11 @@ private val coreModules by lazy {
 }
 
 private val featureModules by lazy {
-    authModules
+    featureAuthModules + featureSyncModules
 }
 
 private val featureModulesOld = listOf(
     splashModule,
-    syncModule,
     feedModule
 )
 
