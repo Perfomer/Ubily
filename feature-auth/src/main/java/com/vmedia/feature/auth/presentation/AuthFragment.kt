@@ -2,11 +2,10 @@ package com.vmedia.feature.auth.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.addTextChangedListener
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.toast
+import com.vmedia.core.common.util.*
 import com.vmedia.feature.auth.R
 import com.vmedia.feature.auth.presentation.mvi.AuthIntent
 import com.vmedia.feature.auth.presentation.mvi.AuthState
@@ -28,9 +27,10 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        auth_signin.setOnClickListener { postIntent(AuthIntent.SignIn) }
+        auth_signin.setOnClickListener(::signIn)
         auth_login.addTextChangedListener { postIntent(AuthIntent.UpdateLogin(it)) }
         auth_password.addTextChangedListener { postIntent(AuthIntent.UpdatePassword(it)) }
+        auth_password.setOnEditorActionListener(EditorInfo.IME_ACTION_DONE, ::signIn)
     }
 
     override fun render(state: AuthState) {
@@ -50,6 +50,11 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
             AuthSucceed -> navigator.onAuthSucceed()
             is AuthFailed -> toast("there is AUTH error") //todo
         }
+    }
+
+    private fun signIn() {
+        hideKeyboard()
+        postIntent(AuthIntent.SignIn)
     }
 
 }

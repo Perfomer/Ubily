@@ -93,6 +93,17 @@ fun EditText.addTextChangedListener(listener: (String) -> Unit) {
     })
 }
 
+fun EditText.setOnEditorActionListener(actionId: Int, action: () -> Unit) {
+    setOnEditorActionListener { _, currentActionId, _ ->
+        if (currentActionId == actionId) {
+            action.invoke()
+            return@setOnEditorActionListener true
+        }
+
+        return@setOnEditorActionListener false
+    }
+}
+
 fun View.addOnFocusedListener(listener: () -> Unit) {
     setOnFocusChangeListener { editText, isFocused ->
         if (isFocused) listener.invoke()
