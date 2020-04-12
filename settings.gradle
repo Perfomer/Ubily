@@ -17,5 +17,9 @@ include ':feature:sync:api'
 include ':feature:sync:domain'
 include ':feature:sync:presentation'
 
-include ':feature-splash'
+include ':feature:splash:api'
+include ':feature:splash:data'
+include ':feature:splash:domain'
+include ':feature:splash:presentation'
+
 include ':feature-feed'

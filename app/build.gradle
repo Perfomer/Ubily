@@ -20,7 +20,7 @@ dependencies {
     implementation project(':core-network')
     implementation project(':core-sync')
 
-    implementation project(':feature-splash')
+    implementation project(':feature:splash:api')
     implementation project(":feature:auth:api")
     implementation project(':feature:sync:api')
     implementation project(':feature-feed')

@@ -9,7 +9,7 @@ import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.api.featureAuthModules
 import com.vmedia.feature.feed.feedModule
-import com.vmedia.feature.splash.splashModule
+import com.vmedia.feature.splash.api.featureSplashModules
 import com.vmedia.feature.sync.api.featureSyncModules
 import org.koin.dsl.module
 
@@ -27,11 +27,10 @@ private val coreModules by lazy {
 }
 
 private val featureModules by lazy {
-    featureAuthModules + featureSyncModules
+    featureAuthModules + featureSyncModules + featureSplashModules
 }
 
 private val featureModulesOld = listOf(
-    splashModule,
     feedModule
 )
 
