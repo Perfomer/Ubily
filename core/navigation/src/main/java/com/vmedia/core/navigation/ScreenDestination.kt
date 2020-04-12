@@ -29,7 +29,7 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
     }
 
     object Feed : ScreenDestination() {
-        override fun getFragment() = get<Fragment>((named(BEAN_FRAGMENT_FEED)))
+        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_FEED))
     }
 
     class EventDetails(val eventId: Long) : ScreenDestination() {

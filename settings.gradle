@@ -8,7 +8,11 @@ include ':core-network'
 include ':core-sync'
 include ':core-data'
 
-include ':feature-auth'
+include ':feature:auth:api'
+include ':feature:auth:data'
+include ':feature:auth:domain'
+include ':feature:auth:presentation'
+
 include ':feature-splash'
 include ':feature-feed'
 include ':feature-sync'
