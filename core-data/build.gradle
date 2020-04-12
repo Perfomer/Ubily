@@ -16,6 +16,6 @@ dependencies {
     // Crypto TODO remove
     implementation "org.jasypt:jasypt:1.9.2"
 
-    implementation project(":core-common")
+    implementation project(":core:common")
     implementation project(":core-network")
 }

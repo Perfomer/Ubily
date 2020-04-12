@@ -3,7 +3,7 @@ rootProject.name='Ubily'
 include ':app'
 
 include ':core:navigation'
-include ':core-common'
+include ':core:common'
 include ':core-network'
 include ':core-sync'
 include ':core-data'
