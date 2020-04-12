@@ -6,7 +6,7 @@ include ':core:navigation'
 include ':core:common'
 include ':core:data'
 include ':core:network'
-include ':core-sync'
+include ':core:sync'
 
 include ':feature:auth:api'
 include ':feature:auth:data'
