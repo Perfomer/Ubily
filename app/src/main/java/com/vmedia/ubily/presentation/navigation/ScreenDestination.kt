@@ -1,8 +1,8 @@
 package com.vmedia.ubily.presentation.navigation
 
 import androidx.fragment.app.Fragment
-import com.example.feature.feed.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.auth.BEAN_FRAGMENT_AUTH
+import com.vmedia.feature.feed.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.splash.BEAN_FRAGMENT_SPLASH
 import com.vmedia.feature.sync.BEAN_FRAGMENT_SYNC
 import com.vmedia.feature.sync.presentation.SyncScreenMode

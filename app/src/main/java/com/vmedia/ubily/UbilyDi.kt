@@ -1,6 +1,5 @@
 package com.vmedia.ubily
 
-import com.example.feature.feed.feedModule
 import com.vmedia.core.data.dataModules
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
@@ -8,6 +7,7 @@ import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
 import com.vmedia.feature.auth.authModule
+import com.vmedia.feature.feed.feedModule
 import com.vmedia.feature.splash.splashModule
 import com.vmedia.feature.sync.syncModule
 import com.vmedia.ubily.presentation.navigation.navigationModule

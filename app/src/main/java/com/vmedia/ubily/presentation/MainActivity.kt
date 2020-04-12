@@ -1,9 +1,9 @@
 package com.vmedia.ubily.presentation
 
-import com.example.feature.feed.presentation.FeedNavigator
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.obj.EventInfo
 import com.vmedia.feature.auth.presentation.AuthNavigator
+import com.vmedia.feature.feed.presentation.FeedNavigator
 import com.vmedia.feature.splash.presentation.SplashNavigator
 import com.vmedia.feature.sync.presentation.SyncNavigator
 import com.vmedia.feature.sync.presentation.SyncScreenMode
@@ -62,7 +62,7 @@ class MainActivity : BaseActivity(
                 navigateTo(ScreenDestination.Feed)
             } else {
 //                if (onboardingAlreadyShown) {
-                    navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
+                navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
 //                } else {
 //                    navigateTo(ScreenDestination.Onboarding)
 //                }
