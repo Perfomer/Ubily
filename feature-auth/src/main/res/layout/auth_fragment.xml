@@ -108,7 +108,8 @@
         app:layout_constraintBottom_toTopOf="@id/auth_signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_login_wrap">
+        app:layout_constraintTop_toBottomOf="@id/auth_login_wrap"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/auth_password"
