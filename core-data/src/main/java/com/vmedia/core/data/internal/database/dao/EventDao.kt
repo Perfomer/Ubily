@@ -10,7 +10,7 @@ import io.reactivex.Single
 @Dao
 interface EventDao: BaseDao<Event> {
 
-    @Query("SELECT * FROM Event")
+    @Query("SELECT * FROM Event ORDER BY date DESC")
     fun getEvents(): Observable<List<Event>>
 
     @Query("SELECT COUNT(*) FROM Event")
