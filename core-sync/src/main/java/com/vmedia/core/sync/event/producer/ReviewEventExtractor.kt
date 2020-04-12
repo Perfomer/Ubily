@@ -12,12 +12,23 @@ internal class ReviewEventExtractor(
     private val reviewIdProvider: _ReviewIdProvider
 ) : EventExtractor<List<Review>> {
 
+    private val Review.updateDate: Date
+        get() {
+            val replyDate = publisherReply?.publishingDate
+            val commentDate = comment.publishingDate
+
+            return if (replyDate == null) commentDate
+            else maxOf(comment.publishingDate, replyDate)
+        }
+
     override fun extract(source: List<Review>): Single<List<EventModel>> {
         return Single.fromCallable {
-            source.map { reviewIdProvider.invoke(it.authorId, it.assetId) }
-                .map { id ->
+            source
+                .map {
+                    val id = reviewIdProvider.invoke(it.authorId, it.assetId)
+
                     EventModel(
-                        date = Date(System.currentTimeMillis()),
+                        date = it.updateDate,
                         type = EventType.REVIEW,
                         entities = listOf(id)
                     )

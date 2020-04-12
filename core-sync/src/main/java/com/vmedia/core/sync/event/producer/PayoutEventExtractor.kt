@@ -5,7 +5,6 @@ import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.EventModel
 import io.reactivex.Single
-import java.util.*
 
 internal object PayoutEventExtractor : EventExtractor<List<Payout>> {
 
@@ -13,7 +12,7 @@ internal object PayoutEventExtractor : EventExtractor<List<Payout>> {
         return Single.fromCallable {
             source.map {
                 EventModel(
-                    date = Date(System.currentTimeMillis()),
+                    date = it.date,
                     type = EventType.PAYOUT,
                     entities = listOf(it.periodId)
                 )

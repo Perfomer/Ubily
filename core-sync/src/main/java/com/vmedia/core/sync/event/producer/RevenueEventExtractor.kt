@@ -5,7 +5,6 @@ import com.vmedia.core.data.internal.database.entity.Revenue
 import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.EventModel
 import io.reactivex.Single
-import java.util.*
 
 internal object RevenueEventExtractor : EventExtractor<List<Revenue>> {
 
@@ -13,7 +12,7 @@ internal object RevenueEventExtractor : EventExtractor<List<Revenue>> {
         return Single.fromCallable {
             source.map {
                 EventModel(
-                    date = Date(System.currentTimeMillis()),
+                    date = it.date,
                     type = EventType.REVENUE,
                     entities = listOf(it.periodId)
                 )

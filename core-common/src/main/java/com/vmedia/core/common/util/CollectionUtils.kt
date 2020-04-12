@@ -26,6 +26,11 @@ fun <T> List<T>.each(predicate: (T) -> Boolean): Boolean {
     return count(predicate) == size
 }
 
+fun <T, R : Comparable<R>> Collection<T>.maxValue(extractor: (T) -> R): R {
+    val maxItem = maxBy { extractor.invoke(it) }!!
+    return extractor.invoke(maxItem)
+}
+
 fun <T> Sequence<T>.onEachIndexed(action: (index: Int, item: T) -> Unit): Sequence<T> {
     return mapIndexed { index: Int, item: T ->
         action(index, item)

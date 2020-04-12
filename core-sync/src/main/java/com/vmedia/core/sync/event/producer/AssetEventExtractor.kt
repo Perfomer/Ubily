@@ -2,11 +2,11 @@ package com.vmedia.core.sync.event.producer
 
 import androidx.annotation.WorkerThread
 import com.vmedia.core.common.obj.EventType
+import com.vmedia.core.common.util.maxValue
 import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.EventModel
 import com.vmedia.core.sync.synchronizer.asset.AssetModel
 import io.reactivex.Single
-import java.util.*
 
 internal object AssetEventExtractor : EventExtractor<List<AssetModel>> {
 
@@ -22,7 +22,7 @@ internal object AssetEventExtractor : EventExtractor<List<AssetModel>> {
 
         return listOf(
             EventModel(
-                date = Date(System.currentTimeMillis()),
+                date = source.maxValue { it.asset.modificationDate },
                 type = EventType.ASSET,
                 entities = source.map { it.asset.id }
             )
