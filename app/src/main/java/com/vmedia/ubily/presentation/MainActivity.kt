@@ -2,14 +2,14 @@ package com.vmedia.ubily.presentation
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.obj.EventInfo
-import com.vmedia.feature.auth.presentation.AuthNavigator
-import com.vmedia.feature.feed.presentation.FeedNavigator
-import com.vmedia.feature.splash.presentation.SplashNavigator
-import com.vmedia.feature.sync.presentation.SyncNavigator
-import com.vmedia.feature.sync.presentation.SyncScreenMode
+import com.vmedia.core.navigation.ScreenDestination
+import com.vmedia.core.navigation.navigator.auth.AuthNavigator
+import com.vmedia.core.navigation.navigator.feed.FeedNavigator
+import com.vmedia.core.navigation.navigator.splash.SplashNavigator
+import com.vmedia.core.navigation.navigator.sync.SyncNavigator
+import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.ubily.R
 import com.vmedia.ubily.presentation.base.BaseActivity
-import com.vmedia.ubily.presentation.navigation.ScreenDestination
 
 class MainActivity : BaseActivity(
     screenLayoutResource = R.layout.activity_main,
@@ -22,18 +22,6 @@ class MainActivity : BaseActivity(
     private var onboardingAlreadyShown: Boolean = false
 
 
-    override fun onInitialized(
-        isUserAuthorized: Boolean,
-        isUserDataSynchronized: Boolean,
-        onboardingAlreadyShown: Boolean
-    ) {
-        this.isUserAuthorized = isUserAuthorized
-        this.isUserDataSynchronized = isUserDataSynchronized
-        this.onboardingAlreadyShown = onboardingAlreadyShown
-
-        navigateThroughStartGraph()
-    }
-
     override fun navigateToEventDetails(eventInfo: EventInfo<*>) {
         TODO("Not yet implemented")
     }
@@ -44,6 +32,18 @@ class MainActivity : BaseActivity(
 
     override fun navigateToStatistics(period: Period) {
         TODO("Not yet implemented")
+    }
+
+    override fun onInitialized(
+        isUserAuthorized: Boolean,
+        isUserDataSynchronized: Boolean,
+        onboardingAlreadyShown: Boolean
+    ) {
+        this.isUserAuthorized = isUserAuthorized
+        this.isUserDataSynchronized = isUserDataSynchronized
+        this.onboardingAlreadyShown = onboardingAlreadyShown
+
+        navigateThroughStartGraph()
     }
 
     override fun onSynchronizationSucceed() {

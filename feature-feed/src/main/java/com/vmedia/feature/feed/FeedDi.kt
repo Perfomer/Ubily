@@ -7,6 +7,7 @@ import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.obj.EventInfo
 import com.vmedia.core.data.obj.EventInfo.*
 import com.vmedia.core.data.obj.EventInfo.EventListInfo.*
+import com.vmedia.core.navigation.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.feed.data.FeedRepositoryImpl
 import com.vmedia.feature.feed.domain.FeedInteractor
 import com.vmedia.feature.feed.domain.FeedRepository
@@ -26,8 +27,6 @@ internal typealias _RevenueMapper = _EventInfoMapper<EventRevenue>
 internal typealias _PayoutMapper = _EventInfoMapper<EventPayout>
 
 private typealias _EventInfoMapper<T> = ObservableMapper<Event, T>
-
-const val BEAN_FRAGMENT_FEED = "FeedFragment"
 
 val feedModule = module {
     single<Fragment>(named(BEAN_FRAGMENT_FEED)) { FeedFragment() }

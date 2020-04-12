@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.util.init
 import com.vmedia.core.data.obj.EventInfo
+import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.feature.feed.R
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents

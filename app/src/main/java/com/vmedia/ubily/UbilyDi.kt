@@ -1,20 +1,20 @@
 package com.vmedia.ubily
 
 import com.vmedia.core.data.dataModules
+import com.vmedia.core.navigation.navigationModule
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
-import com.vmedia.feature.auth.authModule
+import com.vmedia.feature.auth.api.authModules
 import com.vmedia.feature.feed.feedModule
 import com.vmedia.feature.splash.splashModule
 import com.vmedia.feature.sync.syncModule
-import com.vmedia.ubily.presentation.navigation.navigationModule
 import org.koin.dsl.module
 
 internal val koinModules by lazy {
-    appModules + featureModules + coreModules
+    appModules + featureModules + featureModulesOld + coreModules
 }
 
 
@@ -26,9 +26,12 @@ private val coreModules by lazy {
     dataModules + networkModules + syncModules
 }
 
-private val featureModules = listOf(
+private val featureModules by lazy {
+    authModules
+}
+
+private val featureModulesOld = listOf(
     splashModule,
-    authModule,
     syncModule,
     feedModule
 )

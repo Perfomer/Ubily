@@ -1,11 +1,7 @@
-package com.vmedia.ubily.presentation.navigation
+package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.feature.auth.BEAN_FRAGMENT_AUTH
-import com.vmedia.feature.feed.BEAN_FRAGMENT_FEED
-import com.vmedia.feature.splash.BEAN_FRAGMENT_SPLASH
-import com.vmedia.feature.sync.BEAN_FRAGMENT_SYNC
-import com.vmedia.feature.sync.presentation.SyncScreenMode
+import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.parameter.parametersOf

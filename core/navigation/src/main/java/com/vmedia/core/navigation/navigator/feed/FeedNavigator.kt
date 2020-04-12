@@ -1,4 +1,4 @@
-package com.vmedia.feature.feed.presentation
+package com.vmedia.core.navigation.navigator.feed
 
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.obj.EventInfo

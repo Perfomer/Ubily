@@ -1,6 +1,7 @@
 package com.vmedia.feature.splash
 
 import androidx.fragment.app.Fragment
+import com.vmedia.core.navigation.BEAN_FRAGMENT_SPLASH
 import com.vmedia.feature.splash.data.NetworkCredentialsDataSource
 import com.vmedia.feature.splash.data.NetworkCredentialsDataSourceImpl
 import com.vmedia.feature.splash.data.SplashRepositoryImpl
@@ -11,8 +12,6 @@ import com.vmedia.feature.splash.presentation.SplashViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-
-const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 
 val splashModule = module {
     single<NetworkCredentialsDataSource> {

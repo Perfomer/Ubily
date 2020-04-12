@@ -1,4 +1,4 @@
-package com.vmedia.feature.splash.presentation
+package com.vmedia.core.navigation.navigator.splash
 
 interface SplashNavigator {
 

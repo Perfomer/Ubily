@@ -14,13 +14,14 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:1.5.1"
     implementation "ru.terrakok.cicerone:cicerone:5.0.0"
 
+    implementation project(':core:navigation')
     implementation project(':core-common')
     implementation project(':core-data')
     implementation project(':core-network')
     implementation project(':core-sync')
 
     implementation project(':feature-splash')
-    implementation project(':feature-auth')
+    implementation project(":feature:auth:api")
     implementation project(':feature-sync')
     implementation project(':feature-feed')
 }
