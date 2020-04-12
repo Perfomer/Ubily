@@ -1,56 +1,34 @@
 package com.example.feature.feed.data
 
 import com.example.feature.feed.domain.FeedRepository
-import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.util.CacheHolder
 import com.vmedia.core.data.datasource.DatabaseDataSource
-import com.vmedia.core.data.internal.database.entity.*
+import com.vmedia.core.data.internal.database.entity.Event
 import io.reactivex.Observable
-import io.reactivex.Single
 
 internal class FeedRepositoryImpl(
-    private val databaseDataSource: DatabaseDataSource
-) : FeedRepository {
+    private val source: DatabaseDataSource
+) : CacheHolder(), FeedRepository {
+
+    private val assets by cachedMapSingle(source::getAsset)
+    private val users by cachedMapSingle(source::getUser)
+    private val periods by cachedMapSingle(source::getPeriod)
+    private val revenues by cachedMapSingle(source::getRevenue)
 
     override fun getEvents(): Observable<List<Event>> {
-        return databaseDataSource.getEvents()
+        return source.getEvents()
+            .doOnSubscribe { dropCache() }
     }
 
+    override fun getEventSales(eventId: Long) = source.getEventSales(eventId)
+    override fun getEventAssets(eventId: Long) = source.getEventAssets(eventId)
+    override fun getEventReview(eventId: Long) = source.getEventReview(eventId)
+    override fun getEventRevenue(eventId: Long) = source.getEventRevenue(eventId)
+    override fun getEventPayout(eventId: Long) = source.getEventPayout(eventId)
 
-    override fun getEventSales(eventId: Long): Single<List<Sale>> {
-        return databaseDataSource.getEventSales(eventId)
-    }
-
-    override fun getEventAssets(eventId: Long): Single<List<Asset>> {
-        return databaseDataSource.getEventAssets(eventId)
-    }
-
-    override fun getEventReview(eventId: Long): Single<Review> {
-        return databaseDataSource.getEventReview(eventId)
-    }
-
-    override fun getEventRevenue(eventId: Long): Single<Revenue> {
-        return databaseDataSource.getEventRevenue(eventId)
-    }
-
-    override fun getEventPayout(eventId: Long): Single<Payout> {
-        return databaseDataSource.getEventPayout(eventId)
-    }
-
-
-    override fun getAsset(id: Long): Single<Asset> {
-        return databaseDataSource.getAsset(id) // todo cache
-    }
-
-    override fun getUser(id: Long): Single<User> {
-        return databaseDataSource.getUser(id)
-    }
-
-    override fun getPeriod(id: Long): Single<Period> {
-        return databaseDataSource.getPeriod(id)
-    }
-
-    override fun getRevenue(id: Long): Single<Revenue> {
-        return databaseDataSource.getRevenue(id)
-    }
+    override fun getAsset(id: Long) = assets[id]
+    override fun getUser(id: Long) = users[id]
+    override fun getPeriod(id: Long) = periods[id]
+    override fun getRevenue(id: Long) = revenues[id]
 
 }
