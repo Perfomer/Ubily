@@ -17,10 +17,12 @@ internal class EventMapper(
 ) : ObservableListMapper<Event, EventInfo<*>> {
 
     override fun map(from: List<Event>): Observable<List<EventInfo<*>>> {
-        return Observable.fromIterable(from)
-            .flatMap(::map)
-            .toList()
-            .toObservable()
+        return Observable.defer {
+            Observable.fromIterable(from)
+                .flatMap(::map)
+                .toList()
+                .toObservable()
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
