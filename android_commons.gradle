@@ -35,6 +35,18 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/api_release.kotlin_module'
+        exclude 'META-INF/data_release.kotlin_module'
+        exclude 'META-INF/domain_release.kotlin_module'
+        exclude 'META-INF/presentation_release.kotlin_module'
+
+        exclude 'META-INF/api_debug.kotlin_module'
+        exclude 'META-INF/data_debug.kotlin_module'
+        exclude 'META-INF/domain_debug.kotlin_module'
+        exclude 'META-INF/presentation_debug.kotlin_module'
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
