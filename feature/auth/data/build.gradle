@@ -5,6 +5,6 @@ apply from: "../../../android_commons.gradle"
 
 dependencies {
     implementation project(':core:common')
-    implementation project(':core-data')
+    implementation project(':core:data')
     implementation project(":feature:auth:domain")
 }
