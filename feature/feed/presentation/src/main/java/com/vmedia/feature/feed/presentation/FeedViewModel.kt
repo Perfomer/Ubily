@@ -1,7 +1,7 @@
 package com.vmedia.feature.feed.presentation
 
 import com.vmedia.core.common.mvi.MviViewModel
-import com.vmedia.feature.feed.domain.FeedInteractor
+import com.vmedia.core.domain.repository.EventRepository
 import com.vmedia.feature.feed.presentation.mvi.FeedAction
 import com.vmedia.feature.feed.presentation.mvi.FeedAction.*
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
@@ -9,7 +9,7 @@ import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
 import com.vmedia.feature.feed.presentation.mvi.FeedState
 
 internal class FeedViewModel(
-    private val interactor: FeedInteractor
+    private val repository: EventRepository
 ) : MviViewModel<FeedIntent, FeedAction, FeedState, Nothing>(
     initialState = FeedState()
 ) {
@@ -18,7 +18,7 @@ internal class FeedViewModel(
         state: FeedState,
         intent: FeedIntent
     ) = when (intent) {
-        ObserveEvents -> interactor.getEvents()
+        ObserveEvents -> repository.getEvents()
             .asFlowSource(ObserveEvents::class)
             .map<FeedAction>(::EventsLoadingSucceed)
             .startWith(EventsLoadingStarted)

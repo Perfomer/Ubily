@@ -2,6 +2,8 @@ package com.vmedia.core.data
 
 import android.content.Context
 import androidx.room.RoomDatabase
+import com.vmedia.core.common.util.ObservableListMapper
+import com.vmedia.core.common.util.ObservableMapper
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.datasource.PublisherDataSource
@@ -11,6 +13,12 @@ import com.vmedia.core.data.datasource.impl.DatabaseDataSourceImpl
 import com.vmedia.core.data.datasource.impl.PublisherDataSourceImpl
 import com.vmedia.core.data.datasource.impl.SettingsDataSourceImpl
 import com.vmedia.core.data.internal.database.UbilyDatabase
+import com.vmedia.core.data.internal.database.entity.Event
+import com.vmedia.core.data.obj.EventInfo
+import com.vmedia.core.data.repository.event.EventCacheDatabaseDataSource
+import com.vmedia.core.data.repository.event.EventRepositoryImpl
+import com.vmedia.core.data.repository.event.mapper.*
+import com.vmedia.core.domain.repository.EventRepository
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.definition.BeanDefinition
@@ -24,6 +32,16 @@ val dataModules by lazy {
         databaseModule
     )
 }
+
+internal typealias _EventMapper = ObservableListMapper<Event, EventInfo<*>>
+internal typealias _SaleMapper = _EventInfoMapper<EventInfo.EventListInfo.EventSale>
+internal typealias _DownloadMapper = _EventInfoMapper<EventInfo.EventListInfo.EventFreeDownload>
+internal typealias _AssetMapper = _EventInfoMapper<EventInfo.EventListInfo.EventAsset>
+internal typealias _ReviewMapper = _EventInfoMapper<EventInfo.EventReview>
+internal typealias _RevenueMapper = _EventInfoMapper<EventInfo.EventRevenue>
+internal typealias _PayoutMapper = _EventInfoMapper<EventInfo.EventPayout>
+
+private typealias _EventInfoMapper<T> = ObservableMapper<Event, T>
 
 private const val BEAN_PREF_CREDENTIALS = "PREF_CREDENTIALS"
 private const val BEAN_PREF_SETTINGS = "PREF_SETTINGS"
@@ -79,7 +97,7 @@ private val databaseModule = module {
         )
     }
 
-    single<RoomDatabase> { get<UbilyDatabase>()}
+    single<RoomDatabase> { get<UbilyDatabase>() }
 
     single {
         UbilyDatabase.getInstance(
@@ -102,6 +120,33 @@ private val databaseModule = module {
     dao { getReviewDao() }
     dao { getRevenueDao() }
     dao { getPayoutDao() }
+
+    single { EventCacheDatabaseDataSource(get()) }
+
+    single<EventRepository> {
+        EventRepositoryImpl(
+            source = get(),
+            eventMapper = get<EventMapper>()
+        )
+    }
+
+    single {
+        EventMapper(
+            saleMapper = get<SaleMapper>(),
+            downloadMapper = get<DownloadMapper>(),
+            assetMapper = get<AssetMapper>(),
+            reviewMapper = get<ReviewMapper>(),
+            revenueMapper = get<RevenueMapper>(),
+            payoutMapper = get<PayoutMapper>()
+        )
+    }
+
+    single { AssetMapper(get()) }
+    single { DownloadMapper(get()) }
+    single { PayoutMapper(get()) }
+    single { RevenueMapper(get()) }
+    single { ReviewMapper(get()) }
+    single { SaleMapper(get()) }
 }
 
 private inline fun <reified T : Any> Module.dao(

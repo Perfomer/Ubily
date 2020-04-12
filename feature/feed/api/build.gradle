@@ -4,7 +4,5 @@ apply plugin: 'kotlin-android-extensions'
 apply from: "../../../android_commons.gradle"
 
 dependencies {
-    implementation project(":feature:feed:data")
-    implementation project(":feature:feed:domain")
     implementation project(":feature:feed:presentation")
 }
