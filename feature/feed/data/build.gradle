@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "../../android_commons.gradle"
+apply from: "../../../android_commons.gradle"
 
 dependencies {
-    api "ru.terrakok.cicerone:cicerone:5.0.0"
-
     implementation project(':core-common')
     implementation project(':core-data')
+    implementation project(':core-network')
+    implementation project(":feature:feed:domain")
 }

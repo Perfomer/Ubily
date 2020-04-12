@@ -22,4 +22,7 @@ include ':feature:splash:data'
 include ':feature:splash:domain'
 include ':feature:splash:presentation'
 
-include ':feature-feed'
+include ':feature:feed:api'
+include ':feature:feed:data'
+include ':feature:feed:domain'
+include ':feature:feed:presentation'
