@@ -6,8 +6,9 @@ import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import com.example.feature.feed.R
 import com.example.feature.feed.presentation.recycler.FeedViewHolder
+import com.google.android.material.card.MaterialCardView
 import com.vmedia.core.common.util.children
-import com.vmedia.core.common.util.getDrawableCompat
+import com.vmedia.core.common.util.getColorCompat
 import com.vmedia.core.common.util.onEachIndexed
 import com.vmedia.core.data.obj.EventInfo.EventListInfo
 import kotlinx.android.extensions.LayoutContainer
@@ -30,9 +31,8 @@ internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Conte
 
     init {
         for (i in assetViewHolders.indices step 2) {
-            assetViewHolders[i].containerView.background = context.getDrawableCompat(
-                R.drawable.bg_event_item
-            )
+            val cardView = assetViewHolders[i].containerView as MaterialCardView
+            cardView.setCardBackgroundColor(context.getColorCompat(R.color.brand_grey_lightest))
         }
     }
 

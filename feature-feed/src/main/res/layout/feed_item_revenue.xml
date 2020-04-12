@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feed_item_revenue"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="@android:color/white"
-    tools:ignore="ContentDescription"
-    tools:padding="24dp">
+    app:cardBackgroundColor="@color/brand_grey_lightest"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:rippleColor="@color/brand_green"
+    tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/feed_item_revenue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_event_item"
-        android:foreground="?selectableItemBackgroundBorderless"
         android:padding="16dp">
 
         <ImageView
@@ -65,4 +65,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</com.google.android.material.card.MaterialCardView>
