@@ -1,12 +1,13 @@
 package com.vmedia.core.sync.cache
 
 import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.util.CacheHolder
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import java.math.BigDecimal
 
 internal class CachedDatabaseDataSourceDecorator(
     private val source: DatabaseDataSource
-) : CachedDataSource(), DatabaseDataSource by source {
+) : CacheHolder(), DatabaseDataSource by source {
 
     private val lastPayoutCache by cachedSingle(source.getLastPayout())
     private val lastRevenueCache by cachedSingle(source.getLastRevenue())

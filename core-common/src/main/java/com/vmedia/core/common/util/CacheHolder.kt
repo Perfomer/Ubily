@@ -1,4 +1,4 @@
-package com.vmedia.core.sync.cache
+package com.vmedia.core.common.util
 
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
@@ -8,20 +8,28 @@ import kotlin.collections.set
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-internal abstract class CachedDataSource {
+abstract class CacheHolder {
 
     private val cacheDropper = CacheDropper()
 
     fun dropCache() = cacheDropper.dropCache()
 
-    internal fun <T> cachedSingle(query: Single<T>): ReadOnlyProperty<Any, Single<T>> {
+    protected fun <T> cachedSingle(
+        query: Single<T>
+    ): ReadOnlyProperty<Any, Single<T>> {
         return SingleCachedProperty(query).apply { cacheDropper.listen(this) }
     }
 
-    internal fun <K, V> cachedMapSingle(queryProvider: (K) -> Single<V>): MapSingleCachedProperty<K, V> {
+    protected fun <K, V> cachedMapSingle(
+        queryProvider: (K) -> Single<V>
+    ): ReadOnlyProperty<Any, SingleValueHolder<K, V>> {
         return MapSingleCachedProperty(queryProvider).apply { cacheDropper.listen(this) }
     }
 
+}
+
+interface SingleValueHolder<K, V> {
+    operator fun get(key: K): Single<V>
 }
 
 /**
@@ -84,7 +92,7 @@ private class SingleCachedProperty<T>(
 
 private class CachedSingleValue<T>(
     private val source: Single<T>
-): Closeable {
+) : Closeable {
 
     private var subject: Subject<T> = BehaviorSubject.create()
     private var isQueried = false
@@ -124,8 +132,4 @@ private class CacheDropper {
         listeners.forEach(Closeable::close)
     }
 
-}
-
-private interface SingleValueHolder<K, V> {
-    operator fun get(key: K): Single<V>
 }

@@ -1,10 +1,11 @@
 package com.vmedia.core.sync.cache
 
+import com.vmedia.core.common.util.CacheHolder
 import com.vmedia.core.network.datasource.NetworkDataSource
 
 internal class CachedNetworkDataSourceDecorator(
     private val source: NetworkDataSource
-) : CachedDataSource(), NetworkDataSource by source {
+) : CacheHolder(), NetworkDataSource by source {
 
     private val publisherIdCache by cachedSingle(source.getPublisherId())
     private val publisherCache by cachedSingle(source.getPublisherInfo())
