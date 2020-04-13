@@ -15,7 +15,7 @@ internal class AssetViewHolder(
 ) : EventDetailsViewHolder<List<AssetInfo>>(
     EventType.ASSET,
     context,
-    R.layout.eventdetails_item_asset
+    R.layout.eventdetails_item_assets
 ) {
 
     private val adapter = AssetsAdapter(onAssetClick)
