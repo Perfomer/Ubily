@@ -7,9 +7,7 @@ import com.perfomer.blitz.setTimeAgo
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.iconResource
 import com.vmedia.core.common.obj.titleResource
-import com.vmedia.core.common.util.argument
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.setEventDescription
+import com.vmedia.core.common.util.*
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent.LoadEventDetails
@@ -40,6 +38,8 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
 
         general_toolbar.attachToActivity()
         general_toolbar.title = getString(R.string.eventdetails_title, eventId)
+        general_appbar.addSystemTopPadding()
+        eventdetails_scrollroot.addSystemBottomPadding()
 
         adapter = EventDetailsAdapter(
             parent = eventdetails_content,
