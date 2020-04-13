@@ -6,17 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorBackground">@android:color/white</item>
+
+        <item name="android:textColorPrimary">@color/brand_black</item>
+        <item name="android:textColorSecondary">@color/brand_grey_dark</item>
 
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Ubily.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Ubily.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Ubily.LargeComponent</item>
 
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
 
-        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:windowBackground">@android:color/white</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="AppTheme.Splash">
+<!--        <item name="android:windowBackground">@drawable/splash_background</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>
