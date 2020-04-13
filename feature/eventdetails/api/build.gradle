@@ -1,0 +1,9 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: "../../../android_commons.gradle"
+
+dependencies {
+    implementation project(":feature:eventdetails:domain")
+    implementation project(":feature:eventdetails:presentation")
+}

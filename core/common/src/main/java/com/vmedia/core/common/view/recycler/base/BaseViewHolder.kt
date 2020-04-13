@@ -21,8 +21,13 @@ abstract class BaseViewHolder(
 
     protected fun getString(@StringRes id: Int): String = resources.getString(id)
 
+    @Deprecated("Use another method BaseViewHolder#invokeWithPosition")
     protected fun <T> ((T) -> Unit).safeInvoke(item: T) {
         if (hasPosition) invoke(item)
+    }
+
+    protected fun ((Int) -> Unit).invokeWithPosition() {
+        if (hasPosition) invoke(adapterPosition)
     }
 
 }

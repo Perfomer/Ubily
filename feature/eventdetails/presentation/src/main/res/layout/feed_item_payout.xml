@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_event_item"
+    android:orientation="horizontal"
+    android:padding="24dp"
+    tools:ignore="ContentDescription">
+
+    <TextView
+        android:id="@+id/feed_item_payout_auto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/rubik_medium"
+        android:maxLines="1"
+        android:textColor="@color/brand_black"
+        app:layout_constraintEnd_toStartOf="@id/feed_item_payout_paypal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Auto payout: yes" />
+
+    <TextView
+        android:id="@+id/feed_item_payout_failed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="@color/brand_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feed_item_payout_auto"
+        android:layout_marginTop="16dp"
+        tools:text="Payout failed: yes" />
+
+    <ImageView
+        android:id="@+id/feed_item_payout_paypal"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="8dp"
+        android:background="@drawable/bg_event_item"
+        android:backgroundTint="@android:color/white"
+        android:src="@drawable/ic_paypal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

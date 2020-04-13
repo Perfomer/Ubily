@@ -39,7 +39,27 @@ abstract class ListMapper<FROM, TO> : Mapper<List<FROM>, List<TO>> {
 }
 
 interface ObservableMapper<FROM, TO> : Mapper<FROM, Observable<TO>>
-interface ObservableListMapper<FROM, TO> : Mapper<List<FROM>, Observable<List<TO>>>
+
+abstract class ObservableListMapper<FROM, TO> : Mapper<List<FROM>, Observable<List<TO>>> {
+
+    override fun map(from: List<FROM>): Observable<List<TO>> {
+        return Observable.defer {
+            Observable.fromIterable(from)
+                .flatMap(::mapItem)
+                .toList()
+                .toObservable()
+        }
+    }
+
+    abstract fun mapItem(from: FROM): Observable<TO>
+
+}
+
+fun <FROM, TO> ObservableMapper<FROM, TO>.toListMapper(): ObservableListMapper<FROM, TO> {
+    return object : ObservableListMapper<FROM, TO>() {
+        override fun mapItem(from: FROM) = this@toListMapper.map(from)
+    }
+}
 
 /**
  * Automatically turns simple mapper to list mapper
