@@ -2,13 +2,13 @@ package com.vmedia.core.data.repository.event.mapper
 
 import androidx.annotation.WorkerThread
 import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.obj.event.EventInfo.EventPayout
+import com.vmedia.core.common.obj.event.PayoutInfo
 import com.vmedia.core.common.util.ObservableMapper
 import com.vmedia.core.common.util.zipWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Payout
-import com.vmedia.core.data.obj.EventInfo.EventPayout
-import com.vmedia.core.data.obj.PayoutInfo
 import io.reactivex.Observable
 
 internal class PayoutMapper(

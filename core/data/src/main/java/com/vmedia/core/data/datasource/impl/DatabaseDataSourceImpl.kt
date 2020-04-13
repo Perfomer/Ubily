@@ -105,6 +105,10 @@ internal class DatabaseDataSourceImpl(
         return eventDao.getEvents()
     }
 
+    override fun getEvent(id: Long): Observable<Event> {
+        return eventDao.getEvent(id)
+    }
+
     override fun hasEvents(): Single<Boolean> {
         return eventDao.getEventsCount().map { it > 0 }
     }

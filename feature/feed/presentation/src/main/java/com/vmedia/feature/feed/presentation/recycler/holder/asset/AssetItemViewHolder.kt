@@ -1,16 +1,13 @@
 package com.vmedia.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
-import com.vmedia.core.common.obj.descriptionResource
+import com.vmedia.core.common.obj.event.AssetInfo
+import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventAsset
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadRoundedCorners
-import com.vmedia.core.common.util.toSpan
-import com.vmedia.core.data.obj.AssetInfo
-import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventAsset
+import com.vmedia.core.common.util.loadImageWithRoundedCorners
 import com.vmedia.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.ItemViewHolder
-import kotlinx.android.synthetic.main.feed_item.*
 import kotlinx.android.synthetic.main.feed_item_asset_item.*
 
 internal class AssetViewHolder(
@@ -25,15 +22,6 @@ internal class AssetViewHolder(
     onAssetClick
 ) {
 
-    override fun bindContent(item: EventAsset) {
-        super.bindContent(item)
-
-        feed_item_description.text = context.getString(
-            item.type.descriptionResource,
-            item.content.size
-        ).toSpan()
-    }
-
     override fun onItemViewHolderCreate(view: View) = AssetItemViewHolder(view)
 
 }
@@ -46,7 +34,7 @@ internal class AssetItemViewHolder(
         feed_item_asset_title.diffedValue = content.name
         feed_item_asset_version.diffedValue = content.version
         feed_item_asset_status.diffedValue = getString(content.status.labelResource)
-        feed_item_asset_icon.loadRoundedCorners(content.icon)
+        feed_item_asset_icon.loadImageWithRoundedCorners(content.icon)
     }
 
 }

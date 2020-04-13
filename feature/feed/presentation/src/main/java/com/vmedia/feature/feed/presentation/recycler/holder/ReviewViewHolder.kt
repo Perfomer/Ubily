@@ -2,13 +2,11 @@ package com.vmedia.feature.feed.presentation.recycler.holder
 
 import android.view.View
 import androidx.core.view.isVisible
+import com.vmedia.core.common.obj.event.EventInfo.EventReview
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadRoundedCorners
-import com.vmedia.core.common.util.toSpan
-import com.vmedia.core.data.obj.EventInfo.EventReview
+import com.vmedia.core.common.util.loadImageWithRoundedCorners
 import com.vmedia.feature.feed.presentation.R
 import com.vmedia.feature.feed.presentation.recycler.FeedViewHolder
-import kotlinx.android.synthetic.main.feed_item.*
 import kotlinx.android.synthetic.main.feed_item_review.*
 
 internal class ReviewViewHolder(
@@ -26,11 +24,6 @@ internal class ReviewViewHolder(
         val review = item.content
         val hasReply = review.publisherReplyBody != null
 
-        feed_item_description.text = context.getString(
-            R.string.event_review_text,
-            review.authorName
-        ).toSpan()
-
         feed_item_review_rating.rating = review.rating.toFloat()
         feed_item_review_title.diffedValue = review.reviewTitle
         feed_item_review_body.diffedValue = review.reviewBody
@@ -44,7 +37,7 @@ internal class ReviewViewHolder(
             feed_item_review_reply_body.diffedValue = review.publisherReplyBody!!
         }
 
-        feed_item_review_asset_icon.loadRoundedCorners(
+        feed_item_review_asset_icon.loadImageWithRoundedCorners(
             imageUrl = review.assetIcon,
             cornerRadius = R.dimen.asset_icon_corners_radius_small
         )

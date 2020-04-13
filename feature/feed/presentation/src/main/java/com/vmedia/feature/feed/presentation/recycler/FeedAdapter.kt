@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.EventType.*
-import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.*
+import com.vmedia.core.common.obj.event.EventInfo.EventRevenue
+import com.vmedia.core.common.obj.event.EventInfo.EventReview
 import com.vmedia.core.common.util.inflate
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.core.common.view.recycler.diffedListBy
-import com.vmedia.core.data.obj.EventInfo
-import com.vmedia.core.data.obj.EventInfo.EventListInfo.*
-import com.vmedia.core.data.obj.EventInfo.EventRevenue
-import com.vmedia.core.data.obj.EventInfo.EventReview
 import com.vmedia.feature.feed.presentation.R
 import com.vmedia.feature.feed.presentation.recycler.holder.PayoutViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.RevenueViewHolder
@@ -23,10 +22,10 @@ import com.vmedia.feature.feed.presentation.recycler.holder.asset.SaleViewHolder
 import kotlinx.android.synthetic.main.feed_item.view.*
 
 internal class FeedAdapter(
-    private val onItemClick: (item: EventInfo<*>) -> Unit,
+    private val onItemClick: (eventId: Long) -> Unit,
     private val onOptionsClick: (item: EventInfo<*>) -> Unit,
     private val onAssetClick: (assetId: Long) -> Unit,
-    private val onRevenueClick: (periodRevenue: Period) -> Unit
+    private val onRevenueClick: (periodRevenueId: Long) -> Unit
 ) : BaseAdapter<FeedViewHolder<out EventInfo<*>>>() {
 
     var items by diffedListBy(EventInfo<*>::id)
@@ -44,9 +43,7 @@ internal class FeedAdapter(
         val eventType = types[viewType]
         val viewGroup = view as ViewGroup
 
-        onContentLayoutRequested(eventType)?.let {
-            viewGroup.attachViewHolderContent(it)
-        }
+        viewGroup.attachViewHolderContent(onContentLayoutRequested(eventType))
 
         return when (eventType) {
             SALE -> SaleViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
@@ -64,7 +61,7 @@ internal class FeedAdapter(
     }
 
 
-    private fun onContentLayoutRequested(eventType: EventType): Int? {
+    private fun onContentLayoutRequested(eventType: EventType): Int {
         return when (eventType) {
             SALE -> R.layout.feed_item_sale
             FREE_DOWNLOAD -> R.layout.feed_item_sale
@@ -78,7 +75,7 @@ internal class FeedAdapter(
 
 
     private fun onClick(position: Int) {
-        onItemClick.invoke(items[position])
+        onItemClick.invoke(items[position].id)
     }
 
     private fun onOptionsClick(position: Int) {
@@ -103,7 +100,7 @@ internal class FeedAdapter(
 
     private fun onRevenueClick(position: Int) {
         val revenueItem = items[position] as EventRevenue
-        onRevenueClick.invoke(revenueItem.content.period)
+        onRevenueClick.invoke(revenueItem.content.periodId)
     }
 
 

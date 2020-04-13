@@ -6,7 +6,7 @@ import coil.api.load
 import coil.transform.RoundedCornersTransformation
 import com.vmedia.core.common.R
 
-fun ImageView.loadRoundedCorners(
+fun ImageView.loadImageWithRoundedCorners(
     imageUrl: String?,
     crossfade: Boolean = true,
     @DimenRes cornerRadius: Int = R.dimen.asset_icon_corners_radius

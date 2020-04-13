@@ -1,16 +1,12 @@
 package com.vmedia.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
-import com.vmedia.core.common.obj.descriptionResource
+import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.obj.event.SaleInfo
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadRoundedCorners
-import com.vmedia.core.common.util.sumByBigDecimal
-import com.vmedia.core.common.util.toSpan
-import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.data.obj.SaleInfo
+import com.vmedia.core.common.util.loadImageWithRoundedCorners
 import com.vmedia.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.ItemViewHolder
-import kotlinx.android.synthetic.main.feed_item.*
 import kotlinx.android.synthetic.main.feed_item_sale_item.*
 
 internal class SaleViewHolder(
@@ -25,20 +21,7 @@ internal class SaleViewHolder(
     onAssetClick
 ) {
 
-    override fun bindContent(item: EventSale) {
-        super.bindContent(item)
-
-        feed_item_description.text = context.getString(
-            item.type.descriptionResource,
-            item.content.size,
-            item.content.sumByBigDecimal(SaleInfo::summaryPrice).toString()
-        ).toSpan()
-    }
-
-    override fun onItemViewHolderCreate(view: View) =
-        SaleItemViewHolder(
-            view
-        )
+    override fun onItemViewHolderCreate(view: View) = SaleItemViewHolder(view)
 
 }
 
@@ -50,7 +33,7 @@ internal class SaleItemViewHolder(
         feed_item_sale_price.diffedValue = "$${content.summaryPrice}"
         feed_item_sale_quantity.diffedValue = "x${content.quantity}"
         feed_item_sale_title.diffedValue = content.assetName
-        feed_item_sale_icon.loadRoundedCorners(content.assetIcon)
+        feed_item_sale_icon.loadImageWithRoundedCorners(content.assetIcon)
     }
 
 }

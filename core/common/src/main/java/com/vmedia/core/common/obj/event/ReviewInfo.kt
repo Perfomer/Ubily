@@ -1,4 +1,4 @@
-package com.vmedia.core.data.obj
+package com.vmedia.core.common.obj.event
 
 import android.os.Parcelable
 import androidx.annotation.IntRange

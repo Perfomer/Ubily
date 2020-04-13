@@ -2,8 +2,10 @@ package com.vmedia.core.data
 
 import android.content.Context
 import androidx.room.RoomDatabase
+import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.core.common.util.ObservableListMapper
 import com.vmedia.core.common.util.ObservableMapper
+import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.datasource.PublisherDataSource
@@ -14,7 +16,6 @@ import com.vmedia.core.data.datasource.impl.PublisherDataSourceImpl
 import com.vmedia.core.data.datasource.impl.SettingsDataSourceImpl
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.obj.EventInfo
 import com.vmedia.core.data.repository.event.EventCacheDatabaseDataSource
 import com.vmedia.core.data.repository.event.EventRepositoryImpl
 import com.vmedia.core.data.repository.event.mapper.*
@@ -33,7 +34,8 @@ val dataModules by lazy {
     )
 }
 
-internal typealias _EventMapper = ObservableListMapper<Event, EventInfo<*>>
+internal typealias _EventListMapper = ObservableListMapper<Event, EventInfo<*>>
+internal typealias _EventMapper = ObservableMapper<Event, EventInfo<*>>
 internal typealias _SaleMapper = _EventInfoMapper<EventInfo.EventListInfo.EventSale>
 internal typealias _DownloadMapper = _EventInfoMapper<EventInfo.EventListInfo.EventFreeDownload>
 internal typealias _AssetMapper = _EventInfoMapper<EventInfo.EventListInfo.EventAsset>
@@ -126,6 +128,7 @@ private val databaseModule = module {
     single<EventRepository> {
         EventRepositoryImpl(
             source = get(),
+            eventListMapper = get<EventMapper>().toListMapper(),
             eventMapper = get<EventMapper>()
         )
     }

@@ -7,15 +7,16 @@ import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.EventType.*
 import com.vmedia.core.common.obj.Month.APRIL
 import com.vmedia.core.common.obj.Month.JANUARY
+import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.obj.event.EventInfo.*
+import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.obj.event.PayoutInfo
+import com.vmedia.core.common.obj.event.RevenueInfo
+import com.vmedia.core.common.obj.event.ReviewInfo
 import com.vmedia.core.common.obj.of
+import com.vmedia.core.common.util.toListMapper
 import com.vmedia.core.data.*
 import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.obj.EventInfo
-import com.vmedia.core.data.obj.EventInfo.*
-import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.data.obj.PayoutInfo
-import com.vmedia.core.data.obj.RevenueInfo
-import com.vmedia.core.data.obj.ReviewInfo
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
 import org.junit.Test
@@ -23,7 +24,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class EventMapperTest {
+class EventListMapperTest {
 
     private val saleMapper: _SaleMapper = mock() {
         on { map(any()) } doReturn Observable.just(EventSale(id = 1))
@@ -50,7 +51,7 @@ class EventMapperTest {
     private val downloadMapper: _DownloadMapper = mock()
     private val assetMapper: _AssetMapper = mock()
 
-    private val eventMapper: EventMapper
+    private val eventListMapper: _EventListMapper
         get() = EventMapper(
             saleMapper = saleMapper,
             downloadMapper = downloadMapper,
@@ -58,7 +59,7 @@ class EventMapperTest {
             reviewMapper = reviewMapper,
             revenueMapper = revenueMapper,
             payoutMapper = payoutMapper
-        )
+        ).toListMapper()
 
     @Test
     fun map_empty() {
@@ -66,7 +67,7 @@ class EventMapperTest {
         val items = emptyList<Event>()
 
         // When
-        val mapping = eventMapper.map(items)
+        val mapping = eventListMapper.map(items)
 
         // Then
         mapping.test()
@@ -91,7 +92,7 @@ class EventMapperTest {
             MOCKY_EVENTS
 
         // When
-        val mapping = eventMapper.map(items)
+        val mapping = eventListMapper.map(items)
 
         // Then
         mapping.test()
@@ -114,9 +115,12 @@ class EventMapperTest {
             Event(id = 5, type = REVENUE)
         )
 
-        private val MOCKY_REVIEW = ReviewInfo(assetId = 10)
-        private val MOCKY_PAYOUT = PayoutInfo(period = APRIL of 2020)
-        private val MOCKY_REVENUE = RevenueInfo(period = JANUARY of 2020)
+        private val MOCKY_REVIEW =
+            ReviewInfo(assetId = 10)
+        private val MOCKY_PAYOUT =
+            PayoutInfo(period = APRIL of 2020)
+        private val MOCKY_REVENUE =
+            RevenueInfo(period = JANUARY of 2020)
 
     }
 

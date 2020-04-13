@@ -1,6 +1,8 @@
 package com.vmedia.core.data.repository.event.mapper
 
 import androidx.annotation.WorkerThread
+import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.obj.event.SaleInfo
 import com.vmedia.core.common.util.ObservableMapper
 import com.vmedia.core.common.util.associateWith
 import com.vmedia.core.common.util.sumByBigDecimal
@@ -8,8 +10,6 @@ import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Sale
-import com.vmedia.core.data.obj.EventInfo
-import com.vmedia.core.data.obj.SaleInfo
 import io.reactivex.Observable
 
 internal abstract class ProvisionMapper<T : EventInfo<*>>(

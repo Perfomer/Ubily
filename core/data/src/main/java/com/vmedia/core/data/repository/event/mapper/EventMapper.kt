@@ -1,10 +1,10 @@
 package com.vmedia.core.data.repository.event.mapper
 
 import com.vmedia.core.common.obj.EventType.*
-import com.vmedia.core.common.util.ObservableListMapper
+import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.util.ObservableMapper
 import com.vmedia.core.data.*
 import com.vmedia.core.data.internal.database.entity.Event
-import com.vmedia.core.data.obj.EventInfo
 import io.reactivex.Observable
 
 internal class EventMapper(
@@ -14,20 +14,11 @@ internal class EventMapper(
     private val reviewMapper: _ReviewMapper,
     private val revenueMapper: _RevenueMapper,
     private val payoutMapper: _PayoutMapper
-) : ObservableListMapper<Event, EventInfo<*>> {
-
-    override fun map(from: List<Event>): Observable<List<EventInfo<*>>> {
-        return Observable.defer {
-            Observable.fromIterable(from)
-                .flatMap(::map)
-                .toList()
-                .toObservable()
-        }
-    }
+) : ObservableMapper<Event, EventInfo<*>> {
 
     @Suppress("UNCHECKED_CAST")
-    private fun map(event: Event): Observable<EventInfo<*>> {
-        val mapper = when (event.type) {
+    override fun map(from: Event): Observable<EventInfo<*>> {
+        val mapper = when (from.type) {
             SALE -> saleMapper
             FREE_DOWNLOAD -> downloadMapper
             REVIEW -> reviewMapper
@@ -38,7 +29,7 @@ internal class EventMapper(
             INITIALIZATION -> TODO()
         }
 
-        return mapper.map(event) as Observable<EventInfo<*>>
+        return mapper.map(from) as Observable<EventInfo<*>>
     }
 
 }

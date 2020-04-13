@@ -1,7 +1,7 @@
 package com.vmedia.feature.feed.presentation.mvi
 
 import android.os.Parcelable
-import com.vmedia.core.data.obj.EventInfo
+import com.vmedia.core.common.obj.event.EventInfo
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

@@ -5,13 +5,13 @@ import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.vmedia.core.common.obj.EventType
+import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.obj.event.SaleInfo
 import com.vmedia.core.common.util.sumByBigDecimal
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Sale
-import com.vmedia.core.data.obj.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.data.obj.SaleInfo
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith

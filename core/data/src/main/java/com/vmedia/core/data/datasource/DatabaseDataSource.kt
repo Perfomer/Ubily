@@ -45,6 +45,8 @@ interface DatabaseDataSource {
 
     fun getEvents(): Observable<List<Event>>
 
+    fun getEvent(id: Long): Observable<Event>
+
     fun hasEvents(): Single<Boolean>
 
 

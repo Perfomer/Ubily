@@ -1,4 +1,4 @@
-package com.vmedia.core.data.obj
+package com.vmedia.core.common.obj.event
 
 import android.os.Parcelable
 import com.vmedia.core.common.obj.EventType
@@ -13,6 +13,9 @@ sealed class EventInfo<Content>(
     open val content: Content,
     open val type: EventType
 ) : Parcelable {
+
+    @Parcelize
+    object StubEventInfo: EventInfo<Int>(0, EMPTY_DATE, 0, EventType.INITIALIZATION)
 
     sealed class EventListInfo<Content>(
         override val id: Long,

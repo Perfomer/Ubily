@@ -32,8 +32,10 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_FEED))
     }
 
-    class EventDetails(val eventId: Long) : ScreenDestination() {
-        override fun getFragment() = TODO()
+    class EventDetails(private val eventId: Long) : ScreenDestination() {
+        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_EVENTDETAILS)) {
+            parametersOf(eventId)
+        }
     }
 
 }
