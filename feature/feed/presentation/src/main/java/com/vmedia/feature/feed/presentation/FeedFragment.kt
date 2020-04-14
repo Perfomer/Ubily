@@ -6,6 +6,8 @@ import androidx.core.view.isVisible
 import androidx.room.RoomDatabase
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.util.addSystemBottomPadding
+import com.vmedia.core.common.util.addSystemTopPadding
 import com.vmedia.core.common.util.init
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
@@ -41,6 +43,9 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         feed_recycler.init(adapter)
+
+        general_appbar.addSystemTopPadding()
+        feed_recycler.addSystemBottomPadding()
     }
 
     override fun onDestroyView() {

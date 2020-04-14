@@ -38,6 +38,7 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
 
         general_toolbar.attachToActivity()
         general_toolbar.title = getString(R.string.eventdetails_title, eventId)
+
         general_appbar.addSystemTopPadding()
         eventdetails_scrollroot.addSystemBottomPadding()
 
