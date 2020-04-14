@@ -27,48 +27,20 @@ abstract class BaseActivity(
 
     private val navigatorHolder by inject<NavigatorHolder>()
 
-    private val navigator by inject<SupportAppNavigator> { parametersOf(this, frameLayoutResource) }
+    private val navigator by inject<SupportAppNavigator> {
+        parametersOf(this, frameLayoutResource)
+    }
 
     private val router by inject<Router>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.apply {
-                decorView.systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                            View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    decorView.systemUiVisibility = decorView.systemUiVisibility or
-                            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
-
-                statusBarColor = ContextCompat.getColor(context, R.color.black_20)
-                navigationBarColor = ContextCompat.getColor(context, R.color.white_50)
-            }
-        }
-
+        applyActivityWindowInsets()
         super.onCreate(savedInstanceState)
         setContentView(screenLayoutResource)
 
         val frameLayout = findViewById<FrameLayout>(frameLayoutResource)
-        frameLayout.doOnApplyWindowInsets { view, insets, initialPadding ->
-            view.updatePadding(
-                left = initialPadding.left + insets.systemWindowInsetLeft,
-                right = initialPadding.right + insets.systemWindowInsetRight
-            )
-
-            insets.replaceSystemWindowInsets(
-                Rect(
-                    0,
-                    insets.systemWindowInsetTop,
-                    0,
-                    insets.systemWindowInsetBottom
-                )
-            )
-        }
-
+        frameLayout.applyWindowInsets()
 
         if (savedInstanceState == null) {
             router.newRootScreen(startScreen)
@@ -89,5 +61,43 @@ abstract class BaseActivity(
 
 
     protected fun navigateTo(screen: ScreenDestination) = router.navigateTo(screen)
+
+    private fun applyActivityWindowInsets() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return
+        }
+
+        window.apply {
+            decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                decorView.systemUiVisibility = decorView.systemUiVisibility or
+                        View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            }
+
+            statusBarColor = ContextCompat.getColor(context, R.color.black_20)
+            navigationBarColor = ContextCompat.getColor(context, R.color.white_50)
+        }
+    }
+
+    private fun FrameLayout.applyWindowInsets() {
+        doOnApplyWindowInsets { view, insets, initialPadding ->
+            view.updatePadding(
+                left = initialPadding.left + insets.systemWindowInsetLeft,
+                right = initialPadding.right + insets.systemWindowInsetRight
+            )
+
+            insets.replaceSystemWindowInsets(
+                Rect(
+                    0,
+                    insets.systemWindowInsetTop,
+                    0,
+                    insets.systemWindowInsetBottom
+                )
+            )
+        }
+    }
 
 }
