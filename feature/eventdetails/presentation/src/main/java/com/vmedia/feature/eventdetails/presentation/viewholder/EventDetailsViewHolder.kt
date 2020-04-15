@@ -14,13 +14,16 @@ internal abstract class EventDetailsViewHolder<T : Any>(
     @LayoutRes private val contentLayoutResource: Int
 ) : LayoutContainer {
 
+    protected var currentItem: T? = null
+
     override val containerView: View by lazy {
         context.inflate(contentLayoutResource)
     }
 
     @Suppress("UNCHECKED_CAST")
     fun bindEvent(event: EventInfo<*>) {
-        bind(event.content as T)
+        currentItem = event.content as? T
+        currentItem?.let(::bind)
     }
 
     protected abstract fun bind(item: T)
