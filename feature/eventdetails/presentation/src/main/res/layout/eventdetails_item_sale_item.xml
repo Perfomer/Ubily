@@ -18,7 +18,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/feed_item_sale_icon"
+            android:id="@+id/eventdetails_item_sale_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@color/weakestDark"
@@ -28,7 +28,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/feed_item_sale_title"
+            android:id="@+id/eventdetails_item_sale_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -39,20 +39,20 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/feed_item_asset_status"
-            app:layout_constraintStart_toEndOf="@id/feed_item_asset_icon"
+            app:layout_constraintEnd_toStartOf="@id/eventdetails_item_asset_status"
+            app:layout_constraintStart_toEndOf="@id/eventdetails_item_asset_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
 
         <TextView
-            android:id="@+id/feed_item_sale_quantity"
+            android:id="@+id/eventdetails_item_sale_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/brand_green_darker"
             tools:text="x2" />
 
         <TextView
-            android:id="@+id/feed_item_sale_price"
+            android:id="@+id/eventdetails_item_sale_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"

@@ -28,10 +28,10 @@ class AssetItemViewHolder(
         val card = containerView as MaterialCardView
         card.setCardBackgroundColor(backgroundColor)
 
-        feed_item_asset_title.diffedValue = item.name
-        feed_item_asset_version.diffedValue = item.version
-        feed_item_asset_status.diffedValue = getString(item.status.labelResource)
-        feed_item_asset_icon.loadImageWithRoundedCorners(item.icon)
+        eventdetails_item_asset_title.diffedValue = item.name
+        eventdetails_item_asset_version.diffedValue = item.version
+        eventdetails_item_asset_status.diffedValue = getString(item.status.labelResource)
+        eventdetails_item_asset_icon.loadImageWithRoundedCorners(item.icon)
     }
 
 }

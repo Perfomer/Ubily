@@ -6,7 +6,7 @@ import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.feature.eventdetails.presentation.R
 
 internal class AssetsAdapter(
-    private val onAssetClick: (AssetInfo) -> Unit
+    private val onAssetClick: (assetId: Long) -> Unit
 ) : BaseAdapter<AssetItemViewHolder>() {
 
     var items: List<AssetInfo> = emptyList()
@@ -28,6 +28,6 @@ internal class AssetsAdapter(
         holder.bind(items[position])
     }
 
-    private fun onClick(position: Int) = onAssetClick.invoke(items[position])
+    private fun onClick(position: Int) = onAssetClick.invoke(items[position].id)
 
 }

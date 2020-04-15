@@ -16,7 +16,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/feed_item_asset_icon"
+            android:id="@+id/eventdetails_item_asset_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@color/weakestDark"
@@ -26,7 +26,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/feed_item_asset_title"
+            android:id="@+id/eventdetails_item_asset_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -36,31 +36,31 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/feed_item_asset_status"
-            app:layout_constraintStart_toEndOf="@id/feed_item_asset_icon"
+            app:layout_constraintEnd_toStartOf="@id/eventdetails_item_asset_status"
+            app:layout_constraintStart_toEndOf="@id/eventdetails_item_asset_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
 
         <TextView
-            android:id="@+id/feed_item_asset_status"
+            android:id="@+id/eventdetails_item_asset_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:textColor="@color/brand_black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/feed_item_asset_version"
+            app:layout_constraintBottom_toTopOf="@id/eventdetails_item_asset_version"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/asset_status_published" />
 
         <TextView
-            android:id="@+id/feed_item_asset_version"
+            android:id="@+id/eventdetails_item_asset_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/brand_green_darker"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/feed_item_asset_status"
-            app:layout_constraintTop_toBottomOf="@id/feed_item_asset_status"
+            app:layout_constraintEnd_toEndOf="@id/eventdetails_item_asset_status"
+            app:layout_constraintTop_toBottomOf="@id/eventdetails_item_asset_status"
             tools:text="v1.01" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

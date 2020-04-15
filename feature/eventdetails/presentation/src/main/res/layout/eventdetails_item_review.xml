@@ -10,7 +10,7 @@
     tools:padding="24dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/feed_item_review_asset"
+        android:id="@+id/eventdetails_item_review_asset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/brand_grey_lightest"
@@ -27,14 +27,14 @@
             android:paddingVertical="8dp">
 
             <ImageView
-                android:id="@+id/feed_item_review_asset_icon"
+                android:id="@+id/eventdetails_item_review_asset_icon"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:background="@color/brand_grey"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/feed_item_review_asset_name"
+                android:id="@+id/eventdetails_item_review_asset_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -48,7 +48,7 @@
                 tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
 
             <TextView
-                android:id="@+id/feed_item_review_asset_rating"
+                android:id="@+id/eventdetails_item_review_asset_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLength="3"
@@ -68,50 +68,48 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/feed_item_review_title"
+            android:id="@+id/eventdetails_item_review_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:ellipsize="end"
             android:fontFamily="@font/rubik_bold"
-            android:maxLines="1"
             android:textColor="@color/brand_black"
+            android:textIsSelectable="true"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/feed_item_review_rating"
+            app:layout_constraintEnd_toStartOf="@+id/eventdetails_item_review_rating"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Impressive" />
 
         <me.zhanghai.android.materialratingbar.MaterialRatingBar
-            android:id="@+id/feed_item_review_rating"
+            android:id="@+id/eventdetails_item_review_rating"
             style="@style/Widget.MaterialRatingBar.RatingBar"
             android:layout_width="0dp"
             android:layout_height="16dp"
             android:progressTint="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="@+id/feed_item_review_title"
+            app:layout_constraintBottom_toBottomOf="@+id/eventdetails_item_review_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
             tools:rating="5" />
 
         <TextView
-            android:id="@+id/feed_item_review_body"
+            android:id="@+id/eventdetails_item_review_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="5"
             android:textColor="@color/brand_black"
+            android:textIsSelectable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feed_item_review_title"
+            app:layout_constraintTop_toBottomOf="@+id/eventdetails_item_review_title"
             tools:text="This asset made my game better. Really low weight and excellent quality. Thank you." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/feed_item_review_reply"
+        android:id="@+id/eventdetails_item_review_reply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -120,7 +118,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/feed_item_review_reply_title"
+            android:id="@+id/eventdetails_item_review_reply_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -132,17 +130,16 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/feed_item_review_reply_body"
+            android:id="@+id/eventdetails_item_review_reply_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:ellipsize="end"
-            android:maxLines="5"
             android:textColor="@color/brand_black"
+            android:textIsSelectable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feed_item_review_title"
+            app:layout_constraintTop_toBottomOf="@+id/eventdetails_item_review_title"
             tools:text="Thanks. Will be glad to continue our cooperation!" />
 
     </LinearLayout>

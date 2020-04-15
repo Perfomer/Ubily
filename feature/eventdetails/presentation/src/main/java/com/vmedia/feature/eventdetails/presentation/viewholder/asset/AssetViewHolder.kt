@@ -11,7 +11,7 @@ import com.vmedia.feature.eventdetails.presentation.viewholder.asset.recycler.As
 
 internal class AssetViewHolder(
     context: Context,
-    onAssetClick: (AssetInfo) -> Unit
+    onAssetClick: (assetId: Long) -> Unit
 ) : EventDetailsViewHolder<List<AssetInfo>>(
     EventType.ASSET,
     context,

@@ -3,10 +3,10 @@ package com.vmedia.feature.eventdetails.presentation
 import android.view.ViewGroup
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.EventType.*
-import com.vmedia.core.common.obj.event.AssetInfo
 import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.asset.AssetViewHolder
+import com.vmedia.feature.eventdetails.presentation.viewholder.review.ReviewViewHolder
 
 internal class EventDetailsAdapter(
     private val parent: ViewGroup,
@@ -31,7 +31,7 @@ internal class EventDetailsAdapter(
         return when (eventType) {
             SALE -> TODO()
             FREE_DOWNLOAD -> TODO()
-            REVIEW -> TODO()
+            REVIEW -> ReviewViewHolder(parent.context, ::onAssetClick)
             ASSET -> AssetViewHolder(parent.context, ::onAssetClick)
             PAYOUT -> TODO()
             REVENUE -> TODO()
@@ -39,8 +39,8 @@ internal class EventDetailsAdapter(
         }
     }
 
-    private fun onAssetClick(asset: AssetInfo) {
-        onAssetClick.invoke(asset.id)
+    private fun onAssetClick(assetId: Long) {
+        onAssetClick.invoke(assetId)
     }
 
 }
