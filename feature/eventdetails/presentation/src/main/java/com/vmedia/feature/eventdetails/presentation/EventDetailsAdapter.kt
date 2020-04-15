@@ -7,11 +7,13 @@ import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.asset.AssetViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.payout.PayoutViewHolder
+import com.vmedia.feature.eventdetails.presentation.viewholder.revenue.RevenueViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.review.ReviewViewHolder
 
 internal class EventDetailsAdapter(
     private val parent: ViewGroup,
-    private val onAssetClick: (assetId: Long) -> Unit
+    private val onAssetClick: (assetId: Long) -> Unit,
+    private val onRevenueClick: (periodId: Long) -> Unit
 ) {
 
     private var viewHolder: EventDetailsViewHolder<*>? = null
@@ -29,13 +31,15 @@ internal class EventDetailsAdapter(
     }
 
     private fun onViewHolderCreate(eventType: EventType): EventDetailsViewHolder<*>? {
+        val context = parent.context
+
         return when (eventType) {
             SALE -> TODO()
             FREE_DOWNLOAD -> TODO()
-            REVIEW -> ReviewViewHolder(parent.context, onAssetClick)
-            ASSET -> AssetViewHolder(parent.context, onAssetClick)
-            PAYOUT -> PayoutViewHolder(parent.context)
-            REVENUE -> TODO()
+            REVIEW -> ReviewViewHolder(context, onAssetClick)
+            ASSET -> AssetViewHolder(context, onAssetClick)
+            PAYOUT -> PayoutViewHolder(context)
+            REVENUE -> RevenueViewHolder(context, onRevenueClick)
             else -> null
         }
     }

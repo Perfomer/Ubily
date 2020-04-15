@@ -44,7 +44,8 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
 
         adapter = EventDetailsAdapter(
             parent = eventdetails_content,
-            onAssetClick = navigator::navigateToAsset
+            onAssetClick = navigator::navigateToAsset,
+            onRevenueClick = navigator::navigateToStatistics
         )
     }
 
