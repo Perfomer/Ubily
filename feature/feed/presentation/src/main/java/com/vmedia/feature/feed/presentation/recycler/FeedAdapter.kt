@@ -50,7 +50,7 @@ internal class FeedAdapter(
             FREE_DOWNLOAD -> DownloadViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
             REVIEW -> ReviewViewHolder(view, ::onClick, ::onOptionsClick, ::onReviewAssetClick)
             ASSET -> AssetViewHolder(view, ::onClick, ::onOptionsClick, ::onAssetClick)
-            PAYOUT -> PayoutViewHolder(view, ::onOptionsClick, ::onClick)
+            PAYOUT -> PayoutViewHolder(view, ::onClick, ::onOptionsClick)
             REVENUE -> RevenueViewHolder(view, ::onClick, ::onOptionsClick, ::onRevenueClick)
             else -> TODO()
         }
