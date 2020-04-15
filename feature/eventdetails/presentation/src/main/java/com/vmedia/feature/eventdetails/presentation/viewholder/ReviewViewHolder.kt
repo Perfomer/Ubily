@@ -1,4 +1,4 @@
-package com.vmedia.feature.eventdetails.presentation.viewholder.review
+package com.vmedia.feature.eventdetails.presentation.viewholder
 
 import android.content.Context
 import androidx.core.view.isVisible
@@ -7,7 +7,6 @@ import com.vmedia.core.common.obj.event.ReviewInfo
 import com.vmedia.core.common.util.diffedValue
 import com.vmedia.core.common.util.loadImageWithRoundedCorners
 import com.vmedia.feature.eventdetails.presentation.R
-import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import kotlinx.android.synthetic.main.eventdetails_item_review.*
 
 internal class ReviewViewHolder(

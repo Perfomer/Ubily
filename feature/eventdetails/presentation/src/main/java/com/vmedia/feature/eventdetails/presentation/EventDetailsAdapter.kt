@@ -4,11 +4,7 @@ import android.view.ViewGroup
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.EventType.*
 import com.vmedia.core.common.obj.event.EventInfo
-import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
-import com.vmedia.feature.eventdetails.presentation.viewholder.asset.AssetViewHolder
-import com.vmedia.feature.eventdetails.presentation.viewholder.payout.PayoutViewHolder
-import com.vmedia.feature.eventdetails.presentation.viewholder.revenue.RevenueViewHolder
-import com.vmedia.feature.eventdetails.presentation.viewholder.review.ReviewViewHolder
+import com.vmedia.feature.eventdetails.presentation.viewholder.*
 
 internal class EventDetailsAdapter(
     private val parent: ViewGroup,
@@ -34,8 +30,8 @@ internal class EventDetailsAdapter(
         val context = parent.context
 
         return when (eventType) {
-            SALE -> TODO()
-            FREE_DOWNLOAD -> TODO()
+            SALE -> SaleViewHolder(context, onAssetClick)
+            FREE_DOWNLOAD -> DownloadViewHolder(context, onAssetClick)
             REVIEW -> ReviewViewHolder(context, onAssetClick)
             ASSET -> AssetViewHolder(context, onAssetClick)
             PAYOUT -> PayoutViewHolder(context)

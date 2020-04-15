@@ -1,15 +1,15 @@
 package com.vmedia.feature.eventdetails.presentation.viewholder.asset.recycler
 
 import android.view.View
-import com.vmedia.core.common.obj.event.AssetInfo
+import androidx.annotation.LayoutRes
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
-import com.vmedia.feature.eventdetails.presentation.R
 
-internal class AssetsAdapter(
-    private val onAssetClick: (assetId: Long) -> Unit
-) : BaseAdapter<AssetItemViewHolder>() {
+internal class AssetsAdapter<T : Any, VH : BaseAssetItemViewHolder<T>>(
+    @LayoutRes private val itemLayoutResource: Int,
+    private val viewHolderCreator: (view: View) -> VH
+) : BaseAdapter<VH>() {
 
-    var items: List<AssetInfo> = emptyList()
+    var items: List<T> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -18,16 +18,10 @@ internal class AssetsAdapter(
 
     override fun getItemCount() = items.size
 
-    override fun onLayoutRequested(viewType: Int) = R.layout.eventdetails_item_asset_item
+    override fun onLayoutRequested(viewType: Int) = itemLayoutResource
 
-    override fun onCreateViewHolder(view: View, viewType: Int): AssetItemViewHolder {
-        return AssetItemViewHolder(view, ::onClick)
-    }
+    override fun onCreateViewHolder(view: View, viewType: Int) = viewHolderCreator.invoke(view)
 
-    override fun onBindViewHolder(holder: AssetItemViewHolder, position: Int) {
-        holder.bind(items[position])
-    }
-
-    private fun onClick(position: Int) = onAssetClick.invoke(items[position].id)
+    override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(items[position])
 
 }

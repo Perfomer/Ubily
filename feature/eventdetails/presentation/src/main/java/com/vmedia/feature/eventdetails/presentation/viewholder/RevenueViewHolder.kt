@@ -1,4 +1,4 @@
-package com.vmedia.feature.eventdetails.presentation.viewholder.revenue
+package com.vmedia.feature.eventdetails.presentation.viewholder
 
 import android.content.Context
 import com.vmedia.core.common.obj.EventType
@@ -8,7 +8,6 @@ import com.vmedia.core.common.util.diffedValue
 import com.vmedia.core.common.util.setTextColorCompat
 import com.vmedia.core.common.util.toSpan
 import com.vmedia.feature.eventdetails.presentation.R
-import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import kotlinx.android.synthetic.main.eventdetails_item_revenue.*
 
 internal class RevenueViewHolder(

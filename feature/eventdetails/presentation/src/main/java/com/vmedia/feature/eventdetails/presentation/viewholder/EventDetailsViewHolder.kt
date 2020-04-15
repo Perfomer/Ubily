@@ -16,7 +16,7 @@ internal abstract class EventDetailsViewHolder<T : Any>(
 
     protected var currentItem: T? = null
 
-    override val containerView: View by lazy {
+    final override val containerView: View by lazy {
         context.inflate(contentLayoutResource)
     }
 
