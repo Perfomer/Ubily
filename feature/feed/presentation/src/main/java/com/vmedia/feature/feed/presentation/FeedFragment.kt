@@ -54,7 +54,7 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     }
 
     override fun render(state: FeedState) {
-        feed_loading.isVisible = state.isLoading
+        feed_loading.isVisible = state.isLoading && currentState?.payload.isNullOrEmpty()
         adapter.items = state.payload
     }
 
