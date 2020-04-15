@@ -6,6 +6,7 @@ import com.vmedia.core.common.obj.EventType.*
 import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.asset.AssetViewHolder
+import com.vmedia.feature.eventdetails.presentation.viewholder.payout.PayoutViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.review.ReviewViewHolder
 
 internal class EventDetailsAdapter(
@@ -31,16 +32,12 @@ internal class EventDetailsAdapter(
         return when (eventType) {
             SALE -> TODO()
             FREE_DOWNLOAD -> TODO()
-            REVIEW -> ReviewViewHolder(parent.context, ::onAssetClick)
-            ASSET -> AssetViewHolder(parent.context, ::onAssetClick)
-            PAYOUT -> TODO()
+            REVIEW -> ReviewViewHolder(parent.context, onAssetClick)
+            ASSET -> AssetViewHolder(parent.context, onAssetClick)
+            PAYOUT -> PayoutViewHolder(parent.context)
             REVENUE -> TODO()
             else -> null
         }
-    }
-
-    private fun onAssetClick(assetId: Long) {
-        onAssetClick.invoke(assetId)
     }
 
 }

@@ -10,32 +10,32 @@
     tools:ignore="ContentDescription">
 
     <TextView
-        android:id="@+id/feed_item_payout_auto"
+        android:id="@+id/eventdetails_item_payout_auto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:fontFamily="@font/rubik_medium"
         android:maxLines="1"
         android:textColor="@color/brand_black"
-        app:layout_constraintEnd_toStartOf="@id/feed_item_payout_paypal"
+        app:layout_constraintEnd_toStartOf="@id/eventdetails_item_payout_paypal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Auto payout: yes" />
 
     <TextView
-        android:id="@+id/feed_item_payout_failed"
+        android:id="@+id/eventdetails_item_payout_failed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/rubik_medium"
         android:textColor="@color/brand_black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/feed_item_payout_auto"
+        app:layout_constraintTop_toBottomOf="@id/eventdetails_item_payout_auto"
         android:layout_marginTop="16dp"
         tools:text="Payout failed: yes" />
 
     <ImageView
-        android:id="@+id/feed_item_payout_paypal"
+        android:id="@+id/eventdetails_item_payout_paypal"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:padding="8dp"
