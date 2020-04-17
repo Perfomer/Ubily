@@ -1,5 +1,11 @@
 package com.vmedia.core.common.util
 
+import android.os.Build
+import android.util.SparseArray
+import android.util.SparseIntArray
+import android.util.SparseLongArray
+import androidx.annotation.RequiresApi
+
 fun <T> List<T>.split(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
     val trues = mutableListOf<T>()
     val falses = mutableListOf<T>()
@@ -37,3 +43,10 @@ fun <T> Sequence<T>.onEachIndexed(action: (index: Int, item: T) -> Unit): Sequen
         item
     }
 }
+
+operator fun <E> SparseArray<E>.set(key: Int, value: E) = put(key, value)
+
+operator fun SparseIntArray.set(key: Int, value: Int) = put(key, value)
+
+@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+operator fun SparseLongArray.set(key: Int, value: Long) = put(key, value)
