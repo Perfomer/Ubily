@@ -10,6 +10,7 @@ import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.*
 import com.vmedia.core.common.obj.event.EventInfo.EventRevenue
 import com.vmedia.core.common.obj.event.EventInfo.EventReview
 import com.vmedia.core.common.util.inflate
+import com.vmedia.core.common.view.prefetcher.api.PrefetchRecycledViewPool
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.core.common.view.recycler.diffedListBy
 import com.vmedia.feature.feed.presentation.R
@@ -21,6 +22,7 @@ import com.vmedia.feature.feed.presentation.recycler.holder.asset.DownloadViewHo
 import com.vmedia.feature.feed.presentation.recycler.holder.asset.SaleViewHolder
 import kotlinx.android.synthetic.main.feed_item.view.*
 
+@Suppress("RemoveRedundantQualifierName")
 internal class FeedAdapter(
     private val onItemClick: (eventId: Long) -> Unit,
     private val onOptionsClick: (item: EventInfo<*>) -> Unit,
@@ -30,12 +32,14 @@ internal class FeedAdapter(
 
     var items by diffedListBy(EventInfo<*>::id)
 
-    private val types = values()
+    private val types = EventType.values()
 
 
     override fun getItemCount() = items.size
 
     override fun getItemViewType(position: Int) = items[position].type.ordinal
+
+    override fun getItemId(position: Int) = items[position].id
 
     override fun onLayoutRequested(viewType: Int) = R.layout.feed_item
 
@@ -58,6 +62,12 @@ internal class FeedAdapter(
 
     override fun onBindViewHolder(holder: FeedViewHolder<out EventInfo<*>>, position: Int) {
         holder.bind(items[position])
+    }
+
+    fun prefetchItems(viewPool: PrefetchRecycledViewPool) {
+        arrayOf(SALE, FREE_DOWNLOAD, REVIEW, ASSET, PAYOUT, REVENUE).forEach {
+            viewPool.setPrefetchedViewsCount(it.ordinal, 20, ::onCreateViewHolder)
+        }
     }
 
 
@@ -107,7 +117,7 @@ internal class FeedAdapter(
     private companion object {
 
         fun ViewGroup.attachViewHolderContent(@LayoutRes contentLayoutResource: Int) {
-            val contentView = contentLayoutResource.let { context.inflate(it) }
+            val contentView = context.inflate(contentLayoutResource)
             feed_item_content.addView(contentView)
         }
 

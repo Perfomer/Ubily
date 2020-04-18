@@ -17,20 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="@string/feed_title"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/feed_title"
             tools:layout_height="58dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/feed_recycler"
+    <com.vmedia.core.common.view.prefetcher.gapworker.api.WrappedGapWorkerRecyclerView
+        android:id="@+id/feed_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
         android:clipToPadding="false"
-        android:paddingTop="12dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/feed_item" />
 

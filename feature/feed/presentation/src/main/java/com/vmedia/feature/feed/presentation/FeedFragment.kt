@@ -1,5 +1,6 @@
 package com.vmedia.feature.feed.presentation
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,6 +10,7 @@ import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.core.common.util.addSystemBottomPadding
 import com.vmedia.core.common.util.addSystemTopPadding
 import com.vmedia.core.common.util.init
+import com.vmedia.core.common.view.prefetcher.api.PrefetchRecycledViewPool
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
@@ -42,20 +44,34 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        feed_recycler.init(adapter)
 
         general_appbar.addSystemTopPadding()
-        feed_recycler.addSystemBottomPadding()
+        feed_list.addSystemBottomPadding()
+
+        initRecycler()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        feed_recycler.adapter = null
+        feed_list.adapter = null
     }
 
     override fun render(state: FeedState) {
         feed_loading.isVisible = state.isLoading && currentState?.payload.isNullOrEmpty()
         adapter.items = state.payload
+    }
+
+    private fun initRecycler() {
+        val viewPool = PrefetchRecycledViewPool(activity as Activity)
+        viewPool.start()
+
+        feed_list.init(adapter)
+        feed_list.setItemViewCacheSize(10)
+
+        feed_list.setRecycledViewPool(viewPool)
+        feed_list.enableCustomGapworker = true
+
+        adapter.prefetchItems(viewPool)
     }
 
     private fun onOptionsClick(eventInfo: EventInfo<*>) {
