@@ -66,7 +66,7 @@ internal class FeedAdapter(
 
     fun prefetchItems(viewPool: PrefetchRecycledViewPool) {
         arrayOf(SALE, FREE_DOWNLOAD, REVIEW, ASSET, PAYOUT, REVENUE).forEach {
-            viewPool.setPrefetchedViewsCount(it.ordinal, 20, ::onCreateViewHolder)
+            viewPool.setPrefetchedViewsCount(it.ordinal, 10, ::onCreateViewHolder)
         }
     }
 

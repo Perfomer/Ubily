@@ -62,7 +62,7 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
     }
 
     private fun initRecycler() {
-        val viewPool = PrefetchRecycledViewPool(activity as Activity)
+        val viewPool = PrefetchRecycledViewPool(activity as Activity, 60)
         viewPool.start()
 
         feed_list.init(adapter)
