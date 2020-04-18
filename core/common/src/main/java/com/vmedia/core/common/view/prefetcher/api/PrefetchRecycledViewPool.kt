@@ -2,45 +2,45 @@ package com.vmedia.core.common.view.prefetcher.api
 
 import android.app.Activity
 import android.util.SparseIntArray
-import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import androidx.recyclerview.widget.factorInCreateTime
-import com.vmedia.core.common.view.prefetcher.OffthreadViewCreator
-import com.vmedia.core.common.view.prefetcher.RecyclerPrefetchingLogger
+import com.vmedia.core.common.view.prefetcher.OffThreadViewCreator
 import timber.log.Timber
 import kotlin.math.max
 
-class PrefetchRecycledViewPool(activity: Activity) : RecyclerView.RecycledViewPool(), Prefetcher {
-    private val offthreadViewCreator = OffthreadViewCreator(activity, ::putViewFromCreator)
+class PrefetchRecycledViewPool(
+    activity: Activity,
+    private val maxRecycledViews: Int
+) : RecyclerView.RecycledViewPool(), Prefetcher {
+
+    private val offThreadViewCreator = OffThreadViewCreator(activity, ::putViewFromCreator)
+
     private val prefetchRegistry = SparseIntArray()
     private val createdRegistry = SparseIntArray()
 
     var listener: PrefetchedViewsCountListener? = null
 
-    override fun setPrefetchedViewsCount(viewType: Int, count: Int, holderFactory: (fakeParent: ViewGroup, viewType: Int) -> RecyclerView.ViewHolder) {
-        require(count > 0) { "Prefetched count should be > 0" }
-        RecyclerPrefetchingLogger.log { "change views count: new=$count" }
 
-        offthreadViewCreator.setPrefetchBound(holderFactory, viewType, count)
+    override fun setPrefetchedViewsCount(
+        viewType: Int,
+        count: Int,
+        holderFactory: HolderFactory
+    ) {
+        require(count > 0) { "Prefetched count should be > 0" }
+
+        offThreadViewCreator.setPrefetchBound(holderFactory, viewType, count)
 
         prefetchRegistry.put(viewType, max(prefetchRegistry.get(viewType), count))
     }
 
-    fun start() {
-        offthreadViewCreator.start()
-        attachToPreventViewPoolFromClearing()
-    }
-
-    fun terminate() = offthreadViewCreator.terminate()
-
     override fun putRecycledView(scrap: RecyclerView.ViewHolder) {
         val viewType = scrap.itemViewType
-        setMaxRecycledViews(viewType, 60) //todo 200 - for educational purpose only. Choose it properly in real projects
-        RecyclerPrefetchingLogger.log { "putRecycled view for viewType=${getViewTypeName(viewType)}" }
+        setMaxRecycledViews(viewType, maxRecycledViews)
 
         super.putRecycledView(scrap)
 
         val recyclerView = scrap.nestedRecyclerView?.get()
+
         if (recyclerView is RecycleViewToParentViewPoolOnDetach) {
             val oldRecycledViewPool = recyclerView.recycledViewPool
             recyclerView.setRecycledViewPool(this)
@@ -53,21 +53,31 @@ class PrefetchRecycledViewPool(activity: Activity) : RecyclerView.RecycledViewPo
 
     override fun getRecycledView(viewType: Int): RecyclerView.ViewHolder? {
         val holder = super.getRecycledView(viewType)
+
         if (holder == null) {
-            offthreadViewCreator.itemCreatedOutside(viewType)
+            offThreadViewCreator.itemCreatedOutside(viewType)
             createdRegistry[viewType]++
             logUiThreadCreation(viewType)
-        } else {
-            RecyclerPrefetchingLogger.log { "Holder with viewType=${getViewTypeName(viewType)} has been found" }
         }
+
         return holder
     }
 
     override fun clear() {
-        RecyclerPrefetchingLogger.log { "Clear ViewPool" }
-        offthreadViewCreator.clear()
+        offThreadViewCreator.clear()
         super.clear()
     }
+
+
+    fun start() {
+        offThreadViewCreator.start()
+        attachToPreventViewPoolFromClearing()
+    }
+
+    fun terminate() {
+        offThreadViewCreator.terminate()
+    }
+
 
     private fun putViewFromCreator(scrap: RecyclerView.ViewHolder, creationTimeNs: Long) {
         factorInCreateTime(scrap.viewType, creationTimeNs)
@@ -79,26 +89,37 @@ class PrefetchRecycledViewPool(activity: Activity) : RecyclerView.RecycledViewPo
 
     private fun calculatePrefetchedCount(): Int {
         var result = 0
+
         for (i in 0..createdRegistry.size()) {
             result += createdRegistry[i]
         }
+
         return result
     }
 
     private fun logUiThreadCreation(viewType: Int) {
         val created = createdRegistry[viewType]
         val prefetch = prefetchRegistry[viewType]
-        if (created > prefetch) Timber.w("ViewPool cache miss: created=$created, prefetch=$prefetch, cached=${getRecycledViewCount(viewType)}, holder=${getViewTypeName(viewType)}")
+
+        if (created > prefetch) {
+            val recycledViewCount = getRecycledViewCount(viewType)
+            val viewTypeName = getViewTypeName(viewType)
+
+            Timber.w("ViewPool cache miss: created=$created, prefetch=$prefetch, cached=$recycledViewCount, holder=$viewTypeName")
+        }
     }
 
-    //TODO provide human-readable view type names
-//    private val viewTypeNames by lazy { SparseArray<String>() }
-//    private fun getViewTypeName(viewType: Int) = viewTypeNames.get(viewType) ?: activity.resources.getResourceName(viewType).also { viewTypeNames.put(viewType, it) }
+    private fun getViewTypeName(viewType: Int): String {
+        return viewType.toString()
+    }
 
-    private fun getViewTypeName(viewType: Int) = viewType.toString()
+    private companion object {
+
+        operator fun SparseIntArray.set(key: Int, value: Int) = put(key, value)
+
+    }
+
 }
-
-operator fun SparseIntArray.set(key: Int, value: Int) = put(key, value)
 
 interface PrefetchedViewsCountListener {
     fun onViewCountChanged(count: Int)

@@ -33,7 +33,9 @@ class WrappedGapWorkerRecyclerView @JvmOverloads constructor(
 
     private companion object {
 
-        private val customGapWorker by lazy { if (ALLOW_THREAD_GAP_WORK) GapWorkerWrapper() else null }
+        private val customGapWorker by lazy {
+            if (ALLOW_THREAD_GAP_WORK) GapWorkerWrapper() else null
+        }
 
     }
 

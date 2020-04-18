@@ -1,4 +1,5 @@
 @file:Suppress("PackageDirectoryMismatch")
+
 package androidx.recyclerview.widget
 
 import android.view.View
@@ -7,16 +8,12 @@ import com.vmedia.core.common.view.prefetcher.gapworker.GapWorkerLogger
 import java.util.concurrent.TimeUnit
 import kotlin.math.max
 
-private const val DEADLINE_EPSILON_NS = 0.3 * 1_000_000/*ms as ns*/
-
-internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!) : Runnable {
+internal class GapWorkerWrapper(
+    private val gapWorker: GapWorker = androidx.recyclerview.widget.gapWorker!!
+) : Runnable {
 
     private val tasksPool: GapWorkerTaskPool = GapWorkerTaskPool()
     private val idleHandler: GapWorkerIdleHandler = GapWorkerIdleHandler()
-
-    init {
-        idleHandler.callback = { prefetch(it, true) }
-    }
 
     private var shouldCheckDeadline = false
     private var deadlineReachedSomewhere = false
@@ -24,14 +21,11 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
 
     private var attachCounter = 0
 
-    fun attach() {
-        attachCounter++
+
+    init {
+        idleHandler.callback = { prefetch(it, true) }
     }
 
-    fun detach() {
-        attachCounter--
-        if (attachCounter == 0) idleHandler.setEnabled(false)
-    }
 
     override fun run() {
         gapWorker.mPostTimeNs = 0L
@@ -48,6 +42,17 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
 
         prefetch(TimeUnit.MILLISECONDS.toNanos(latestFrameVsyncMs), false)
     }
+
+
+    fun attach() {
+        attachCounter++
+    }
+
+    fun detach() {
+        attachCounter--
+        if (attachCounter == 0) idleHandler.setEnabled(false)
+    }
+
 
     private fun prefetch(frameTime: Long, fromIdleHandler: Boolean) {
         shouldCheckDeadline = false
@@ -72,7 +77,12 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
             if (task.view == null) return
             val taskDeadlineNs = if (task.immediate) Long.MAX_VALUE else deadlineNs
 
-            GapWorkerLogger.startingTask(task.position, task.distanceToItem, task.viewVelocity, task.immediate)
+            GapWorkerLogger.startingTask(
+                task.position,
+                task.distanceToItem,
+                task.viewVelocity,
+                task.immediate
+            )
 
             prefetchWithDeadline(task.view, task.position, taskDeadlineNs)
 
@@ -97,13 +107,18 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
         }
     }
 
-    private fun prefetchNotAttachedPositionWithDeadline(view: RecyclerView, position: Int, deadlineNs: Long): RecyclerView.ViewHolder? {
+    private fun prefetchNotAttachedPositionWithDeadline(
+        view: RecyclerView,
+        position: Int,
+        deadlineNs: Long
+    ): RecyclerView.ViewHolder? {
         val recycler = view.mRecycler
-
         var bound = false
 
         view.onEnterLayoutOrScroll()
+
         val holder = recycler.tryGetViewHolderForPositionByDeadline(position, false, deadlineNs)
+
         if (holder != null) {
             if (holder.isBound && !holder.isInvalid) {
                 bound = true
@@ -112,6 +127,7 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
                 recycler.addViewHolderToRecycledViewPool(holder, false)
             }
         }
+
         view.onExitLayoutOrScroll(false)
 
         shouldCheckDeadline = !bound
@@ -127,7 +143,12 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
         }
 
         val innerPrefetchRegistry = innerView.mPrefetchRegistry
-        innerPrefetchRegistry.collectPrefetchPositionsFromView(innerView, true)//todo try to resume from previously bound position
+
+        innerPrefetchRegistry.collectPrefetchPositionsFromView(
+            innerView,
+            true
+        )
+
         if (innerPrefetchRegistry.mCount == 0) return
 
         innerView.mState.prepareForNestedPrefetch(innerView.mAdapter)
@@ -147,7 +168,8 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
                 continue
             }
 
-            val holder = prefetchNotAttachedPositionWithDeadline(innerView, innerPosition, deadlineNs)
+            val holder =
+                prefetchNotAttachedPositionWithDeadline(innerView, innerPosition, deadlineNs)
 
             if (isDeadlineBeyondHope(deadlineNs)) return
 
@@ -193,7 +215,16 @@ internal class GapWorkerWrapper(private val gapWorker: GapWorker = sGapWorker!!)
 
         return deadlineBeyondHope
     }
-}
 
-private val RecyclerView.ViewHolder?.nestedRecycler
-    get() = this?.mNestedRecyclerView?.get()
+
+    private companion object {
+
+        // ms as ns
+        private const val DEADLINE_EPSILON_NS = 0.3 * 1_000_000
+
+        private val RecyclerView.ViewHolder?.nestedRecycler
+            get() = this?.mNestedRecyclerView?.get()
+
+    }
+
+}

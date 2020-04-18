@@ -11,9 +11,6 @@ internal class GapWorkerIdleHandler(
 
     var callback: ((frameTimeNs: Long) -> Unit)? = null
 
-    private var enabled = false
-    private var frameListenerRegistered = false
-
     private val listener = object : Choreographer.FrameCallback, MessageQueue.IdleHandler {
         private var idleListenerRegistered = false
         private var fromIdleCounter = 0
@@ -50,8 +47,13 @@ internal class GapWorkerIdleHandler(
         }
     }
 
+    private var enabled = false
+    private var frameListenerRegistered = false
+
+
     fun setEnabled(enabled: Boolean) {
         this.enabled = enabled
+
         if (enabled && !frameListenerRegistered) {
             frameListenerRegistered = true
             choreographer.postFrameCallback(listener)
