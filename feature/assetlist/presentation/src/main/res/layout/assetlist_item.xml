@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="12dp"
+    app:rippleColor="@color/brand_green"
+    tools:layout_width="200dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/assetlist_item_largeimage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="4:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/assetlist_item_iconimage"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_asset_icon"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/assetlist_item_largeimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetlist_item_largeimage"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/assetlist_item_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/rubik"
+            android:gravity="center_horizontal"
+            android:textAllCaps="true"
+            android:textColor="@color/brand_green_dark"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetlist_item_iconimage"
+            tools:text="Icons &amp; UI" />
+
+        <TextView
+            android:id="@+id/assetlist_item_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/rubik_bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/brand_black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetlist_item_category"
+            tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
+
+        <TextView
+            android:id="@+id/assetlist_item_reviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginStart="20dp"
+            android:drawableStart="@drawable/ic_review"
+            android:drawablePadding="8dp"
+            android:textColor="@color/brand_green_dark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/assetlist_item_rating"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetlist_item_name"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="24" />
+
+        <TextView
+            android:id="@+id/assetlist_item_rating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_star"
+            android:drawablePadding="8dp"
+            android:textColor="@color/brand_green_dark"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/assetlist_item_reviews"
+            app:layout_constraintTop_toBottomOf="@id/assetlist_item_name"
+            app:layout_constraintWidth_default="wrap"
+            tools:text="5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

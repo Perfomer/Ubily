@@ -28,3 +28,7 @@ include ':feature:feed:presentation'
 include ':feature:eventdetails:api'
 include ':feature:eventdetails:domain'
 include ':feature:eventdetails:presentation'
+
+include ':feature:assetlist:api'
+include ':feature:assetlist:domain'
+include ':feature:assetlist:presentation'

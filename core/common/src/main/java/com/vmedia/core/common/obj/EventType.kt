@@ -47,7 +47,7 @@ val EventType.iconResource: Int
         SALE, FREE_DOWNLOAD -> R.drawable.ic_event_sale
         REVIEW -> R.drawable.ic_event_review
         PAYOUT, REVENUE -> R.drawable.ic_event_revenue
-        INITIALIZATION -> R.drawable.ic_event_initialization
+        INITIALIZATION -> R.drawable.ic_star
         ASSET -> R.drawable.ic_event_asset
         else -> R.drawable.logo_ubily
     }

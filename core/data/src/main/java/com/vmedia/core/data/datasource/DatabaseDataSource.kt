@@ -17,6 +17,8 @@ interface DatabaseDataSource {
 
     fun getAssetByUrl(url: String): Single<Asset>
 
+    fun getAssets() : Observable<List<Asset>>
+
     fun getUser(id: Long): Single<User>
 
     fun getUserByName(name: String): Single<User>

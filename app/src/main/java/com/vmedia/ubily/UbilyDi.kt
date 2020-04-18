@@ -7,6 +7,7 @@ import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.network.networkModules
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
 import com.vmedia.core.sync.syncModules
+import com.vmedia.feature.assetlist.api.featureAssetListModules
 import com.vmedia.feature.auth.api.featureAuthModules
 import com.vmedia.feature.eventdetails.api.featureEventDetailsModules
 import com.vmedia.feature.feed.api.featureFeedModules
@@ -37,7 +38,8 @@ private val featureModules
         featureSyncModules,
         featureSplashModules,
         featureFeedModules,
-        featureEventDetailsModules
+        featureEventDetailsModules,
+        featureAssetListModules
     ).flatten()
 
 

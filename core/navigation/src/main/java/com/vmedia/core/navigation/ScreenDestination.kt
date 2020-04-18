@@ -38,4 +38,8 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
         }
     }
 
+    object AssetList : ScreenDestination() {
+        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_ASSETLIST))
+    }
+
 }

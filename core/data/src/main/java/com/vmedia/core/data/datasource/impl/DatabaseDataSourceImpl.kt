@@ -53,6 +53,10 @@ internal class DatabaseDataSourceImpl(
         return assetDao.getAssetByUrl(url)
     }
 
+    override fun getAssets(): Observable<List<Asset>> {
+        return assetDao.getAssets()
+    }
+
     override fun getReview(authorId: Long, assetId: Long): Single<Review> {
         return reviewDao.getReview(authorId, assetId)
     }
@@ -144,7 +148,7 @@ internal class DatabaseDataSourceImpl(
 
     override fun putPublisher(publisher: Publisher): Completable {
         return database.completableTransaction {
-            val contains = publisherDao.getCount() == 0L
+            val contains = publisherDao.getCount() > 0L
             publisherDao.upsert(contains, publisher)
         }
     }

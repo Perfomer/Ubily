@@ -1,6 +1,7 @@
 package com.vmedia.ubily.presentation
 
 import com.vmedia.core.navigation.ScreenDestination
+import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
@@ -14,7 +15,13 @@ class MainActivity : BaseActivity(
     screenLayoutResource = R.layout.activity_main,
     frameLayoutResource = R.id.nav_host_fragment,
     startScreen = ScreenDestination.Splash
-), SplashNavigator, SyncNavigator, AuthNavigator, FeedNavigator, EventDetailsNavigator {
+), SplashNavigator,
+    SyncNavigator,
+    AuthNavigator,
+    FeedNavigator,
+    EventDetailsNavigator,
+    AssetListNavigator {
+
 
     private var isUserAuthorized: Boolean = false
     private var isUserDataSynchronized: Boolean = false
@@ -26,6 +33,14 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToAsset(assetId: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToAssetSearch() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToPublisher() {
         TODO("Not yet implemented")
     }
 
@@ -58,7 +73,7 @@ class MainActivity : BaseActivity(
     private fun navigateThroughStartGraph() {
         if (isUserAuthorized) {
             if (isUserDataSynchronized) {
-                navigateTo(ScreenDestination.Feed)
+                navigateTo(ScreenDestination.AssetList)
             } else {
 //                if (onboardingAlreadyShown) {
                 navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
