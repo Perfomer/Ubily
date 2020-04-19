@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/asset_icon_corners_radius_small" />
+    <solid android:color="@color/brand_grey" />
+</shape>

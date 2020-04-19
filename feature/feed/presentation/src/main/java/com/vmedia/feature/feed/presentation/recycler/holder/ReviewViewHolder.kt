@@ -39,7 +39,8 @@ internal class ReviewViewHolder(
 
         feed_item_review_asset_icon.loadImageWithRoundedCorners(
             imageUrl = review.assetIcon,
-            cornerRadius = R.dimen.asset_icon_corners_radius_small
+            cornerRadius = R.dimen.asset_icon_corners_radius_small,
+            placeholder = R.drawable.bg_placeholder_rect_rounded_small
         )
     }
 
