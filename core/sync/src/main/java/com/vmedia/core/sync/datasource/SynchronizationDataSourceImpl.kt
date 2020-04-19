@@ -70,9 +70,9 @@ internal class SynchronizationDataSourceImpl(
 
     private fun execute(): Completable {
         return credentialsSynchronizer.synchronize()
+            .andThen(categorySynchronizer.synchronize())
             .andThenSynchronizeWith(
                 publisherSynchronizer,
-                categorySynchronizer,
                 assetSynchronizer,
                 userSynchronizer
             )

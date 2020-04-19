@@ -15,13 +15,16 @@ internal class CategorySynchronizer(
     private val databaseDataSource: DatabaseDataSource,
 
     private val mapper: _CategoryMapper
-): Synchronizer<List<Category>> {
+) : Synchronizer<List<Category>> {
 
     override val dataType = SynchronizationDataType.ASSETS_CATEGORIES
 
     override fun execute(): Single<List<Category>> {
         return networkDataSource.getCategories()
             .mapWith(mapper)
+            .map<List<Category>> {
+                it.toMutableList().apply { add(Category(id = 0, name = "None")) }
+            }
             .actOnSuccess(databaseDataSource::putCategories)
     }
 
