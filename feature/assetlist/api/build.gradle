@@ -1,0 +1,9 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: "../../../android_commons.gradle"
+
+dependencies {
+    implementation project(":feature:assetlist:domain")
+    implementation project(":feature:assetlist:presentation")
+}
