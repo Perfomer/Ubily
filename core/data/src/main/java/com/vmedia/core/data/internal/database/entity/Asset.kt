@@ -2,6 +2,7 @@ package com.vmedia.core.data.internal.database.entity
 
 import androidx.annotation.IntRange
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.vmedia.core.common.obj.AssetStatus
@@ -11,7 +12,12 @@ import java.math.BigDecimal
 import java.util.*
 
 @Entity(
-    indices = [Index(value = ["shortUrl"], unique = true)]
+    indices = [Index(value = ["shortUrl"], unique = true)],
+    foreignKeys = [ForeignKey(
+        entity = Category::class,
+        parentColumns = ["id"],
+        childColumns = ["categoryId"]
+    )]
 )
 data class Asset(
     @PrimaryKey override val id: Long,
