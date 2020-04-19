@@ -1,6 +1,7 @@
 package com.vmedia.core.network.datasource
 
 import com.vmedia.core.common.obj.Period
+import com.vmedia.core.network.api.entity.CategoryDto
 import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.entity.internal.IncomeDto
 import io.reactivex.Single
@@ -24,5 +25,7 @@ interface NetworkDataSource {
     fun getAssetDetails(versionId: Long): Single<AssetDetailsDto>
 
     fun getReviews(): Single<List<DetailedReviewDto>>
+
+    fun getCategories(): Single<List<CategoryDto>>
 
 }

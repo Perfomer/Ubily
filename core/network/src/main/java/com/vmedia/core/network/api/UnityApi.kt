@@ -1,5 +1,6 @@
 package com.vmedia.core.network.api
 
+import com.vmedia.core.network.api.entity.CategoryDto
 import com.vmedia.core.network.api.entity.PeriodsModel
 import com.vmedia.core.network.api.entity.TableValuesModel
 import com.vmedia.core.network.api.entity.asset.PackageDetailsModel
@@ -41,5 +42,8 @@ internal interface UnityApi {
 
     @GET("/api/management/package-version/{versionId}.json")
     fun getPackageVersionInfo(@Path("versionId") versionId: Long): Single<PackageDetailsModel>
+
+    @GET("/api/management/categories/185235.json")
+    fun getCategories(): Single<List<CategoryDto>>
 
 }

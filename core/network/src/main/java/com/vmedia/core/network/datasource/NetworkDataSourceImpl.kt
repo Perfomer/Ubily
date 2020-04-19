@@ -7,6 +7,7 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.network.*
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
+import com.vmedia.core.network.api.entity.CategoryDto
 import com.vmedia.core.network.api.entity.PeriodsModel
 import com.vmedia.core.network.api.entity.asset.*
 import com.vmedia.core.network.api.entity.publisher.PublisherAccountModel
@@ -100,6 +101,10 @@ internal class NetworkDataSourceImpl(
             .mapWith(reviewMapper)
             .filterWith(reviewFilter)
             .mapWith(detailedCommentMapper)
+    }
+
+    override fun getCategories(): Single<List<CategoryDto>> {
+        return api.getCategories()
     }
 
 }
