@@ -69,7 +69,7 @@ internal sealed class LogEvent {
 @Suppress("NOTHING_TO_INLINE", "ConstantConditionIf")
 internal object GapWorkerLogger {
 
-    private const val LOGGING_ENABLED = true
+    private const val LOGGING_ENABLED = false
 
     internal val infos = mutableListOf<LogEvent>()
     internal var deadlineNs = 0L
