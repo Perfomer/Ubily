@@ -21,6 +21,6 @@ fun String.parse(format: String) : Date {
     return format.toDateFormat().parse(this)!!
 }
 
-private fun String.toDateFormat(locale: Locale = Locale.getDefault()) : DateFormat {
+private fun String.toDateFormat(locale: Locale = Locale.US) : DateFormat {
     return SimpleDateFormat(this, locale)
 }
