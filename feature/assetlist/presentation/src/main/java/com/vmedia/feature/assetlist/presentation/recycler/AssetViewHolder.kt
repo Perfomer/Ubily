@@ -6,6 +6,7 @@ import coil.transform.CircleCropTransformation
 import com.vmedia.core.common.util.diffedValue
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
+import com.vmedia.feature.assetlist.presentation.R
 import kotlinx.android.synthetic.main.assetlist_item.*
 
 internal class AssetViewHolder(
@@ -18,8 +19,14 @@ internal class AssetViewHolder(
     }
 
     fun bind(asset: AssetShortInfo) {
-        assetlist_item_largeimage.load(asset.largeImage)
+        assetlist_item_largeimage.load(asset.largeImage) {
+            placeholder(R.drawable.bg_placeholder)
+            crossfade(true)
+        }
+
         assetlist_item_iconimage.load(asset.iconImage) {
+            placeholder(R.drawable.bg_placeholder)
+            crossfade(true)
             transformations(CircleCropTransformation())
         }
 

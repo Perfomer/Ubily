@@ -30,7 +30,6 @@
                 android:id="@+id/feed_item_review_asset_icon"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:background="@color/brand_grey"
                 tools:src="@tools:sample/avatars" />
 
             <TextView

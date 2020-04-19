@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToAsset(assetId: Long) {
-        TODO("Not yet implemented")
+        navigateTo(ScreenDestination.AssetList)
     }
 
     override fun navigateToAssetSearch() {
@@ -73,7 +73,7 @@ class MainActivity : BaseActivity(
     private fun navigateThroughStartGraph() {
         if (isUserAuthorized) {
             if (isUserDataSynchronized) {
-                navigateTo(ScreenDestination.AssetList)
+                navigateTo(ScreenDestination.Feed)
             } else {
 //                if (onboardingAlreadyShown) {
                 navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))

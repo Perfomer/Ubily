@@ -55,7 +55,7 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
     }
 
     override fun render(state: AssetListState) {
-        assetlist_loading.isVisible = state.isLoading && currentState?.payload.isNullOrEmpty()
+        assetlist_loading.isVisible = state.isLoading && state.payload.isEmpty()
 
         adapter.items = state.payload
 

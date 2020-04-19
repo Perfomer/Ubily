@@ -14,6 +14,7 @@ fun ImageView.loadImageWithRoundedCorners(
     val cornerRadiusValue = resources.getDimension(cornerRadius)
 
     load(imageUrl) {
+        placeholder(R.drawable.bg_placeholder)
         crossfade(crossfade)
         transformations(RoundedCornersTransformation(cornerRadiusValue))
     }
