@@ -11,6 +11,7 @@ sealed class SynchronizationEvent {
 
 enum class SynchronizationDataType {
     PUBLISHER,
+    ASSETS_CATEGORIES,
     ASSETS,
     PERIODS,
     USERS,

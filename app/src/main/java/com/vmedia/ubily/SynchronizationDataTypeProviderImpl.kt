@@ -10,7 +10,7 @@ internal class SynchronizationDataTypeProviderImpl : SynchronizationDataTypeProv
     override fun shouldSynchronize(type: SynchronizationDataType): Single<Boolean> {
         return Single.fromCallable {
             when(type) {
-                PUBLISHER, PERIODS, ASSETS -> true
+                PUBLISHER, PERIODS, ASSETS, ASSETS_CATEGORIES -> true
                 USERS, REVIEWS -> true
                 REVENUES, PAYOUTS -> true
                 SALES -> true

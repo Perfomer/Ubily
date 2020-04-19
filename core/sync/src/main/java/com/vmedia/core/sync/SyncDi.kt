@@ -4,6 +4,7 @@ import com.vmedia.core.common.obj.Period
 import com.vmedia.core.common.util.*
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
+import com.vmedia.core.network.api.entity.CategoryDto
 import com.vmedia.core.network.entity.*
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync.cache.CachedDatabaseDataSourceDecorator
@@ -23,6 +24,8 @@ import com.vmedia.core.sync.synchronizer.asset.AssetFilter
 import com.vmedia.core.sync.synchronizer.asset.AssetMapper
 import com.vmedia.core.sync.synchronizer.asset.AssetModel
 import com.vmedia.core.sync.synchronizer.asset.AssetSynchronizer
+import com.vmedia.core.sync.synchronizer.category.CategoryMapper
+import com.vmedia.core.sync.synchronizer.category.CategorySynchronizer
 import com.vmedia.core.sync.synchronizer.download.DownloadMapper
 import com.vmedia.core.sync.synchronizer.download.DownloadSynchronizer
 import com.vmedia.core.sync.synchronizer.payout.PayoutDateFilter
@@ -83,6 +86,7 @@ internal typealias _RevenueMapper = ListMapper<IncomeDto.Revenue, Revenue>
 internal typealias _PayoutMapper = ListMapper<IncomeDto.Payout, Payout>
 internal typealias _ReviewMapper = ListMapper<DetailedReviewDto, Review>
 internal typealias _UserMapper = ListMapper<DetailedReviewDto, User>
+internal typealias _CategoryMapper = ListMapper<CategoryDto, Category>
 internal typealias _PublisherMapper = Mapper<Pair<Long, PublisherDto>, Publisher>
 
 internal typealias _AssetFilter = Filter<AssetDto>
@@ -102,6 +106,7 @@ internal typealias _SaleSynchronizer = Synchronizer<List<Sale>>
 internal typealias _DownloadSynchronizer = Synchronizer<List<Sale>>
 internal typealias _PeriodSynchronizer = Synchronizer<List<Period>>
 internal typealias _UserSynchronizer = Synchronizer<List<User>>
+internal typealias _CategorySynchronizer = Synchronizer<List<Category>>
 
 internal typealias _AssetEventExtractor = EventExtractor<List<AssetModel>>
 internal typealias _ReviewEventExtractor = EventExtractor<List<Review>>
@@ -148,7 +153,8 @@ private val syncModule = module {
             revenueSynchronizer = get<RevenueSynchronizer>(),
             reviewSynchronizer = get<ReviewSynchronizer>(),
             saleSynchronizer = get<SaleSynchronizer>(),
-            userSynchronizer = get<UserSynchronizer>()
+            userSynchronizer = get<UserSynchronizer>(),
+            categorySynchronizer = get<CategorySynchronizer>()
         )
     }
 
@@ -264,12 +270,21 @@ private val synchronizerModule = module {
             filter = get<SaleFilter>()
         )
     }
+
+    single {
+        CategorySynchronizer(
+            networkDataSource = get<CachedNetworkDataSourceDecorator>(),
+            databaseDataSource = get<CachedDatabaseDataSourceDecorator>(),
+            mapper = get<CategoryMapper>().toListMapper()
+        )
+    }
 }
 
 private val mapperModule = module {
     single { AssetMapper }
     single { UserMapper }
     single { PublisherMapper }
+    single { CategoryMapper }
     single { SaleMapper(get(named(BEAN_PROVIDER_ASSET_BY_URL))) }
     single { DownloadMapper(get(named(BEAN_PROVIDER_ASSET_BY_URL))) }
     single { RevenueMapper(get(named(BEAN_PROVIDER_PERIOD_ID))) }

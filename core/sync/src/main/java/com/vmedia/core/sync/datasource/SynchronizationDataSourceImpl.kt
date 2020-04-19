@@ -33,7 +33,8 @@ internal class SynchronizationDataSourceImpl(
     private val revenueSynchronizer: _RevenueSynchronizer,
     private val payoutSynchronizer: _PayoutSynchronizer,
     private val periodSynchronizer: _PeriodSynchronizer,
-    private val userSynchronizer: _UserSynchronizer
+    private val userSynchronizer: _UserSynchronizer,
+    private val categorySynchronizer: _CategorySynchronizer
 ) : SynchronizationDataSource {
 
     @Volatile
@@ -71,6 +72,7 @@ internal class SynchronizationDataSourceImpl(
         return credentialsSynchronizer.synchronize()
             .andThenSynchronizeWith(
                 publisherSynchronizer,
+                categorySynchronizer,
                 assetSynchronizer,
                 userSynchronizer
             )
