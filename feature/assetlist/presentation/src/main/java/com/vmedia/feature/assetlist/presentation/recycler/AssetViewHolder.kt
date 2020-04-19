@@ -20,12 +20,14 @@ internal class AssetViewHolder(
 
     fun bind(asset: AssetShortInfo) {
         assetlist_item_largeimage.load(asset.largeImage) {
-            placeholder(R.drawable.bg_placeholder)
+            error(R.drawable.bg_placeholder_rect)
+            placeholder(R.drawable.bg_placeholder_rect)
             crossfade(true)
         }
 
         assetlist_item_iconimage.load(asset.iconImage) {
-            placeholder(R.drawable.bg_placeholder)
+            error(R.drawable.bg_placeholder_circle)
+            placeholder(R.drawable.bg_placeholder_circle)
             crossfade(true)
             transformations(CircleCropTransformation())
         }
