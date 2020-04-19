@@ -95,7 +95,8 @@ private val databaseModule = module {
             assetDao = get(),
             assetImageDao = get(),
             keywordDao = get(),
-            assetKeywordDao = get()
+            assetKeywordDao = get(),
+            categoryDao = get()
         )
     }
 
@@ -122,6 +123,7 @@ private val databaseModule = module {
     dao { getReviewDao() }
     dao { getRevenueDao() }
     dao { getPayoutDao() }
+    dao { getCategoryDao() }
 
     single { EventCacheDatabaseDataSource(get()) }
 

@@ -30,7 +30,8 @@ internal class DatabaseDataSourceImpl(
     private val assetDao: AssetDao,
     private val assetImageDao: AssetImageDao,
     private val keywordDao: KeywordDao,
-    private val assetKeywordDao: AssetKeywordDao
+    private val assetKeywordDao: AssetKeywordDao,
+    private val categoryDao: CategoryDao
 ) : DatabaseDataSource {
 
     override fun getPublisher(): Single<Publisher> {
@@ -138,6 +139,12 @@ internal class DatabaseDataSourceImpl(
         return payoutDao.getEventPayout(eventId)
     }
 
+
+    override fun putCategories(categories: List<Category>): Completable {
+        return Completable.fromAction {
+            categoryDao.insertWithReplace(categories)
+        }
+    }
 
     override fun putEvent(type: EventType, date: Date, entityIds: Collection<Long>): Completable {
         return database.completableTransaction {

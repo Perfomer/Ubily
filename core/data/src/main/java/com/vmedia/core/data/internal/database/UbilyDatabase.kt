@@ -25,7 +25,8 @@ import com.vmedia.core.data.internal.database.entity.*
         PeriodWrap::class,
         Keyword::class,
         AssetImage::class,
-        AssetKeyword::class
+        AssetKeyword::class,
+        Category::class
     ]
 )
 @TypeConverters(
@@ -51,6 +52,7 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getReviewDao(): ReviewDao
     abstract fun getRevenueDao(): RevenueDao
     abstract fun getPayoutDao(): PayoutDao
+    abstract fun getCategoryDao(): CategoryDao
 
     internal companion object {
 

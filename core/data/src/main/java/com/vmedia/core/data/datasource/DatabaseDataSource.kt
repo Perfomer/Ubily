@@ -17,7 +17,7 @@ interface DatabaseDataSource {
 
     fun getAssetByUrl(url: String): Single<Asset>
 
-    fun getAssets() : Observable<List<Asset>>
+    fun getAssets(): Observable<List<Asset>>
 
     fun getUser(id: Long): Single<User>
 
@@ -84,5 +84,7 @@ interface DatabaseDataSource {
     fun putReviews(reviews: Collection<Review>): Completable
 
     fun putUsers(users: Collection<User>): Completable
+
+    fun putCategories(categories: List<Category>): Completable
 
 }
