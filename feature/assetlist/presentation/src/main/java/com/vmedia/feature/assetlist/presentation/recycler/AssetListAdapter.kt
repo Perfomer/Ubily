@@ -3,7 +3,7 @@ package com.vmedia.feature.assetlist.presentation.recycler
 import android.view.View
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.core.common.view.recycler.diffedListBy
-import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
+import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.feature.assetlist.presentation.R
 
 internal class AssetListAdapter(

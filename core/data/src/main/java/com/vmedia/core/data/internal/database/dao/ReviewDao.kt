@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.vmedia.core.data.internal.database.dao.base.BaseDao
 import com.vmedia.core.data.internal.database.entity.Review
+import io.reactivex.Observable
 import io.reactivex.Single
 
 @Dao
@@ -24,6 +25,9 @@ interface ReviewDao : BaseDao<Review> {
         """
     )
     fun getEventReview(eventId: Long): Single<Review>
+
+    @Query("SELECT COUNT(*) FROM Review WHERE assetId = :assetId")
+    fun getCount(assetId: Long): Observable<Int>
 
     @WorkerThread
     @Query("SELECT COUNT(*) FROM Review WHERE authorId = :authorId AND assetId = :assetId")

@@ -11,8 +11,8 @@ import com.vmedia.core.common.util.addSystemTopPadding
 import com.vmedia.core.common.util.addSystemVerticalPadding
 import com.vmedia.core.common.util.init
 import com.vmedia.core.common.util.setOnClickListener
+import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
-import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent.LoadData
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListState
@@ -60,6 +60,8 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
         adapter.items = state.payload
 
         assetlist_toolbar_account.load(state.publisherAvatar) {
+            error(R.drawable.bg_placeholder_circle)
+            placeholder(R.drawable.bg_placeholder_circle)
             transformations(CircleCropTransformation())
         }
     }

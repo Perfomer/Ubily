@@ -1,6 +1,6 @@
 package com.vmedia.feature.assetlist.presentation.mvi
 
-import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
+import com.vmedia.core.domain.model.AssetShortInfo
 
 internal sealed class AssetListAction {
 

@@ -13,6 +13,8 @@ interface DatabaseDataSource {
 
     fun getPublisher(): Single<Publisher>
 
+    fun getCategory(id: Long): Single<Category>
+
     fun getAsset(id: Long): Single<Asset>
 
     fun getAssetByUrl(url: String): Single<Asset>
@@ -22,6 +24,8 @@ interface DatabaseDataSource {
     fun getUser(id: Long): Single<User>
 
     fun getUserByName(name: String): Single<User>
+
+    fun getReviewsCount(assetId: Long): Observable<Int>
 
     fun getReview(authorId: Long, assetId: Long): Single<Review>
 

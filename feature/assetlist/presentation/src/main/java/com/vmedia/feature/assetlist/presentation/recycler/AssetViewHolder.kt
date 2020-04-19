@@ -5,7 +5,7 @@ import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.vmedia.core.common.util.diffedValue
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
-import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
+import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.feature.assetlist.presentation.R
 import kotlinx.android.synthetic.main.assetlist_item.*
 
@@ -32,7 +32,7 @@ internal class AssetViewHolder(
             transformations(CircleCropTransformation())
         }
 
-        assetlist_item_category.diffedValue = asset.categoryId.toString() //todo
+        assetlist_item_category.diffedValue = asset.categoryName
         assetlist_item_name.diffedValue = asset.name
 
         assetlist_item_reviews.diffedValue = asset.reviewsCount.toString()

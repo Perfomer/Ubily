@@ -15,10 +15,16 @@ import com.vmedia.core.data.datasource.impl.DatabaseDataSourceImpl
 import com.vmedia.core.data.datasource.impl.PublisherDataSourceImpl
 import com.vmedia.core.data.datasource.impl.SettingsDataSourceImpl
 import com.vmedia.core.data.internal.database.UbilyDatabase
+import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event
+import com.vmedia.core.data.repository.asset.AssetCacheDatabaseDataSource
+import com.vmedia.core.data.repository.asset.AssetRepositoryImpl
+import com.vmedia.core.data.repository.asset.mapper.AssetShortInfoMapper
 import com.vmedia.core.data.repository.event.EventCacheDatabaseDataSource
 import com.vmedia.core.data.repository.event.EventRepositoryImpl
 import com.vmedia.core.data.repository.event.mapper.*
+import com.vmedia.core.domain.model.AssetShortInfo
+import com.vmedia.core.domain.repository.AssetRepository
 import com.vmedia.core.domain.repository.EventRepository
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -33,6 +39,8 @@ val dataModules by lazy {
         databaseModule
     )
 }
+
+internal typealias _AssetShortInfoMapper = ObservableListMapper<Asset, AssetShortInfo>
 
 internal typealias _EventListMapper = ObservableListMapper<Event, EventInfo<*>>
 internal typealias _EventMapper = ObservableMapper<Event, EventInfo<*>>
@@ -126,12 +134,20 @@ private val databaseModule = module {
     dao { getCategoryDao() }
 
     single { EventCacheDatabaseDataSource(get()) }
+    single { AssetCacheDatabaseDataSource(get()) }
 
     single<EventRepository> {
         EventRepositoryImpl(
             source = get(),
             eventListMapper = get<EventMapper>().toListMapper(),
             eventMapper = get<EventMapper>()
+        )
+    }
+
+    single<AssetRepository> {
+        AssetRepositoryImpl(
+            source = get(),
+            mapper = get<AssetShortInfoMapper>().toListMapper()
         )
     }
 
@@ -146,12 +162,14 @@ private val databaseModule = module {
         )
     }
 
-    single { AssetMapper(get()) }
-    single { DownloadMapper(get()) }
-    single { PayoutMapper(get()) }
-    single { RevenueMapper(get()) }
-    single { ReviewMapper(get()) }
-    single { SaleMapper(get()) }
+    single { AssetMapper(get<EventCacheDatabaseDataSource>()) }
+    single { DownloadMapper(get<EventCacheDatabaseDataSource>()) }
+    single { PayoutMapper(get<EventCacheDatabaseDataSource>()) }
+    single { RevenueMapper(get<EventCacheDatabaseDataSource>()) }
+    single { ReviewMapper(get<EventCacheDatabaseDataSource>()) }
+    single { SaleMapper(get<EventCacheDatabaseDataSource>()) }
+
+    single { AssetShortInfoMapper(get<AssetCacheDatabaseDataSource>()) }
 }
 
 private inline fun <reified T : Any> Module.dao(

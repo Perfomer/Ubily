@@ -1,7 +1,7 @@
 package com.vmedia.feature.assetlist.presentation.mvi
 
 import android.os.Parcelable
-import com.vmedia.feature.assetlist.domain.model.AssetShortInfo
+import com.vmedia.core.domain.model.AssetShortInfo
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

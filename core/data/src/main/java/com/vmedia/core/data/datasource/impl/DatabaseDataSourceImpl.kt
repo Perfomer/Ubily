@@ -46,6 +46,10 @@ internal class DatabaseDataSourceImpl(
         return userDao.getUserByName(name)
     }
 
+    override fun getCategory(id: Long): Single<Category> {
+        return categoryDao.getCategory(id)
+    }
+
     override fun getAsset(id: Long): Single<Asset> {
         return assetDao.getAsset(id)
     }
@@ -56,6 +60,10 @@ internal class DatabaseDataSourceImpl(
 
     override fun getAssets(): Observable<List<Asset>> {
         return assetDao.getAssets()
+    }
+
+    override fun getReviewsCount(assetId: Long): Observable<Int> {
+        return reviewDao.getCount(assetId)
     }
 
     override fun getReview(authorId: Long, assetId: Long): Single<Review> {
