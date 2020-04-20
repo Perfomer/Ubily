@@ -5,6 +5,7 @@ import com.vmedia.feature.assetlist.domain.AssetListInteractor
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListAction
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListAction.*
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
+import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent.LoadData
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListState
 import io.reactivex.rxkotlin.Observables
 
@@ -18,11 +19,12 @@ internal class AssetListViewModel(
         state: AssetListState,
         intent: AssetListIntent
     ) = when (intent) {
-        AssetListIntent.LoadData -> {
+        LoadData -> {
             Observables.zip(
                 interactor.getAssets(),
                 interactor.getPublisherAvatar()
             )
+                .asFlowSource(LoadData::class)
                 .map<AssetListAction> { (assets, avatar) -> AssetsLoadingSucceed(assets, avatar) }
                 .startWith(AssetsLoadingStarted)
                 .onErrorReturn(::AssetsLoadingFailed)
