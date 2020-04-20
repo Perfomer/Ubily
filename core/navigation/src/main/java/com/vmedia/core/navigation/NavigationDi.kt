@@ -9,6 +9,7 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 const val BEAN_FRAGMENT_AUTH = "AuthFragment"
 const val BEAN_FRAGMENT_FEED = "FeedFragment"
 const val BEAN_FRAGMENT_EVENTDETAILS = "EventDetailsFragment"
+const val BEAN_FRAGMENT_ASSETDETAILS = "AssetDetailsFragment"
 const val BEAN_FRAGMENT_ASSETLIST = "AssetListFragment"
 const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 const val BEAN_FRAGMENT_SYNC = "SyncFragment"

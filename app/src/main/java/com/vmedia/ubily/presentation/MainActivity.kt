@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToAsset(assetId: Long) {
-        navigateTo(ScreenDestination.AssetList)
+        navigateTo(ScreenDestination.AssetDetails(assetId))
     }
 
     override fun navigateToAssetSearch() {
