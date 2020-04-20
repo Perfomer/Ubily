@@ -5,7 +5,7 @@ import com.vmedia.core.common.obj.event.AssetInfo
 import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventAsset
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadImageWithRoundedCorners
+import com.vmedia.core.common.util.loadRoundedImage
 import com.vmedia.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.ItemViewHolder
 import kotlinx.android.synthetic.main.feed_item_asset_item.*
@@ -34,7 +34,7 @@ internal class AssetItemViewHolder(
         feed_item_asset_title.diffedValue = content.name
         feed_item_asset_version.diffedValue = content.version
         feed_item_asset_status.diffedValue = getString(content.status.labelResource)
-        feed_item_asset_icon.loadImageWithRoundedCorners(content.icon)
+        feed_item_asset_icon.loadRoundedImage(content.icon)
     }
 
 }

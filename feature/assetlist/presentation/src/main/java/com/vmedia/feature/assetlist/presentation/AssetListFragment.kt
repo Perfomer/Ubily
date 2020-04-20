@@ -4,13 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import coil.api.load
-import coil.transform.CircleCropTransformation
 import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.addSystemTopPadding
-import com.vmedia.core.common.util.addSystemVerticalPadding
-import com.vmedia.core.common.util.init
-import com.vmedia.core.common.util.setOnClickListener
+import com.vmedia.core.common.util.*
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
@@ -56,14 +51,8 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
 
     override fun render(state: AssetListState) {
         assetlist_loading.isVisible = state.isLoading && state.payload.isEmpty()
-
+        assetlist_toolbar_account.loadCircleImage(state.publisherAvatar)
         adapter.items = state.payload
-
-        assetlist_toolbar_account.load(state.publisherAvatar) {
-            error(R.drawable.bg_placeholder_circle)
-            placeholder(R.drawable.bg_placeholder_circle)
-            transformations(CircleCropTransformation())
-        }
     }
 
 

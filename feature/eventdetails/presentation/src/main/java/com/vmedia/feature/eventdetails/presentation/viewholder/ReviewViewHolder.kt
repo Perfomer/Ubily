@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.event.ReviewInfo
 import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadImageWithRoundedCorners
+import com.vmedia.core.common.util.loadRoundedImage
 import com.vmedia.feature.eventdetails.presentation.R
 import kotlinx.android.synthetic.main.eventdetails_item_review.*
 
@@ -40,7 +40,7 @@ internal class ReviewViewHolder(
             eventdetails_item_review_reply_body.diffedValue = item.publisherReplyBody!!
         }
 
-        eventdetails_item_review_asset_icon.loadImageWithRoundedCorners(
+        eventdetails_item_review_asset_icon.loadRoundedImage(
             imageUrl = item.assetIcon,
             cornerRadius = R.dimen.asset_icon_corners_radius_small,
             placeholder = R.drawable.bg_placeholder_rect_rounded_small

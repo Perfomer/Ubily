@@ -2,8 +2,8 @@ package com.vmedia.feature.assetlist.presentation.recycler
 
 import android.view.View
 import coil.api.load
-import coil.transform.CircleCropTransformation
 import com.vmedia.core.common.util.diffedValue
+import com.vmedia.core.common.util.loadCircleImage
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.feature.assetlist.presentation.R
@@ -25,13 +25,7 @@ internal class AssetViewHolder(
             crossfade(true)
         }
 
-        assetlist_item_iconimage.load(asset.iconImage) {
-            error(R.drawable.bg_placeholder_circle)
-            placeholder(R.drawable.bg_placeholder_circle)
-            crossfade(true)
-            transformations(CircleCropTransformation())
-        }
-
+        assetlist_item_iconimage.loadCircleImage(asset.iconImage)
         assetlist_item_category.diffedValue = asset.categoryName
         assetlist_item_name.diffedValue = asset.name
 
