@@ -7,10 +7,7 @@ import coil.api.load
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
-import com.vmedia.core.common.util.argument
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.isVisible
-import com.vmedia.core.common.util.loadCircleImage
+import com.vmedia.core.common.util.*
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.splash.presentation.mvi.AssetDetailsState
@@ -36,7 +33,18 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        assetdetails_root.addSystemBottomPadding()
 
+        val function: (v: View) -> Unit = {
+            assetdetails_description_viewmore.isVisible = false
+            assetdetails_description_scrim.isVisible = false
+            assetdetails_description_text.maxLines = Integer.MAX_VALUE
+            assetdetails_description_keywords_title.isVisible = true
+            assetdetails_description_keywords_list.isVisible = true
+        }
+
+        assetdetails_description_scrim.setOnClickListener(function)
+        assetdetails_description_viewmore.setOnClickListener(function)
     }
 
     override fun onStart() {
@@ -61,8 +69,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             assetdetails_status.diffedValue = getString(status.labelResource)
             assetdetails_size.diffedValue = String.format("%.2f", sizeMb)
 
+            assetdetails_description_text.text = description.toSpan()
+
             assetdetails_icon.loadCircleImage(iconImage)
             assetdetails_largeimage.load(bigImage)
+            assetdetails_description_image.load(bigImage)
         }
     }
 
