@@ -45,7 +45,7 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToStatistics(periodId: Long) {
-        TODO("Not yet implemented")
+        navigateTo(ScreenDestination.AssetList)
     }
 
     override fun onInitialized(

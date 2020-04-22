@@ -380,6 +380,93 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/assetdetails_publisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetdetails_description"
+            tools:background="@android:color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/assetdetails_publisher_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Publisher"
+                    android:textAllCaps="true"
+                    android:textColor="@color/brand_black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/assetdetails_publisher_avatar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_placeholder_circle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_title"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/assetdetails_publisher_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/rubik_bold"
+                    android:maxLines="1"
+                    android:textColor="@color/brand_black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@id/assetdetails_publisher_rating"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_avatar"
+                    app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_avatar"
+                    app:layout_constraintWidth_default="wrap"
+                    tools:text="Wello Graphics" />
+
+                <TextView
+                    android:id="@+id/assetdetails_publisher_rating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/brand_green_darker"
+                    app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_name"
+                    app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_name"
+                    app:layout_constraintWidth_default="wrap"
+                    tools:text="4" />
+
+                <TextView
+                    android:id="@+id/assetdetails_publisher_description"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:textColor="@color/brand_grey_dark"
+                    app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_avatar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/assetdetails_publisher_name"
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_name"
+                    tools:text="@tools:sample/lorem/random" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <ProgressBar
             android:id="@+id/assetdetails_loading"
             android:layout_width="wrap_content"
