@@ -1,4 +1,4 @@
-package com.vmedia.feature.splash.presentation.mvi
+package com.vmedia.feature.assetdetails.presentation.mvi
 
 import android.os.Parcelable
 import com.vmedia.feature.assetdetails.domain.model.AssetDetails

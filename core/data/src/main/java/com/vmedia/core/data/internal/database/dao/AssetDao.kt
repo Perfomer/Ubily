@@ -17,8 +17,14 @@ interface AssetDao : BaseDao<Asset> {
     @Query("SELECT * FROM Asset WHERE id = :id")
     fun getAsset(id: Long): Single<Asset>
 
+    @Query("SELECT * FROM Asset WHERE id = :id")
+    fun getAssetObservable(id: Long): Observable<Asset>
+
     @Query("SELECT * FROM Asset WHERE shortUrl = :url")
     fun getAssetByUrl(url: String): Single<Asset>
+
+    @Query("SELECT AVG(averageRating) FROM Asset WHERE averageRating > 0")
+    fun getAverageAssetsRating(): Observable<Double>
 
     @Query(
         """

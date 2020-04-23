@@ -19,6 +19,9 @@ interface PublisherDao : BaseDao<Publisher> {
     @Query("SELECT * FROM Publisher LIMIT 1")
     fun getPublisher(): Single<Publisher>
 
+    @Query("SELECT * FROM Publisher LIMIT 1")
+    fun getPublisherObservable(): Observable<Publisher>
+
     @Query("SELECT token, publisherName FROM Publisher WHERE id = :id")
     fun getRssToken(id: Long): Observable<RssToken>
 

@@ -7,6 +7,7 @@ import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import com.vmedia.core.data.internal.database.dao.*
 import com.vmedia.core.data.internal.database.entity.*
+import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.core.data.util.completableTransaction
 import com.vmedia.core.data.util.upsert
 import io.reactivex.Completable
@@ -38,6 +39,10 @@ internal class DatabaseDataSourceImpl(
         return publisherDao.getPublisher()
     }
 
+    override fun getPublisherObservable(): Observable<Publisher> {
+        return publisherDao.getPublisherObservable()
+    }
+
     override fun getUser(id: Long): Single<User> {
         return userDao.getUser(id)
     }
@@ -48,6 +53,10 @@ internal class DatabaseDataSourceImpl(
 
     override fun getCategory(id: Long): Single<Category> {
         return categoryDao.getCategory(id)
+    }
+
+    override fun getAssetObservable(id: Long): Observable<Asset> {
+        return assetDao.getAssetObservable(id)
     }
 
     override fun getAsset(id: Long): Single<Asset> {
@@ -62,8 +71,21 @@ internal class DatabaseDataSourceImpl(
         return assetDao.getAssets()
     }
 
+    override fun getAverageAssetsRating(): Observable<Double> {
+        return assetDao.getAverageAssetsRating()
+            .onErrorReturnItem(0.0)
+    }
+
+    override fun getArtworks(assetId: Long): Observable<List<String>> {
+        return assetImageDao.getArtworks(assetId)
+    }
+
     override fun getReviewsCount(assetId: Long): Observable<Int> {
         return reviewDao.getCount(assetId)
+    }
+
+    override fun getDetailedReviews(assetId: Long): Observable<List<ReviewDetailed>> {
+        return reviewDao.getDetailedReviews(assetId)
     }
 
     override fun getReview(authorId: Long, assetId: Long): Single<Review> {
@@ -100,6 +122,10 @@ internal class DatabaseDataSourceImpl(
             .map(Date::toPeriod)
             .flatMap { periodDao.getPeriodsAfter(it.year, it.month) }
             .mapItems(PeriodWrap::period)
+    }
+
+    override fun getKeywords(assetId: Long): Observable<List<Keyword>> {
+        return keywordDao.getKeywords(assetId)
     }
 
     override fun getLastPeriod(): Single<Period> {

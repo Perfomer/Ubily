@@ -3,6 +3,7 @@ package com.vmedia.core.data.datasource
 import com.vmedia.core.common.obj.EventType
 import com.vmedia.core.common.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
+import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -13,7 +14,11 @@ interface DatabaseDataSource {
 
     fun getPublisher(): Single<Publisher>
 
+    fun getPublisherObservable(): Observable<Publisher>
+
     fun getCategory(id: Long): Single<Category>
+
+    fun getAssetObservable(id: Long): Observable<Asset>
 
     fun getAsset(id: Long): Single<Asset>
 
@@ -21,11 +26,17 @@ interface DatabaseDataSource {
 
     fun getAssets(): Observable<List<Asset>>
 
+    fun getAverageAssetsRating(): Observable<Double>
+
+    fun getArtworks(assetId: Long): Observable<List<String>>
+
     fun getUser(id: Long): Single<User>
 
     fun getUserByName(name: String): Single<User>
 
     fun getReviewsCount(assetId: Long): Observable<Int>
+
+    fun getDetailedReviews(assetId: Long): Observable<List<ReviewDetailed>>
 
     fun getReview(authorId: Long, assetId: Long): Single<Review>
 
@@ -42,6 +53,8 @@ interface DatabaseDataSource {
     fun getSaleId(assetId: Long, date: Date, priceUsd: BigDecimal): Single<Long>
 
     fun getFreeDownloadsPeriods(): Single<List<Period>>
+
+    fun getKeywords(assetId: Long): Observable<List<Keyword>>
 
     fun getPeriod(id: Long): Single<Period>
 

@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="188dp"
             android:scaleType="centerCrop"
+            android:src="@drawable/bg_placeholder_rect"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -204,12 +205,11 @@
             android:layout_height="72dp"
             android:background="@drawable/bg_asset_icon"
             android:padding="4dp"
+            android:src="@drawable/bg_placeholder_circle"
             app:layout_constraintBottom_toTopOf="@id/assetdetails_asset"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/assetdetails_asset"
-            tools:src="@drawable/bg_asset_icon"
-            tools:tint="@color/brand_grey" />
+            app:layout_constraintTop_toTopOf="@id/assetdetails_asset" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/assetdetails_artworks"
@@ -273,6 +273,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/assetdetails_artworks"
+            app:layout_goneMarginTop="0dp"
             tools:background="@android:color/white">
 
             <androidx.constraintlayout.widget.ConstraintLayout

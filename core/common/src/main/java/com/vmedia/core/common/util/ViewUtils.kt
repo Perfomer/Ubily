@@ -26,6 +26,13 @@ var TextView.diffedValue: String
         setText(value)
     }
 
+var ProgressBar.diffedValue: Int
+    get() = progress
+    set(value) {
+        if (progress == value) return
+        progress = value
+    }
+
 var CheckBox.diffedValue: Boolean
     get() = isChecked
     set(value) {
