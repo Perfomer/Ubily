@@ -8,9 +8,11 @@
     <color name="brand_green_darkest">#134725</color>
 
     <color name="brand_grey_lightest">#F9F9F9</color>
-    <color name="brand_grey_light">#F3F3F3</color>
+    <color name="brand_grey_lighter">#F3F3F3</color>
+    <color name="brand_grey_light">#C9CDCF</color>
     <color name="brand_grey">#ADB1B4</color>
-    <color name="brand_grey_dark">#6D7073</color>
+    <color name="brand_grey_dark">#94989B</color>
+    <color name="brand_grey_darker">#6D7073</color>
 
     <color name="brand_black_light">#444E5A</color>
     <color name="brand_black">#24303D</color>

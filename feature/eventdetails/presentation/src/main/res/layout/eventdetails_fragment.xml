@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:textColor="@color/brand_grey_dark"
+                android:textColor="@color/brand_grey_darker"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/eventdetails_icon"
                 app:layout_constraintEnd_toStartOf="@id/eventdetails_options"
@@ -92,7 +92,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:padding="6dp"
                 android:src="@drawable/ic_options"
-                android:tint="@color/brand_grey_dark"
+                android:tint="@color/brand_grey_darker"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/eventdetails_icon" />
 

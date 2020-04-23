@@ -31,7 +31,7 @@ internal class RevenueViewHolder(
         val growthColor = when {
             delta > 0 -> R.color.brand_green_darker
             delta < 0 -> R.color.brand_red
-            else -> R.color.brand_grey_dark
+            else -> R.color.brand_grey_darker
         }
 
         val growthArrow = when {

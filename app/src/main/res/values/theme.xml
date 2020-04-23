@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:textColorPrimary">@color/brand_black</item>
-        <item name="android:textColorSecondary">@color/brand_grey_dark</item>
+        <item name="android:textColorSecondary">@color/brand_grey_darker</item>
 
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Ubily.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Ubily.MediumComponent</item>
