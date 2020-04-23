@@ -1,6 +1,7 @@
 package com.vmedia.feature.assetdetails.presentation
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import coil.api.load
@@ -45,6 +46,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_description_scrim.setOnClickListener(function)
         assetdetails_description_viewmore.setOnClickListener(function)
+
+        assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun onStart() {
