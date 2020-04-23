@@ -8,6 +8,18 @@ import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.vmedia.core.common.R
 
+fun ImageView.loadImage(
+    imageUrl: String?,
+    crossfade: Boolean = true,
+    @DrawableRes placeholder: Int = R.drawable.bg_placeholder_rect
+) {
+    load(imageUrl) {
+        error(placeholder)
+        placeholder(placeholder)
+        crossfade(crossfade)
+    }
+}
+
 fun ImageView.loadRoundedImage(
     imageUrl: String?,
     crossfade: Boolean = true,
