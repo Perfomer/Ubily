@@ -1,11 +1,11 @@
 package com.vmedia.core.data.internal.database.entity
 
-import androidx.annotation.IntRange
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.vmedia.core.common.obj.AssetStatus
+import com.vmedia.core.common.obj.HollowRating
 import com.vmedia.core.common.util.EMPTY_DATE
 import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
@@ -32,7 +32,7 @@ data class Asset(
     val versionName: String = "",
     val totalFileSize: Double = 0.0,
     val status: AssetStatus = AssetStatus.NONE,
-    @IntRange(from = 0, to = 5) val averageRating: Int = 0,
+    @HollowRating val averageRating: Int = 0,
 
     val name: String = "",
     val description: String = "",

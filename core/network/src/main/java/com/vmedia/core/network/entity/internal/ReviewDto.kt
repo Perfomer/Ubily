@@ -1,12 +1,12 @@
 package com.vmedia.core.network.entity.internal
 
-import androidx.annotation.IntRange
+import com.vmedia.core.common.obj.HollowRating
 import java.util.*
 
 internal data class ReviewDto(
     val title: String,
     val authorName: String,
-    @IntRange(from = 0, to = 5) val rating: Int,
+    @HollowRating val rating: Int,
     val comment: String,
     val publishingDate: Date,
     val assetShortUrl: String,

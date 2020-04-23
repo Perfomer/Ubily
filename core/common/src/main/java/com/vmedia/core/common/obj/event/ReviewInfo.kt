@@ -1,12 +1,13 @@
 package com.vmedia.core.common.obj.event
 
 import android.os.Parcelable
-import androidx.annotation.IntRange
+import com.vmedia.core.common.obj.HollowRating
+import com.vmedia.core.common.obj.Rating
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ReviewInfo(
-    @IntRange(from = 1, to = 5) val rating: Int = 1,
+    @Rating val rating: Int = 1,
     val authorName: String = "",
     val reviewTitle: String = "",
     val reviewBody: String = "",
@@ -14,5 +15,5 @@ data class ReviewInfo(
     val assetId: Long,
     val assetIcon: String? = null,
     val assetName: String = "",
-    @IntRange(from = 0, to = 5) val assetAverageRating: Int = 5
+    @HollowRating val assetAverageRating: Int = 5
 ) : Parcelable
