@@ -15,6 +15,6 @@ data class AssetDetails(
     val status: AssetStatus = AssetStatus.NONE,
     val sizeMb: Double = 0.0,
     val description: String = "",
-    val bigImage: String = "",
-    val iconImage: String = ""
+    val bigImage: String? = null,
+    val iconImage: String? = null
 ) : Parcelable

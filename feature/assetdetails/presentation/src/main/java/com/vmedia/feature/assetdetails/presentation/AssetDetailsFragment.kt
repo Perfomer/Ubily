@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
-import coil.api.load
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
@@ -64,6 +63,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_loading.isVisible = state.isLoading
 
         with(state.payload) {
+            val hasLargeImage = !bigImage.isNullOrBlank()
+
             assetdetails_name.diffedValue = name
             assetdetails_identifier.diffedValue = id.toString()
             assetdetails_category.diffedValue = categoryName
@@ -75,8 +76,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             assetdetails_description_text.text = description.toSpan()
 
             assetdetails_icon.loadCircleImage(iconImage)
-            assetdetails_largeimage.load(bigImage)
-            assetdetails_description_image.load(bigImage)
+            assetdetails_largeimage.loadImage(bigImage)
+
+            assetdetails_description_image.isVisible = hasLargeImage
+            if (hasLargeImage) assetdetails_description_image.loadImage(bigImage)
         }
     }
 
