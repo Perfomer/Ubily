@@ -1,7 +1,6 @@
 package com.vmedia.feature.feed.presentation.recycler
 
 import android.view.View
-import coil.api.load
 import com.perfomer.blitz.setTimeAgo
 import com.vmedia.core.common.obj.event.EventInfo
 import com.vmedia.core.common.obj.iconResource
@@ -26,7 +25,7 @@ internal abstract class FeedViewHolder<T : EventInfo<*>>(
     fun bind(event: EventInfo<*>) {
         val type = event.type
 
-        feed_item_icon.load(type.iconResource)
+        feed_item_icon.setImageResource(type.iconResource)
         feed_item_title.diffedValue = getString(type.titleResource)
         feed_item_date.setTimeAgo(event.date, showSeconds = true)
         feed_item_description.setEventDescription(event)
