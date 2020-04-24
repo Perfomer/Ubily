@@ -8,5 +8,7 @@ import kotlinx.android.parcel.Parcelize
 internal data class AssetDetailsState(
     val isLoading: Boolean = false,
     val error: Throwable? = null,
-    val payload: AssetDetails = AssetDetails()
+    val payload: AssetDetails = AssetDetails(),
+    val isDescriptionExpanded: Boolean = false,
+    val isReviewsExpanded: Boolean = false
 ): Parcelable

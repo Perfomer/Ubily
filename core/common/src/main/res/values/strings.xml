@@ -87,4 +87,6 @@
 
     <string name="event_initialized_title">Unity data is initialized!</string>
     <string name="event_initialized_text"><![CDATA[Welcome to <b>Unity Billionaire</b>! Let\'s start with your statistics. Just click it to see details]]></string>
+
+    <string name="reviews_count"><![CDATA[Reviews count: <b>%d</b>]]></string>
 </resources>

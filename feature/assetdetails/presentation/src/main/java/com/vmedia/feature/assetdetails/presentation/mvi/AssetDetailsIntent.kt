@@ -6,6 +6,8 @@ internal sealed class AssetDetailsIntent {
 
     object ExpandDescription : AssetDetailsIntent()
 
+    object ExpandReviews : AssetDetailsIntent()
+
 
 
 }

@@ -10,4 +10,8 @@ internal sealed class AssetDetailsAction {
 
     class AssetLoadingFailed(val error: Throwable) : AssetDetailsAction()
 
+    object DescriptionExpanded : AssetDetailsAction()
+
+    object ReviewsExpanded : AssetDetailsAction()
+
 }

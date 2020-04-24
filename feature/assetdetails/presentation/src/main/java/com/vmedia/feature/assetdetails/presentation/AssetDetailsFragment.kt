@@ -14,6 +14,7 @@ import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -39,15 +40,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         super.onViewCreated(view, savedInstanceState)
         assetdetails_root.addSystemBottomPadding()
 
-        val function: (v: View) -> Unit = {
-            assetdetails_description_viewmore.isVisible = false
-            assetdetails_description_scrim.isVisible = false
-            assetdetails_description_text.maxLines = Integer.MAX_VALUE
-            currentState?.let { renderKeywords(it.payload.asset.keywords) }
-        }
-
-        assetdetails_description_scrim.setOnClickListener(function)
-        assetdetails_description_viewmore.setOnClickListener(function)
+        assetdetails_description_scrim.setOnClickListener { postIntent(ExpandDescription) }
+        assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
     }
@@ -64,30 +58,41 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         with(state.payload) {
             renderAsset(asset)
             renderArtworks(asset.artworks)
-            renderKeywords(asset.keywords)
-            renderPublisher(publisher)
+            renderDescription(asset, state.isDescriptionExpanded)
             renderReviews(reviews)
+            renderPublisher(publisher)
         }
     }
 
     private fun renderAsset(asset: DetailedAsset) = with(asset) {
-        val hasLargeImage = !bigImage.isNullOrBlank()
-
         assetdetails_name.diffedValue = name
         assetdetails_identifier.diffedValue = id.toString()
         assetdetails_category.diffedValue = categoryName
         assetdetails_price.diffedValue = "$$priceUsd"
         assetdetails_version.diffedValue = versionName
         assetdetails_status.diffedValue = getString(status.labelResource)
-        assetdetails_size.diffedValue = String.format("%.2f", sizeMb)
-
-        assetdetails_description_text.text = description.toSpan()
+        assetdetails_size.diffedValue = sizeMb.cropToString()
 
         iconImage?.let { assetdetails_icon.loadCircleImage(it) }
         bigImage?.let { assetdetails_largeimage.loadImage(it) }
+    }
+
+    private fun renderDescription(asset: DetailedAsset, isExpanded: Boolean) = with(asset) {
+        val hasLargeImage = !bigImage.isNullOrBlank()
+
+        assetdetails_description_text.text = description.toSpan()
 
         assetdetails_description_image.isVisible = hasLargeImage
         if (hasLargeImage) assetdetails_description_image.loadImage(bigImage)
+
+        renderKeywords(asset.keywords, isExpanded)
+
+        assetdetails_description_viewmore.isVisible = !isExpanded
+        assetdetails_description_scrim.isVisible = !isExpanded
+
+        assetdetails_description_text.maxLines =
+            if (isExpanded) Integer.MAX_VALUE
+            else MAX_COLLAPSED_DESCRIPTION_LINES
     }
 
     private fun renderArtworks(artworks: List<String>) {
@@ -100,8 +105,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         }
     }
 
-    private fun renderKeywords(keywords: List<KeywordModel>) {
-        val hasKeywords = keywords.isNotEmpty()
+    private fun renderKeywords(keywords: List<KeywordModel>, isDescriptionExpanded: Boolean) {
+        val hasKeywords = keywords.isNotEmpty() && isDescriptionExpanded
 
         assetdetails_description_keywords_list.isVisible = hasKeywords
         assetdetails_description_keywords_title.isVisible = hasKeywords
@@ -127,12 +132,9 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             return
         }
 
-        assetdetails_reviews_rating_value.diffedValue = averageReviewsRating.cropToString()
+        assetdetails_reviews_count.text = getString(R.string.reviews_count, reviewsCount).toSpan()
 
-        assetdetails_reviews_count.diffedValue = getString(
-            R.string.assetdetails_reviews_count,
-            reviewsCount
-        )
+        assetdetails_reviews_rating_value.diffedValue = averageReviewsRating.cropToString()
 
         assetdetails_reviews_1_count.diffedValue = oneStarStats.count.toString()
         assetdetails_reviews_2_count.diffedValue = twoStarsStats.count.toString()
@@ -149,7 +151,9 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     internal companion object {
 
-        fun newInstance(assetId: Long) = AssetDetailsFragment().apply {
+        private const val MAX_COLLAPSED_DESCRIPTION_LINES = 10
+
+        internal fun newInstance(assetId: Long) = AssetDetailsFragment().apply {
             this.assetId = assetId
         }
 
