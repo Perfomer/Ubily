@@ -7,6 +7,7 @@ import java.util.*
 const val FORMAT_TABLEVALUES = "yyyy-MM-dd"
 const val FORMAT_PACKAGEVERSION = "yyyy-MM-dd HH:mm:ss"
 const val FORMAT_RSS = "EEE, d MMM yyyy HH:mm:ss Z"
+const val FORMAT_REVIEWS = "dd.MM.yyyy"
 
 val EMPTY_DATE = Date(0L)
 

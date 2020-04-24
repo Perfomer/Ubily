@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="16dp">
+
+    <ImageView
+        android:id="@+id/assetdetails_review_item_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/bg_placeholder_circle"
+        android:tint="@color/brand_green_darker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_avatar_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:fontFamily="@font/rubik_bold"
+        android:maxLength="1"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintEnd_toEndOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintStart_toStartOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintTop_toTopOf="@id/assetdetails_review_item_avatar"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:fontFamily="@font/rubik_bold"
+        android:textColor="@color/brand_black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/assetdetails_review_item_date"
+        app:layout_constraintEnd_toStartOf="@id/assetdetails_review_item_rating"
+        app:layout_constraintStart_toEndOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintTop_toTopOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@tools:sample/full_names" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/brand_grey_darker"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintStart_toStartOf="@id/assetdetails_review_item_author"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_author"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/assetdetails_review_item_rating"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:max="5"
+        android:progressTint="@color/brand_green_darker"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/assetdetails_review_item_avatar"
+        tools:rating="5" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_bold"
+        android:textColor="@color/brand_black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_avatar"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autoLink="all"
+        android:textColor="@color/brand_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_title"
+        tools:maxLines="6"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_reply_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="@string/event_review_reply_title"
+        android:textColor="@color/brand_black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_comment" />
+
+    <TextView
+        android:id="@+id/assetdetails_review_item_reply_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autoLink="all"
+        android:textColor="@color/brand_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/assetdetails_review_item_reply_title"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_reply_title"
+        tools:maxLines="6"
+        tools:text="@tools:sample/lorem/random" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

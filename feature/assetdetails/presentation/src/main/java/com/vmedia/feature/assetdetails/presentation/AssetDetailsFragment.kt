@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
@@ -16,6 +18,7 @@ import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
+import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -27,6 +30,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private val navigator: SplashNavigator
         get() = activity as SplashNavigator
+
+    private val reviewsAdapter: ReviewsAdapter by lazy { ReviewsAdapter({ TODO() }) }
 
     private var errorSnackbar: Snackbar? = null
 
@@ -44,6 +49,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
+
+        assetdetails_reviews_list.init(reviewsAdapter)
+        assetdetails_reviews_list.addItemDecoration(
+            DividerItemDecoration(context, RecyclerView.VERTICAL)
+        )
     }
 
     override fun onStop() {
@@ -147,6 +157,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_3_progress.diffedValue = threeStarsStats.percent
         assetdetails_reviews_4_progress.diffedValue = fourStarsStats.percent
         assetdetails_reviews_5_progress.diffedValue = fiveStarsStats.percent
+
+        reviewsAdapter.items = reviewsModel.reviews
     }
 
     internal companion object {
