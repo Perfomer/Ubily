@@ -20,7 +20,7 @@ interface ReviewDao : BaseDao<Review> {
             SELECT * FROM Review review
                 JOIN User user ON (review.authorId = user.id)
             WHERE assetId = :assetId
-            ORDER BY publishingDate
+            ORDER BY publishingDate DESC
         """
     )
     fun getDetailedReviews(assetId: Long): Observable<List<ReviewDetailed>>
