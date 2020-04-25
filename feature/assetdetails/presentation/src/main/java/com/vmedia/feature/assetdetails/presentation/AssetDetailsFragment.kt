@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
@@ -18,6 +22,7 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.Expan
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandReviews
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
+import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -33,6 +38,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private val reviewsAdapter by lazy { ReviewsAdapter({ TODO() }) }
     private val artworksAdapter by lazy { ArtworksAdapter({ TODO() }) }
+    private val keywordsAdapter by lazy { KeywordsAdapter({ TODO() }) }
 
     private var errorSnackbar: Snackbar? = null
 
@@ -55,6 +61,14 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_artworks_list.adapter = artworksAdapter
         assetdetails_reviews_list.adapter = reviewsAdapter
+        assetdetails_description_keywords_list.init(
+            adapter = keywordsAdapter,
+            layoutManager = FlexboxLayoutManager(context).apply {
+                flexWrap = FlexWrap.WRAP
+                flexDirection = FlexDirection.ROW
+                alignItems = AlignItems.STRETCH
+            }
+        )
     }
 
     override fun onStop() {
@@ -127,6 +141,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         if (!hasKeywords) {
             return
         }
+
+        keywordsAdapter.items = keywords
     }
 
     private fun renderPublisher(publisherModel: PublisherModel) = with(publisherModel) {

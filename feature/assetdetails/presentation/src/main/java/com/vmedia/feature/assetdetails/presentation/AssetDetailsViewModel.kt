@@ -41,10 +41,14 @@ internal class AssetDetailsViewModel(
 
         is AssetLoadingSucceed -> {
             val payload = action.payload
+            val asset = payload.asset
+
+            val isDescriptionShort = asset.description.length <= MAX_COLLAPSED_DESCRIPTION_LENGTH
+            val isKeywordsListShort = asset.keywords.size <= MAX_COLLAPSED_KEYWORDS_COUNT
 
             val isDescriptionExpanded =
                 if (oldState.isDescriptionExpanded) true
-                else payload.asset.description.length <= MAX_COLLAPSED_DESCRIPTION_LENGTH
+                else isDescriptionShort && isKeywordsListShort
 
             val isReviewsExpanded =
                 if (oldState.isReviewsExpanded) true
@@ -78,6 +82,7 @@ internal class AssetDetailsViewModel(
     private companion object {
 
         private const val MAX_COLLAPSED_DESCRIPTION_LENGTH = 300
+        private const val MAX_COLLAPSED_KEYWORDS_COUNT = 10
         private const val MAX_COLLAPSED_REVIEWS_COUNT = 3
 
     }

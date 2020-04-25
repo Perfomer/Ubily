@@ -363,9 +363,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/assetdetails_description_keywords_list"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
