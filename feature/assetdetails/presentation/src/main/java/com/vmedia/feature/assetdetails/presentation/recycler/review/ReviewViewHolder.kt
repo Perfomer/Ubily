@@ -2,9 +2,7 @@ package com.vmedia.feature.assetdetails.presentation.recycler.review
 
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.util.FORMAT_REVIEWS
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.format
+import com.vmedia.core.common.util.*
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import kotlinx.android.synthetic.main.assetdetails_review_item.*
@@ -27,6 +25,7 @@ internal class ReviewViewHolder(
         val publisherReply = review.publisherReply
         val hasReply = !review.publisherReply.isNullOrBlank()
 
+        assetdetails_review_item_avatar.setTint(getUserColorResource(authorName))
         assetdetails_review_item_avatar_letter.diffedValue = authorName
         assetdetails_review_item_author.diffedValue = authorName
         assetdetails_review_item_date.diffedValue = review.publishingDate.format(FORMAT_REVIEWS)
