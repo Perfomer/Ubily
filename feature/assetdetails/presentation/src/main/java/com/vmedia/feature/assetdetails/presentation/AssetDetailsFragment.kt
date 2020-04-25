@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -59,9 +58,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         )
 
         assetdetails_reviews_list.init(reviewsAdapter)
-        assetdetails_reviews_list.addItemDecoration(
-            DividerItemDecoration(context, RecyclerView.VERTICAL)
-        )
     }
 
     override fun onStop() {

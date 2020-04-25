@@ -22,7 +22,10 @@ internal class ReviewsAdapter(
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(
+            review = items[position],
+            showDivider = position != itemCount - 1
+        )
     }
 
     private fun onAuthorClick(position: Int) {

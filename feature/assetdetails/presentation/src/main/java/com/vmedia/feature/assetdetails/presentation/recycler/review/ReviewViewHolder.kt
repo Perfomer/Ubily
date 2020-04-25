@@ -20,7 +20,7 @@ internal class ReviewViewHolder(
         }
     }
 
-    fun bind(review: ReviewDetailed) {
+    fun bind(review: ReviewDetailed, showDivider: Boolean) {
         val authorName = review.authorName
         val publisherReply = review.publisherReply
         val hasReply = !review.publisherReply.isNullOrBlank()
@@ -34,6 +34,7 @@ internal class ReviewViewHolder(
 
         assetdetails_review_item_reply_comment.isVisible = hasReply
         assetdetails_review_item_reply_title.isVisible = hasReply
+        assetdetails_review_item_divider.isVisible = showDivider
 
         if (hasReply) {
             assetdetails_review_item_reply_comment.diffedValue = publisherReply!!
