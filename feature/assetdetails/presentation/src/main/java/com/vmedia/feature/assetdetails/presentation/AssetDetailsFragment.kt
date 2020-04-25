@@ -5,6 +5,7 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
@@ -18,6 +19,7 @@ import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
+import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -31,7 +33,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     private val navigator: SplashNavigator
         get() = activity as SplashNavigator
 
-    private val reviewsAdapter: ReviewsAdapter by lazy { ReviewsAdapter({ TODO() }) }
+    private val reviewsAdapter by lazy { ReviewsAdapter({ TODO() }) }
+    private val artworksAdapter by lazy { ArtworksAdapter({ TODO() }) }
 
     private var errorSnackbar: Snackbar? = null
 
@@ -49,6 +52,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
+
+        assetdetails_artworks_list.init(
+            adapter = artworksAdapter,
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        )
 
         assetdetails_reviews_list.init(reviewsAdapter)
         assetdetails_reviews_list.addItemDecoration(
@@ -113,6 +121,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         if (!hasArtworks) {
             return
         }
+
+        artworksAdapter.items = artworks
     }
 
     private fun renderKeywords(keywords: List<KeywordModel>, isDescriptionExpanded: Boolean) {

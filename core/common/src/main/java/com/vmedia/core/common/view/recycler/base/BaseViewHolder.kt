@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import kotlinx.android.extensions.LayoutContainer
 
+typealias ViewHolderOnClick = (position: Int) -> Unit
+
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseViewHolder(
     override val containerView: View
@@ -26,7 +28,7 @@ abstract class BaseViewHolder(
         if (hasPosition) invoke(item)
     }
 
-    protected fun ((Int) -> Unit).invokeWithPosition() {
+    protected fun ViewHolderOnClick.invokeWithPosition() {
         if (hasPosition) invoke(adapterPosition)
     }
 

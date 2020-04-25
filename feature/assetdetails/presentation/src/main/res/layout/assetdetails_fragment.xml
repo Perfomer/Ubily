@@ -225,14 +225,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
                 android:paddingTop="6dp"
                 android:paddingBottom="20dp">
 
                 <TextView
-                    android:id="@+id/assetlist_artworks_title"
+                    android:id="@+id/assetdetails_artworks_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="14dp"
                     android:text="Artworks"
                     android:textAllCaps="true"
@@ -242,23 +242,29 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/assetlist_artworks_showall"
+                    android:id="@+id/assetdetails_artworks_showall"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:text="View all"
                     android:textColor="@color/brand_green_darker"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/assetlist_artworks_list"
+                    android:id="@+id/assetdetails_artworks_list"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/assetlist_artworks_title"
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_artworks_title"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/assetdetails_artwork_item"
                     tools:orientation="horizontal" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -667,7 +673,9 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_sort_value" />
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_sort_value"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/assetdetails_review_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
