@@ -15,6 +15,8 @@ internal class ReviewViewHolder(
 ) : BaseViewHolder(containerView) {
 
     init {
+        assetdetails_review_item_rating.max = MAX_STARS
+
         assetdetails_review_item_avatar.setOnClickListener {
             onAuthorClick.invokeWithPosition()
         }
@@ -28,7 +30,7 @@ internal class ReviewViewHolder(
         assetdetails_review_item_avatar_letter.diffedValue = authorName
         assetdetails_review_item_author.diffedValue = authorName
         assetdetails_review_item_date.diffedValue = review.publishingDate.format(FORMAT_REVIEWS)
-        assetdetails_review_item_rating.diffedValue = review.rating * 2
+        assetdetails_review_item_rating.diffedValue = review.rating
         assetdetails_review_item_title.diffedValue = review.title
         assetdetails_review_item_comment.diffedValue = review.comment
 
@@ -36,9 +38,18 @@ internal class ReviewViewHolder(
         assetdetails_review_item_reply_title.isVisible = hasReply
         assetdetails_review_item_divider.isVisible = showDivider
 
+        assetdetails_review_item_title.isVisible = review.title.isNotBlank()
+        assetdetails_review_item_comment.isVisible = review.comment.isNotBlank()
+
         if (hasReply) {
             assetdetails_review_item_reply_comment.diffedValue = publisherReply!!
         }
+    }
+
+    private companion object {
+
+        private const val MAX_STARS = 5
+
     }
 
 }

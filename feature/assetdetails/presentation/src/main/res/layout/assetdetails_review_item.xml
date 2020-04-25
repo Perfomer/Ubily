@@ -12,8 +12,10 @@
         android:layout_height="40dp"
         android:src="@drawable/bg_placeholder_circle"
         android:tint="@color/brand_green_darker"
+        app:layout_constraintBottom_toTopOf="@id/assetdetails_review_item_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="16dp"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -80,9 +82,11 @@
         android:textColor="@color/brand_black"
         android:textIsSelectable="true"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_review_item_comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assetdetails_review_item_avatar"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@tools:sample/lorem" />
 
     <TextView
@@ -136,7 +140,7 @@
         android:id="@+id/assetdetails_review_item_divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/brand_grey_light"
+        android:background="@color/brand_grey_lighter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

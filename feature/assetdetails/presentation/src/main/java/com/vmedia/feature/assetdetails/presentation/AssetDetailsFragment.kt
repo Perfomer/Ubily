@@ -17,12 +17,14 @@ import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandReviews
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
+
 
 internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetailsState, Nothing>(
     layoutResource = R.layout.assetdetails_fragment,
@@ -49,6 +51,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_description_scrim.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
+        assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
+        assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
 
@@ -73,7 +77,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             renderAsset(asset)
             renderArtworks(asset.artworks)
             renderDescription(asset, state.isDescriptionExpanded)
-            renderReviews(reviews)
+            renderReviews(reviews, state.isReviewsExpanded)
             renderPublisher(publisher)
         }
     }
@@ -139,7 +143,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_publisher_avatar.loadCircleImage(avatar)
     }
 
-    private fun renderReviews(reviewsModel: ReviewsModel) = with(reviewsModel) {
+    private fun renderReviews(
+        reviewsModel: ReviewsModel,
+        isExpanded: Boolean
+    ) = with(reviewsModel) {
         val hasReviews = reviewsCount > 0
 
         assetdetails_reviews.isVisible = hasReviews
@@ -164,7 +171,13 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_4_progress.diffedValue = fourStarsStats.percent
         assetdetails_reviews_5_progress.diffedValue = fiveStarsStats.percent
 
-        reviewsAdapter.items = reviewsModel.reviews
+        assetdetails_reviews_viewmore.isVisible = !isExpanded
+        assetdetails_reviews_scrim.isVisible = !isExpanded
+
+        reviewsAdapter.notifyItemChanged(reviewsAdapter.items.size - 1)
+        reviewsAdapter.items =
+            if (isExpanded) reviews
+            else collapsedReviews
     }
 
     internal companion object {

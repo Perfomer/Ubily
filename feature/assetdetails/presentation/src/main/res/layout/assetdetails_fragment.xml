@@ -258,6 +258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:clipToPadding="false"
+                    android:overScrollMode="never"
                     android:paddingStart="20dp"
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -671,11 +672,37 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_sort_value"
                     tools:itemCount="2"
                     tools:listitem="@layout/assetdetails_review_item" />
+
+                <ImageView
+                    android:id="@+id/assetdetails_reviews_scrim"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_scrim"
+                    app:layout_constraintBottom_toBottomOf="@id/assetdetails_reviews_list"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/assetdetails_reviews_list" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/assetdetails_reviews_viewmore"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/brand_grey_lightest"
+                    android:text="View more"
+                    android:textColor="@color/brand_green_darker"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_list"
+                    app:rippleColor="@color/brand_green" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -772,10 +799,10 @@
             android:id="@+id/assetdetails_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/assetdetails_largeimage"
+            app:layout_constraintEnd_toEndOf="@id/assetdetails_largeimage"
+            app:layout_constraintStart_toStartOf="@id/assetdetails_largeimage"
+            app:layout_constraintTop_toTopOf="@id/assetdetails_largeimage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

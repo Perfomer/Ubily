@@ -52,7 +52,11 @@ internal class AssetDetailsViewModel(
 
             oldState.copy(
                 isLoading = false,
-                payload = payload,
+                payload = payload.copy(
+                    reviews = payload.reviews.copy(
+                        collapsedReviews = payload.reviews.reviews.take(MAX_COLLAPSED_REVIEWS_COUNT)
+                    )
+                ),
                 isDescriptionExpanded = isDescriptionExpanded,
                 isReviewsExpanded = isReviewsExpanded
             )
