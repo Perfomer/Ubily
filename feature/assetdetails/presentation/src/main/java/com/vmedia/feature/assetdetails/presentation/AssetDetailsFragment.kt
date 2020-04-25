@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
@@ -24,7 +22,6 @@ import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapt
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetailsState, Nothing>(
     layoutResource = R.layout.assetdetails_fragment,
@@ -56,12 +53,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
 
-        assetdetails_artworks_list.init(
-            adapter = artworksAdapter,
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        )
-
-        assetdetails_reviews_list.init(reviewsAdapter)
+        assetdetails_artworks_list.adapter = artworksAdapter
+        assetdetails_reviews_list.adapter = reviewsAdapter
     }
 
     override fun onStop() {
