@@ -3,9 +3,11 @@ package com.vmedia.feature.assetlist.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.*
+import com.vmedia.core.common.util.addSystemTopPadding
+import com.vmedia.core.common.util.addSystemVerticalPadding
+import com.vmedia.core.common.util.loadCircleImage
+import com.vmedia.core.common.util.setOnClickListener
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
@@ -38,10 +40,7 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
         assetlist_toolbar_search.setOnClickListener(navigator::navigateToAssetSearch)
         assetlist_toolbar_filter.setOnClickListener(navigator::navigateToAssetSearch)
 
-        assetlist_list.init(
-            adapter = adapter,
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        )
+        assetlist_list.adapter = adapter
     }
 
     override fun onDestroyView() {
