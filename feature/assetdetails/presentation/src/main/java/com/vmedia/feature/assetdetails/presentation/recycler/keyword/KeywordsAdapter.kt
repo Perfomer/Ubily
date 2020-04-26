@@ -7,7 +7,7 @@ import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.presentation.R
 
 internal class KeywordsAdapter(
-    private val onClick: (KeywordModel) -> Unit
+    private val onClick: (keywordId: Long) -> Unit
 ) : BaseAdapter<KeywordViewHolder>() {
 
     var items by diffedListBy(KeywordModel::id)
@@ -27,7 +27,7 @@ internal class KeywordsAdapter(
 
 
     private fun onClick(position: Int) {
-        onClick.invoke(items[position])
+        onClick.invoke(items[position].id)
     }
 
 }

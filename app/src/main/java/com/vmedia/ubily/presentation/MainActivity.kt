@@ -1,6 +1,7 @@
 package com.vmedia.ubily.presentation
 
 import com.vmedia.core.navigation.ScreenDestination
+import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
@@ -20,7 +21,8 @@ class MainActivity : BaseActivity(
     AuthNavigator,
     FeedNavigator,
     EventDetailsNavigator,
-    AssetListNavigator {
+    AssetListNavigator,
+    AssetDetailsNavigator {
 
 
     private var isUserAuthorized: Boolean = false
@@ -41,6 +43,18 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToPublisher() {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToUser(id: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToAssetsSearch(keywordId: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun navigateToGallery(artworks: List<String>, targetArtworkPosition: Int) {
         TODO("Not yet implemented")
     }
 

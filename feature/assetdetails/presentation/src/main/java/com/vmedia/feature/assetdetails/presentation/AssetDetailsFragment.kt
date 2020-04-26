@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.*
-import com.vmedia.core.navigation.navigator.splash.SplashNavigator
+import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel
@@ -33,12 +33,21 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     initialIntent = AssetDetailsIntent.LoadData
 ) {
 
-    private val navigator: SplashNavigator
-        get() = activity as SplashNavigator
+    private val navigator: AssetDetailsNavigator
+        get() = activity as AssetDetailsNavigator
 
-    private val reviewsAdapter by lazy { ReviewsAdapter({ TODO() }) }
-    private val artworksAdapter by lazy { ArtworksAdapter({ TODO() }) }
-    private val keywordsAdapter by lazy { KeywordsAdapter({ TODO() }) }
+    private val reviewsAdapter by lazy { ReviewsAdapter(navigator::navigateToUser) }
+
+    private val keywordsAdapter by lazy { KeywordsAdapter(navigator::navigateToAssetsSearch) }
+
+    private val artworksAdapter by lazy {
+        ArtworksAdapter { artworkPosition ->
+            navigator.navigateToGallery(
+                artworks = currentState!!.payload.asset.artworks,
+                targetArtworkPosition = artworkPosition
+            )
+        }
+    }
 
     private var errorSnackbar: Snackbar? = null
 
@@ -56,6 +65,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
         assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
+
+        assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
 
