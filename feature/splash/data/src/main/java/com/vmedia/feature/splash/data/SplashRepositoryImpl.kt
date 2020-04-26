@@ -14,6 +14,7 @@ internal class SplashRepositoryImpl(
 
     override fun syncNetworkCredentials(): Completable {
         return networkCredentialsDataSource.synchronizeCredentials()
+            .onErrorComplete()
     }
 
     override fun isUserAuthorized(): Single<Boolean> {
