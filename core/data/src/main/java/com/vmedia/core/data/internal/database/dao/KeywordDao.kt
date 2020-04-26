@@ -19,6 +19,7 @@ interface KeywordDao : BaseDao<Keyword> {
             SELECT * FROM AssetKeyword assetKeyword
                 LEFT JOIN Keyword keyword ON (keyword.id = assetKeyword.keywordId)
             WHERE assetId = :assetId
+            ORDER BY value
         """
     )
     fun getKeywords(assetId: Long): Observable<List<Keyword>>
