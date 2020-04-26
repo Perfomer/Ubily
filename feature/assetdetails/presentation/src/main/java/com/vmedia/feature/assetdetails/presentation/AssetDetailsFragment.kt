@@ -68,6 +68,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
+        assetdetails_externallink.setOnClickListener {
+            navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
+        }
+
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
 
         assetdetails_artworks_list.adapter = artworksAdapter

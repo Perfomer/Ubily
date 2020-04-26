@@ -2,6 +2,8 @@ package com.vmedia.core.navigation.navigator.assetdetails
 
 interface AssetDetailsNavigator {
 
+    fun navigateToUrl(url: String)
+
     fun navigateToPublisher()
 
     fun navigateToUser(id: Long)

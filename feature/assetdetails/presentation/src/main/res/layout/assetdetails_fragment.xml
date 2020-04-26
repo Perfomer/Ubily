@@ -25,6 +25,24 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/assetdetails_externallink"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/brand_grey_lighter"
+            android:paddingTop="28dp"
+            android:text="Open in browser"
+            android:textColor="@color/brand_green_darker"
+            app:icon="@drawable/ic_external_link"
+            app:iconGravity="textStart"
+            app:iconTint="@color/brand_green_darker"
+            app:layout_constraintBottom_toTopOf="@id/assetdetails_artworks"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="@color/brand_green" />
+
         <FrameLayout
             android:id="@+id/assetdetails_asset"
             android:layout_width="0dp"
@@ -216,6 +234,7 @@
             android:id="@+id/assetdetails_artworks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
             app:cardCornerRadius="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

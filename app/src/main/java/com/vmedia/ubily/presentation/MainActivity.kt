@@ -58,6 +58,10 @@ class MainActivity : BaseActivity(
         TODO("Not yet implemented")
     }
 
+    override fun navigateToUrl(url: String) {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToStatistics(periodId: Long) {
         navigateTo(ScreenDestination.AssetList)
     }
