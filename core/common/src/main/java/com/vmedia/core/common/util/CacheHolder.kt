@@ -101,8 +101,7 @@ private class CachedSingleValue<T>(
         return if (isQueried) {
             subject.firstOrError()
         } else {
-            Single.fromCallable { source.blockingGet() }
-                .doOnSubscribe { isQueried = true }
+            source.doOnSubscribe { isQueried = true }
                 .doOnSuccess(subject::onNext)
         }
     }
