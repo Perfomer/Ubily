@@ -64,8 +64,10 @@ internal class SynchronizationDataSourceImpl(
         return execute()
             .andThen(Completable.defer { eventProducer.produce(syncStatus) })
             .doOnSubscribe { isSynchronizing = true }
-            .doOnTerminate { isSynchronizing = false }
-            .doOnTerminate(::clear)
+            .doOnTerminate {
+                isSynchronizing = false
+                clear()
+            }
     }
 
     private fun execute(): Completable {

@@ -42,24 +42,24 @@ internal class NetworkDataSourceImpl(
 ) : NetworkDataSource {
 
     override fun getPeriods(): Single<List<Period>> {
-        return api.getPeriods(credentials.userId)
+        return Single.defer { api.getPeriods(credentials.userId) }
             .map(PeriodsModel::periods)
             .map { it.asReversed() }
             .mapWith(periodMapper)
     }
 
     override fun getDownloads(period: Period): Single<List<DownloadDto>> {
-        return api.getDownloads(credentials.userId, period.toString())
+        return Single.defer { api.getDownloads(credentials.userId, period.toString()) }
             .mapWith(downloadMapper)
     }
 
     override fun getSales(period: Period): Single<List<SaleDto>> {
-        return api.getSales(credentials.userId, period.toString())
+        return Single.defer { api.getSales(credentials.userId, period.toString()) }
             .mapWith(saleMapper)
     }
 
     override fun getIncome(): Single<List<IncomeDto>> {
-        return api.getIncome(credentials.userId)
+        return Single.defer { api.getIncome(credentials.userId) }
             .mapWith(incomeMapper)
             .filterWith(incomeFilter)
     }
@@ -77,7 +77,7 @@ internal class NetworkDataSourceImpl(
     }
 
     override fun getPublisherInfo(): Single<PublisherDto> {
-        return api.getPublisherInfo(credentials.userId)
+        return Single.defer { api.getPublisherInfo(credentials.userId) }
             .map(PublisherResponseModel::result)
             .map(PublisherWrapModel::publisher)
             .mapWith(publisherMapper)
@@ -93,9 +93,10 @@ internal class NetworkDataSourceImpl(
     }
 
     override fun getReviews(): Single<List<DetailedReviewDto>> {
-        val token = credentials.rssToken
-
-        return rssApi.getReviewsRss(token.publisherName, token.token)
+        return Single.defer {
+            val token = credentials.rssToken
+            rssApi.getReviewsRss(token.publisherName, token.token)
+        }
             .map(RssModel::getChannel)
             .map(RssChannelModel::getItems)
             .mapWith(reviewMapper)
