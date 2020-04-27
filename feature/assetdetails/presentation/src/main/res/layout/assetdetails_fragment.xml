@@ -770,7 +770,7 @@
 
                 <TextView
                     android:id="@+id/assetdetails_publisher_name"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
                     android:ellipsize="end"
@@ -788,7 +788,7 @@
 
                 <TextView
                     android:id="@+id/assetdetails_publisher_rating"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:textColor="@color/brand_green_darker"
