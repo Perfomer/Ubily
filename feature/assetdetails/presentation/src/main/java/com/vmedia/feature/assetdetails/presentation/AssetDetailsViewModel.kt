@@ -29,6 +29,8 @@ internal class AssetDetailsViewModel(
         ExpandDescription -> DescriptionExpanded.toObservable()
 
         ExpandReviews -> ReviewsExpanded.toObservable()
+
+        is UpdateSortType -> super.act(state, intent)
     }
 
     override fun reduce(

@@ -13,7 +13,7 @@ data class DetailedAsset(
     val name: String = "",
     val shortUrl: String? = null,
     val versionName: String = "",
-    @HollowRating val averageRating: Int = 1,
+    @HollowRating val averageRating: Int = 0,
     val priceUsd: BigDecimal = BigDecimal.ZERO,
     val status: AssetStatus = AssetStatus.NONE,
     val sizeMb: Double = 0.0,

@@ -1,5 +1,7 @@
 package com.vmedia.feature.assetdetails.presentation.mvi
 
+import com.vmedia.core.common.obj.ReviewsSortType
+
 internal sealed class AssetDetailsIntent {
 
     object LoadData : AssetDetailsIntent()
@@ -8,6 +10,6 @@ internal sealed class AssetDetailsIntent {
 
     object ExpandReviews : AssetDetailsIntent()
 
-
+    class UpdateSortType(val sortType: ReviewsSortType) : AssetDetailsIntent()
 
 }

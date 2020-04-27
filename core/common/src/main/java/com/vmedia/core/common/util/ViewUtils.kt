@@ -111,6 +111,15 @@ fun EditText.setOnEditorActionListener(actionId: Int, action: () -> Unit) {
     }
 }
 
+fun Spinner.setOnItemSelectedListener(listener: (position: Int) -> Unit) {
+    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            listener.invoke(position)
+        }
+    }
+}
+
 fun View.addOnFocusedListener(listener: () -> Unit) {
     setOnFocusChangeListener { editText, isFocused ->
         if (isFocused) listener.invoke()

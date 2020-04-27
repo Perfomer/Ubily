@@ -10,6 +10,7 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.mvi.MviFragment
+import com.vmedia.core.common.obj.ReviewsSortType
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.*
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
@@ -18,8 +19,7 @@ import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
-import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
-import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandReviews
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
@@ -28,9 +28,10 @@ import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
+
 internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetailsState, Nothing>(
     layoutResource = R.layout.assetdetails_fragment,
-    initialIntent = AssetDetailsIntent.LoadData
+    initialIntent = LoadData
 ) {
 
     private val navigator: AssetDetailsNavigator
@@ -66,6 +67,16 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
         assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
 
+        assetdetails_reviews_sort_value.setOnItemSelectedListener {
+            postIntent(UpdateSortType(ReviewsSortType.values()[it]))
+        }
+
+        assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
+            context!!,
+            ReviewsSortType.labelResources,
+            R.layout.common_reviews_sort_item
+        )
+
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
         assetdetails_externallink.setOnClickListener {
@@ -99,7 +110,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             renderAsset(asset)
             renderArtworks(asset.artworks)
             renderDescription(asset, state.isDescriptionExpanded)
-            renderReviews(reviews, state.isReviewsExpanded)
+            renderReviews(reviews, state.reviewsSortType, state.isReviewsExpanded)
             renderPublisher(publisher)
         }
     }
@@ -169,6 +180,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private fun renderReviews(
         reviewsModel: ReviewsModel,
+        sortType: ReviewsSortType,
         isExpanded: Boolean
     ) = with(reviewsModel) {
         val hasReviews = reviewsCount > 0
@@ -179,6 +191,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             return
         }
 
+        assetdetails_reviews_sort_value.setSelection(sortType.ordinal)
         assetdetails_reviews_count.text = getString(R.string.reviews_count, reviewsCount).toSpan()
 
         assetdetails_reviews_rating_value.diffedValue = averageReviewsRating.cropToString()
