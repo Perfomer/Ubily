@@ -74,7 +74,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
             context!!,
             ReviewsSortType.labelResources,
-            R.layout.common_reviews_sort_item
+            R.layout.common_reviews_sort_item,
+            android.R.layout.simple_spinner_dropdown_item
         )
 
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
