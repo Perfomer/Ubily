@@ -1,7 +1,9 @@
 package com.vmedia.feature.assetdetails.presentation
 
 import com.vmedia.core.common.mvi.MviViewModel
+import com.vmedia.core.common.obj.ReviewsSortType
 import com.vmedia.core.common.util.toObservable
+import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.feature.assetdetails.domain.AssetDetailsInteractor
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction.*
@@ -30,7 +32,7 @@ internal class AssetDetailsViewModel(
 
         ExpandReviews -> ReviewsExpanded.toObservable()
 
-        is UpdateSortType -> super.act(state, intent)
+        is UpdateSortType -> SortTypeUpdated(intent.sortType).toObservable()
     }
 
     override fun reduce(
@@ -79,6 +81,21 @@ internal class AssetDetailsViewModel(
         ReviewsExpanded -> {
             oldState.copy(isReviewsExpanded = true)
         }
+
+        is SortTypeUpdated -> {
+            val reviewsSortType = action.sortType
+            val sortedReviews = sort(oldState.payload.reviews.reviews, reviewsSortType)
+
+            oldState.copy(
+                reviewsSortType = reviewsSortType,
+                payload = oldState.payload.copy(
+                    reviews = oldState.payload.reviews.copy(
+                        reviews = sortedReviews,
+                        collapsedReviews = sortedReviews.take(MAX_COLLAPSED_REVIEWS_COUNT)
+                    )
+                )
+            )
+        }
     }
 
     private companion object {
@@ -86,6 +103,31 @@ internal class AssetDetailsViewModel(
         private const val MAX_COLLAPSED_DESCRIPTION_LENGTH = 300
         private const val MAX_COLLAPSED_KEYWORDS_COUNT = 10
         private const val MAX_COLLAPSED_REVIEWS_COUNT = 3
+
+        fun sort(reviews: List<ReviewDetailed>, sortType: ReviewsSortType): List<ReviewDetailed> {
+            return when (sortType) {
+                ReviewsSortType.RELEVANCE -> {
+                    reviews.sortedByDescending(ReviewDetailed::publishingDate)
+                        .sortedBy { it.comment.isEmpty() }
+                }
+
+                ReviewsSortType.DATE_ASC -> {
+                    reviews.sortedBy(ReviewDetailed::publishingDate)
+                }
+
+                ReviewsSortType.DATE_DESC -> {
+                    reviews.sortedByDescending(ReviewDetailed::publishingDate)
+                }
+
+                ReviewsSortType.RATING_ASC -> {
+                    reviews.sortedBy(ReviewDetailed::rating)
+                }
+
+                ReviewsSortType.RATING_DESC -> {
+                    reviews.sortedByDescending(ReviewDetailed::rating)
+                }
+            }
+        }
 
     }
 

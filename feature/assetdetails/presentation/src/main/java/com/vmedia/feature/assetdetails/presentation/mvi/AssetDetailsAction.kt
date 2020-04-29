@@ -1,5 +1,6 @@
 package com.vmedia.feature.assetdetails.presentation.mvi
 
+import com.vmedia.core.common.obj.ReviewsSortType
 import com.vmedia.feature.assetdetails.domain.model.AssetDetails
 
 internal sealed class AssetDetailsAction {
@@ -13,5 +14,7 @@ internal sealed class AssetDetailsAction {
     object DescriptionExpanded : AssetDetailsAction()
 
     object ReviewsExpanded : AssetDetailsAction()
+
+    class SortTypeUpdated(val sortType: ReviewsSortType) : AssetDetailsAction()
 
 }
