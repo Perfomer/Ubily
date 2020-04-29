@@ -90,8 +90,8 @@
 
     <string name="reviews_count"><![CDATA[Reviews total: <b>%d</b>]]></string>
     <string name="reviews_sort_relevance">relevance</string>
-    <string name="reviews_sort_date_asc">date (newest)</string>
-    <string name="reviews_sort_date_desc">date (oldest)</string>
-    <string name="reviews_sort_rating_asc">rating (highest)</string>
-    <string name="reviews_sort_rating_desc">rating (lowest)</string>
+    <string name="reviews_sort_date_asc">date (oldest)</string>
+    <string name="reviews_sort_date_desc">date (newest)</string>
+    <string name="reviews_sort_rating_asc">rating (lowest)</string>
+    <string name="reviews_sort_rating_desc">rating (highest)</string>
 </resources>
