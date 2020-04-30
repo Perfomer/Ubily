@@ -6,10 +6,10 @@ import com.vmedia.core.common.obj.ReviewsSortType.*
 
 enum class ReviewsSortType {
     RELEVANCE,
-    DATE_ASC,
     DATE_DESC,
-    RATING_ASC,
-    RATING_DESC;
+    DATE_ASC,
+    RATING_DESC,
+    RATING_ASC;
 
     companion object {
 
