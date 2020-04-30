@@ -62,6 +62,7 @@ internal class AssetDetailsViewModel(
                 isLoading = false,
                 payload = payload.copy(
                     reviews = payload.reviews.copy(
+                        reviews = sort(payload.reviews.reviews, oldState.reviewsSortType),
                         collapsedReviews = payload.reviews.reviews.take(MAX_COLLAPSED_REVIEWS_COUNT)
                     )
                 ),
@@ -107,8 +108,10 @@ internal class AssetDetailsViewModel(
         fun sort(reviews: List<ReviewDetailed>, sortType: ReviewsSortType): List<ReviewDetailed> {
             return when (sortType) {
                 ReviewsSortType.RELEVANCE -> {
-                    reviews.sortedByDescending(ReviewDetailed::publishingDate)
-                        .sortedBy { it.comment.isEmpty() }
+                    reviews.sortedWith(
+                        compareBy<ReviewDetailed> { it.comment.isBlank() }
+                            .thenByDescending(ReviewDetailed::publishingDate)
+                    )
                 }
 
                 ReviewsSortType.DATE_ASC -> {
