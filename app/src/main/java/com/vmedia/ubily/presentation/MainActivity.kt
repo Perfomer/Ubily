@@ -1,6 +1,7 @@
 package com.vmedia.ubily.presentation
 
 import com.vmedia.core.data.internal.database.entity.Artwork
+import com.vmedia.core.navigation.BEAN_FRAGMENT_GALLERY
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
@@ -56,7 +57,12 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToGallery(artworks: List<Artwork>, targetArtworkPosition: Int) {
-        navigateTo(ScreenDestination.Gallery(artworks, targetArtworkPosition))
+        val destination = ScreenDestination.Gallery(artworks, targetArtworkPosition)
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.nav_host_fragment, destination.fragment)
+            .addToBackStack(BEAN_FRAGMENT_GALLERY)
+            .commit()
     }
 
     override fun navigateToUrl(url: String) {

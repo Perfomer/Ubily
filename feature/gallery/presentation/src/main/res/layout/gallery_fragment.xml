@@ -4,18 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@color/gallery_background"
     tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/gallery_image"
+    <me.saket.flick.FlickDismissLayout
+        android:id="@+id/gallery_image_wrap"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.vmedia.feature.gallery.presentation.util.ZoomableGestureImageView
+            android:id="@+id/gallery_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+    </me.saket.flick.FlickDismissLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gallery_images_list"
