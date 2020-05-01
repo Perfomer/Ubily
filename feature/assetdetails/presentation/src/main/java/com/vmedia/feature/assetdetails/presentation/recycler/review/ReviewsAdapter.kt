@@ -12,10 +12,15 @@ internal class ReviewsAdapter(
 
     var items by diffedListBy(ReviewDetailed::id)
 
+    init {
+        setHasStableIds(true)
+    }
+
+    override fun getItemCount() = items.size
 
     override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_review
 
-    override fun getItemCount() = items.size
+    override fun getItemId(position: Int) = items[position].id
 
     override fun onCreateViewHolder(view: View, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(view, ::onAuthorClick)

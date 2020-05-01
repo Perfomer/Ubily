@@ -12,8 +12,13 @@ internal class KeywordsAdapter(
 
     var items by diffedListBy(KeywordModel::id)
 
+    init {
+        setHasStableIds(true)
+    }
 
     override fun getItemCount() = items.size
+
+    override fun getItemId(position: Int) = items[position].id
 
     override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_keyword
 

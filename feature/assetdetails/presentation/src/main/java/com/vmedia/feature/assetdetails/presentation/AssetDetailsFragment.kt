@@ -217,7 +217,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_viewmore.isVisible = !isExpanded
         assetdetails_reviews_scrim.isVisible = !isExpanded
 
-        reviewsAdapter.notifyItemChanged(reviewsAdapter.items.size - 1)
         reviewsAdapter.items = if (isExpanded) reviews else collapsedReviews
     }
 
