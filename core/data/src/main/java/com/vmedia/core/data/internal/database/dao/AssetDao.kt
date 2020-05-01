@@ -35,11 +35,12 @@ interface AssetDao : BaseDao<Asset> {
     @Query("SELECT * FROM Asset WHERE shortUrl = :url")
     fun getAssetByUrl(url: String): Single<Asset>
 
+    /**
+     * Wrapped to list 'cause of issue
+     * If there's no assets with averageRating > 0 then Observable will never return anything
+     */
     @Query("SELECT AVG(averageRating) FROM Asset WHERE averageRating > 0")
-    fun getAverageAssetsRating(): Observable<Double>
-
-    @Query("SELECT AVG(averageRating) FROM Asset WHERE averageRating > 0")
-    fun getAverageAssetsRatingSync(): Double
+    fun getAverageAssetsRating(): Observable<List<Double>>
 
     @Query(
         """

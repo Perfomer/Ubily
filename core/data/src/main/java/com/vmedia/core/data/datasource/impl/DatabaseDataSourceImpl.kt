@@ -72,8 +72,8 @@ internal class DatabaseDataSourceImpl(
     }
 
     override fun getAverageAssetsRating(): Observable<Double> {
-        //todo fix
-        return Observable.fromCallable { assetDao.getAverageAssetsRatingSync() }
+        return assetDao.getAverageAssetsRating()
+            .map { it.getOrElse(0) { 0.0 } }
             .onErrorReturnItem(0.0)
     }
 
