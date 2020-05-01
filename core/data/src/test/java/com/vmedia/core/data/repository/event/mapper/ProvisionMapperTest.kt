@@ -4,10 +4,10 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.common.android.obj.event.SaleInfo
-import com.vmedia.core.common.android.util.sumByBigDecimal
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.pure.obj.event.SaleInfo
+import com.vmedia.core.common.pure.util.sumByBigDecimal
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event

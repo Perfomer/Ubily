@@ -1,9 +1,9 @@
 package com.vmedia.core.network.datasource
 
-import com.vmedia.core.common.android.obj.Period
-import com.vmedia.core.common.android.util.Filter
-import com.vmedia.core.common.android.util.filterWith
-import com.vmedia.core.common.android.util.mapWith
+import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.util.Filter
+import com.vmedia.core.common.pure.util.filterWith
+import com.vmedia.core.common.pure.util.mapWith
 import com.vmedia.core.network.*
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi

@@ -2,12 +2,12 @@ package com.vmedia.feature.feed.presentation.recycler
 
 import android.view.View
 import com.perfomer.blitz.setTimeAgo
-import com.vmedia.core.common.android.obj.event.EventInfo
-import com.vmedia.core.common.android.obj.iconResource
-import com.vmedia.core.common.android.obj.titleResource
 import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.iconResource
 import com.vmedia.core.common.android.util.setEventDescription
+import com.vmedia.core.common.android.util.titleResource
 import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
+import com.vmedia.core.common.pure.obj.event.EventInfo
 import kotlinx.android.synthetic.main.feed_item.*
 
 internal abstract class FeedViewHolder<T : EventInfo<*>>(

@@ -1,9 +1,9 @@
 package com.vmedia.core.sync.event
 
 import com.nhaarman.mockitokotlin2.*
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.EventType.*
-import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.EventType.*
+import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.sync.*

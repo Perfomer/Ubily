@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.event
 
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.util.EMPTY_DATE
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.util.EMPTY_DATE
 import java.util.*
 
 class EventModel(

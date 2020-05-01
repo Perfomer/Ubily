@@ -3,18 +3,18 @@ package com.vmedia.core.data.repository.event.mapper
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.EventType.*
-import com.vmedia.core.common.android.obj.Month.APRIL
-import com.vmedia.core.common.android.obj.Month.JANUARY
-import com.vmedia.core.common.android.obj.event.EventInfo
-import com.vmedia.core.common.android.obj.event.EventInfo.*
-import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.common.android.obj.event.PayoutInfo
-import com.vmedia.core.common.android.obj.event.RevenueInfo
-import com.vmedia.core.common.android.obj.event.ReviewInfo
-import com.vmedia.core.common.android.obj.of
-import com.vmedia.core.common.android.util.toListMapper
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.EventType.*
+import com.vmedia.core.common.pure.obj.Month.APRIL
+import com.vmedia.core.common.pure.obj.Month.JANUARY
+import com.vmedia.core.common.pure.obj.event.EventInfo
+import com.vmedia.core.common.pure.obj.event.EventInfo.*
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.pure.obj.event.PayoutInfo
+import com.vmedia.core.common.pure.obj.event.RevenueInfo
+import com.vmedia.core.common.pure.obj.event.ReviewInfo
+import com.vmedia.core.common.pure.obj.of
+import com.vmedia.core.common.pure.util.toListMapper
 import com.vmedia.core.data.*
 import com.vmedia.core.data.internal.database.entity.Event
 import io.reactivex.Observable
@@ -115,12 +115,9 @@ class EventListMapperTest {
             Event(id = 5, type = REVENUE)
         )
 
-        private val MOCKY_REVIEW =
-            ReviewInfo(assetId = 10)
-        private val MOCKY_PAYOUT =
-            PayoutInfo(period = APRIL of 2020)
-        private val MOCKY_REVENUE =
-            RevenueInfo(period = JANUARY of 2020)
+        private val MOCKY_REVIEW = ReviewInfo(assetId = 10)
+        private val MOCKY_PAYOUT = PayoutInfo(period = APRIL of 2020)
+        private val MOCKY_REVENUE = RevenueInfo(period = JANUARY of 2020)
 
     }
 

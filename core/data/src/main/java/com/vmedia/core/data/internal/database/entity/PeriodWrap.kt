@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.data.KeyEntity
 
 @Entity(
@@ -14,7 +14,7 @@ import com.vmedia.core.data.KeyEntity
 internal class PeriodWrap(
     @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     @Embedded val period: Period
-): KeyEntity<Long>
+) : KeyEntity<Long>
 
 internal fun Period.wrap(): PeriodWrap {
     return PeriodWrap(period = this)

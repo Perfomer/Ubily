@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.synchronizer.period
 
-import com.vmedia.core.common.android.obj.Period
-import com.vmedia.core.common.android.obj.isAfter
-import com.vmedia.core.common.android.util.Filter
+import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.obj.isAfter
+import com.vmedia.core.common.pure.util.Filter
 import com.vmedia.core.sync._PeriodLastProvider
 
 internal class PeriodFilter(

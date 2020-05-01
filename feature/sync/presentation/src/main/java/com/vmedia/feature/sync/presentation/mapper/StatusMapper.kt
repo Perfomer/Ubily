@@ -1,6 +1,6 @@
 package com.vmedia.feature.sync.presentation.mapper
 
-import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.pure.util.Mapper
 import com.vmedia.core.sync.SynchronizationDataType.*
 import com.vmedia.core.sync.SynchronizationEvent
 import com.vmedia.core.sync.SynchronizationStatus

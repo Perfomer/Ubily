@@ -1,7 +1,7 @@
 package com.vmedia.core.network.mapper
 
 import android.annotation.SuppressLint
-import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.pure.util.Mapper
 import com.vmedia.core.network.entity.DetailedReviewDto
 import com.vmedia.core.network.entity.internal.ReviewDto
 import java.util.*

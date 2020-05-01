@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.common.android.obj.creds.RssToken
+import com.vmedia.core.common.pure.obj.creds.RssToken
 import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
 

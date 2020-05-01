@@ -1,6 +1,6 @@
 package com.vmedia.feature.feed.presentation.mvi
 
-import com.vmedia.core.common.android.obj.event.EventInfo
+import com.vmedia.core.common.pure.obj.event.EventInfo
 
 internal sealed class FeedAction {
 

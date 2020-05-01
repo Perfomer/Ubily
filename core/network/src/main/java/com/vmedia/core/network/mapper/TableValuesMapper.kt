@@ -1,9 +1,9 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.android.obj.Money
-import com.vmedia.core.common.android.obj.toCurrency
-import com.vmedia.core.common.android.util.Mapper
-import com.vmedia.core.common.android.util.zipWithNullable
+import com.vmedia.core.common.pure.obj.Money
+import com.vmedia.core.common.pure.obj.toCurrency
+import com.vmedia.core.common.pure.util.Mapper
+import com.vmedia.core.common.pure.util.zipWithNullable
 import com.vmedia.core.network.api.entity.ExtraTableValues
 import com.vmedia.core.network.api.entity.TableValuesModel
 import java.math.BigDecimal

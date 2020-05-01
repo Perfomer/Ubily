@@ -1,10 +1,10 @@
 package com.vmedia.core.sync.synchronizer.sale
 
-import com.vmedia.core.common.android.obj.Period
-import com.vmedia.core.common.android.obj.endDate
-import com.vmedia.core.common.android.obj.startDate
-import com.vmedia.core.common.android.util.EMPTY_DATE
-import com.vmedia.core.common.android.util.ItemFilter
+import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.obj.endDate
+import com.vmedia.core.common.pure.obj.startDate
+import com.vmedia.core.common.pure.util.EMPTY_DATE
+import com.vmedia.core.common.pure.util.ItemFilter
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync._SaleLastDateProvider
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider

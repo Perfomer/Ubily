@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.synchronizer.review
 
-import com.vmedia.core.common.android.util.actOnSuccess
-import com.vmedia.core.common.android.util.filterWith
-import com.vmedia.core.common.android.util.mapWith
+import com.vmedia.core.common.pure.util.actOnSuccess
+import com.vmedia.core.common.pure.util.filterWith
+import com.vmedia.core.common.pure.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Review
 import com.vmedia.core.network.datasource.NetworkDataSource

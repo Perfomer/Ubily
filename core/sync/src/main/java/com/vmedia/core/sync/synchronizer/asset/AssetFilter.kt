@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.asset
 
-import com.vmedia.core.common.android.util.ItemFilter
+import com.vmedia.core.common.pure.util.ItemFilter
 import com.vmedia.core.network.entity.AssetDto
 import com.vmedia.core.sync._AssetProviderById
 

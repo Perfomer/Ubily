@@ -1,8 +1,8 @@
 package com.vmedia.feature.auth.data
 
 import android.webkit.CookieManager
-import com.vmedia.core.common.android.obj.creds.Credentials
-import com.vmedia.core.common.android.obj.creds.Token
+import com.vmedia.core.common.pure.obj.creds.Credentials
+import com.vmedia.core.common.pure.obj.creds.Token
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.feature.auth.data.util.clearCookies
 import com.vmedia.feature.auth.data.util.getCookie

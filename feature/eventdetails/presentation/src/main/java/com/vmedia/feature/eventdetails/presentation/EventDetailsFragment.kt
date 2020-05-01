@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.vmedia.core.common.android.mvi.MviFragment
-import com.vmedia.core.common.android.obj.iconResource
-import com.vmedia.core.common.android.obj.titleResource
 import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.pure.util.FORMAT_DDMMYYYY
+import com.vmedia.core.common.pure.util.format
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent.LoadEventDetails

@@ -1,7 +1,7 @@
 package com.vmedia.feature.auth.presentation
 
 import com.vmedia.core.common.android.mvi.MviViewModel
-import com.vmedia.core.common.android.util.toObservable
+import com.vmedia.core.common.pure.util.toObservable
 import com.vmedia.feature.auth.domain.AuthInteractor
 import com.vmedia.feature.auth.presentation.mvi.AuthAction
 import com.vmedia.feature.auth.presentation.mvi.AuthAction.*

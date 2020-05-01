@@ -2,7 +2,7 @@ package com.vmedia.feature.assetdetails.domain.model
 
 import android.os.Parcelable
 import androidx.annotation.IntRange
-import com.vmedia.core.common.android.obj.Rating
+import com.vmedia.core.common.pure.obj.Rating
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import kotlinx.android.parcel.Parcelize
 

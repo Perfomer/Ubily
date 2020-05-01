@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import com.vmedia.core.common.android.obj.EventType
 import com.vmedia.core.common.android.util.init
+import com.vmedia.core.common.pure.obj.EventType
 import com.vmedia.feature.eventdetails.presentation.R
 import com.vmedia.feature.eventdetails.presentation.viewholder.EventDetailsViewHolder
 import com.vmedia.feature.eventdetails.presentation.viewholder.asset.recycler.AssetsAdapter

@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.revenue
 
-import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.pure.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Revenue
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync._PeriodIdProvider

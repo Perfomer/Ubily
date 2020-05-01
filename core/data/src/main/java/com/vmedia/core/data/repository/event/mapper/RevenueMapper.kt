@@ -1,11 +1,11 @@
 package com.vmedia.core.data.repository.event.mapper
 
 import androidx.annotation.WorkerThread
-import com.vmedia.core.common.android.obj.Period
-import com.vmedia.core.common.android.obj.event.EventInfo.EventRevenue
-import com.vmedia.core.common.android.obj.event.RevenueInfo
-import com.vmedia.core.common.android.util.ObservableMapper
-import com.vmedia.core.common.android.util.zipWith
+import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventRevenue
+import com.vmedia.core.common.pure.obj.event.RevenueInfo
+import com.vmedia.core.common.pure.util.ObservableMapper
+import com.vmedia.core.common.pure.util.zipWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Revenue

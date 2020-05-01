@@ -1,6 +1,6 @@
 package com.vmedia.feature.assetdetails.presentation.mvi
 
-import com.vmedia.core.common.android.obj.ReviewsSortType
+import com.vmedia.core.common.pure.obj.ReviewsSortType
 
 internal sealed class AssetDetailsIntent {
 

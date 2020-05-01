@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.event.producer
 
 import androidx.annotation.WorkerThread
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.util.maxValue
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.util.maxValue
 import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.EventModel
 import com.vmedia.core.sync.synchronizer.asset.AssetModel

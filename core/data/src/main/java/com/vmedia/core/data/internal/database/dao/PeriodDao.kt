@@ -2,7 +2,7 @@ package com.vmedia.core.data.internal.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.vmedia.core.common.android.obj.Month
+import com.vmedia.core.common.pure.obj.Month
 import com.vmedia.core.data.internal.database.dao.base.BaseDao
 import com.vmedia.core.data.internal.database.entity.PeriodWrap
 import io.reactivex.Single

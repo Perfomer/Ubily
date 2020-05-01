@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.event.producer
 
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.toPeriod
-import com.vmedia.core.common.android.util.maxValue
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.toPeriod
+import com.vmedia.core.common.pure.util.maxValue
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync._SaleIdProvider
 import com.vmedia.core.sync.event.EventExtractor

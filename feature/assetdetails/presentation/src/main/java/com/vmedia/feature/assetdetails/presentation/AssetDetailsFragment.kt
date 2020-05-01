@@ -10,9 +10,9 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.android.mvi.MviFragment
-import com.vmedia.core.common.android.obj.ReviewsSortType
-import com.vmedia.core.common.android.obj.labelResource
 import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.pure.obj.ReviewsSortType
+import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
@@ -95,7 +95,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
             context!!,
-            ReviewsSortType.labelResources,
+            reviewsSortTypeLabelResources,
             R.layout.common_reviews_sort_item
         )
 

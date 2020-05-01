@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.event.producer
 
-import com.vmedia.core.common.android.obj.*
-import com.vmedia.core.common.android.util.each
+import com.vmedia.core.common.pure.obj.*
+import com.vmedia.core.common.pure.util.each
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync.event.EventModel
 import org.junit.Test

@@ -4,9 +4,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.Month
-import com.vmedia.core.common.android.obj.of
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.Month
+import com.vmedia.core.common.pure.obj.of
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Revenue

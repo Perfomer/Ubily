@@ -2,8 +2,8 @@ package com.vmedia.core.data.internal.database.entity
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import com.vmedia.core.common.android.util.EMPTY_DATE
-import com.vmedia.core.common.android.util.times
+import com.vmedia.core.common.pure.util.EMPTY_DATE
+import com.vmedia.core.common.pure.util.times
 import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
 import java.util.*

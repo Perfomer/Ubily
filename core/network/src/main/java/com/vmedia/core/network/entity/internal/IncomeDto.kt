@@ -1,7 +1,7 @@
 package com.vmedia.core.network.entity.internal
 
-import com.vmedia.core.common.android.obj.Money
-import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.pure.obj.Money
+import com.vmedia.core.common.pure.obj.Period
 import java.util.*
 
 sealed class IncomeDto {

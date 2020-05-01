@@ -1,7 +1,7 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.android.obj.creds.RssToken
-import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.pure.obj.creds.RssToken
+import com.vmedia.core.common.pure.util.Mapper
 import com.vmedia.core.network.api.entity.publisher.PublisherDetailsModel
 import com.vmedia.core.network.entity.PublisherDto
 import com.vmedia.core.network.util.fixUrl

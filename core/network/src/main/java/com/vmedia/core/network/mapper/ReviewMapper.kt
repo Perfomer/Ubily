@@ -1,8 +1,8 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.android.util.FORMAT_RSS
-import com.vmedia.core.common.android.util.Mapper
-import com.vmedia.core.common.android.util.parse
+import com.vmedia.core.common.pure.util.FORMAT_RSS
+import com.vmedia.core.common.pure.util.Mapper
+import com.vmedia.core.common.pure.util.parse
 import com.vmedia.core.network.api.entity.rss.RssItemModel
 import com.vmedia.core.network.entity.internal.ReviewDto
 

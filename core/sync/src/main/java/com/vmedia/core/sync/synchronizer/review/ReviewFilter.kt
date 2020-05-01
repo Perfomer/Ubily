@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.review
 
-import com.vmedia.core.common.android.util.ItemFilter
+import com.vmedia.core.common.pure.util.ItemFilter
 import com.vmedia.core.data.internal.database.entity.Review
 import com.vmedia.core.sync._ReviewProvider
 

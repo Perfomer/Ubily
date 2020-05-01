@@ -1,11 +1,11 @@
 package com.vmedia.core.sync.synchronizer.download
 
 import androidx.annotation.WorkerThread
-import com.vmedia.core.common.android.obj.Period
-import com.vmedia.core.common.android.util.actOnSuccess
-import com.vmedia.core.common.android.util.filterWith
-import com.vmedia.core.common.android.util.mapWith
-import com.vmedia.core.common.android.util.toFlattenList
+import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.util.actOnSuccess
+import com.vmedia.core.common.pure.util.filterWith
+import com.vmedia.core.common.pure.util.mapWith
+import com.vmedia.core.common.pure.util.toFlattenList
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.datasource.NetworkDataSource

@@ -3,8 +3,8 @@ package com.vmedia.core.common.android.mvi
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
-import com.vmedia.core.common.android.util.toObservable
 import com.vmedia.core.common.android.view.BaseFragment
+import com.vmedia.core.common.pure.util.toObservable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

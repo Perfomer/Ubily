@@ -1,12 +1,12 @@
 package com.vmedia.feature.eventdetails.presentation.viewholder
 
 import android.content.Context
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.event.RevenueInfo
-import com.vmedia.core.common.android.obj.getString
 import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.getString
 import com.vmedia.core.common.android.util.setTextColorCompat
 import com.vmedia.core.common.android.util.toSpan
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.event.RevenueInfo
 import com.vmedia.feature.eventdetails.presentation.R
 import kotlinx.android.synthetic.main.eventdetails_item_revenue.*
 

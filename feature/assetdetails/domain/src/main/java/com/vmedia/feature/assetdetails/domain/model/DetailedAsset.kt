@@ -1,7 +1,7 @@
 package com.vmedia.feature.assetdetails.domain.model
 
-import com.vmedia.core.common.android.obj.AssetStatus
-import com.vmedia.core.common.android.obj.HollowRating
+import com.vmedia.core.common.pure.obj.AssetStatus
+import com.vmedia.core.common.pure.obj.HollowRating
 import com.vmedia.core.data.internal.database.entity.Artwork
 import java.math.BigDecimal
 

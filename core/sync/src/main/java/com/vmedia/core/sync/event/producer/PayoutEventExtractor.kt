@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.event.producer
 
-import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.pure.obj.EventType
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.EventModel

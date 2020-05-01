@@ -2,10 +2,10 @@ package com.vmedia.feature.eventdetails.presentation.viewholder
 
 import android.content.Context
 import androidx.core.view.isVisible
-import com.vmedia.core.common.android.obj.EventType
-import com.vmedia.core.common.android.obj.event.ReviewInfo
 import com.vmedia.core.common.android.util.diffedValue
 import com.vmedia.core.common.android.util.loadRoundedImage
+import com.vmedia.core.common.pure.obj.EventType
+import com.vmedia.core.common.pure.obj.event.ReviewInfo
 import com.vmedia.feature.eventdetails.presentation.R
 import kotlinx.android.synthetic.main.eventdetails_item_review.*
 

@@ -1,10 +1,10 @@
 package com.vmedia.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
-import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.common.android.obj.event.SaleInfo
 import com.vmedia.core.common.android.util.diffedValue
 import com.vmedia.core.common.android.util.loadRoundedImage
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.pure.obj.event.SaleInfo
 import com.vmedia.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.ItemViewHolder
 import kotlinx.android.synthetic.main.feed_item_sale_item.*

@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.event.producer
 
-import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.pure.obj.EventType
 import com.vmedia.core.data.internal.database.entity.Review
 import com.vmedia.core.sync._ReviewIdProvider
 import com.vmedia.core.sync.event.EventExtractor

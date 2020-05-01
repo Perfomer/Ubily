@@ -4,9 +4,9 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.common.android.obj.AssetStatus
-import com.vmedia.core.common.android.obj.HollowRating
-import com.vmedia.core.common.android.util.EMPTY_DATE
+import com.vmedia.core.common.pure.obj.AssetStatus
+import com.vmedia.core.common.pure.obj.HollowRating
+import com.vmedia.core.common.pure.util.EMPTY_DATE
 import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
 import java.util.*

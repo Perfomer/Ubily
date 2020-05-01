@@ -6,11 +6,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.room.RoomDatabase
 import com.vmedia.core.common.android.mvi.MviFragment
-import com.vmedia.core.common.android.obj.event.EventInfo
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.addSystemTopPadding
 import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.view.prefetcher.api.PrefetchRecycledViewPool
+import com.vmedia.core.common.pure.obj.event.EventInfo
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents

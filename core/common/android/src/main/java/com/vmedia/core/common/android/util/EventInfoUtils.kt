@@ -2,13 +2,12 @@ package com.vmedia.core.common.android.util
 
 import android.widget.TextView
 import com.vmedia.core.common.android.R
-import com.vmedia.core.common.android.obj.descriptionResource
-import com.vmedia.core.common.android.obj.event.EventInfo
-import com.vmedia.core.common.android.obj.event.EventInfo.*
-import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventFreeDownload
-import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.common.android.obj.event.SaleInfo
-import com.vmedia.core.common.android.obj.labelResource
+import com.vmedia.core.common.pure.obj.event.EventInfo
+import com.vmedia.core.common.pure.obj.event.EventInfo.*
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventListInfo.EventFreeDownload
+import com.vmedia.core.common.pure.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.pure.obj.event.SaleInfo
+import com.vmedia.core.common.pure.util.sumByBigDecimal
 
 fun TextView.setEventDescription(event: EventInfo<*>) {
     val descriptionResource = event.type.descriptionResource
