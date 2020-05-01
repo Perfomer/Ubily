@@ -9,15 +9,17 @@ import com.vmedia.core.network.util.fixUrl
 internal object PublisherMapper : Mapper<PublisherDetailsModel, PublisherDto> {
 
     override fun map(from: PublisherDetailsModel): PublisherDto {
-        val bigV2 = from.keyImages.big_v2
-        val smallV2 = from.keyImages.small_v2
+        val keyImages = from.keyImages
+
+        val bigV2 = keyImages.big_v2
+        val smallV2 = keyImages.small_v2
 
         val smallImage =
-            if (smallV2.isBlank()) from.keyImages.small
+            if (smallV2.isBlank()) keyImages.small
             else smallV2
 
         val bigImage =
-            if (bigV2.isBlank()) from.keyImages.big
+            if (bigV2.isBlank()) keyImages.big
             else bigV2
 
         return PublisherDto(
