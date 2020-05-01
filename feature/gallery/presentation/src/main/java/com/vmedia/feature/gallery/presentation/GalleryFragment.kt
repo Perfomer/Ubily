@@ -32,6 +32,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         gallery_images_list.adapter = adapter
         adapter.items = artworks
 
+        gallery_images_list.scrollToPosition(targetArtworkPosition)
         onArtworkClick(artworks[targetArtworkPosition])
     }
 
