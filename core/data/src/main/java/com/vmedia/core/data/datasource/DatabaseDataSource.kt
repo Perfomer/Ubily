@@ -86,7 +86,7 @@ interface DatabaseDataSource {
 
     fun putAsset(
         asset: Asset,
-        images: Collection<AssetImage>,
+        images: Collection<Artwork>,
         keywords: Collection<String>
     ): Completable
 

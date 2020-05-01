@@ -51,7 +51,7 @@ internal class AssetEventExtractorTest {
         private fun createMockyAsset(id: Long): AssetModel {
             return AssetModel(
                 asset = Asset(id),
-                images = emptyList(),
+                artworks = emptyList(),
                 keywords = emptySet()
             )
         }

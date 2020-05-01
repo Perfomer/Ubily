@@ -2,8 +2,8 @@ package com.vmedia.core.sync.synchronizer.asset
 
 import com.vmedia.core.common.util.EMPTY_DATE
 import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.Asset
-import com.vmedia.core.data.internal.database.entity.AssetImage
 import com.vmedia.core.network.entity.AssetDetailsDto
 import com.vmedia.core.network.entity.AssetDto
 
@@ -32,8 +32,8 @@ internal object AssetMapper : Mapper<Pair<AssetDto, AssetDetailsDto>, AssetModel
                 smallImage = details.smallImageUrl,
                 iconImage = details.iconImageUrl
             ),
-            images = details.artworksUrls.map {
-                AssetImage(
+            artworks = details.artworksUrls.map {
+                Artwork(
                     assetId = asset.id,
                     url = it
                 )

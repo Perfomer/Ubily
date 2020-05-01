@@ -24,7 +24,7 @@ import com.vmedia.core.data.internal.database.entity.*
         Payout::class,
         PeriodWrap::class,
         Keyword::class,
-        AssetImage::class,
+        Artwork::class,
         AssetKeyword::class,
         Category::class
     ]
@@ -42,7 +42,7 @@ internal abstract class UbilyDatabase : RoomDatabase() {
     abstract fun getEventDao(): EventDao
     abstract fun getEventEntityDao(): EventEntityDao
     abstract fun getAssetDao(): AssetDao
-    abstract fun getAssetImageDao(): AssetImageDao
+    abstract fun getArtworkDao(): ArtworkDao
     abstract fun getAssetKeywordDao(): AssetKeywordDao
     abstract fun getKeywordDao(): KeywordDao
     abstract fun getSaleDao(): SaleDao

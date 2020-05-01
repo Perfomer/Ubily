@@ -34,7 +34,7 @@ class AssetSynchronizer(
 
     private fun save(assets: List<AssetModel>): Completable {
         return Observable.fromIterable(assets)
-            .flatMapCompletable { databaseDataSource.putAsset(it.asset, it.images, it.keywords) }
+            .flatMapCompletable { databaseDataSource.putAsset(it.asset, it.artworks, it.keywords) }
     }
 
 }

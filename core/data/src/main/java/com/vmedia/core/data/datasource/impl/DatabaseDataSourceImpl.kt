@@ -29,7 +29,7 @@ internal class DatabaseDataSourceImpl(
     private val payoutDao: PayoutDao,
     private val reviewDao: ReviewDao,
     private val assetDao: AssetDao,
-    private val assetImageDao: AssetImageDao,
+    private val artworkDao: ArtworkDao,
     private val keywordDao: KeywordDao,
     private val assetKeywordDao: AssetKeywordDao,
     private val categoryDao: CategoryDao
@@ -78,7 +78,7 @@ internal class DatabaseDataSourceImpl(
     }
 
     override fun getArtworks(assetId: Long): Observable<List<String>> {
-        return assetImageDao.getArtworks(assetId)
+        return artworkDao.getArtworks(assetId)
     }
 
     override fun getReviewsCount(assetId: Long): Observable<Int> {
@@ -204,7 +204,7 @@ internal class DatabaseDataSourceImpl(
 
     override fun putAsset(
         asset: Asset,
-        images: Collection<AssetImage>,
+        images: Collection<Artwork>,
         keywords: Collection<String>
     ): Completable {
         return database.completableTransaction {
@@ -214,7 +214,7 @@ internal class DatabaseDataSourceImpl(
                 else asset.copy(categoryId = 0)
 
             putAsset(categorizedAsset)
-            assetImageDao.insert(images)
+            artworkDao.insert(images)
             keywords.forEach { putKeyword(it, asset.id) }
         }
     }

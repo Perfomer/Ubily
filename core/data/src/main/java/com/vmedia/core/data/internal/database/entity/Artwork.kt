@@ -19,7 +19,7 @@ import com.vmedia.core.data.KeyEntity
         onDelete = CASCADE
     )]
 )
-data class AssetImage(
+data class Artwork(
     @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val assetId: Long,
     val url: String

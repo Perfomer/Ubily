@@ -101,7 +101,7 @@ private val databaseModule = module {
             payoutDao = get(),
             reviewDao = get(),
             assetDao = get(),
-            assetImageDao = get(),
+            artworkDao = get(),
             keywordDao = get(),
             assetKeywordDao = get(),
             categoryDao = get()
@@ -119,7 +119,7 @@ private val databaseModule = module {
     }
 
     dao { getAssetDao() }
-    dao { getAssetImageDao() }
+    dao { getArtworkDao() }
     dao { getAssetKeywordDao() }
     dao { getKeywordDao() }
     dao { getEventDao() }
