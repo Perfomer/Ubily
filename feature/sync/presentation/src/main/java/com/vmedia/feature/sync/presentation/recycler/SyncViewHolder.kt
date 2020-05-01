@@ -57,7 +57,7 @@ internal class SyncViewHolder(
         sync_item_label.typeface = context.getFontCompat(typeface)
         sync_item_label.setTextColorCompat(textColor)
 
-        icon?.let { sync_item_icon.setImageResource(it) }
+        icon?.let(sync_item_icon::setImageResource)
     }
 
 }
