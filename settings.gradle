@@ -37,3 +37,6 @@ include ':feature:assetdetails:api'
 include ':feature:assetdetails:data'
 include ':feature:assetdetails:domain'
 include ':feature:assetdetails:presentation'
+
+include ':feature:gallery:api'
+include ':feature:gallery:presentation'

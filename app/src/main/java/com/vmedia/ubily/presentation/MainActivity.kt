@@ -56,7 +56,7 @@ class MainActivity : BaseActivity(
     }
 
     override fun navigateToGallery(artworks: List<Artwork>, targetArtworkPosition: Int) {
-        TODO("Not yet implemented")
+        navigateTo(ScreenDestination.Gallery(artworks, targetArtworkPosition))
     }
 
     override fun navigateToUrl(url: String) {

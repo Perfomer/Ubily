@@ -14,14 +14,14 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/assetdetails_artwork_item_image"
+            android:id="@+id/gallery_artwork_item_image"
             android:layout_width="128dp"
             android:layout_height="78dp"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
-            android:id="@+id/assetdetails_artwork_item_play"
+            android:id="@+id/gallery_artwork_item_play"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"

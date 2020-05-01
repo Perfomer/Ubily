@@ -2,4 +2,6 @@
 <resources>
     <dimen name="asset_icon_corners_radius">12dp</dimen>
     <dimen name="asset_icon_corners_radius_small">5dp</dimen>
+
+    <dimen name="artwork_corner_radius">8dp</dimen>
 </resources>

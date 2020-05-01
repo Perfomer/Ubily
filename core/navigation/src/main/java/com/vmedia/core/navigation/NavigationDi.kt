@@ -12,6 +12,7 @@ const val BEAN_FRAGMENT_EVENTDETAILS = "EventDetailsFragment"
 const val BEAN_FRAGMENT_ASSETDETAILS = "AssetDetailsFragment"
 const val BEAN_FRAGMENT_ASSETLIST = "AssetListFragment"
 const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
+const val BEAN_FRAGMENT_GALLERY = "GalleryFragment"
 const val BEAN_FRAGMENT_SYNC = "SyncFragment"
 
 typealias CiceroneRouter = Cicerone<Router>
