@@ -61,11 +61,19 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         assetdetails_root.addSystemBottomPadding()
+        assetdetails_toolbar.addSystemTopPadding()
 
         assetdetails_description_scrim.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
         assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
+
+        assetdetails_back.setOnClickListener(::goBack)
+        assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
+
+        assetdetails_externallink.setOnClickListener {
+            navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
+        }
 
         assetdetails_reviews_sort_value.setOnItemSelectedListener {
             postIntent(UpdateSortType(ReviewsSortType.values()[it]))
@@ -76,12 +84,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             ReviewsSortType.labelResources,
             R.layout.common_reviews_sort_item
         )
-
-        assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
-
-        assetdetails_externallink.setOnClickListener {
-            navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
-        }
 
         assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
 
