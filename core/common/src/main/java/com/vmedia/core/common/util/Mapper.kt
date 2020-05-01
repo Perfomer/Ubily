@@ -45,7 +45,7 @@ abstract class ObservableListMapper<FROM, TO> : Mapper<List<FROM>, Observable<Li
     override fun map(from: List<FROM>): Observable<List<TO>> {
         return Observable.defer {
             Observable.fromIterable(from)
-                .flatMap(::mapItem)
+                .concatMap(::mapItem)
                 .toList()
                 .toObservable()
         }
@@ -57,7 +57,7 @@ abstract class ObservableListMapper<FROM, TO> : Mapper<List<FROM>, Observable<Li
 
 fun <FROM, TO> ObservableMapper<FROM, TO>.toListMapper(): ObservableListMapper<FROM, TO> {
     return object : ObservableListMapper<FROM, TO>() {
-        override fun mapItem(from: FROM) = this@toListMapper.map(from)
+        override fun mapItem(from: FROM) = map(from)
     }
 }
 
@@ -69,7 +69,7 @@ fun <FROM, TO> ObservableMapper<FROM, TO>.toListMapper(): ObservableListMapper<F
  */
 fun <FROM, TO> Mapper<FROM, TO>.toListMapper(): ListMapper<FROM, TO> {
     return object : ListMapper<FROM, TO>() {
-        override fun mapItem(from: FROM): TO = this@toListMapper.map(from)
+        override fun mapItem(from: FROM): TO = map(from)
     }
 }
 

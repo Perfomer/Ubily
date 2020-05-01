@@ -11,7 +11,19 @@ import io.reactivex.Single
 @Dao
 interface AssetDao : BaseDao<Asset> {
 
-    @Query("SELECT * FROM Asset")
+    @Query(
+        """
+            SELECT * FROM Asset
+            ORDER BY 
+                CASE WHEN status = "DRAFT"
+                    THEN 0
+                    ELSE 1
+                END DESC,
+                publishingDate DESC,
+                name,
+                id
+        """
+    )
     fun getAssets(): Observable<List<Asset>>
 
     @Query("SELECT * FROM Asset WHERE id = :id")
