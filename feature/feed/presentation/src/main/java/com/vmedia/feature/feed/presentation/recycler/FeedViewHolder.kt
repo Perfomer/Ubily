@@ -17,8 +17,8 @@ internal abstract class FeedViewHolder<T : EventInfo<*>>(
 ) : BaseViewHolder(containerView) {
 
     init {
-        containerView.setOnClickListener { onClick.safeInvoke(adapterPosition) }
-        feed_item_options.setOnClickListener { onOptionsClick.safeInvoke(adapterPosition) }
+        containerView.setOnClickListener { onClick.invokeWithPosition() }
+        feed_item_options.setOnClickListener { onOptionsClick.invokeWithPosition() }
     }
 
     @Suppress("UNCHECKED_CAST")

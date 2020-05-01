@@ -17,7 +17,7 @@ internal class ReviewViewHolder(
 ) : FeedViewHolder<EventReview>(containerView, onClick, onOptionsClick) {
 
     init {
-        feed_item_review_asset.setOnClickListener { onAssetClick.safeInvoke(adapterPosition) }
+        feed_item_review_asset.setOnClickListener { onAssetClick.invokeWithPosition() }
     }
 
     override fun bindContent(item: EventReview) {

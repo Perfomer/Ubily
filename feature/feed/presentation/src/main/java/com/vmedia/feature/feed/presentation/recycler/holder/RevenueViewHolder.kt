@@ -18,7 +18,7 @@ internal class RevenueViewHolder(
 ) : FeedViewHolder<EventRevenue>(containerView, onClick, onOptionsClick) {
 
     init {
-        feed_item_revenue.setOnClickListener { onRevenueClick.safeInvoke(adapterPosition) }
+        feed_item_revenue.setOnClickListener { onRevenueClick.invokeWithPosition() }
     }
 
     override fun bindContent(item: EventRevenue) {
