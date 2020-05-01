@@ -5,7 +5,7 @@ import androidx.core.view.isVisible
 import com.vmedia.core.common.util.*
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
-import kotlinx.android.synthetic.main.assetdetails_review_item.*
+import kotlinx.android.synthetic.main.assetdetails_item_review.*
 
 internal class ReviewViewHolder(
     containerView: View,

@@ -5,7 +5,7 @@ import com.vmedia.core.common.util.loadRoundedImage
 import com.vmedia.core.common.view.recycler.base.BaseViewHolder
 import com.vmedia.core.common.view.recycler.base.ViewHolderOnClick
 import com.vmedia.feature.assetdetails.presentation.R
-import kotlinx.android.synthetic.main.assetdetails_artwork_item.*
+import kotlinx.android.synthetic.main.assetdetails_item_artwork.*
 
 internal class ArtworkViewHolder(
     containerView: View,

@@ -15,7 +15,7 @@ internal class KeywordsAdapter(
 
     override fun getItemCount() = items.size
 
-    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_keyword_item
+    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_keyword
 
     override fun onCreateViewHolder(view: View, viewType: Int): KeywordViewHolder {
         return KeywordViewHolder(view, ::onClick)

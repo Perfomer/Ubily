@@ -13,7 +13,7 @@ internal class ReviewsAdapter(
     var items by diffedListBy(ReviewDetailed::id)
 
 
-    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_review_item
+    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_review
 
     override fun getItemCount() = items.size
 

@@ -15,7 +15,7 @@ internal class ArtworksAdapter(
 
     override fun getItemCount() = items.size
 
-    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_artwork_item
+    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_artwork
 
     override fun onCreateViewHolder(view: View, viewType: Int): ArtworkViewHolder {
         return ArtworkViewHolder(view, onClick)
