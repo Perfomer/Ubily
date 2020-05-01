@@ -72,6 +72,13 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_back.setOnClickListener(::goBack)
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
+        assetdetails_artworks_showall.setOnClickListener {
+            navigator.navigateToGallery(
+                currentState!!.payload.asset.artworks,
+                0
+            )
+        }
+
         assetdetails_externallink.setOnClickListener {
             navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
         }
