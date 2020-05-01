@@ -7,7 +7,7 @@ fun Double.cropToString(
     return buildString(format(signsAfterDot)) {
         if (cropZeros) {
             while (last() == '0') deleteLast()
-            if (last() == '.') deleteLast()
+            if (last() == '.' || last() == ',') deleteLast()
         }
     }
 }
