@@ -9,7 +9,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ReviewsModel(
     val reviews: List<ReviewDetailed> = emptyList(),
-    val collapsedReviews: List<ReviewDetailed> = emptyList(),
     val reviewsCount: Int = reviews.size,
     val averageReviewsRating: Double = 0.0,
     val oneStarStats: StarStats = StarStats(),

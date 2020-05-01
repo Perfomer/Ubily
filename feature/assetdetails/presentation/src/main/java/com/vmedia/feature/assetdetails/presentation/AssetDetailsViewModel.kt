@@ -62,8 +62,7 @@ internal class AssetDetailsViewModel(
                 isLoading = false,
                 payload = payload.copy(
                     reviews = payload.reviews.copy(
-                        reviews = sort(payload.reviews.reviews, oldState.reviewsSortType),
-                        collapsedReviews = payload.reviews.reviews.take(MAX_COLLAPSED_REVIEWS_COUNT)
+                        reviews = sort(payload.reviews.reviews, oldState.reviewsSortType)
                     )
                 ),
                 isDescriptionExpanded = isDescriptionExpanded,
@@ -91,21 +90,24 @@ internal class AssetDetailsViewModel(
                 reviewsSortType = reviewsSortType,
                 payload = oldState.payload.copy(
                     reviews = oldState.payload.reviews.copy(
-                        reviews = sortedReviews,
-                        collapsedReviews = sortedReviews.take(MAX_COLLAPSED_REVIEWS_COUNT)
+                        reviews = sortedReviews
                     )
                 )
             )
         }
     }
 
-    private companion object {
+    internal companion object {
+
+        internal const val MAX_COLLAPSED_REVIEWS_COUNT = 3
 
         private const val MAX_COLLAPSED_DESCRIPTION_LENGTH = 300
         private const val MAX_COLLAPSED_KEYWORDS_COUNT = 10
-        private const val MAX_COLLAPSED_REVIEWS_COUNT = 3
 
-        fun sort(reviews: List<ReviewDetailed>, sortType: ReviewsSortType): List<ReviewDetailed> {
+        private fun sort(
+            reviews: List<ReviewDetailed>,
+            sortType: ReviewsSortType
+        ): List<ReviewDetailed> {
             return when (sortType) {
                 ReviewsSortType.RELEVANCE -> {
                     reviews.sortedWith(

@@ -230,7 +230,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_viewmore.isVisible = !isExpanded
         assetdetails_reviews_scrim.isVisible = !isExpanded
 
-        reviewsAdapter.items = if (isExpanded) reviews else collapsedReviews
+        reviewsAdapter.setItems(reviews, isExpanded)
     }
 
     internal companion object {

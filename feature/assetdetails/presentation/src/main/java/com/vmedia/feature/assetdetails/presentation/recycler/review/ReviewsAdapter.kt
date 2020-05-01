@@ -2,25 +2,28 @@ package com.vmedia.feature.assetdetails.presentation.recycler.review
 
 import android.view.View
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.view.recycler.diffedListBy
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
+import com.vmedia.feature.assetdetails.presentation.AssetDetailsViewModel
 import com.vmedia.feature.assetdetails.presentation.R
 
 internal class ReviewsAdapter(
     private val onAuthorClick: (authorId: Long) -> Unit
 ) : BaseAdapter<ReviewViewHolder>() {
 
-    var items by diffedListBy(ReviewDetailed::id)
+    private var items: List<ReviewDetailed> = emptyList()
+    private var isExpanded: Boolean = false
 
     init {
         setHasStableIds(true)
     }
 
-    override fun getItemCount() = items.size
-
-    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_review
+    override fun getItemCount() =
+        if (isExpanded) items.size
+        else minOf(items.size, AssetDetailsViewModel.MAX_COLLAPSED_REVIEWS_COUNT)
 
     override fun getItemId(position: Int) = items[position].id
+
+    override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_review
 
     override fun onCreateViewHolder(view: View, viewType: Int): ReviewViewHolder {
         return ReviewViewHolder(view, ::onAuthorClick)
@@ -31,6 +34,13 @@ internal class ReviewsAdapter(
             review = items[position],
             showDivider = position != itemCount - 1
         )
+    }
+
+    fun setItems(items: List<ReviewDetailed>, isExpanded: Boolean) {
+        this.items = items
+        this.isExpanded = isExpanded
+
+        notifyDataSetChanged()
     }
 
     private fun onAuthorClick(position: Int) {
