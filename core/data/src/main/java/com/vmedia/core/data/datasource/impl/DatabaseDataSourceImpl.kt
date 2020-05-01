@@ -207,7 +207,12 @@ internal class DatabaseDataSourceImpl(
         keywords: Collection<String>
     ): Completable {
         return database.completableTransaction {
-            putAsset(asset)
+            val containsCategory = categoryDao.contains(asset.categoryId) == 1
+            val categorizedAsset =
+                if (containsCategory) asset
+                else asset.copy(categoryId = 0)
+
+            putAsset(categorizedAsset)
             assetImageDao.insert(images)
             keywords.forEach { putKeyword(it, asset.id) }
         }
