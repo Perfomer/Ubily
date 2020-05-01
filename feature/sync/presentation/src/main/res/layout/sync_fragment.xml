@@ -62,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toTopOf="@id/sync_action"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
