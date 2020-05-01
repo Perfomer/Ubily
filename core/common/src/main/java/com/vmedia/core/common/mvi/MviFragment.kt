@@ -3,7 +3,6 @@ package com.vmedia.core.common.mvi
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
-import com.vmedia.core.common.util.put
 import com.vmedia.core.common.util.toObservable
 import com.vmedia.core.common.view.BaseFragment
 import io.reactivex.ObservableSource
@@ -31,7 +30,7 @@ abstract class MviFragment<Intent : Any, State : Any, Subscription : Any>(
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        currentState?.let { outState.put(KEY_STATE, it) }
+//        currentState?.let { outState.put(KEY_STATE, it) }
     }
 
     override fun onStart() {
