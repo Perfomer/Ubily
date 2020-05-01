@@ -9,7 +9,7 @@ import com.vmedia.core.data.KeyEntity
 
 @Entity(
     indices = [
-        Index(value = ["url"], unique = true),
+        Index(value = ["previewUrl"], unique = true),
         Index(value = ["assetId"])
     ],
     foreignKeys = [ForeignKey(
@@ -22,5 +22,12 @@ import com.vmedia.core.data.KeyEntity
 data class Artwork(
     @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
     val assetId: Long,
-    val url: String
+    val mediaType: MediaType,
+    val previewUrl: String,
+    val contentUrl: String?
 ) : KeyEntity<Long>
+
+enum class MediaType {
+    IMAGE,
+    VIDEO
+}

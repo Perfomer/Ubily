@@ -10,7 +10,7 @@ import com.vmedia.core.data.internal.database.dao.*
 import com.vmedia.core.data.internal.database.entity.*
 
 @Database(
-    version = 1,
+    version = 2,
     exportSchema = false,
     entities = [
         Asset::class,
@@ -35,7 +35,8 @@ import com.vmedia.core.data.internal.database.entity.*
     CurrencyConverter::class,
     EventTypeConverter::class,
     DateConverter::class,
-    MonthConverter::class
+    MonthConverter::class,
+    MediaTypeConverter::class
 )
 internal abstract class UbilyDatabase : RoomDatabase() {
 

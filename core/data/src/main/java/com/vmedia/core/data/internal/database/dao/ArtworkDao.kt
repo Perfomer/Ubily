@@ -9,7 +9,7 @@ import io.reactivex.Observable
 @Dao
 interface ArtworkDao : BaseDao<Artwork> {
 
-    @Query("SELECT url FROM Artwork WHERE assetId = :assetId")
+    @Query("SELECT previewUrl FROM Artwork WHERE assetId = :assetId")
     fun getArtworks(assetId: Long): Observable<List<String>>
 
 }
