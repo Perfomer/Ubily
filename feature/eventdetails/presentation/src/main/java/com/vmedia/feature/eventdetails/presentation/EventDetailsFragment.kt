@@ -3,7 +3,6 @@ package com.vmedia.feature.eventdetails.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.perfomer.blitz.setTimeAgo
 import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.iconResource
 import com.vmedia.core.common.obj.titleResource
@@ -63,7 +62,7 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
 
         eventdetails_icon.setImageResource(type.iconResource)
         eventdetails_title.diffedValue = getString(type.titleResource)
-        eventdetails_date.setTimeAgo(event.date, showSeconds = true)
+        eventdetails_date.diffedValue = event.date.format(FORMAT_DDMMYYYY)
         eventdetails_description.setEventDescription(event)
 
         adapter!!.bind(event)

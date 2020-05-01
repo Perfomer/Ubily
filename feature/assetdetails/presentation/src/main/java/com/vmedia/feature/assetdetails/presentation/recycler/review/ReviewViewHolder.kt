@@ -29,7 +29,7 @@ internal class ReviewViewHolder(
         assetdetails_review_item_avatar.setTint(getUserColorResource(authorName))
         assetdetails_review_item_avatar_letter.diffedValue = authorName
         assetdetails_review_item_author.diffedValue = authorName
-        assetdetails_review_item_date.diffedValue = review.publishingDate.format(FORMAT_REVIEWS)
+        assetdetails_review_item_date.diffedValue = review.publishingDate.format(FORMAT_DDMMYYYY)
         assetdetails_review_item_rating.diffedValue = review.rating
         assetdetails_review_item_title.diffedValue = review.title
         assetdetails_review_item_comment.diffedValue = review.comment
