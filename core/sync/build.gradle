@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 apply from: '../../android_commons.gradle'
 
 dependencies {
-    implementation project(":core:common:android")
+    implementation project(":core:common:pure")
     implementation project(":core:network")
     implementation project(":core:data")
 }

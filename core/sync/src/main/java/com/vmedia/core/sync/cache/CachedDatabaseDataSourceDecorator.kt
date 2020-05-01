@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.cache
 
-import com.vmedia.core.common.android.util.CacheHolder
 import com.vmedia.core.common.pure.obj.Period
+import com.vmedia.core.common.pure.util.CacheHolder
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import java.math.BigDecimal
 

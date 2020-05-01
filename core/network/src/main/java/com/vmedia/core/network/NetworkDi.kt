@@ -1,7 +1,7 @@
 package com.vmedia.core.network
 
 import com.google.gson.GsonBuilder
-import com.vmedia.core.common.android.BuildConfig
+import com.vmedia.core.common.pure.BuildConfig
 import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.common.pure.util.ListMapper
 import com.vmedia.core.common.pure.util.Mapper

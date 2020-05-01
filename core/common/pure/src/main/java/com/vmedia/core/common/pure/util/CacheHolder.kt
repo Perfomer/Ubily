@@ -1,4 +1,4 @@
-package com.vmedia.core.common.android.util
+package com.vmedia.core.common.pure.util
 
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
