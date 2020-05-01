@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="assetdetails_size_mb">%s MB</string>
+    <string name="assetdetails_viewmore">View more</string>
+    <string name="assetdetails_viewall">View all</string>
+    <string name="assetdetails_externallink">Open in browser</string>
+
+    <string name="assetdetails_asset_price">Price</string>
+    <string name="assetdetails_asset_id">Identifier</string>
+    <string name="assetdetails_asset_version">Version</string>
+    <string name="assetdetails_asset_status">Status</string>
+    <string name="assetdetails_asset_size">Size</string>
+
+    <string name="assetdetails_asset_value_size">%s MB</string>
+
+    <string name="assetdetails_title_artworks">Artworks</string>
+    <string name="assetdetails_title_description">Description</string>
+    <string name="assetdetails_title_keywords">Keywords</string>
+    <string name="assetdetails_title_reviews">Reviews</string>
+    <string name="assetdetails_title_publisher">Publisher</string>
+
+    <string name="assetdetails_reviews_average">Average reviews rating:</string>
+    <string name="assetdetails_reviews_sortby">Sort by</string>
 </resources>

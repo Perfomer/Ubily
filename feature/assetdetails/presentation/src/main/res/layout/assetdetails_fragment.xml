@@ -33,7 +33,7 @@
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/brand_grey_lighter"
             android:paddingTop="28dp"
-            android:text="Open in browser"
+            android:text="@string/assetdetails_externallink"
             android:textColor="@color/brand_green_darker"
             app:icon="@drawable/ic_external_link"
             app:iconGravity="textStart"
@@ -104,7 +104,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Price"
+                            android:text="@string/assetdetails_asset_price"
                             android:textColor="@color/brand_black" />
 
                         <TextView
@@ -129,7 +129,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Identifier"
+                            android:text="@string/assetdetails_asset_id"
                             android:textColor="@color/brand_black" />
 
                         <TextView
@@ -152,7 +152,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Version"
+                            android:text="@string/assetdetails_asset_version"
                             android:textColor="@color/brand_black" />
 
                         <TextView
@@ -176,7 +176,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Status"
+                            android:text="@string/assetdetails_asset_status"
                             android:textColor="@color/brand_black" />
 
                         <TextView
@@ -200,7 +200,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Size"
+                            android:text="@string/assetdetails_asset_size"
                             android:textColor="@color/brand_black" />
 
                         <TextView
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="14dp"
-                    android:text="Artworks"
+                    android:text="@string/assetdetails_title_artworks"
                     android:textAllCaps="true"
                     android:textColor="@color/brand_black"
                     android:textStyle="bold"
@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:text="View all"
+                    android:text="@string/assetdetails_viewall"
                     android:textColor="@color/brand_green_darker"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -317,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="14dp"
-                    android:text="Description"
+                    android:text="@string/assetdetails_title_description"
                     android:textAllCaps="true"
                     android:textColor="@color/brand_black"
                     android:textStyle="bold"
@@ -370,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="24dp"
-                    android:text="Keywords"
+                    android:text="@string/assetdetails_title_keywords"
                     android:textAllCaps="true"
                     android:textColor="@color/brand_black"
                     android:textStyle="bold"
@@ -399,7 +399,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/brand_grey_lightest"
-                    android:text="View more"
+                    android:text="@string/assetdetails_viewmore"
                     android:textColor="@color/brand_green_darker"
                     app:layout_constraintEnd_toEndOf="@id/assetdetails_description_text"
                     app:layout_constraintStart_toStartOf="@id/assetdetails_description_text"
@@ -431,7 +431,7 @@
                     android:id="@+id/assetdetails_reviews_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reviews"
+                    android:text="@string/assetdetails_title_reviews"
                     android:textAllCaps="true"
                     android:textColor="@color/brand_black"
                     android:textStyle="bold"
@@ -452,7 +452,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Average reviews rating:"
+                    android:text="@string/assetdetails_reviews_average"
                     android:textColor="@color/brand_black"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@id/assetdetails_reviews_count"
@@ -477,12 +477,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Reviews total: 24"
                     android:textColor="@color/brand_grey_dark"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@id/assetdetails_reviews_icon"
                     app:layout_constraintStart_toStartOf="@id/assetdetails_reviews_rating_title"
-                    app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_rating_title" />
+                    app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews_rating_title"
+                    tools:text="Reviews total: 24" />
 
                 <me.zhanghai.android.materialratingbar.MaterialRatingBar
                     android:id="@+id/assetdetails_reviews_1"
@@ -674,7 +674,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:text="Sort by"
+                    android:text="@string/assetdetails_reviews_sortby"
                     android:textColor="@color/brand_black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -725,7 +725,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="@color/brand_grey_lightest"
-                    android:text="View more"
+                    android:text="@string/assetdetails_viewmore"
                     android:textColor="@color/brand_green_darker"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -758,7 +758,7 @@
                     android:id="@+id/assetdetails_publisher_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Publisher"
+                    android:text="@string/assetdetails_title_publisher"
                     android:textAllCaps="true"
                     android:textColor="@color/brand_black"
                     android:textStyle="bold"

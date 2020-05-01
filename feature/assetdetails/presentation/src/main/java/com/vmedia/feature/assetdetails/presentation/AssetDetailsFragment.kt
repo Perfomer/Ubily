@@ -123,7 +123,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_version.diffedValue = versionName
         assetdetails_status.diffedValue = getString(status.labelResource)
         assetdetails_size.diffedValue = getString(
-            R.string.assetdetails_size_mb,
+            R.string.assetdetails_asset_value_size,
             sizeMb.cropToString()
         )
 
