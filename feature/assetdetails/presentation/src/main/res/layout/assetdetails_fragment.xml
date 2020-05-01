@@ -100,6 +100,7 @@
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/rubik"
                         android:gravity="center_horizontal"
+                        android:letterSpacing="0.165"
                         android:textAllCaps="true"
                         android:textColor="@color/brand_green_dark"
                         android:textSize="14sp"
