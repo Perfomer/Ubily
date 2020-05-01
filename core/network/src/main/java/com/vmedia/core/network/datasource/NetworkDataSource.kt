@@ -26,6 +26,11 @@ interface NetworkDataSource {
 
     fun getReviews(): Single<List<DetailedReviewDto>>
 
-    fun getCategories(): Single<List<CategoryDto>>
+    /**
+     * Get categories list
+     *
+     * @param versionId any asset version id
+     */
+    fun getCategories(versionId: Long): Single<List<CategoryDto>>
 
 }

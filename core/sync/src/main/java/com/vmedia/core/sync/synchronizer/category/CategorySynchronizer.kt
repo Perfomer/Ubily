@@ -5,6 +5,7 @@ import com.vmedia.core.common.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Category
 import com.vmedia.core.network.datasource.NetworkDataSource
+import com.vmedia.core.network.entity.AssetDto
 import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync._CategoryMapper
 import com.vmedia.core.sync.synchronizer.Synchronizer
@@ -20,7 +21,10 @@ internal class CategorySynchronizer(
     override val dataType = SynchronizationDataType.ASSETS_CATEGORIES
 
     override fun execute(): Single<List<Category>> {
-        return networkDataSource.getCategories()
+        return networkDataSource.getAssets()
+            .map { it.first() }
+            .map(AssetDto::packageVersionId)
+            .flatMap(networkDataSource::getCategories)
             .mapWith(mapper)
             .map<List<Category>> {
                 it.toMutableList().apply { add(Category(id = 0, name = "None")) }

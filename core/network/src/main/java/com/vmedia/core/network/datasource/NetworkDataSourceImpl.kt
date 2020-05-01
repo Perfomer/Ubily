@@ -104,8 +104,8 @@ internal class NetworkDataSourceImpl(
             .mapWith(detailedCommentMapper)
     }
 
-    override fun getCategories(): Single<List<CategoryDto>> {
-        return api.getCategories()
+    override fun getCategories(versionId: Long): Single<List<CategoryDto>> {
+        return api.getCategories(versionId)
     }
 
 }
