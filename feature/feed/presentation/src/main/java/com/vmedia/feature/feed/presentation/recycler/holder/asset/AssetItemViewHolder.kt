@@ -1,11 +1,11 @@
 package com.vmedia.feature.feed.presentation.recycler.holder.asset
 
 import android.view.View
-import com.vmedia.core.common.obj.event.AssetInfo
-import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventAsset
-import com.vmedia.core.common.obj.labelResource
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadRoundedImage
+import com.vmedia.core.common.android.obj.event.AssetInfo
+import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventAsset
+import com.vmedia.core.common.android.obj.labelResource
+import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.loadRoundedImage
 import com.vmedia.feature.feed.presentation.recycler.holder.AssetListViewHolder
 import com.vmedia.feature.feed.presentation.recycler.holder.ItemViewHolder
 import kotlinx.android.synthetic.main.feed_item_asset_item.*

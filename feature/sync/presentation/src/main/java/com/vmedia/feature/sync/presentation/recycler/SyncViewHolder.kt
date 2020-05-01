@@ -2,11 +2,11 @@ package com.vmedia.feature.sync.presentation.recycler
 
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.getDrawableCompat
-import com.vmedia.core.common.util.getFontCompat
-import com.vmedia.core.common.util.setTextColorCompat
-import com.vmedia.core.common.view.recycler.base.BaseViewHolder
+import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.getDrawableCompat
+import com.vmedia.core.common.android.util.getFontCompat
+import com.vmedia.core.common.android.util.setTextColorCompat
+import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.feature.sync.presentation.R
 import com.vmedia.feature.sync.presentation.model.SyncDataItem
 import com.vmedia.feature.sync.presentation.model.SyncDataStatus.*

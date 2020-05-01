@@ -1,7 +1,7 @@
 package com.vmedia.core.network.datasource
 
-import com.vmedia.core.common.obj.creds.RssToken
-import com.vmedia.core.common.obj.creds.Token
+import com.vmedia.core.common.android.obj.creds.RssToken
+import com.vmedia.core.common.android.obj.creds.Token
 
 interface NetworkCredentialsProvider {
     val userId: Long

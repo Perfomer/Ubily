@@ -1,7 +1,7 @@
 package com.vmedia.core.data.datasource
 
-import com.vmedia.core.common.obj.EventType
-import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.android.obj.Period
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import io.reactivex.Completable

@@ -3,9 +3,9 @@ package com.vmedia.feature.eventdetails.presentation.viewholder
 import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.vmedia.core.common.obj.EventType
-import com.vmedia.core.common.obj.event.EventInfo
-import com.vmedia.core.common.util.inflate
+import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.android.obj.event.EventInfo
+import com.vmedia.core.common.android.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 
 internal abstract class EventDetailsViewHolder<T : Any>(

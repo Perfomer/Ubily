@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
-import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.createSnackbar
-import com.vmedia.core.common.util.isVisible
-import com.vmedia.core.common.util.toSpan
+import com.vmedia.core.common.android.mvi.MviFragment
+import com.vmedia.core.common.android.util.createSnackbar
+import com.vmedia.core.common.android.util.isVisible
+import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.feature.splash.presentation.mvi.SplashIntent
 import com.vmedia.feature.splash.presentation.mvi.SplashState

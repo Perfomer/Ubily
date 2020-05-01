@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.synchronizer.asset
 
-import com.vmedia.core.common.util.EMPTY_DATE
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.EMPTY_DATE
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.MediaType.IMAGE

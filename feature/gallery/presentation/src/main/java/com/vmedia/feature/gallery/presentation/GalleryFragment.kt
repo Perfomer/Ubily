@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.core.view.isVisible
-import com.vmedia.core.common.util.addSystemBottomPadding
-import com.vmedia.core.common.util.argument
-import com.vmedia.core.common.util.loadImage
-import com.vmedia.core.common.util.setOnClickListener
-import com.vmedia.core.common.view.BaseFragment
+import com.vmedia.core.common.android.util.addSystemBottomPadding
+import com.vmedia.core.common.android.util.argument
+import com.vmedia.core.common.android.util.loadImage
+import com.vmedia.core.common.android.util.setOnClickListener
+import com.vmedia.core.common.android.view.BaseFragment
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
 import com.vmedia.feature.gallery.presentation.util.createFlickGestureListener

@@ -1,7 +1,7 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.util.FORMAT_TABLEVALUES
-import com.vmedia.core.common.util.parse
+import com.vmedia.core.common.android.util.FORMAT_TABLEVALUES
+import com.vmedia.core.common.android.util.parse
 import com.vmedia.core.network.api.entity.ExtraTableValues
 import com.vmedia.core.network.entity.DownloadDto
 

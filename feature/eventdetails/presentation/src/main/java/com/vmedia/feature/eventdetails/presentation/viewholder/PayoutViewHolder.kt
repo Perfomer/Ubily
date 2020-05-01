@@ -2,9 +2,9 @@ package com.vmedia.feature.eventdetails.presentation.viewholder
 
 import android.content.Context
 import androidx.core.view.isVisible
-import com.vmedia.core.common.obj.EventType
-import com.vmedia.core.common.obj.event.PayoutInfo
-import com.vmedia.core.common.util.toSpan
+import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.android.obj.event.PayoutInfo
+import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.feature.eventdetails.presentation.R
 import kotlinx.android.synthetic.main.eventdetails_item_payout.*
 

@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.download
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.entity.DownloadDto
 import com.vmedia.core.sync._AssetProviderByUrl

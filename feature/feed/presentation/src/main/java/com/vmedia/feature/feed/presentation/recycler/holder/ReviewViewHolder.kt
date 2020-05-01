@@ -2,9 +2,9 @@ package com.vmedia.feature.feed.presentation.recycler.holder
 
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.obj.event.EventInfo.EventReview
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadRoundedImage
+import com.vmedia.core.common.android.obj.event.EventInfo.EventReview
+import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.loadRoundedImage
 import com.vmedia.feature.feed.presentation.R
 import com.vmedia.feature.feed.presentation.recycler.FeedViewHolder
 import kotlinx.android.synthetic.main.feed_item_review.*

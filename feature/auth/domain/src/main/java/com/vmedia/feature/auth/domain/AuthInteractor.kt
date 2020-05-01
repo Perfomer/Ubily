@@ -1,6 +1,6 @@
 package com.vmedia.feature.auth.domain
 
-import com.vmedia.core.common.obj.creds.Credentials
+import com.vmedia.core.common.android.obj.creds.Credentials
 import io.reactivex.Completable
 
 class AuthInteractor(

@@ -2,8 +2,8 @@ package com.vmedia.core.data.datasource.impl
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import com.vmedia.core.common.obj.creds.Credentials
-import com.vmedia.core.common.obj.creds.Token
+import com.vmedia.core.common.android.obj.creds.Credentials
+import com.vmedia.core.common.android.obj.creds.Token
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.util.NO_VALUE_ENCRYPT
 import com.vmedia.core.data.util.decrypt

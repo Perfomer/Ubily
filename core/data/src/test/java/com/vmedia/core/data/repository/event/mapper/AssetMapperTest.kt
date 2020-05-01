@@ -3,7 +3,7 @@ package com.vmedia.core.data.repository.event.mapper
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import com.vmedia.core.common.obj.EventType
+import com.vmedia.core.common.android.obj.EventType
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Event

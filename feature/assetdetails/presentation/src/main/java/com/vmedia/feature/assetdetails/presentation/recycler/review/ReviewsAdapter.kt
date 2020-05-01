@@ -1,7 +1,7 @@
 package com.vmedia.feature.assetdetails.presentation.recycler.review
 
 import android.view.View
-import com.vmedia.core.common.view.recycler.base.BaseAdapter
+import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.feature.assetdetails.presentation.AssetDetailsViewModel
 import com.vmedia.feature.assetdetails.presentation.R

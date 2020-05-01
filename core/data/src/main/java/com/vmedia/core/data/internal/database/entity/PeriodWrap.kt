@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.common.obj.Period
+import com.vmedia.core.common.android.obj.Period
 import com.vmedia.core.data.KeyEntity
 
 @Entity(

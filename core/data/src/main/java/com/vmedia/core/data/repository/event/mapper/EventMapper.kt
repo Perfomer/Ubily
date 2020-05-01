@@ -1,8 +1,8 @@
 package com.vmedia.core.data.repository.event.mapper
 
-import com.vmedia.core.common.obj.EventType.*
-import com.vmedia.core.common.obj.event.EventInfo
-import com.vmedia.core.common.util.ObservableMapper
+import com.vmedia.core.common.android.obj.EventType.*
+import com.vmedia.core.common.android.obj.event.EventInfo
+import com.vmedia.core.common.android.util.ObservableMapper
 import com.vmedia.core.data.*
 import com.vmedia.core.data.internal.database.entity.Event
 import io.reactivex.Observable

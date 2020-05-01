@@ -1,8 +1,8 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.obj.Month
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.obj.Month
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.network.api.entity.PeriodModel
 
 /**

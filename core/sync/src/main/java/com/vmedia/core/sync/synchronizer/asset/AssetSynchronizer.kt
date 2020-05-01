@@ -1,9 +1,9 @@
 package com.vmedia.core.sync.synchronizer.asset
 
-import com.vmedia.core.common.util.actOnSuccess
-import com.vmedia.core.common.util.associateWith
-import com.vmedia.core.common.util.filterWith
-import com.vmedia.core.common.util.mapWith
+import com.vmedia.core.common.android.util.actOnSuccess
+import com.vmedia.core.common.android.util.associateWith
+import com.vmedia.core.common.android.util.filterWith
+import com.vmedia.core.common.android.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.sync.SynchronizationDataType

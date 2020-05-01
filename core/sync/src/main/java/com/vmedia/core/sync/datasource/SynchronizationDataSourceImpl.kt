@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.datasource
 
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.andThenMerge
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.andThenMerge
 import com.vmedia.core.sync.*
 import com.vmedia.core.sync.SynchronizationDataType.PERIODS
 import com.vmedia.core.sync.SynchronizationEvent.*

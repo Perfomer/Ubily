@@ -1,7 +1,7 @@
 package com.vmedia.feature.assetdetails.presentation.mvi
 
-import com.vmedia.core.common.obj.ReviewsSortType
-import com.vmedia.core.common.obj.ReviewsSortType.RELEVANCE
+import com.vmedia.core.common.android.obj.ReviewsSortType
+import com.vmedia.core.common.android.obj.ReviewsSortType.RELEVANCE
 import com.vmedia.feature.assetdetails.domain.model.AssetDetails
 
 internal data class AssetDetailsState(

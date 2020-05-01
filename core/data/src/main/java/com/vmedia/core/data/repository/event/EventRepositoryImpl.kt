@@ -1,7 +1,7 @@
 package com.vmedia.core.data.repository.event
 
-import com.vmedia.core.common.obj.event.EventInfo
-import com.vmedia.core.common.util.flatMapWith
+import com.vmedia.core.common.android.obj.event.EventInfo
+import com.vmedia.core.common.android.util.flatMapWith
 import com.vmedia.core.data._EventListMapper
 import com.vmedia.core.data._EventMapper
 import com.vmedia.core.domain.repository.EventRepository

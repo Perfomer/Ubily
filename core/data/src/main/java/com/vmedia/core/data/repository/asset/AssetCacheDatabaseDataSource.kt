@@ -1,6 +1,6 @@
 package com.vmedia.core.data.repository.asset
 
-import com.vmedia.core.common.util.CacheHolder
+import com.vmedia.core.common.android.util.CacheHolder
 import com.vmedia.core.data.datasource.DatabaseDataSource
 
 internal class AssetCacheDatabaseDataSource(

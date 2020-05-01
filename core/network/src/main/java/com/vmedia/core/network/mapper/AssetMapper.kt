@@ -1,11 +1,11 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.obj.Currency
-import com.vmedia.core.common.obj.Money
-import com.vmedia.core.common.obj.toAssetStatus
-import com.vmedia.core.common.util.FORMAT_PACKAGEVERSION
-import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.common.util.parse
+import com.vmedia.core.common.android.obj.Currency
+import com.vmedia.core.common.android.obj.Money
+import com.vmedia.core.common.android.obj.toAssetStatus
+import com.vmedia.core.common.android.util.FORMAT_PACKAGEVERSION
+import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.android.util.parse
 import com.vmedia.core.network.api.entity.asset.PackageModelWithVersions
 import com.vmedia.core.network.api.entity.asset.PackageVersionModel
 import com.vmedia.core.network.entity.AssetDto

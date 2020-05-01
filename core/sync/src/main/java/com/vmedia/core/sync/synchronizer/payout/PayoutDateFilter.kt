@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.payout
 
-import com.vmedia.core.common.util.Filter
+import com.vmedia.core.common.android.util.Filter
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync._PayoutLastDateProvider
 

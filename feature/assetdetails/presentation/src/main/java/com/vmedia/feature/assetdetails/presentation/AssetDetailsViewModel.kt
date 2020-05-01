@@ -1,8 +1,8 @@
 package com.vmedia.feature.assetdetails.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
-import com.vmedia.core.common.obj.ReviewsSortType
-import com.vmedia.core.common.util.toObservable
+import com.vmedia.core.common.android.mvi.MviViewModel
+import com.vmedia.core.common.android.obj.ReviewsSortType
+import com.vmedia.core.common.android.util.toObservable
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.feature.assetdetails.domain.AssetDetailsInteractor
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction

@@ -2,8 +2,9 @@ rootProject.name='Ubily'
 
 include ':app'
 
+include ':core:common:android'
+
 include ':core:navigation'
-include ':core:common'
 include ':core:data'
 include ':core:network'
 include ':core:sync'

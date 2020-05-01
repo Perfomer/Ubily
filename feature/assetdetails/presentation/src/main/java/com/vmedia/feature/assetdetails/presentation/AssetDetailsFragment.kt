@@ -9,10 +9,10 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.obj.ReviewsSortType
-import com.vmedia.core.common.obj.labelResource
-import com.vmedia.core.common.util.*
+import com.vmedia.core.common.android.mvi.MviFragment
+import com.vmedia.core.common.android.obj.ReviewsSortType
+import com.vmedia.core.common.android.obj.labelResource
+import com.vmedia.core.common.android.util.*
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset

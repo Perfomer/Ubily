@@ -1,6 +1,6 @@
 package com.vmedia.core.network.entity
 
-import com.vmedia.core.common.obj.Rating
+import com.vmedia.core.common.android.obj.Rating
 import java.util.*
 
 data class DetailedReviewDto(

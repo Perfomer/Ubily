@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.synchronizer.period
 
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.actOnSuccess
-import com.vmedia.core.common.util.filterWith
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.actOnSuccess
+import com.vmedia.core.common.android.util.filterWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.network.datasource.NetworkDataSource
 import com.vmedia.core.sync.SynchronizationDataType

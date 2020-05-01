@@ -1,6 +1,6 @@
 package com.vmedia.core.domain.repository
 
-import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.android.obj.event.EventInfo
 import io.reactivex.Observable
 
 interface EventRepository {

@@ -1,6 +1,6 @@
 package com.vmedia.core.network.filter
 
-import com.vmedia.core.common.util.Filter
+import com.vmedia.core.common.android.util.Filter
 import com.vmedia.core.network.entity.internal.ReviewDto
 
 internal object ReviewFilter : Filter<ReviewDto> {

@@ -1,6 +1,6 @@
 package com.vmedia.core.data.datasource
 
-import com.vmedia.core.common.obj.creds.Credentials
+import com.vmedia.core.common.android.obj.creds.Credentials
 import io.reactivex.Completable
 import io.reactivex.Single
 

@@ -1,6 +1,6 @@
 package com.vmedia.core.network.mapper
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.network.api.entity.asset.LanguageMetadataModel
 import com.vmedia.core.network.entity.AssetDetailsDto
 import com.vmedia.core.network.util.fixUrl

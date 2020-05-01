@@ -1,7 +1,7 @@
 package com.vmedia.feature.sync.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
-import com.vmedia.core.common.util.mapWith
+import com.vmedia.core.common.android.mvi.MviViewModel
+import com.vmedia.core.common.android.util.mapWith
 import com.vmedia.feature.sync.domain.SyncInteractor
 import com.vmedia.feature.sync.presentation.di._StatusMapper
 import com.vmedia.feature.sync.presentation.mvi.SyncAction

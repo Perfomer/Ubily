@@ -3,7 +3,7 @@ package com.vmedia.core.data.internal.database.dao
 import androidx.annotation.WorkerThread
 import androidx.room.Dao
 import androidx.room.Query
-import com.vmedia.core.common.obj.creds.RssToken
+import com.vmedia.core.common.android.obj.creds.RssToken
 import com.vmedia.core.data.internal.database.dao.base.BaseDao
 import com.vmedia.core.data.internal.database.entity.Publisher
 import io.reactivex.Observable

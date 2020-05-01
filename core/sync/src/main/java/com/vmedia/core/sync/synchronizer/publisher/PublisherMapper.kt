@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.publisher
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Publisher
 import com.vmedia.core.network.entity.PublisherDto
 

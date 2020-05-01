@@ -1,6 +1,6 @@
 package com.vmedia.feature.assetdetails.domain
 
-import com.vmedia.core.common.util.mapItems
+import com.vmedia.core.common.android.util.mapItems
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Keyword

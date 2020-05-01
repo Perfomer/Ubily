@@ -1,7 +1,7 @@
 package com.vmedia.core.data.repository.event.mapper
 
-import com.vmedia.core.common.obj.event.EventInfo.EventListInfo.EventSale
-import com.vmedia.core.common.obj.event.SaleInfo
+import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo.EventSale
+import com.vmedia.core.common.android.obj.event.SaleInfo
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Event
 

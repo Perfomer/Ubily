@@ -3,10 +3,10 @@ package com.vmedia.feature.sync.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.argument
-import com.vmedia.core.common.util.init
-import com.vmedia.core.common.util.toSpan
+import com.vmedia.core.common.android.mvi.MviFragment
+import com.vmedia.core.common.android.util.argument
+import com.vmedia.core.common.android.util.init
+import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode.INITIAL

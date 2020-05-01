@@ -1,7 +1,7 @@
 package com.vmedia.core.sync
 
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.*
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.*
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.api.entity.CategoryDto

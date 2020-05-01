@@ -1,10 +1,10 @@
 package com.vmedia.core.network.mapper
 
 import android.annotation.SuppressLint
-import com.vmedia.core.common.obj.Month
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.FORMAT_TABLEVALUES
-import com.vmedia.core.common.util.parse
+import com.vmedia.core.common.android.obj.Month
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.FORMAT_TABLEVALUES
+import com.vmedia.core.common.android.util.parse
 import com.vmedia.core.network.api.entity.ExtraTableValues
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.network.entity.internal.IncomeDto.Payout

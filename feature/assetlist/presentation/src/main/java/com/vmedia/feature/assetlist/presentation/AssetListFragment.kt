@@ -3,11 +3,11 @@ package com.vmedia.feature.assetlist.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.addSystemTopPadding
-import com.vmedia.core.common.util.addSystemVerticalPadding
-import com.vmedia.core.common.util.loadCircleImage
-import com.vmedia.core.common.util.setOnClickListener
+import com.vmedia.core.common.android.mvi.MviFragment
+import com.vmedia.core.common.android.util.addSystemTopPadding
+import com.vmedia.core.common.android.util.addSystemVerticalPadding
+import com.vmedia.core.common.android.util.loadCircleImage
+import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent

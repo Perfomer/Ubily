@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.sale
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.network.entity.SaleDto
 import com.vmedia.core.sync._AssetProviderByUrl

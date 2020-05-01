@@ -1,8 +1,8 @@
 package com.vmedia.core.sync.synchronizer.user
 
-import com.vmedia.core.common.util.actOnSuccess
-import com.vmedia.core.common.util.filterWith
-import com.vmedia.core.common.util.mapWith
+import com.vmedia.core.common.android.util.actOnSuccess
+import com.vmedia.core.common.android.util.filterWith
+import com.vmedia.core.common.android.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.User
 import com.vmedia.core.network.datasource.NetworkDataSource

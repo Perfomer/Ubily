@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.synchronizer.category
 
-import com.vmedia.core.common.util.actOnSuccess
-import com.vmedia.core.common.util.mapWith
+import com.vmedia.core.common.android.util.actOnSuccess
+import com.vmedia.core.common.android.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Category
 import com.vmedia.core.network.datasource.NetworkDataSource

@@ -24,7 +24,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.vmedia.core.common.view.prefetcher.gapworker.api.WrappedGapWorkerRecyclerView
+    <com.vmedia.core.common.android.view.prefetcher.gapworker.api.WrappedGapWorkerRecyclerView
         android:id="@+id/feed_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

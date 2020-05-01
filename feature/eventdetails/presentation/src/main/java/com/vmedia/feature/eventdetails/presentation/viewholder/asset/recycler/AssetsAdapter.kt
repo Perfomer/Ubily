@@ -2,7 +2,7 @@ package com.vmedia.feature.eventdetails.presentation.viewholder.asset.recycler
 
 import android.view.View
 import androidx.annotation.LayoutRes
-import com.vmedia.core.common.view.recycler.base.BaseAdapter
+import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
 
 internal class AssetsAdapter<T : Any, VH : BaseAssetItemViewHolder<T>>(
     @LayoutRes private val itemLayoutResource: Int,

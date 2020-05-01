@@ -3,7 +3,7 @@ package com.vmedia.feature.eventdetails.presentation.viewholder.asset.recycler
 import android.view.View
 import androidx.annotation.CallSuper
 import com.google.android.material.card.MaterialCardView
-import com.vmedia.core.common.view.recycler.base.BaseViewHolder
+import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.feature.eventdetails.presentation.R
 
 abstract class BaseAssetItemViewHolder<T: Any>(

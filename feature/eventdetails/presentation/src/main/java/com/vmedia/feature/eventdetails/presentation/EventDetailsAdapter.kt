@@ -1,9 +1,9 @@
 package com.vmedia.feature.eventdetails.presentation
 
 import android.view.ViewGroup
-import com.vmedia.core.common.obj.EventType
-import com.vmedia.core.common.obj.EventType.*
-import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.android.obj.EventType
+import com.vmedia.core.common.android.obj.EventType.*
+import com.vmedia.core.common.android.obj.event.EventInfo
 import com.vmedia.feature.eventdetails.presentation.viewholder.*
 
 internal class EventDetailsAdapter(

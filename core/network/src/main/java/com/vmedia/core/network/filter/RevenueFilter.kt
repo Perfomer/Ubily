@@ -1,8 +1,8 @@
 package com.vmedia.core.network.filter
 
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.Filter
-import com.vmedia.core.common.util.sumByBigDecimal
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.Filter
+import com.vmedia.core.common.android.util.sumByBigDecimal
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.network.entity.internal.IncomeDto.Payout
 import com.vmedia.core.network.entity.internal.IncomeDto.Revenue

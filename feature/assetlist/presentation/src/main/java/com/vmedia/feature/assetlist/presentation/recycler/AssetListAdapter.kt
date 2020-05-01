@@ -1,8 +1,8 @@
 package com.vmedia.feature.assetlist.presentation.recycler
 
 import android.view.View
-import com.vmedia.core.common.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.view.recycler.diffedListBy
+import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
+import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.feature.assetlist.presentation.R
 

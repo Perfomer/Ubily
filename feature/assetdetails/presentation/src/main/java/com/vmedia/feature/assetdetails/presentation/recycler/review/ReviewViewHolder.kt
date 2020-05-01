@@ -2,8 +2,8 @@ package com.vmedia.feature.assetdetails.presentation.recycler.review
 
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.util.*
-import com.vmedia.core.common.view.recycler.base.BaseViewHolder
+import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import kotlinx.android.synthetic.main.assetdetails_item_review.*
 

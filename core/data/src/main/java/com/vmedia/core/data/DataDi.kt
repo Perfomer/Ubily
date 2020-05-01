@@ -2,10 +2,10 @@ package com.vmedia.core.data
 
 import android.content.Context
 import androidx.room.RoomDatabase
-import com.vmedia.core.common.obj.event.EventInfo
-import com.vmedia.core.common.util.ObservableListMapper
-import com.vmedia.core.common.util.ObservableMapper
-import com.vmedia.core.common.util.toListMapper
+import com.vmedia.core.common.android.obj.event.EventInfo
+import com.vmedia.core.common.android.util.ObservableListMapper
+import com.vmedia.core.common.android.util.ObservableMapper
+import com.vmedia.core.common.android.util.toListMapper
 import com.vmedia.core.data.datasource.CredentialsDataSource
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.datasource.PublisherDataSource

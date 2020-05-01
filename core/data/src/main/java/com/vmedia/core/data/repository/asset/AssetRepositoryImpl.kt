@@ -1,6 +1,6 @@
 package com.vmedia.core.data.repository.asset
 
-import com.vmedia.core.common.util.flatMapWith
+import com.vmedia.core.common.android.util.flatMapWith
 import com.vmedia.core.data._AssetShortInfoMapper
 import com.vmedia.core.data.internal.database.entity.Publisher
 import com.vmedia.core.domain.model.AssetShortInfo

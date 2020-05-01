@@ -1,9 +1,9 @@
 package com.vmedia.feature.assetdetails.presentation.recycler.artwork
 
 import android.view.View
-import com.vmedia.core.common.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.view.recycler.base.ViewHolderOnClick
-import com.vmedia.core.common.view.recycler.diffedListBy
+import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.presentation.R
 

@@ -2,8 +2,8 @@ package com.vmedia.feature.feed.presentation.recycler.holder
 
 import android.view.View
 import androidx.core.view.isVisible
-import com.vmedia.core.common.obj.event.EventInfo.EventPayout
-import com.vmedia.core.common.util.toSpan
+import com.vmedia.core.common.android.obj.event.EventInfo.EventPayout
+import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.feature.feed.presentation.R
 import com.vmedia.feature.feed.presentation.recycler.FeedViewHolder
 import kotlinx.android.synthetic.main.feed_item_payout.*

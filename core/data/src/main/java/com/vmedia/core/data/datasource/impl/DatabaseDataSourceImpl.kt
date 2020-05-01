@@ -1,8 +1,8 @@
 package com.vmedia.core.data.datasource.impl
 
 import androidx.annotation.WorkerThread
-import com.vmedia.core.common.obj.*
-import com.vmedia.core.common.util.mapItems
+import com.vmedia.core.common.android.obj.*
+import com.vmedia.core.common.android.util.mapItems
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.UbilyDatabase
 import com.vmedia.core.data.internal.database.dao.*

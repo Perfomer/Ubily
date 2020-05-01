@@ -1,6 +1,6 @@
 package com.vmedia.feature.eventdetails.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
+import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.core.domain.repository.EventRepository
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsAction
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsAction.*

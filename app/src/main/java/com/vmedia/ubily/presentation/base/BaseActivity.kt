@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
-import com.vmedia.core.common.util.doOnApplyWindowInsets
+import com.vmedia.core.common.android.util.doOnApplyWindowInsets
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.ubily.R
 import org.koin.android.ext.android.inject

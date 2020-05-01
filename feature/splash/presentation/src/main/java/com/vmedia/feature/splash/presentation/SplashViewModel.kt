@@ -1,6 +1,6 @@
 package com.vmedia.feature.splash.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
+import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.feature.splash.domain.SplashInteractor
 import com.vmedia.feature.splash.presentation.mvi.SplashAction
 import com.vmedia.feature.splash.presentation.mvi.SplashAction.*

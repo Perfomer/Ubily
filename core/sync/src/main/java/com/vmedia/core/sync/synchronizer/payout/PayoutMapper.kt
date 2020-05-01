@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.payout
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.network.entity.internal.IncomeDto
 import com.vmedia.core.sync._PeriodIdProvider

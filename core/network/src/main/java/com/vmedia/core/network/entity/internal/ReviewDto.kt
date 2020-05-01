@@ -1,6 +1,6 @@
 package com.vmedia.core.network.entity.internal
 
-import com.vmedia.core.common.obj.HollowRating
+import com.vmedia.core.common.android.obj.HollowRating
 import java.util.*
 
 internal data class ReviewDto(

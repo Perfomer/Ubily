@@ -1,6 +1,6 @@
 package com.vmedia.feature.eventdetails.presentation.mvi
 
-import com.vmedia.core.common.obj.event.EventInfo
+import com.vmedia.core.common.android.obj.event.EventInfo
 
 internal sealed class EventDetailsAction {
 

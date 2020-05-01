@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
-import com.vmedia.core.common.mvi.MviFragment
-import com.vmedia.core.common.util.*
+import com.vmedia.core.common.android.mvi.MviFragment
+import com.vmedia.core.common.android.util.*
 import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.feature.auth.presentation.mvi.AuthIntent
 import com.vmedia.feature.auth.presentation.mvi.AuthState

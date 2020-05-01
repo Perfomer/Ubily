@@ -1,10 +1,10 @@
 package com.vmedia.feature.assetlist.presentation.recycler
 
 import android.view.View
-import com.vmedia.core.common.util.diffedValue
-import com.vmedia.core.common.util.loadCircleImage
-import com.vmedia.core.common.util.loadImage
-import com.vmedia.core.common.view.recycler.base.BaseViewHolder
+import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.loadCircleImage
+import com.vmedia.core.common.android.util.loadImage
+import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.core.domain.model.AssetShortInfo
 import kotlinx.android.synthetic.main.assetlist_item.*
 

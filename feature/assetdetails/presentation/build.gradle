@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../../../android_commons.gradle'
 
 dependencies {
+    implementation project(":core:common:android")
     implementation project(':core:navigation')
-    implementation project(':core:common')
     implementation project(':core:data')
     implementation project(':feature:assetdetails:domain')
 

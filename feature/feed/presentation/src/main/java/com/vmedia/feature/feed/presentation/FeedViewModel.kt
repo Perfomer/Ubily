@@ -1,6 +1,6 @@
 package com.vmedia.feature.feed.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
+import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.core.domain.repository.EventRepository
 import com.vmedia.feature.feed.presentation.mvi.FeedAction
 import com.vmedia.feature.feed.presentation.mvi.FeedAction.*

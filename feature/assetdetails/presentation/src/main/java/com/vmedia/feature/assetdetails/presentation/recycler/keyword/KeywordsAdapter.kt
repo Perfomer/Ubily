@@ -1,8 +1,8 @@
 package com.vmedia.feature.assetdetails.presentation.recycler.keyword
 
 import android.view.View
-import com.vmedia.core.common.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.view.recycler.diffedListBy
+import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
+import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.presentation.R
 

@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.synchronizer.review
 
-import com.vmedia.core.common.util.Mapper
+import com.vmedia.core.common.android.util.Mapper
 import com.vmedia.core.data.internal.database.entity.CommentBody
 import com.vmedia.core.data.internal.database.entity.Review
 import com.vmedia.core.network.entity.DetailedReviewDto

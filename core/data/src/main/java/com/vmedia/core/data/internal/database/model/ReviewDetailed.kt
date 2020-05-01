@@ -2,8 +2,8 @@ package com.vmedia.core.data.internal.database.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
-import com.vmedia.core.common.obj.Rating
-import com.vmedia.core.common.util.EMPTY_DATE
+import com.vmedia.core.common.android.obj.Rating
+import com.vmedia.core.common.android.util.EMPTY_DATE
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

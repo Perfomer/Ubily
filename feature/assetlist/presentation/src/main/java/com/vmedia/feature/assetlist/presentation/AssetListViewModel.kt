@@ -1,6 +1,6 @@
 package com.vmedia.feature.assetlist.presentation
 
-import com.vmedia.core.common.mvi.MviViewModel
+import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.feature.assetlist.domain.AssetListInteractor
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListAction
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListAction.*

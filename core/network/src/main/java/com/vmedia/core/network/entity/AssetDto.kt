@@ -1,8 +1,8 @@
 package com.vmedia.core.network.entity
 
-import com.vmedia.core.common.obj.AssetStatus
-import com.vmedia.core.common.obj.HollowRating
-import com.vmedia.core.common.obj.Money
+import com.vmedia.core.common.android.obj.AssetStatus
+import com.vmedia.core.common.android.obj.HollowRating
+import com.vmedia.core.common.android.obj.Money
 import java.util.*
 
 data class AssetDto(

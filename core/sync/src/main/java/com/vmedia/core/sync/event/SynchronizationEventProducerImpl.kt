@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.event
 
 import android.annotation.SuppressLint
-import com.vmedia.core.common.util.split
+import com.vmedia.core.common.android.util.split
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.data.internal.database.entity.Revenue

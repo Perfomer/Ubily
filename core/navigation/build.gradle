@@ -6,6 +6,6 @@ apply from: "../../android_commons.gradle"
 dependencies {
     api "ru.terrakok.cicerone:cicerone:5.0.0"
 
-    implementation project(':core:common')
+    implementation project(":core:common:android")
     implementation project(':core:data')
 }

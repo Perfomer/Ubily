@@ -1,6 +1,6 @@
 package com.vmedia.core.sync.cache
 
-import com.vmedia.core.common.util.CacheHolder
+import com.vmedia.core.common.android.util.CacheHolder
 import com.vmedia.core.network.datasource.NetworkDataSource
 
 internal class CachedNetworkDataSourceDecorator(

@@ -1,11 +1,11 @@
 package com.vmedia.core.network
 
 import com.google.gson.GsonBuilder
-import com.vmedia.core.common.BuildConfig
-import com.vmedia.core.common.obj.Period
-import com.vmedia.core.common.util.ListMapper
-import com.vmedia.core.common.util.Mapper
-import com.vmedia.core.common.util.toListMapper
+import com.vmedia.core.common.android.BuildConfig
+import com.vmedia.core.common.android.obj.Period
+import com.vmedia.core.common.android.util.ListMapper
+import com.vmedia.core.common.android.util.Mapper
+import com.vmedia.core.common.android.util.toListMapper
 import com.vmedia.core.network.api.UnityApi
 import com.vmedia.core.network.api.UnityRssApi
 import com.vmedia.core.network.api.entity.PeriodModel

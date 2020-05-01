@@ -5,10 +5,10 @@ import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
-import com.vmedia.core.common.obj.event.EventInfo.EventListInfo
-import com.vmedia.core.common.util.children
-import com.vmedia.core.common.util.getColorCompat
-import com.vmedia.core.common.util.onEachIndexed
+import com.vmedia.core.common.android.obj.event.EventInfo.EventListInfo
+import com.vmedia.core.common.android.util.children
+import com.vmedia.core.common.android.util.getColorCompat
+import com.vmedia.core.common.android.util.onEachIndexed
 import com.vmedia.feature.feed.presentation.R
 import com.vmedia.feature.feed.presentation.recycler.FeedViewHolder
 import kotlinx.android.extensions.LayoutContainer
