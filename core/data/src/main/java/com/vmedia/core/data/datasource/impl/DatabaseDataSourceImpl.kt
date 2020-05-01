@@ -122,6 +122,7 @@ internal class DatabaseDataSourceImpl(
             .map(Date::toPeriod)
             .flatMap { periodDao.getPeriodsAfter(it.year, it.month) }
             .mapItems(PeriodWrap::period)
+            .onErrorReturnItem(emptyList())
     }
 
     override fun getKeywords(assetId: Long): Observable<List<Keyword>> {
