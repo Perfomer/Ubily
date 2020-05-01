@@ -1,5 +1,6 @@
 package com.vmedia.core.common.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
@@ -171,4 +172,9 @@ fun RecyclerView.addItemTouchHelper(callback: ItemTouchHelper.Callback) {
 
 fun <T> Observable<T>.distinctByValue(valueReceiver: () -> T): Observable<T> {
     return filter { it != valueReceiver.invoke() }
+}
+
+@SuppressLint("ClickableViewAccessibility")
+fun View.disableTouches() {
+    setOnTouchListener { _, _ -> true }
 }

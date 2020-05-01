@@ -14,6 +14,7 @@ internal class ReviewViewHolder(
 
     init {
         assetdetails_review_item_rating.max = MAX_STARS
+        assetdetails_review_item_rating.disableTouches()
 
         assetdetails_review_item_avatar.setOnClickListener {
             onAuthorClick.invokeWithPosition()

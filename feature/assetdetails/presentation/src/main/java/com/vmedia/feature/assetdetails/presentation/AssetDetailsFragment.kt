@@ -80,6 +80,12 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             postIntent(UpdateSortType(ReviewsSortType.values()[it]))
         }
 
+        assetdetails_reviews_1.disableTouches()
+        assetdetails_reviews_2.disableTouches()
+        assetdetails_reviews_3.disableTouches()
+        assetdetails_reviews_4.disableTouches()
+        assetdetails_reviews_5.disableTouches()
+
         assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
             context!!,
             ReviewsSortType.labelResources,
