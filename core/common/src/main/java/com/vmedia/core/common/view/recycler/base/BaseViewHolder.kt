@@ -13,9 +13,11 @@ abstract class BaseViewHolder(
     override val containerView: View
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    protected val context by lazy { itemView.context!! }
+    protected val context
+        get() = itemView.context!!
 
-    protected val resources by lazy { itemView.resources!! }
+    protected val resources
+        get() = itemView.resources!!
 
     protected val hasPosition: Boolean
         get() = adapterPosition != NO_POSITION
