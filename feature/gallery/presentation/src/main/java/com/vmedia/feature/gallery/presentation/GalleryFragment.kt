@@ -26,8 +26,8 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
         gallery_images_list.addSystemBottomPadding()
 
-        view.setOnClickListener(::switchUi)
-        gallery_image.setOnClickListener(::switchUi)
+        view.setOnClickListener(::switchUiVisibility)
+        gallery_image.setOnClickListener(::switchUiVisibility)
 
         gallery_images_list.adapter = adapter
         adapter.items = artworks
@@ -41,7 +41,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         gallery_images_list.adapter = null
     }
 
-    private fun switchUi() {
+    private fun switchUiVisibility() {
         uiShown = !uiShown
         gallery_images_list.isVisible = uiShown
     }
