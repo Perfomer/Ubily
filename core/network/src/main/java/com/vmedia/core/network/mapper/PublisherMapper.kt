@@ -9,13 +9,24 @@ import com.vmedia.core.network.util.fixUrl
 internal object PublisherMapper : Mapper<PublisherDetailsModel, PublisherDto> {
 
     override fun map(from: PublisherDetailsModel): PublisherDto {
+        val bigV2 = from.keyImages.big_v2
+        val smallV2 = from.keyImages.small_v2
+
+        val smallImage =
+            if (smallV2.isBlank()) from.keyImages.small
+            else smallV2
+
+        val bigImage =
+            if (bigV2.isBlank()) from.keyImages.big
+            else bigV2
+
         return PublisherDto(
             organizationId = from.organizationId,
             name = from.name,
             description = from.description,
             url = from.shortUrl,
-            smallImageUrl = from.keyImages.small.fixUrl(),
-            largeImageUrl = from.keyImages.big.fixUrl(),
+            smallImageUrl = smallImage.fixUrl(),
+            largeImageUrl = bigImage.fixUrl(),
             rssToken = from.activityUrl.extractToken()
         )
     }
