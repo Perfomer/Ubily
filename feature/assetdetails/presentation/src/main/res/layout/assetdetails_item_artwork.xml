@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingEnd="12dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="@dimen/assetdetails_artwork_corner_radius"
+    app:rippleColor="@color/brand_green"
     tools:ignore="ContentDescription,RtlSymmetry">
 
-    <ImageView
-        android:id="@+id/assetdetails_artwork_item_image"
-        android:layout_width="118dp"
-        android:layout_height="72dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:focusable="false"
-        android:src="@drawable/ic_play"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/assetdetails_artwork_item_image"
-        app:layout_constraintEnd_toEndOf="@id/assetdetails_artwork_item_image"
-        app:layout_constraintStart_toStartOf="@id/assetdetails_artwork_item_image"
-        app:layout_constraintTop_toTopOf="@id/assetdetails_artwork_item_image"
-        tools:visibility="visible" />
+        <ImageView
+            android:id="@+id/assetdetails_artwork_item_image"
+            android:layout_width="128dp"
+            android:layout_height="78dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:focusable="false"
+            android:src="@drawable/ic_play"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
