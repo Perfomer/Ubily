@@ -13,6 +13,7 @@ import com.vmedia.core.common.view.BaseFragment
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
 import com.vmedia.feature.gallery.presentation.util.createFlickGestureListener
+import com.vmedia.feature.gallery.presentation.util.uihelper.SystemUiHelper
 import kotlinx.android.synthetic.main.gallery_fragment.*
 import kotlin.math.abs
 
@@ -24,6 +25,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
     private var targetArtworkPosition: Int by argument()
 
     private lateinit var backgroundDrawable: Drawable
+    private lateinit var systemUiHelper: SystemUiHelper
 
     private var uiShown = true
 
@@ -31,6 +33,8 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         backgroundDrawable = view.background.mutate()
+        systemUiHelper = SystemUiHelper(activity, SystemUiHelper.LEVEL_IMMERSIVE, 0, null)
+
         gallery_images_list.addSystemBottomPadding()
 
         view.setOnClickListener(::switchUiVisibility)
@@ -50,11 +54,13 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        systemUiHelper.show()
         gallery_images_list.adapter = null
     }
 
     private fun switchUiVisibility() {
         uiShown = !uiShown
+        systemUiHelper.toggle()
         gallery_images_list.isVisible = uiShown
     }
 
