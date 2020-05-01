@@ -822,12 +822,12 @@
                     android:maxLines="1"
                     android:textColor="@color/brand_black"
                     android:textSize="20sp"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toStartOf="@id/assetdetails_publisher_rating"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_avatar"
                     app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_avatar"
-                    app:layout_constraintWidth_default="wrap"
                     tools:text="Wello Graphics" />
 
                 <TextView
@@ -837,12 +837,12 @@
                     android:layout_marginStart="10dp"
                     android:textColor="@color/brand_green_darker"
                     android:textStyle="bold"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_name"
                     app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_name"
-                    app:layout_constraintWidth_default="wrap"
                     tools:text="4" />
 
                 <TextView
