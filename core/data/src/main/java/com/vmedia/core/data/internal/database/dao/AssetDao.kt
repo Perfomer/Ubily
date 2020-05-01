@@ -38,6 +38,9 @@ interface AssetDao : BaseDao<Asset> {
     @Query("SELECT AVG(averageRating) FROM Asset WHERE averageRating > 0")
     fun getAverageAssetsRating(): Observable<Double>
 
+    @Query("SELECT AVG(averageRating) FROM Asset WHERE averageRating > 0")
+    fun getAverageAssetsRatingSync(): Double
+
     @Query(
         """
             SELECT * FROM Asset
