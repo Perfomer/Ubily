@@ -74,8 +74,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
             context!!,
             ReviewsSortType.labelResources,
-            R.layout.common_reviews_sort_item,
-            android.R.layout.simple_spinner_dropdown_item
+            R.layout.common_reviews_sort_item
         )
 
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
@@ -123,7 +122,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_price.diffedValue = "$$priceUsd"
         assetdetails_version.diffedValue = versionName
         assetdetails_status.diffedValue = getString(status.labelResource)
-        assetdetails_size.diffedValue = sizeMb.cropToString()
+        assetdetails_size.diffedValue = getString(
+            R.string.assetdetails_size_mb,
+            sizeMb.cropToString()
+        )
 
         iconImage?.let { assetdetails_icon.loadCircleImage(it) }
         bigImage?.let { assetdetails_largeimage.loadImage(it) }
@@ -213,9 +215,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_reviews_scrim.isVisible = !isExpanded
 
         reviewsAdapter.notifyItemChanged(reviewsAdapter.items.size - 1)
-        reviewsAdapter.items =
-            if (isExpanded) reviews
-            else collapsedReviews
+        reviewsAdapter.items = if (isExpanded) reviews else collapsedReviews
     }
 
     internal companion object {

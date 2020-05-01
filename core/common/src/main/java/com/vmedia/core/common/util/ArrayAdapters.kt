@@ -9,8 +9,8 @@ object ArrayAdapters {
     fun createFromResources(
         context: Context,
         textArraysId: IntArray,
-        @LayoutRes textViewResId: Int,
-        @LayoutRes textDropdownResId: Int
+        @LayoutRes textViewResId: Int = android.R.layout.simple_spinner_item,
+        @LayoutRes textDropdownResId: Int = android.R.layout.simple_spinner_dropdown_item
     ): ArrayAdapter<String> {
         val strings = textArraysId.map(context::getString)
 
