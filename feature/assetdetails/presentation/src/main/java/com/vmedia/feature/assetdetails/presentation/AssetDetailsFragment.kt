@@ -13,6 +13,7 @@ import com.vmedia.core.common.mvi.MviFragment
 import com.vmedia.core.common.obj.ReviewsSortType
 import com.vmedia.core.common.obj.labelResource
 import com.vmedia.core.common.util.*
+import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
@@ -151,7 +152,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             else MAX_COLLAPSED_DESCRIPTION_LINES
     }
 
-    private fun renderArtworks(artworks: List<String>) {
+    private fun renderArtworks(artworks: List<Artwork>) {
         val hasArtworks = artworks.isNotEmpty()
 
         assetdetails_artworks.isVisible = hasArtworks

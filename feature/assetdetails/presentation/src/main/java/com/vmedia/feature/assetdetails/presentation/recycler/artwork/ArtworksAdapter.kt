@@ -4,13 +4,14 @@ import android.view.View
 import com.vmedia.core.common.view.recycler.base.BaseAdapter
 import com.vmedia.core.common.view.recycler.base.ViewHolderOnClick
 import com.vmedia.core.common.view.recycler.diffedListBy
+import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.presentation.R
 
 internal class ArtworksAdapter(
     private val onClick: ViewHolderOnClick
 ) : BaseAdapter<ArtworkViewHolder>() {
 
-    var items by diffedListBy(String::hashCode)
+    var items by diffedListBy(Artwork::id)
 
 
     override fun getItemCount() = items.size

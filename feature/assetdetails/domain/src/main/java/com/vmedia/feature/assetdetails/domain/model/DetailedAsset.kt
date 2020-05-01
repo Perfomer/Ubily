@@ -1,12 +1,10 @@
 package com.vmedia.feature.assetdetails.domain.model
 
-import android.os.Parcelable
 import com.vmedia.core.common.obj.AssetStatus
 import com.vmedia.core.common.obj.HollowRating
-import kotlinx.android.parcel.Parcelize
+import com.vmedia.core.data.internal.database.entity.Artwork
 import java.math.BigDecimal
 
-@Parcelize
 data class DetailedAsset(
     val id: Long = 0L,
     val categoryName: String = "",
@@ -20,6 +18,6 @@ data class DetailedAsset(
     val description: String = "",
     val bigImage: String? = null,
     val iconImage: String? = null,
-    val artworks: List<String> = emptyList(),
+    val artworks: List<Artwork> = emptyList(),
     val keywords: List<KeywordModel> = emptyList()
-) : Parcelable
+)

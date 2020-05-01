@@ -77,7 +77,7 @@ internal class DatabaseDataSourceImpl(
             .onErrorReturnItem(0.0)
     }
 
-    override fun getArtworks(assetId: Long): Observable<List<String>> {
+    override fun getArtworks(assetId: Long): Observable<List<Artwork>> {
         return artworkDao.getArtworks(assetId)
     }
 

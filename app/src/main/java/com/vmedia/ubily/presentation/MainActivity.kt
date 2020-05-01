@@ -1,5 +1,6 @@
 package com.vmedia.ubily.presentation
 
+import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
@@ -54,7 +55,7 @@ class MainActivity : BaseActivity(
         TODO("Not yet implemented")
     }
 
-    override fun navigateToGallery(artworks: List<String>, targetArtworkPosition: Int) {
+    override fun navigateToGallery(artworks: List<Artwork>, targetArtworkPosition: Int) {
         TODO("Not yet implemented")
     }
 

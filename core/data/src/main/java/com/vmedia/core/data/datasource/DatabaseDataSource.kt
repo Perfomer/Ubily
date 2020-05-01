@@ -28,7 +28,7 @@ interface DatabaseDataSource {
 
     fun getAverageAssetsRating(): Observable<Double>
 
-    fun getArtworks(assetId: Long): Observable<List<String>>
+    fun getArtworks(assetId: Long): Observable<List<Artwork>>
 
     fun getUser(id: Long): Single<User>
 
