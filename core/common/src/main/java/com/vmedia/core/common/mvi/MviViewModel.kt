@@ -1,6 +1,5 @@
 package com.vmedia.core.common.mvi
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import com.vmedia.core.common.util.SwitchableObservable
 import com.vmedia.core.common.util.flatWithLatestFrom
@@ -18,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 import kotlin.reflect.KClass
 
 @Suppress("UNCHECKED_CAST")
-abstract class MviViewModel<Intent : Any, Action : Any, State : Parcelable, Subscription : Any>(
+abstract class MviViewModel<Intent : Any, Action : Any, State : Any, Subscription : Any>(
     initialState: State
 ) : ViewModel() {
 

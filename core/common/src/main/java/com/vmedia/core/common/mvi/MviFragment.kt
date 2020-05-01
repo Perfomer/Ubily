@@ -1,7 +1,6 @@
 package com.vmedia.core.common.mvi
 
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import com.vmedia.core.common.util.put
@@ -13,7 +12,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-abstract class MviFragment<Intent : Any, State : Parcelable, Subscription : Any>(
+abstract class MviFragment<Intent : Any, State : Any, Subscription : Any>(
     @LayoutRes layoutResource: Int? = null,
     @MenuRes menuResource: Int? = null,
     private val initialIntent: Intent? = null
@@ -27,7 +26,7 @@ abstract class MviFragment<Intent : Any, State : Parcelable, Subscription : Any>
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)
+//        savedInstanceState?.getParcelable<State>(KEY_STATE)?.let(viewModel::restoreState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
