@@ -25,9 +25,16 @@ abstract class BaseFragment(
         menuResource?.let { setHasOptionsMenu(true) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return if (layoutResource == null) super.onCreateView(inflater, container, savedInstanceState)
-        else inflater.inflate(layoutResource, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return if (layoutResource == null) {
+            super.onCreateView(inflater, container, savedInstanceState)
+        } else {
+            inflater.inflate(layoutResource, container, false)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,8 +62,9 @@ abstract class BaseFragment(
     }
 
     protected fun showDialog(dialogFragment: DialogFragment, requestCode: Int? = null) {
+        if (!isAdded) return
         requestCode?.let { dialogFragment.setTargetFragment(this, it) }
-        dialogFragment.show(fragmentManager!!, null)
+        dialogFragment.show(parentFragmentManager, null)
     }
 
     protected fun Toolbar.attachToActivity(enableArrowUp: Boolean = true) {
