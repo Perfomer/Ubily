@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_feed_title">Feed</string>
+    <string name="menu_statistics_title">Statistics</string>
+    <string name="menu_publisher_title">Publisher</string>
+    <string name="menu_assets_title">Assets</string>
+    <string name="menu_more_title">More</string>
+</resources>

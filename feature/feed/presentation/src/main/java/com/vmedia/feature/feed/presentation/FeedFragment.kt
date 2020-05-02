@@ -12,6 +12,9 @@ import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.view.prefetcher.api.PrefetchRecycledViewPool
 import com.vmedia.core.common.pure.obj.event.EventInfo
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
+import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen.FEED
+import com.vmedia.core.navigation.utils.initMainMenu
+import com.vmedia.core.navigation.utils.mainNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
 import com.vmedia.feature.feed.presentation.mvi.FeedState
@@ -47,6 +50,7 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
 
         general_appbar.addSystemTopPadding()
         feed_list.addSystemBottomPadding()
+        general_bottom_navigation.initMainMenu(mainNavigator, FEED)
 
         initRecycler()
     }

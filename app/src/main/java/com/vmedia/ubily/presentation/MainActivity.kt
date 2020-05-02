@@ -8,6 +8,7 @@ import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
+import com.vmedia.core.navigation.navigator.main.MainNavigator
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
@@ -15,10 +16,11 @@ import com.vmedia.ubily.R
 import com.vmedia.ubily.presentation.base.BaseActivity
 
 class MainActivity : BaseActivity(
-    screenLayoutResource = R.layout.activity_main,
+    screenLayoutResource = R.layout.main_activity,
     frameLayoutResource = R.id.nav_host_fragment,
     startScreen = ScreenDestination.Splash
-), SplashNavigator,
+), MainNavigator,
+    SplashNavigator,
     SyncNavigator,
     AuthNavigator,
     FeedNavigator,
@@ -26,11 +28,9 @@ class MainActivity : BaseActivity(
     AssetListNavigator,
     AssetDetailsNavigator {
 
-
     private var isUserAuthorized: Boolean = false
     private var isUserDataSynchronized: Boolean = false
     private var onboardingAlreadyShown: Boolean = false
-
 
     override fun navigateToEventDetails(eventId: Long) {
         navigateTo(ScreenDestination.EventDetails(eventId))
@@ -38,6 +38,18 @@ class MainActivity : BaseActivity(
 
     override fun navigateToAsset(assetId: Long) {
         navigateTo(ScreenDestination.AssetDetails(assetId))
+    }
+
+    override fun navigateToFeed() {
+        navigateTo(ScreenDestination.Feed)
+    }
+
+    override fun navigateToAssetList() {
+        navigateTo(ScreenDestination.AssetList)
+    }
+
+    override fun navigateToMenu() {
+        TODO("Not yet implemented")
     }
 
     override fun navigateToAssetSearch() {
@@ -69,8 +81,12 @@ class MainActivity : BaseActivity(
         TODO("Not yet implemented")
     }
 
+    override fun navigateToStatistics() {
+        TODO("Not yet implemented")
+    }
+
     override fun navigateToStatistics(periodId: Long) {
-        navigateTo(ScreenDestination.AssetList)
+        navigateToAssetList()
     }
 
     override fun onInitialized(
@@ -98,7 +114,7 @@ class MainActivity : BaseActivity(
     private fun navigateThroughStartGraph() {
         if (isUserAuthorized) {
             if (isUserDataSynchronized) {
-                navigateTo(ScreenDestination.Feed)
+                navigateToFeed()
             } else {
 //                if (onboardingAlreadyShown) {
                 navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
