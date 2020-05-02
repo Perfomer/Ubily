@@ -23,14 +23,17 @@ fun AHBottomNavigation.initMainMenu(
     defaultBackgroundColor = context.getColorCompat(R.color.brand_green)
     titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
 
-    setMainNavigator(navigator)
+    setMainNavigator(navigator, currentScreen)
     setCurrentItem(currentScreen.ordinal, false)
 
     // todo remove
     setNotification("1", 0)
 }
 
-private fun AHBottomNavigation.setMainNavigator(navigator: MainNavigator) {
+private fun AHBottomNavigation.setMainNavigator(
+    navigator: MainNavigator,
+    currentScreen: MainNavigatorScreen
+) {
     val values = MainNavigatorScreen.values()
 
     removeAllItems()
@@ -38,6 +41,7 @@ private fun AHBottomNavigation.setMainNavigator(navigator: MainNavigator) {
 
     setOnTabSelectedListener { position, _ ->
         values[position].navigatorAction.invoke(navigator)
+        setCurrentItem(currentScreen.ordinal, false)
         return@setOnTabSelectedListener true
     }
 }
