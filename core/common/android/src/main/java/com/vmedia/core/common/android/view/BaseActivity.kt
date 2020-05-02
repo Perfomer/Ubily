@@ -36,7 +36,7 @@ abstract class BaseActivity(
     }
 
     private fun setNavigationBarDarkInternal(dark: Boolean) {
-        val color = if (dark) R.color.black_20 else R.color.white_50
+        val color = if (dark) R.color.black_20 else R.color.grey_light_65
 
         with(window) {
             navigationBarColor = getColorCompat(color)
