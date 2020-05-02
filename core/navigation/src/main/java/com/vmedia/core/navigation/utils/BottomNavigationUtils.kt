@@ -39,7 +39,9 @@ private fun AHBottomNavigation.setMainNavigator(
     removeAllItems()
     addItems(values.map(MainNavigatorScreen::toMenuItem))
 
-    setOnTabSelectedListener { position, _ ->
+    setOnTabSelectedListener { position, wasSelected ->
+        if (wasSelected) return@setOnTabSelectedListener false
+
         values[position].navigatorAction.invoke(navigator)
         setCurrentItem(currentScreen.ordinal, false)
         return@setOnTabSelectedListener true
