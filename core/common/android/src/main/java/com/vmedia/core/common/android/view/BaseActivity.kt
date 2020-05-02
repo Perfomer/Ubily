@@ -19,25 +19,23 @@ abstract class BaseActivity(
         setContentView(screenLayoutResource)
     }
 
-        if (savedInstanceState == null) {
-            router.newRootScreen(startScreen)
+    fun setNavigationBarDark(dark: Boolean) {
+        with(window) {
+            if (dark) {
+                navigationBarColor = getColorCompat(R.color.black_20)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    decorView.systemUiVisibility =
+                        decorView.systemUiVisibility xor View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                }
+            } else {
+                navigationBarColor = getColorCompat(R.color.white_50)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    decorView.systemUiVisibility =
+                        decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                }
+            }
         }
     }
-
-    override fun onResumeFragments() {
-        super.onResumeFragments()
-        navigatorHolder.setNavigator(navigator)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        navigatorHolder.removeNavigator()
-    }
-
-    override fun onBackPressed() = router.exit()
-
-
-    protected fun navigateTo(screen: ScreenDestination) = router.navigateTo(screen)
 
     private fun applyActivityWindowInsets() {
         with(window) {

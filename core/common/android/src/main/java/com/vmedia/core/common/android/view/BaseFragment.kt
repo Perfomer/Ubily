@@ -59,7 +59,7 @@ abstract class BaseFragment(
         activity?.onBackPressed()
     }
 
-    protected fun setNavigationBarColor(dark: Boolean) {
+    protected fun setNavigationBarDark(dark: Boolean) {
         baseActivity.setNavigationBarDark(dark)
     }
 
