@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.vmedia.core.common.android.R
 import com.vmedia.core.common.android.util.getColorCompat
+import com.vmedia.core.common.pure.util.or
 
 abstract class BaseActivity(
     @LayoutRes private val screenLayoutResource: Int
@@ -20,20 +21,17 @@ abstract class BaseActivity(
     }
 
     fun setNavigationBarDark(dark: Boolean) {
+        val color = if (dark) R.color.black_20 else R.color.white_50
+
         with(window) {
-            if (dark) {
-                navigationBarColor = getColorCompat(R.color.black_20)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    decorView.systemUiVisibility =
-                        decorView.systemUiVisibility xor View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
-            } else {
-                navigationBarColor = getColorCompat(R.color.white_50)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    decorView.systemUiVisibility =
-                        decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
-            }
+            navigationBarColor = getColorCompat(color)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+
+            decorView.systemUiVisibility = decorView.systemUiVisibility.or(
+                other = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR,
+                exclusive = dark
+            )
         }
     }
 
