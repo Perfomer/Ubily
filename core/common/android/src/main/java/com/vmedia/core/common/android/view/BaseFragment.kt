@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import io.reactivex.disposables.CompositeDisposable
 
@@ -15,8 +13,8 @@ abstract class BaseFragment(
     @MenuRes private val menuResource: Int? = null
 ) : Fragment() {
 
-    protected val appCompatActivity: AppCompatActivity
-        get() = activity as AppCompatActivity
+    protected val baseActivity: BaseActivity
+        get() = activity as BaseActivity
 
     protected val disposable by lazy { CompositeDisposable() }
 
@@ -61,15 +59,13 @@ abstract class BaseFragment(
         activity?.onBackPressed()
     }
 
-    protected fun showDialog(dialogFragment: DialogFragment, requestCode: Int? = null) {
-        if (!isAdded) return
-        requestCode?.let { dialogFragment.setTargetFragment(this, it) }
-        dialogFragment.show(parentFragmentManager, null)
+    protected fun setNavigationBarColor(dark: Boolean) {
+        baseActivity.setNavigationBarDark(dark)
     }
 
     protected fun Toolbar.attachToActivity(enableArrowUp: Boolean = true) {
-        appCompatActivity.setSupportActionBar(this)
-        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(enableArrowUp)
+        baseActivity.setSupportActionBar(this)
+        baseActivity.supportActionBar?.setDisplayHomeAsUpEnabled(enableArrowUp)
     }
 
 }

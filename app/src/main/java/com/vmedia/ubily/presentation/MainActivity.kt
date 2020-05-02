@@ -2,6 +2,7 @@ package com.vmedia.ubily.presentation
 
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.BEAN_FRAGMENT_GALLERY
+import com.vmedia.core.navigation.NavigationActivity
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
@@ -13,9 +14,8 @@ import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.ubily.R
-import com.vmedia.ubily.presentation.base.BaseActivity
 
-class MainActivity : BaseActivity(
+class MainActivity : NavigationActivity(
     screenLayoutResource = R.layout.main_activity,
     frameLayoutResource = R.id.nav_host_fragment,
     startScreen = ScreenDestination.Splash

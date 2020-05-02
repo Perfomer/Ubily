@@ -1,29 +1,22 @@
-package com.vmedia.ubily.presentation.base
+package com.vmedia.core.navigation
 
 import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.FrameLayout
-import androidx.annotation.IdRes
-import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
 import com.vmedia.core.common.android.util.doOnApplyWindowInsets
-import com.vmedia.core.navigation.ScreenDestination
-import com.vmedia.ubily.R
+import com.vmedia.core.common.android.view.BaseActivity
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
-abstract class BaseActivity(
-    @LayoutRes private val screenLayoutResource: Int,
-    @IdRes private val frameLayoutResource: Int,
+abstract class NavigationActivity(
+    screenLayoutResource: Int,
+    private val frameLayoutResource: Int,
     private val startScreen: ScreenDestination
-) : AppCompatActivity() {
+) : BaseActivity(screenLayoutResource) {
 
     private val navigatorHolder by inject<NavigatorHolder>()
 
@@ -35,9 +28,7 @@ abstract class BaseActivity(
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyActivityWindowInsets()
         super.onCreate(savedInstanceState)
-        setContentView(screenLayoutResource)
 
         val frameLayout = findViewById<FrameLayout>(frameLayoutResource)
         frameLayout.applyWindowInsets()
@@ -57,30 +48,15 @@ abstract class BaseActivity(
         navigatorHolder.removeNavigator()
     }
 
-    override fun onBackPressed() = router.exit()
-
-
-    protected fun navigateTo(screen: ScreenDestination) = router.navigateTo(screen)
-
-    private fun applyActivityWindowInsets() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            return
-        }
-
-        window.apply {
-            decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                decorView.systemUiVisibility = decorView.systemUiVisibility or
-                        View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            }
-
-            statusBarColor = ContextCompat.getColor(context, R.color.black_20)
-            navigationBarColor = ContextCompat.getColor(context, R.color.white_50)
-        }
+    override fun onBackPressed() {
+        router.exit()
     }
+
+
+    protected fun navigateTo(screen: ScreenDestination) {
+        router.navigateTo(screen)
+    }
+
 
     private fun FrameLayout.applyWindowInsets() {
         doOnApplyWindowInsets { view, insets, initialPadding ->
