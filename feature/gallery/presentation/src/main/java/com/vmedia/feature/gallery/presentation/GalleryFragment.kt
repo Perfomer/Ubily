@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.core.view.isVisible
+import coil.api.load
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.argument
-import com.vmedia.core.common.android.util.loadImage
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.view.BaseFragment
 import com.vmedia.core.data.internal.database.entity.Artwork
@@ -71,7 +71,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
     }
 
     private fun onArtworkClick(artwork: Artwork) {
-        gallery_image.loadImage(artwork.previewUrl)
+        gallery_image.load(artwork.previewUrl)
     }
 
     private fun updateBackgroundDimmingAlpha(
