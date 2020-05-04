@@ -19,7 +19,7 @@ fun AHBottomNavigation.initMainMenu(
     addSystemBottomPadding()
 
     accentColor = context.getColorCompat(android.R.color.white)
-    inactiveColor = context.getColorCompat(R.color.white_50)
+    inactiveColor = context.getColorCompat(R.color.white_65)
     defaultBackgroundColor = context.getColorCompat(R.color.brand_green)
     titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
 
