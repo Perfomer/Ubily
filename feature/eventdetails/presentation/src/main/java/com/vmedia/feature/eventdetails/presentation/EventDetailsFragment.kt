@@ -48,6 +48,11 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarDark(false)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         adapter = null

@@ -113,6 +113,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarDark(false)
+    }
+
     override fun onStop() {
         super.onStop()
         errorSnackbar = null

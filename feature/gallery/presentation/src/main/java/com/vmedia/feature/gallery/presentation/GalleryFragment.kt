@@ -52,9 +52,15 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarDark(true)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         systemUiHelper.show()
+        setNavigationBarDark(false)
         gallery_images_list.adapter = null
     }
 

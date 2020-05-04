@@ -55,6 +55,11 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
         initRecycler()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarDark(true)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         feed_list.adapter = null

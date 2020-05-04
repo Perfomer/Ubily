@@ -47,6 +47,11 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
         assetlist_list.adapter = adapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        setNavigationBarDark(true)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         assetlist_list.adapter = null
