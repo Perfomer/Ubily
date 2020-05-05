@@ -29,6 +29,10 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
         }
     }
 
+    object Main : ScreenDestination() {
+        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_MAIN))
+    }
+
     object Feed : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_FEED))
     }

@@ -6,15 +6,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.room.RoomDatabase
 import com.vmedia.core.common.android.mvi.MviFragment
-import com.vmedia.core.common.android.util.addSystemBottomPadding
-import com.vmedia.core.common.android.util.addSystemTopPadding
+import com.vmedia.core.common.android.util.addSystemVerticalPadding
 import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.view.prefetcher.api.PrefetchRecycledViewPool
 import com.vmedia.core.common.pure.obj.event.EventInfo
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen.FEED
-import com.vmedia.core.navigation.utils.initMainMenu
-import com.vmedia.core.navigation.utils.mainNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
 import com.vmedia.feature.feed.presentation.mvi.FeedState
@@ -47,17 +43,8 @@ internal class FeedFragment : MviFragment<FeedIntent, FeedState, Nothing>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        general_appbar.addSystemTopPadding()
-        feed_list.addSystemBottomPadding()
-        general_bottom_navigation.initMainMenu(mainNavigator, FEED)
-
+        feed_list.addSystemVerticalPadding()
         initRecycler()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setNavigationBarDark(true)
     }
 
     override fun onDestroyView() {

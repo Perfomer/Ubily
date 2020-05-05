@@ -10,9 +10,6 @@ import com.vmedia.core.common.android.util.loadCircleImage
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.domain.model.AssetShortInfo
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen.ASSETLIST
-import com.vmedia.core.navigation.utils.initMainMenu
-import com.vmedia.core.navigation.utils.mainNavigator
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent.LoadData
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListState
@@ -37,7 +34,6 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
 
         assetlist_toolbar_search_wrap.addSystemTopPadding()
         assetlist_list.addSystemVerticalPadding()
-        general_bottom_navigation.initMainMenu(mainNavigator, ASSETLIST)
 
         assetlist_toolbar_back.setOnClickListener(::goBack)
         assetlist_toolbar_account.setOnClickListener(navigator::navigateToPublisher)
@@ -45,11 +41,6 @@ internal class AssetListFragment : MviFragment<AssetListIntent, AssetListState, 
         assetlist_toolbar_filter.setOnClickListener(navigator::navigateToAssetSearch)
 
         assetlist_list.adapter = adapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setNavigationBarDark(true)
     }
 
     override fun onDestroyView() {

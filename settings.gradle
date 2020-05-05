@@ -10,6 +10,8 @@ include ':core:data'
 include ':core:network'
 include ':core:sync'
 
+include ':feature:main:presentation'
+
 include ':feature:auth:api'
 include ':feature:auth:data'
 include ':feature:auth:domain'

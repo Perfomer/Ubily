@@ -6,6 +6,7 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
+const val BEAN_FRAGMENT_MAIN = "MainFragment"
 const val BEAN_FRAGMENT_AUTH = "AuthFragment"
 const val BEAN_FRAGMENT_FEED = "FeedFragment"
 const val BEAN_FRAGMENT_EVENTDETAILS = "EventDetailsFragment"
@@ -14,6 +15,9 @@ const val BEAN_FRAGMENT_ASSETLIST = "AssetListFragment"
 const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 const val BEAN_FRAGMENT_GALLERY = "GalleryFragment"
 const val BEAN_FRAGMENT_SYNC = "SyncFragment"
+const val BEAN_FRAGMENT_PUBLISHER = "PublisherFragment"
+const val BEAN_FRAGMENT_MENU = "MenuFragment"
+const val BEAN_FRAGMENT_STATISTICS = "StatisticsFragment"
 
 typealias CiceroneRouter = Cicerone<Router>
 

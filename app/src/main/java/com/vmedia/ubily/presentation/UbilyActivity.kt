@@ -114,7 +114,7 @@ internal class UbilyActivity : NavigationActivity(
     private fun navigateThroughStartGraph() {
         if (isUserAuthorized) {
             if (isUserDataSynchronized) {
-                navigateToFeed()
+                navigateTo(ScreenDestination.Main)
             } else {
 //                if (onboardingAlreadyShown) {
                 navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
