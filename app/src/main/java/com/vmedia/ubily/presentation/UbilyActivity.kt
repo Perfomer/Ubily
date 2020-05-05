@@ -15,8 +15,8 @@ import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.ubily.R
 
-class MainActivity : NavigationActivity(
-    screenLayoutResource = R.layout.main_activity,
+internal class UbilyActivity : NavigationActivity(
+    screenLayoutResource = R.layout.ubily_activity,
     frameLayoutResource = R.id.nav_host_fragment,
     startScreen = ScreenDestination.Splash
 ), MainNavigator,
