@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.vmedia.core.navigation.*
 import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen.*
 import org.koin.core.KoinComponent
 import org.koin.core.error.NoBeanDefFoundException
 import org.koin.core.qualifier.named
@@ -15,7 +14,7 @@ internal class MainAdapter(
     fragmentActivity: FragmentActivity
 ) : FragmentStateAdapter(fragmentActivity), KoinComponent {
 
-    private val items = values()
+    private val items = MainNavigatorScreen.values()
 
     override fun getItemCount() = items.size
 
@@ -27,11 +26,11 @@ internal class MainAdapter(
 
         private val MainNavigatorScreen.beanQualifier: String
             get() = when (this) {
-                FEED -> BEAN_FRAGMENT_FEED
-                STATISTICS -> BEAN_FRAGMENT_STATISTICS
-                PUBLISHER -> BEAN_FRAGMENT_PUBLISHER
-                ASSETLIST -> BEAN_FRAGMENT_ASSETLIST
-                MENU -> BEAN_FRAGMENT_MENU
+                MainNavigatorScreen.FEED -> BEAN_FRAGMENT_FEED
+                MainNavigatorScreen.STATISTICS -> BEAN_FRAGMENT_STATISTICS
+                MainNavigatorScreen.PUBLISHER -> BEAN_FRAGMENT_PUBLISHER
+                MainNavigatorScreen.ASSETLIST -> BEAN_FRAGMENT_ASSETLIST
+                MainNavigatorScreen.MENU -> BEAN_FRAGMENT_MENU
             }
 
         // todo remove try catch when all fragment will be done
