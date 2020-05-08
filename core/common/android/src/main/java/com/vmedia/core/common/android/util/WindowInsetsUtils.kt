@@ -7,14 +7,8 @@ import androidx.core.view.WindowInsetsCompat
 
 typealias OnApplyWindowInsets = (view: View, insets: WindowInsetsCompat, initialPadding: Rect) -> WindowInsetsCompat
 
-fun View.updatePadding(
-    left: Int = paddingLeft,
-    top: Int = paddingTop,
-    right: Int = paddingRight,
-    bottom: Int = paddingBottom
-) {
-    setPadding(left, top, right, bottom)
-}
+private val View.paddingRect: Rect
+    get() = Rect(paddingLeft, paddingTop, paddingRight, paddingBottom)
 
 fun View.addSystemVerticalPadding(
     targetView: View = this,
@@ -28,12 +22,10 @@ fun View.addSystemVerticalPadding(
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
-                Rect(
-                    insets.systemWindowInsetLeft,
-                    0,
-                    insets.systemWindowInsetRight,
-                    0
-                )
+                insets.systemWindowInsetLeft,
+                0,
+                insets.systemWindowInsetRight,
+                0
             )
         } else {
             insets
@@ -52,12 +44,10 @@ fun View.addSystemTopPadding(
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
-                Rect(
-                    insets.systemWindowInsetLeft,
-                    0,
-                    insets.systemWindowInsetRight,
-                    insets.systemWindowInsetBottom
-                )
+                insets.systemWindowInsetLeft,
+                0,
+                insets.systemWindowInsetRight,
+                insets.systemWindowInsetBottom
             )
         } else {
             insets
@@ -76,12 +66,10 @@ fun View.addSystemBottomPadding(
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
-                Rect(
-                    insets.systemWindowInsetLeft,
-                    insets.systemWindowInsetTop,
-                    insets.systemWindowInsetRight,
-                    0
-                )
+                insets.systemWindowInsetLeft,
+                insets.systemWindowInsetTop,
+                insets.systemWindowInsetRight,
+                0
             )
         } else {
             insets
@@ -90,17 +78,13 @@ fun View.addSystemBottomPadding(
 }
 
 fun View.doOnApplyWindowInsets(block: OnApplyWindowInsets) {
-    val initialPadding = recordInitialPaddingForView(this)
+    val initialPadding = paddingRect
 
     ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
         block(v, insets, initialPadding)
     }
 
     requestApplyInsetsWhenAttached()
-}
-
-private fun recordInitialPaddingForView(view: View): Rect {
-    return Rect(view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom)
 }
 
 
@@ -117,4 +101,13 @@ private fun View.requestApplyInsetsWhenAttached() {
             override fun onViewDetachedFromWindow(v: View) = Unit
         })
     }
+}
+
+private fun View.updatePadding(
+    left: Int = paddingLeft,
+    top: Int = paddingTop,
+    right: Int = paddingRight,
+    bottom: Int = paddingBottom
+) {
+    setPadding(left, top, right, bottom)
 }
