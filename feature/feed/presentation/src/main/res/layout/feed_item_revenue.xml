@@ -33,6 +33,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/brand_black"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@id/feed_item_revenue_growth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/feed_item_revenue_icon"
@@ -47,6 +48,7 @@
             android:maxLines="1"
             android:text="@string/event_revenue_statistics_growth"
             android:textColor="@color/brand_black_light"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/feed_item_revenue_title"
             app:layout_constraintTop_toBottomOf="@id/feed_item_revenue_title" />
@@ -58,6 +60,7 @@
             android:layout_marginStart="4dp"
             android:fontFamily="@font/rubik_medium"
             android:textColor="@color/brand_green_darker"
+            android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/feed_item_revenue_growth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/feed_item_revenue_growth"
