@@ -3,6 +3,7 @@ package com.vmedia.feature.feed.presentation.recycler.holder
 import android.view.View
 import androidx.core.view.isVisible
 import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.disableTouches
 import com.vmedia.core.common.android.util.loadRoundedImage
 import com.vmedia.core.common.pure.obj.event.EventInfo.EventReview
 import com.vmedia.feature.feed.presentation.R
@@ -18,6 +19,8 @@ internal class ReviewViewHolder(
 
     init {
         feed_item_review_asset.setOnClickListener { onAssetClick.invokeWithPosition() }
+        feed_item_review_rating.max = 5
+        feed_item_review_rating.disableTouches()
     }
 
     override fun bindContent(item: EventReview) {
