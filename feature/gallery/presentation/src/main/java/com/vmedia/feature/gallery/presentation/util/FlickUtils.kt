@@ -2,6 +2,7 @@ package com.vmedia.feature.gallery.presentation.util
 
 import android.content.Context
 import android.util.TypedValue
+import android.view.View
 import me.saket.flick.ContentSizeProvider2
 import me.saket.flick.FlickCallbacks
 import me.saket.flick.FlickGestureListener
@@ -9,14 +10,14 @@ import me.saket.flick.InterceptResult
 
 private const val DEFAULT_MAX_SIZE = 240
 
-internal fun ZoomableGestureImageView.createFlickGestureListener(
+internal fun View.createFlickGestureListener(
     onMove: (moveRatio: Float) -> Unit,
     onDismiss: (flickAnimationDuration: Long) -> Unit = {}
 ): FlickGestureListener {
     val callbacks = FlickCallbacks(onMove, onDismiss)
 
     val contentSizeProvider = ContentSizeProvider2 {
-        maxOf(context!!.dip(DEFAULT_MAX_SIZE), zoomedImageHeight.toInt())
+        maxOf(context!!.dip(DEFAULT_MAX_SIZE), height)
     }
 
     return FlickGestureListener(context!!, contentSizeProvider, callbacks).apply {

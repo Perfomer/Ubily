@@ -17,16 +17,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <com.vmedia.feature.gallery.presentation.util.ZoomableGestureImageView
-            android:id="@+id/gallery_image"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/gallery_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            android:layout_height="match_parent"/>
 
     </me.saket.flick.FlickDismissLayout>
 
@@ -42,6 +36,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/gallery_item" />
+        tools:listitem="@layout/gallery_preview_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,7 @@ import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.gallery.presentation.R
 
-internal class GalleryAdapter(
-    private val onClick: (Artwork) -> Unit
-) : BaseAdapter<GalleryItemViewHolder>() {
+internal class GalleryAdapter : BaseAdapter<GalleryItemViewHolder>() {
 
     var items by diffedListBy(Artwork::id)
 
@@ -18,16 +16,11 @@ internal class GalleryAdapter(
     override fun onLayoutRequested(viewType: Int) = R.layout.gallery_item
 
     override fun onCreateViewHolder(view: View, viewType: Int): GalleryItemViewHolder {
-        return GalleryItemViewHolder(view, ::onClick)
+        return GalleryItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: GalleryItemViewHolder, position: Int) {
         holder.bind(items[position])
-    }
-
-
-    private fun onClick(position: Int) {
-        onClick.invoke(items[position])
     }
 
 }

@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.core.view.isVisible
-import coil.api.load
+import androidx.viewpager2.widget.ViewPager2
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.view.BaseFragment
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
+import com.vmedia.feature.gallery.presentation.recycler.GalleryPreviewAdapter
 import com.vmedia.feature.gallery.presentation.util.createFlickGestureListener
 import com.vmedia.feature.gallery.presentation.util.uihelper.SystemUiHelper
 import kotlinx.android.synthetic.main.gallery_fragment.*
@@ -19,7 +20,8 @@ import kotlin.math.abs
 
 internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
-    private val adapter by lazy { GalleryAdapter(::onArtworkClick) }
+    private val previewAdapter by lazy { GalleryPreviewAdapter(::onArtworkClick) }
+    private val adapter by lazy { GalleryAdapter() }
 
     private var artworks: List<Artwork> by argument()
     private var targetArtworkPosition: Int by argument()
@@ -38,15 +40,27 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         gallery_images_list.addSystemBottomPadding()
 
         view.setOnClickListener(::switchUiVisibility)
-        gallery_image.setOnClickListener(::switchUiVisibility)
+        gallery_pager.setOnClickListener(::switchUiVisibility)
 
-        gallery_images_list.adapter = adapter
+        gallery_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrollStateChanged(state: Int) = Unit
+            override fun onPageScrolled(arg1: Int, arg2: Float, arg3: Int) = Unit
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                gallery_images_list.smoothScrollToPosition(position)
+            }
+        })
+        gallery_pager.adapter = adapter
         adapter.items = artworks
+
+        gallery_images_list.adapter = previewAdapter
+        previewAdapter.items = artworks
 
         gallery_images_list.scrollToPosition(targetArtworkPosition)
         onArtworkClick(artworks[targetArtworkPosition])
 
-        gallery_image_wrap.gestureListener = gallery_image.createFlickGestureListener(
+        gallery_image_wrap.gestureListener = gallery_pager.createFlickGestureListener(
             onMove = { updateBackgroundDimmingAlpha(abs(it)) },
             onDismiss = { view.postDelayed(::goBack, it) }
         )
@@ -71,7 +85,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
     }
 
     private fun onArtworkClick(artwork: Artwork) {
-        gallery_image.load(artwork.previewUrl)
+        gallery_pager.currentItem = artworks.indexOf(artwork)
     }
 
     private fun updateBackgroundDimmingAlpha(
