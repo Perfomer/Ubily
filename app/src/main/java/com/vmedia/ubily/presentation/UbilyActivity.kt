@@ -69,12 +69,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToGallery(artworks: List<Artwork>, targetArtworkPosition: Int) {
-        val destination = ScreenDestination.Gallery(artworks, targetArtworkPosition)
-
-        supportFragmentManager.beginTransaction()
-            .add(R.id.nav_host_fragment, destination.fragment)
-            .addToBackStack(BEAN_FRAGMENT_GALLERY)
-            .commit()
+        addOver(ScreenDestination.Gallery(artworks, targetArtworkPosition))
     }
 
     override fun navigateToUrl(url: String) {

@@ -1,10 +1,13 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.FragmentActivity
+import com.vmedia.core.navigation.cicerone.UbilyNavigator
+import com.vmedia.core.navigation.cicerone.UbilyRouter
 import org.koin.dsl.module
+import ru.terrakok.cicerone.BaseRouter
 import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 const val BEAN_FRAGMENT_MAIN = "MainFragment"
 const val BEAN_FRAGMENT_AUTH = "AuthFragment"
@@ -19,15 +22,14 @@ const val BEAN_FRAGMENT_PUBLISHER = "PublisherFragment"
 const val BEAN_FRAGMENT_MENU = "MenuFragment"
 const val BEAN_FRAGMENT_STATISTICS = "StatisticsFragment"
 
-typealias CiceroneRouter = Cicerone<Router>
-
 val navigationModule = module {
-    factory { (activity: FragmentActivity, containerId: Int) ->
-        SupportAppNavigator(activity, containerId)
+    factory<Navigator> { (activity: FragmentActivity, containerId: Int) ->
+        UbilyNavigator(activity, containerId)
     }
 
-    single { Cicerone.create() }
+    single { Cicerone.create(get()) }
+    factory<BaseRouter> { UbilyRouter() }
 
-    single { get<CiceroneRouter>().router }
-    single { get<CiceroneRouter>().navigatorHolder }
+    single { get<Cicerone<Router>>().router as UbilyRouter }
+    single { get<Cicerone<Router>>().navigatorHolder }
 }

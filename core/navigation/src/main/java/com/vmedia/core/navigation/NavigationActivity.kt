@@ -6,11 +6,11 @@ import android.widget.FrameLayout
 import androidx.core.view.updatePadding
 import com.vmedia.core.common.android.util.doOnApplyWindowInsets
 import com.vmedia.core.common.android.view.BaseActivity
+import com.vmedia.core.navigation.cicerone.UbilyRouter
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 abstract class NavigationActivity(
     screenLayoutResource: Int,
@@ -20,11 +20,11 @@ abstract class NavigationActivity(
 
     private val navigatorHolder by inject<NavigatorHolder>()
 
-    private val navigator by inject<SupportAppNavigator> {
+    private val navigator by inject<Navigator> {
         parametersOf(this, frameLayoutResource)
     }
 
-    private val router by inject<Router>()
+    private val router by inject<UbilyRouter>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +52,12 @@ abstract class NavigationActivity(
         router.exit()
     }
 
-
     protected fun navigateTo(screen: ScreenDestination) {
         router.navigateTo(screen)
+    }
+
+    protected fun addOver(screen: ScreenDestination) {
+        router.addOver(screen)
     }
 
 
