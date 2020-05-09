@@ -1,12 +1,9 @@
 package com.vmedia.feature.gallery.presentation.recycler
 
 import android.view.View
-import androidx.core.view.isVisible
 import com.vmedia.core.common.android.util.loadImage
 import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
-import com.vmedia.core.data.internal.database.entity.Artwork
-import com.vmedia.core.data.internal.database.entity.MediaType.VIDEO
 import kotlinx.android.synthetic.main.gallery_preview_item.*
 
 internal class GalleryPreviewViewHolder(
@@ -18,9 +15,8 @@ internal class GalleryPreviewViewHolder(
         containerView.setOnClickListener { onClick.invokeWithPosition() }
     }
 
-    fun bind(artwork: Artwork) {
-        gallery_artwork_item_image.loadImage(artwork.previewUrl)
-        gallery_artwork_item_play.isVisible = artwork.mediaType == VIDEO
+    fun bind(imageUrl: String) {
+        gallery_artwork_item_image.loadImage(imageUrl)
     }
 
 }

@@ -1,7 +1,6 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -54,11 +53,11 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
     }
 
     class Gallery(
-        private val artworks: List<Artwork>,
-        private val targetArtworkPosition: Int
+        private val images: List<String>,
+        private val targetImagesPosition: Int
     ) : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_GALLERY)) {
-            parametersOf(artworks, targetArtworkPosition)
+            parametersOf(images, targetImagesPosition)
         }
     }
 

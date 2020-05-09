@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.Observable
 
@@ -177,4 +178,16 @@ fun <T> Observable<T>.distinctByValue(valueReceiver: () -> T): Observable<T> {
 @SuppressLint("ClickableViewAccessibility")
 fun View.disableTouches() {
     setOnTouchListener { _, _ -> true }
+}
+
+fun ViewPager2.setOnPageSelectedListener(listener: (position: Int) -> Unit) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrollStateChanged(state: Int) = Unit
+        override fun onPageScrolled(arg1: Int, arg2: Float, arg3: Int) = Unit
+
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            listener.invoke(position)
+        }
+    })
 }

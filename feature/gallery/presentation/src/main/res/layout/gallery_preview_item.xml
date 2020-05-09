@@ -20,16 +20,6 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <ImageView
-            android:id="@+id/gallery_artwork_item_play"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:focusable="false"
-            android:src="@drawable/ic_play"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
     </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>

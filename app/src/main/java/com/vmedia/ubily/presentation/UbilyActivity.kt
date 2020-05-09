@@ -1,7 +1,5 @@
 package com.vmedia.ubily.presentation
 
-import com.vmedia.core.data.internal.database.entity.Artwork
-import com.vmedia.core.navigation.BEAN_FRAGMENT_GALLERY
 import com.vmedia.core.navigation.NavigationActivity
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
@@ -68,8 +66,8 @@ internal class UbilyActivity : NavigationActivity(
         TODO("Not yet implemented")
     }
 
-    override fun navigateToGallery(artworks: List<Artwork>, targetArtworkPosition: Int) {
-        addOver(ScreenDestination.Gallery(artworks, targetArtworkPosition))
+    override fun navigateToGallery(images: List<String>, targetImagesPosition: Int) {
+        addOver(ScreenDestination.Gallery(images, targetImagesPosition))
     }
 
     override fun navigateToUrl(url: String) {

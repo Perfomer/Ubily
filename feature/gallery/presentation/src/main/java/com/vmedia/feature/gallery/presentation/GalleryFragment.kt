@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.core.view.isVisible
-import androidx.viewpager2.widget.ViewPager2
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.setOnClickListener
+import com.vmedia.core.common.android.util.setOnPageSelectedListener
 import com.vmedia.core.common.android.view.BaseFragment
-import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
 import com.vmedia.feature.gallery.presentation.recycler.GalleryPreviewAdapter
 import com.vmedia.feature.gallery.presentation.util.createFlickGestureListener
@@ -20,11 +19,11 @@ import kotlin.math.abs
 
 internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
-    private val previewAdapter by lazy { GalleryPreviewAdapter(::onArtworkClick) }
+    private val previewAdapter by lazy { GalleryPreviewAdapter(gallery_pager::setCurrentItem) }
     private val adapter by lazy { GalleryAdapter() }
 
-    private var artworks: List<Artwork> by argument()
-    private var targetArtworkPosition: Int by argument()
+    private var images: List<String> by argument()
+    private var targetImagePosition: Int by argument()
 
     private lateinit var backgroundDrawable: Drawable
     private lateinit var systemUiHelper: SystemUiHelper
@@ -42,23 +41,8 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         view.setOnClickListener(::switchUiVisibility)
         gallery_pager.setOnClickListener(::switchUiVisibility)
 
-        gallery_pager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrollStateChanged(state: Int) = Unit
-            override fun onPageScrolled(arg1: Int, arg2: Float, arg3: Int) = Unit
-
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                gallery_images_list.smoothScrollToPosition(position)
-            }
-        })
-        gallery_pager.adapter = adapter
-        adapter.items = artworks
-
-        gallery_images_list.adapter = previewAdapter
-        previewAdapter.items = artworks
-
-        gallery_images_list.scrollToPosition(targetArtworkPosition)
-        onArtworkClick(artworks[targetArtworkPosition])
+        initPreviews()
+        initPager()
 
         gallery_image_wrap.gestureListener = gallery_pager.createFlickGestureListener(
             onMove = { updateBackgroundDimmingAlpha(abs(it)) },
@@ -78,14 +62,30 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
         gallery_images_list.adapter = null
     }
 
+    private fun initPager() {
+        gallery_pager.setOnPageSelectedListener(gallery_images_list::smoothScrollToPosition)
+        gallery_pager.adapter = adapter
+
+        adapter.items = images
+        gallery_pager.currentItem = targetImagePosition
+    }
+
+    private fun initPreviews() {
+        if (images.size < 2) {
+            gallery_images_list.isVisible = false
+            return
+        }
+
+        gallery_images_list.adapter = previewAdapter
+        gallery_images_list.scrollToPosition(targetImagePosition)
+
+        previewAdapter.items = images
+    }
+
     private fun switchUiVisibility() {
         uiShown = !uiShown
         systemUiHelper.toggle()
         gallery_images_list.isVisible = uiShown
-    }
-
-    private fun onArtworkClick(artwork: Artwork) {
-        gallery_pager.currentItem = artworks.indexOf(artwork)
     }
 
     private fun updateBackgroundDimmingAlpha(
@@ -100,10 +100,10 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
     internal companion object {
 
-        fun newInstance(artworks: List<Artwork>, targetArtworkPosition: Int): GalleryFragment {
+        fun newInstance(images: List<String>, targetImagePosition: Int): GalleryFragment {
             return GalleryFragment().apply {
-                this.artworks = artworks
-                this.targetArtworkPosition = targetArtworkPosition
+                this.images = images
+                this.targetImagePosition = targetImagePosition
             }
         }
 

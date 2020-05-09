@@ -1,7 +1,5 @@
 package com.vmedia.core.navigation.navigator.assetdetails
 
-import com.vmedia.core.data.internal.database.entity.Artwork
-
 interface AssetDetailsNavigator {
 
     fun navigateToUrl(url: String)
@@ -13,8 +11,12 @@ interface AssetDetailsNavigator {
     fun navigateToAssetsSearch(keywordId: Long)
 
     fun navigateToGallery(
-        artworks: List<Artwork>,
-        targetArtworkPosition: Int = 0
+        images: List<String>,
+        targetImagesPosition: Int = 0
     )
+
+    fun navigateToGallery(imageUrl: String) {
+        navigateToGallery(listOf(imageUrl))
+    }
 
 }

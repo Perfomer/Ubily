@@ -14,6 +14,7 @@ import com.vmedia.core.common.android.util.*
 import com.vmedia.core.common.pure.obj.ReviewsSortType
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.core.data.internal.database.entity.Artwork
+import com.vmedia.core.data.internal.database.entity.MediaType
 import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
@@ -50,8 +51,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     private val artworksAdapter by lazy {
         ArtworksAdapter { artworkPosition ->
             navigator.navigateToGallery(
-                artworks = currentState!!.payload.asset.artworks,
-                targetArtworkPosition = artworkPosition
+                images = currentState!!.payload.asset.artworks.images,
+                targetImagesPosition = artworkPosition
             )
         }
     }
@@ -77,11 +78,16 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_back.setOnClickListener(::goBack)
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
+        assetdetails_icon.setOnClickListener {
+            currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
+        }
+
+        assetdetails_description_image.setOnClickListener {
+            currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery)
+        }
+
         assetdetails_artworks_showall.setOnClickListener {
-            navigator.navigateToGallery(
-                currentState!!.payload.asset.artworks,
-                0
-            )
+            navigator.navigateToGallery(currentState!!.payload.asset.artworks.images)
         }
 
         assetdetails_externallink.setOnClickListener {
@@ -250,6 +256,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         internal fun newInstance(assetId: Long) = AssetDetailsFragment().apply {
             this.assetId = assetId
         }
+
+        private val List<Artwork>.images: List<String>
+            get() = this.filter { it.mediaType == MediaType.IMAGE }
+                .map(Artwork::previewUrl)
 
     }
 
