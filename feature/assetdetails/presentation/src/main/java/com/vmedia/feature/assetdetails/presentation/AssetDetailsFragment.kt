@@ -25,6 +25,11 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
+import kotlinx.android.synthetic.main.assetdetails_card_artworks.*
+import kotlinx.android.synthetic.main.assetdetails_card_asset.*
+import kotlinx.android.synthetic.main.assetdetails_card_description.*
+import kotlinx.android.synthetic.main.assetdetails_card_publisher.*
+import kotlinx.android.synthetic.main.assetdetails_card_reviews.*
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
