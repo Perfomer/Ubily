@@ -6,19 +6,23 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 typealias OnApplyWindowInsets = (view: View, insets: WindowInsetsCompat, initialPadding: Rect) -> WindowInsetsCompat
+typealias OnWindowInsetsChanged = (() -> Unit)
 
 private val View.paddingRect: Rect
     get() = Rect(paddingLeft, paddingTop, paddingRight, paddingBottom)
 
 fun View.addSystemVerticalPadding(
     targetView: View = this,
-    isConsumed: Boolean = false
+    isConsumed: Boolean = false,
+    onWindowInsetsChanged: OnWindowInsetsChanged? = null
 ) {
     doOnApplyWindowInsets { _, insets, initialPadding ->
         targetView.updatePadding(
             top = initialPadding.top + insets.systemWindowInsetTop,
             bottom = initialPadding.bottom + insets.systemWindowInsetBottom
         )
+
+        onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
@@ -35,12 +39,15 @@ fun View.addSystemVerticalPadding(
 
 fun View.addSystemTopPadding(
     targetView: View = this,
-    isConsumed: Boolean = false
+    isConsumed: Boolean = false,
+    onWindowInsetsChanged: OnWindowInsetsChanged? = null
 ) {
     doOnApplyWindowInsets { _, insets, initialPadding ->
         targetView.updatePadding(
             top = initialPadding.top + insets.systemWindowInsetTop
         )
+
+        onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
@@ -57,12 +64,15 @@ fun View.addSystemTopPadding(
 
 fun View.addSystemBottomPadding(
     targetView: View = this,
-    isConsumed: Boolean = false
+    isConsumed: Boolean = false,
+    onWindowInsetsChanged: OnWindowInsetsChanged? = null
 ) {
     doOnApplyWindowInsets { _, insets, initialPadding ->
         targetView.updatePadding(
             bottom = initialPadding.bottom + insets.systemWindowInsetBottom
         )
+
+        onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
             insets.replaceSystemWindowInsets(
