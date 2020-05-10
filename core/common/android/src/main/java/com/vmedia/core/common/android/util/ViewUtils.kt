@@ -191,3 +191,7 @@ fun ViewPager2.setOnPageSelectedListener(listener: (position: Int) -> Unit) {
         }
     })
 }
+
+fun ScrollView.smoothScrollToBottom() {
+    smoothScrollTo(0, height)
+}
