@@ -42,6 +42,10 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
         }
     }
 
+    object PublisherDetails : ScreenDestination() {
+        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))
+    }
+
     class AssetDetails(private val assetId: Long) : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_ASSETDETAILS)) {
             parametersOf(assetId)

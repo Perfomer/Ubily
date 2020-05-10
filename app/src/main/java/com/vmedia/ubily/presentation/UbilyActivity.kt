@@ -8,6 +8,7 @@ import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
 import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.core.navigation.navigator.main.MainNavigator
+import com.vmedia.core.navigation.navigator.publisherdetails.PublisherDetailsNavigator
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
@@ -23,6 +24,7 @@ internal class UbilyActivity : NavigationActivity(
     AuthNavigator,
     FeedNavigator,
     EventDetailsNavigator,
+    PublisherDetailsNavigator,
     AssetListNavigator,
     AssetDetailsNavigator {
 
@@ -55,7 +57,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToPublisher() {
-        TODO("Not yet implemented")
+        navigateTo(ScreenDestination.PublisherDetails)
     }
 
     override fun navigateToUser(id: Long) {
@@ -68,6 +70,10 @@ internal class UbilyActivity : NavigationActivity(
 
     override fun navigateToGallery(images: List<String>, targetImagesPosition: Int) {
         addOver(ScreenDestination.Gallery(images, targetImagesPosition))
+    }
+
+    override fun navigateToGallery(imageUrl: String) {
+        navigateToGallery(listOf(imageUrl))
     }
 
     override fun navigateToUrl(url: String) {

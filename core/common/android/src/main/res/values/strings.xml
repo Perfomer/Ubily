@@ -94,4 +94,9 @@
     <string name="reviews_sort_date_desc">date (newest)</string>
     <string name="reviews_sort_rating_asc">rating (lowest)</string>
     <string name="reviews_sort_rating_desc">rating (highest)</string>
+
+    <string name="common_details_id">Identifier</string>
+    <string name="common_details_externallink">Open in browser</string>
+    <string name="common_details_title_description">Description</string>
+    <string name="common_details_viewmore">View more</string>
 </resources>

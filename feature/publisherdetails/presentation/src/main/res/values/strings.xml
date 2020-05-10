@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="publisherdetails_publisher_averagerating">Average rating</string>
+    <string name="publisherdetails_assets_title">Assets</string>
+    <string name="publisherdetails_assets_count"><![CDATA[Assets count: <b>%d</b>]]></string>
+</resources>

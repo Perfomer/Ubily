@@ -1,4 +1,5 @@
-rootProject.name='Ubily'
+include ':feature:publisherdetails:domain'
+rootProject.name = 'Ubily'
 
 include ':app'
 
@@ -41,6 +42,9 @@ include ':feature:assetdetails:api'
 include ':feature:assetdetails:data'
 include ':feature:assetdetails:domain'
 include ':feature:assetdetails:presentation'
+
+include ':feature:publisherdetails:api'
+include ':feature:publisherdetails:presentation'
 
 include ':feature:gallery:api'
 include ':feature:gallery:presentation'

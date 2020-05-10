@@ -15,8 +15,6 @@ interface AssetDetailsNavigator {
         targetImagesPosition: Int = 0
     )
 
-    fun navigateToGallery(imageUrl: String) {
-        navigateToGallery(listOf(imageUrl))
-    }
+    fun navigateToGallery(imageUrl: String)
 
 }

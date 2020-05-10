@@ -28,7 +28,7 @@ internal class MainAdapter(
             get() = when (this) {
                 MainNavigatorScreen.FEED -> BEAN_FRAGMENT_FEED
                 MainNavigatorScreen.STATISTICS -> BEAN_FRAGMENT_STATISTICS
-                MainNavigatorScreen.PUBLISHER -> BEAN_FRAGMENT_PUBLISHER
+                MainNavigatorScreen.PUBLISHER -> BEAN_FRAGMENT_PUBLISHERDETAILS
                 MainNavigatorScreen.ASSETLIST -> BEAN_FRAGMENT_ASSETLIST
                 MainNavigatorScreen.MENU -> BEAN_FRAGMENT_MENU
             }

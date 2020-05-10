@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="36dp"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:id="@+id/assetdetails_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:textColor="@color/brand_black"
+        android:textSize="24sp"
+        tools:text="Wello Graphics" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_list_item_grey"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/common_details_id"
+            android:textColor="@color/brand_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/publisherdetails_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brand_black"
+            android:textSize="16sp"
+            tools:text="22305" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/publisherdetails_publisher_averagerating"
+            android:textColor="@color/brand_black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/publisherdetails_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/brand_green_darker"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="4.5" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -8,14 +8,14 @@
     tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/assetdetails_root"
+        android:id="@+id/publisherdetails_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:paddingBottom="20dp">
 
         <ImageView
-            android:id="@+id/assetdetails_largeimage"
+            android:id="@+id/publisherdetails_largeimage"
             android:layout_width="0dp"
             android:layout_height="210dp"
             android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <LinearLayout
-            android:id="@+id/assetdetails_toolbar"
+            android:id="@+id/publisherdetails_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/assetdetails_back"
+                android:id="@+id/publisherdetails_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
@@ -51,7 +51,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/assetdetails_externallink"
+            android:id="@+id/publisherdetails_externallink"
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="0dp"
             android:layout_height="96dp"
@@ -63,13 +63,13 @@
             app:icon="@drawable/ic_external_link"
             app:iconGravity="textStart"
             app:iconTint="@color/brand_green_darker"
-            app:layout_constraintBottom_toTopOf="@id/assetdetails_artworks"
+            app:layout_constraintBottom_toTopOf="@id/publisherdetails_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:rippleColor="@color/brand_green" />
 
         <FrameLayout
-            android:id="@+id/assetdetails_asset"
+            android:id="@+id/publisherdetails_publisher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="202dp"
@@ -85,94 +85,47 @@
                 app:cardCornerRadius="14dp"
                 tools:background="@android:color/white">
 
-                <include layout="@layout/assetdetails_card_asset" />
+                <include layout="@layout/publisherdetails_card_publisher" />
 
             </com.google.android.material.card.MaterialCardView>
 
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/assetdetails_icon"
+            android:id="@+id/publisherdetails_icon"
             android:layout_width="86dp"
             android:layout_height="86dp"
             android:background="@drawable/bg_asset_icon"
             android:padding="4dp"
             android:src="@drawable/bg_placeholder_circle"
-            app:layout_constraintBottom_toTopOf="@id/assetdetails_asset"
+            app:layout_constraintBottom_toTopOf="@id/publisherdetails_publisher"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/assetdetails_asset" />
+            app:layout_constraintTop_toTopOf="@id/publisherdetails_publisher" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_artworks"
+            android:id="@+id/publisherdetails_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             app:cardCornerRadius="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
+            app:layout_constraintTop_toBottomOf="@id/publisherdetails_publisher"
             tools:background="@android:color/white">
 
-            <include layout="@layout/assetdetails_card_artworks" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_artworks"
-            app:layout_goneMarginTop="0dp"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_description" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_reviews"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_description"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_reviews" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_publisher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews"
-            app:rippleColor="@color/brand_green"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_publisher" />
+            <include layout="@layout/publisherdetails_card_description" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <ProgressBar
-            android:id="@+id/assetdetails_loading"
+            android:id="@+id/publisherdetails_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/assetdetails_largeimage"
-            app:layout_constraintEnd_toEndOf="@id/assetdetails_largeimage"
-            app:layout_constraintStart_toStartOf="@id/assetdetails_largeimage"
-            app:layout_constraintTop_toTopOf="@id/assetdetails_largeimage" />
+            app:layout_constraintBottom_toBottomOf="@id/publisherdetails_largeimage"
+            app:layout_constraintEnd_toEndOf="@id/publisherdetails_largeimage"
+            app:layout_constraintStart_toStartOf="@id/publisherdetails_largeimage"
+            app:layout_constraintTop_toTopOf="@id/publisherdetails_largeimage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
