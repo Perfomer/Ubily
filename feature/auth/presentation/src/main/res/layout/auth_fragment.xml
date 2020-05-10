@@ -1,143 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:gravity="center"
-    android:paddingStart="32dp"
-    android:paddingTop="72dp"
-    android:paddingEnd="32dp">
+    tools:ignore="ContentDescription">
 
-    <ImageView
-        android:id="@+id/auth_logo_sign"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/logo_ubily"
-        app:layout_constraintEnd_toStartOf="@id/auth_logo_text"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/auth_logo_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:fontFamily="@font/rubik_bold"
-        android:text="@string/app_name"
-        android:textColor="@color/brand_black"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/auth_logo_sign"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/auth_logo_sign"
-        app:layout_constraintTop_toTopOf="@id/auth_logo_sign" />
-
-    <ProgressBar
-        android:id="@+id/auth_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_signin"
-        tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/auth_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/rubik_bold"
-        android:text="@string/auth_signin"
-        android:textColor="@color/brand_black"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@id/auth_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <TextView
-        android:id="@+id/auth_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:fontFamily="@font/rubik"
-        android:text="@string/auth_signin_subtitle"
-        android:textColor="@color/brand_black_light"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/auth_login_wrap"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_title" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/auth_login_wrap"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/auth_login"
-        android:textColorHint="@color/text_input_layout_stroke_color"
-        app:boxStrokeColor="@color/text_input_layout_stroke_color"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintBottom_toTopOf="@id/auth_password_wrap"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/auth_subtitle">
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:paddingTop="72dp"
+        android:paddingBottom="32dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/auth_login"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableStart="@drawable/logo_ubily"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/rubik_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/brand_black"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:fontFamily="@font/rubik_bold"
+            android:text="@string/auth_signin"
+            android:textColor="@color/brand_black"
+            android:textSize="28sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/rubik"
+            android:text="@string/auth_signin_subtitle"
+            android:textColor="@color/brand_black_light"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            tools:text="user@gmail.com" />
+            android:layout_marginTop="20dp"
+            android:hint="@string/auth_login"
+            android:textColorHint="@color/text_input_layout_stroke_color"
+            app:boxStrokeColor="@color/text_input_layout_stroke_color"
+            app:boxStrokeWidthFocused="2dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                tools:text="user@gmail.com" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/auth_password_wrap"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="@string/auth_password"
-        android:textColorHint="@color/text_input_layout_stroke_color"
-        app:boxStrokeColor="@color/text_input_layout_stroke_color"
-        app:boxStrokeWidthFocused="2dp"
-        app:layout_constraintBottom_toTopOf="@id/auth_signin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_login_wrap"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/brand_grey_dark">
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/auth_password"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            tools:text="user@gmail.com" />
+            android:layout_marginTop="12dp"
+            android:hint="@string/auth_password"
+            android:textColorHint="@color/text_input_layout_stroke_color"
+            app:boxStrokeColor="@color/text_input_layout_stroke_color"
+            app:boxStrokeWidthFocused="2dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/brand_grey_dark">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                tools:text="user@gmail.com" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/auth_signin"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/auth_signin"
-        android:textColor="@color/brand_grey_lightest"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/auth_password_wrap"
-        tools:backgroundTint="@color/brand_green"
-        tools:textColor="@color/brand_grey_lightest" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/auth_signin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/auth_signin"
+            android:textColor="@color/brand_grey_lightest"
+            android:textSize="16sp"
+            tools:backgroundTint="@color/brand_green"
+            tools:textColor="@color/brand_grey_lightest" />
+
+        <ProgressBar
+            android:id="@+id/auth_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</ScrollView>
