@@ -27,6 +27,8 @@ internal class AuthFragment : MviFragment<AuthIntent, AuthState, AuthSubscriptio
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth_root.addSystemBottomPadding(onWindowInsetsChanged = auth_root::smoothScrollToBottom)
+
         auth_signin.setOnClickListener(::signIn)
         auth_login.addTextChangedListener { postIntent(AuthIntent.UpdateLogin(it)) }
         auth_password.addTextChangedListener { postIntent(AuthIntent.UpdatePassword(it)) }
