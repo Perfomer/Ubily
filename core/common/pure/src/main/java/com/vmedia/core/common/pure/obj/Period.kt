@@ -1,14 +1,11 @@
 package com.vmedia.core.common.pure.obj
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-@Parcelize
 data class Period(
     val year: Int,
     val month: Month
-) : Parcelable {
+) {
 
     // todo tests
     override fun toString(): String {

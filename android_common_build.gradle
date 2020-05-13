@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     // Kotlin
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
 
     // Support

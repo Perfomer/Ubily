@@ -6,7 +6,7 @@ import com.google.android.material.card.MaterialCardView
 import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
 import com.vmedia.feature.eventdetails.presentation.R
 
-abstract class BaseAssetItemViewHolder<T: Any>(
+abstract class BaseAssetItemViewHolder<T : Any>(
     containerView: View,
     onClick: (position: Int) -> Unit
 ) : BaseViewHolder(containerView) {
