@@ -26,12 +26,7 @@ fun View.addSystemVerticalPadding(
         onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
-            insets.replaceSystemWindowInsets(
-                insets.systemWindowInsetLeft,
-                0,
-                insets.systemWindowInsetRight,
-                0
-            )
+            insets.updateSystemWindowInsets(top = 0, bottom = 0)
         } else {
             insets
         }
@@ -44,19 +39,12 @@ fun View.addSystemTopPadding(
     onWindowInsetsChanged: OnWindowInsetsChanged? = null
 ) {
     doOnApplyWindowInsets { _, insets, initialPadding ->
-        targetView.updatePadding(
-            top = initialPadding.top + insets.systemWindowInsetTop
-        )
+        targetView.updatePadding(top = initialPadding.top + insets.systemWindowInsetTop)
 
         onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
-            insets.replaceSystemWindowInsets(
-                insets.systemWindowInsetLeft,
-                0,
-                insets.systemWindowInsetRight,
-                insets.systemWindowInsetBottom
-            )
+            insets.updateSystemWindowInsets(top = 0)
         } else {
             insets
         }
@@ -69,19 +57,12 @@ fun View.addSystemBottomPadding(
     onWindowInsetsChanged: OnWindowInsetsChanged? = null
 ) {
     doOnApplyWindowInsets { _, insets, initialPadding ->
-        targetView.updatePadding(
-            bottom = initialPadding.bottom + insets.systemWindowInsetBottom
-        )
+        targetView.updatePadding(bottom = initialPadding.bottom + insets.systemWindowInsetBottom)
 
         onWindowInsetsChanged?.invoke()
 
         if (isConsumed) {
-            insets.replaceSystemWindowInsets(
-                insets.systemWindowInsetLeft,
-                insets.systemWindowInsetTop,
-                insets.systemWindowInsetRight,
-                0
-            )
+            insets.updateSystemWindowInsets(bottom = 0)
         } else {
             insets
         }
@@ -112,4 +93,13 @@ private fun View.requestApplyInsetsWhenAttached() {
             override fun onViewDetachedFromWindow(v: View) = Unit
         })
     }
+}
+
+private fun WindowInsetsCompat.updateSystemWindowInsets(
+    left: Int = systemWindowInsetLeft,
+    top: Int = systemWindowInsetTop,
+    right: Int = systemWindowInsetRight,
+    bottom: Int = systemWindowInsetBottom
+): WindowInsetsCompat {
+    return replaceSystemWindowInsets(left, top, right, bottom)
 }
