@@ -5,6 +5,7 @@ import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.api.AssetDetailsScreen
 import com.vmedia.feature.assetlist.api.AssetListNavigator
+import com.vmedia.feature.assetlist.api.AssetListScreen
 import com.vmedia.feature.auth.api.AuthNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsScreen
@@ -47,7 +48,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToAssetList() {
-        navigateTo(ScreenDestination.AssetList)
+        navigateTo(AssetListScreen)
     }
 
     override fun navigateToMenu() {

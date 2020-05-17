@@ -1,7 +1,6 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.gallery.api.BEAN_FRAGMENT_GALLERY
@@ -57,10 +56,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object PublisherDetails : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))
-    }
-
-    object AssetList : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_ASSETLIST))
     }
 
     class Gallery(

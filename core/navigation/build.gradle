@@ -9,7 +9,6 @@ dependencies {
     implementation project(":core:common:android")
     implementation project(':core:data')
 
-    implementation project(":feature:assetlist:api")
     implementation project(":feature:auth:api")
     implementation project(":feature:sync:api")
     implementation project(":feature:feed:api")
