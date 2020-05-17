@@ -14,6 +14,7 @@ import com.vmedia.feature.feed.api.FeedNavigator
 import com.vmedia.feature.feed.api.FeedScreen
 import com.vmedia.feature.gallery.api.GalleryScreen
 import com.vmedia.feature.main.api.MainNavigator
+import com.vmedia.feature.main.api.MainScreen
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.sync.api.SyncNavigator
@@ -120,7 +121,7 @@ internal class UbilyActivity : NavigationActivity(
     private fun navigateThroughStartGraph() {
         if (isUserAuthorized) {
             if (isUserDataSynchronized) {
-                navigateTo(ScreenDestination.Main)
+                navigateTo(MainScreen)
             } else {
 //                if (onboardingAlreadyShown) {
                 navigateTo(SyncScreen(SyncScreenMode.INITIAL))

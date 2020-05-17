@@ -2,3 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../../../android_common_build.gradle'
+
+dependencies {
+    implementation project(':core:navigation')
+}
