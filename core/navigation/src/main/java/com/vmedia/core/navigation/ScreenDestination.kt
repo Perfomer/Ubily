@@ -6,8 +6,6 @@ import com.vmedia.feature.gallery.api.BEAN_FRAGMENT_GALLERY
 import com.vmedia.feature.main.api.BEAN_FRAGMENT_MAIN
 import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import com.vmedia.feature.splash.api.BEAN_FRAGMENT_SPLASH
-import com.vmedia.feature.sync.api.BEAN_FRAGMENT_SYNC
-import com.vmedia.feature.sync.api.SyncScreenMode
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.parameter.parametersOf
@@ -32,12 +30,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object Onboarding : ScreenDestination() {
         override fun getFragment() = TODO()
-    }
-
-    class Sync(private val mode: SyncScreenMode) : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_SYNC)) {
-            parametersOf(mode)
-        }
     }
 
     object Main : ScreenDestination() {

@@ -15,6 +15,7 @@ import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.sync.api.SyncNavigator
+import com.vmedia.feature.sync.api.SyncScreen
 import com.vmedia.feature.sync.api.SyncScreenMode
 import com.vmedia.ubily.R
 
@@ -120,7 +121,7 @@ internal class UbilyActivity : NavigationActivity(
                 navigateTo(ScreenDestination.Main)
             } else {
 //                if (onboardingAlreadyShown) {
-                navigateTo(ScreenDestination.Sync(SyncScreenMode.INITIAL))
+                navigateTo(SyncScreen(SyncScreenMode.INITIAL))
 //                } else {
 //                    navigateTo(ScreenDestination.Onboarding)
 //                }
