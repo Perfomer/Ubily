@@ -1,5 +1,5 @@
 package com.vmedia.feature.auth.api
 
-import com.vmedia.core.navigation.ScreenDestination.ScreenDestinationNew
+import com.vmedia.core.navigation.ScreenDestination
 
-object AuthScreen : ScreenDestinationNew(BEAN_FRAGMENT_AUTH)
+object AuthScreen : ScreenDestination(BEAN_FRAGMENT_AUTH)

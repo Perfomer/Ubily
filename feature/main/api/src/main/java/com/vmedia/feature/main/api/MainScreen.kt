@@ -1,5 +1,5 @@
 package com.vmedia.feature.main.api
 
-import com.vmedia.core.navigation.ScreenDestination.ScreenDestinationNew
+import com.vmedia.core.navigation.ScreenDestination
 
-object MainScreen : ScreenDestinationNew(BEAN_FRAGMENT_MAIN)
+object MainScreen : ScreenDestination(BEAN_FRAGMENT_MAIN)

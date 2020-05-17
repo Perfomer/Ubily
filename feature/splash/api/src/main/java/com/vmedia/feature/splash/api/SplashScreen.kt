@@ -1,5 +1,5 @@
 package com.vmedia.feature.splash.api
 
-import com.vmedia.core.navigation.ScreenDestination.ScreenDestinationNew
+import com.vmedia.core.navigation.ScreenDestination
 
-object SplashScreen : ScreenDestinationNew(BEAN_FRAGMENT_SPLASH)
+object SplashScreen : ScreenDestination(BEAN_FRAGMENT_SPLASH)

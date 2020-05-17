@@ -1,5 +1,5 @@
 package com.vmedia.feature.publisherdetails.api
 
-import com.vmedia.core.navigation.ScreenDestination.ScreenDestinationNew
+import com.vmedia.core.navigation.ScreenDestination
 
-object PublisherDetailsScreen : ScreenDestinationNew(BEAN_FRAGMENT_PUBLISHERDETAILS)
+object PublisherDetailsScreen : ScreenDestination(BEAN_FRAGMENT_PUBLISHERDETAILS)

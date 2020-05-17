@@ -1,5 +1,5 @@
 package com.vmedia.feature.assetlist.api
 
-import com.vmedia.core.navigation.ScreenDestination.ScreenDestinationNew
+import com.vmedia.core.navigation.ScreenDestination
 
-object AssetListScreen : ScreenDestinationNew(BEAN_FRAGMENT_ASSETLIST)
+object AssetListScreen : ScreenDestination(BEAN_FRAGMENT_ASSETLIST)
