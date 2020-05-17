@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.createSnackbar
+import com.vmedia.core.common.android.util.getFontCompat
 import com.vmedia.core.common.android.util.isVisible
 import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.feature.splash.api.SplashNavigator
@@ -30,7 +31,10 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preloadFonts()
+
         splash_copyright.text = getString(R.string.app_copyright).toSpan()
+        splash_root.transitionToEnd()
     }
 
     override fun onStart() {
@@ -66,6 +70,22 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
                 onboardingAlreadyShown = result.onboardingAlreadyShown
             )
         }
+    }
+
+    /**
+     * There's a bug: custom fonts loading finishes a bit later than MotionLayout animation starts,
+     * so MotionLayout measures TextView like it have a default font.
+     *
+     * So it causes cropped text because of wrong TextView size measurement.
+     *
+     * After fonts loading finished there's no need for this workaround on other screens.
+     *
+     * TODO: remove when ConstraintLayout 2.0.0 will be released (Hope the bug will be fixed already)
+     */
+    private fun preloadFonts() {
+        splash_logo_text.typeface = context!!.getFontCompat(R.font.rubik_bold)
+        splash_logo_subtitle.typeface = context!!.getFontCompat(R.font.rubik)
+        splash_copyright.typeface = context!!.getFontCompat(R.font.rubik)
     }
 
 }

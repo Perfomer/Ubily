@@ -8,6 +8,7 @@ import com.vmedia.feature.splash.presentation.mvi.SplashIntent
 import com.vmedia.feature.splash.presentation.mvi.SplashIntent.Initialize
 import com.vmedia.feature.splash.presentation.mvi.SplashState
 import com.vmedia.feature.splash.presentation.mvi.SplashSubscription
+import java.util.concurrent.TimeUnit
 
 internal class SplashViewModel(
     private val interactor: SplashInteractor
@@ -21,6 +22,7 @@ internal class SplashViewModel(
     ) = when (intent) {
         Initialize -> interactor.initialize()
             .toObservable()
+            .delay(2, TimeUnit.SECONDS)
             .asFlowSource(Initialize::class)
             .map<SplashAction>(::InitializingSucceed)
             .startWith(InitializingStarted)
