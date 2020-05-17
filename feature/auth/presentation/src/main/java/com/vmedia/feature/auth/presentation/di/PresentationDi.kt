@@ -2,7 +2,7 @@ package com.vmedia.feature.auth.presentation.di
 
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
-import com.vmedia.core.navigation.BEAN_FRAGMENT_AUTH
+import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
 import com.vmedia.feature.auth.presentation.AuthFragment
 import com.vmedia.feature.auth.presentation.AuthViewModel
 import org.koin.android.ext.koin.androidApplication

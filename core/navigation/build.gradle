@@ -11,4 +11,5 @@ dependencies {
 
     implementation project(':feature:assetdetails:api')
     implementation project(":feature:assetlist:api")
+    implementation project(":feature:auth:api")
 }

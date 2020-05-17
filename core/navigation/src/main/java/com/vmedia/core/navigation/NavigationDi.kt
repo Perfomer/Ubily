@@ -10,7 +10,6 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 
 const val BEAN_FRAGMENT_MAIN = "MainFragment"
-const val BEAN_FRAGMENT_AUTH = "AuthFragment"
 const val BEAN_FRAGMENT_FEED = "FeedFragment"
 const val BEAN_FRAGMENT_EVENTDETAILS = "EventDetailsFragment"
 const val BEAN_FRAGMENT_PUBLISHERDETAILS = "PublisherDetailsFragment"
