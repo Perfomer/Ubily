@@ -1,7 +1,7 @@
 package com.vmedia.feature.feed.presentation.di
 
 import androidx.fragment.app.Fragment
-import com.vmedia.core.navigation.BEAN_FRAGMENT_FEED
+import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.feed.presentation.FeedFragment
 import com.vmedia.feature.feed.presentation.FeedViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

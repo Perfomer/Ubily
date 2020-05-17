@@ -10,7 +10,7 @@ import com.vmedia.core.common.android.util.addSystemVerticalPadding
 import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.view.prefetcher.api.PrefetchRecycledViewPool
 import com.vmedia.core.common.pure.obj.event.EventInfo
-import com.vmedia.core.navigation.navigator.feed.FeedNavigator
+import com.vmedia.feature.feed.api.FeedNavigator
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent
 import com.vmedia.feature.feed.presentation.mvi.FeedIntent.ObserveEvents
 import com.vmedia.feature.feed.presentation.mvi.FeedState

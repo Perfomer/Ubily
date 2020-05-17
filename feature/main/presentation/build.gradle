@@ -6,5 +6,7 @@ apply from: '../../../android_common_build.gradle'
 dependencies {
     implementation project(":core:common:android")
     implementation project(':core:navigation')
+
     implementation project(":feature:assetlist:api")
+    implementation project(":feature:feed:api")
 }
