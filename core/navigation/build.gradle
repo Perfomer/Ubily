@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply from: "../../android_common_build.gradle"
 
 dependencies {
-    api "ru.terrakok.cicerone:cicerone:5.1.0"
+    api "ru.terrakok.cicerone:cicerone:5.1.1"
 
     implementation project(":core:common:android")
     implementation project(':core:data')
