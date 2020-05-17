@@ -9,7 +9,7 @@ import com.vmedia.core.common.android.util.addSystemVerticalPadding
 import com.vmedia.core.common.android.util.loadCircleImage
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.domain.model.AssetShortInfo
-import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
+import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListIntent.LoadData
 import com.vmedia.feature.assetlist.presentation.mvi.AssetListState

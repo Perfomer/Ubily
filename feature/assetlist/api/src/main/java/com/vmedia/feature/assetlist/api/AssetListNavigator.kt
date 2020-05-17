@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.assetlist
+package com.vmedia.feature.assetlist.api
+
+const val BEAN_FRAGMENT_ASSETLIST = "AssetListFragment"
 
 interface AssetListNavigator {
 
