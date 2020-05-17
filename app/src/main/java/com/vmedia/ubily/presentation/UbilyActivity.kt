@@ -11,6 +11,7 @@ import com.vmedia.feature.auth.api.AuthScreen
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsScreen
 import com.vmedia.feature.feed.api.FeedNavigator
+import com.vmedia.feature.feed.api.FeedScreen
 import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.splash.api.SplashNavigator
@@ -46,7 +47,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToFeed() {
-        navigateTo(ScreenDestination.Feed)
+        navigateTo(FeedScreen)
     }
 
     override fun navigateToAssetList() {
