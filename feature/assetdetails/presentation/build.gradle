@@ -5,8 +5,9 @@ apply from: '../../../android_common_build.gradle'
 
 dependencies {
     implementation project(":core:common:android")
-    implementation project(':core:navigation')
     implementation project(':core:data')
+
+    implementation project(':feature:assetdetails:api')
     implementation project(':feature:assetdetails:domain')
 
     implementation 'com.google.android:flexbox:2.0.1'

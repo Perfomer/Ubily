@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.assetdetails
+package com.vmedia.feature.assetdetails.api
+
+const val BEAN_FRAGMENT_ASSETDETAILS = "AssetDetailsFragment"
 
 interface AssetDetailsNavigator {
 

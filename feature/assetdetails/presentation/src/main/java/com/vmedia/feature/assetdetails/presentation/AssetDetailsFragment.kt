@@ -15,7 +15,7 @@ import com.vmedia.core.common.pure.obj.ReviewsSortType
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.MediaType
-import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
+import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel

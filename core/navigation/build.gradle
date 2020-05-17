@@ -8,4 +8,6 @@ dependencies {
 
     implementation project(":core:common:android")
     implementation project(':core:data')
+
+    implementation project(':feature:assetdetails:api')
 }

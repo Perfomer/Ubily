@@ -2,7 +2,6 @@ package com.vmedia.ubily.presentation
 
 import com.vmedia.core.navigation.NavigationActivity
 import com.vmedia.core.navigation.ScreenDestination
-import com.vmedia.core.navigation.navigator.assetdetails.AssetDetailsNavigator
 import com.vmedia.core.navigation.navigator.assetlist.AssetListNavigator
 import com.vmedia.core.navigation.navigator.auth.AuthNavigator
 import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
@@ -12,6 +11,7 @@ import com.vmedia.core.navigation.navigator.publisherdetails.PublisherDetailsNav
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncNavigator
 import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
+import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.ubily.R
 
 internal class UbilyActivity : NavigationActivity(
