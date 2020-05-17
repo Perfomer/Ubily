@@ -6,7 +6,8 @@ apply from: '../../../android_common_build.gradle'
 dependencies {
     implementation project(":core:common:android")
     implementation project(':core:data')
-    implementation project(':core:navigation')
+
+    implementation project(":feature:gallery:api")
 
     implementation 'com.alexvasilkov:gesture-views:2.2.0'
     implementation 'me.saket:flick:1.7.0'
