@@ -7,6 +7,7 @@ import com.vmedia.feature.assetdetails.api.AssetDetailsScreen
 import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.assetlist.api.AssetListScreen
 import com.vmedia.feature.auth.api.AuthNavigator
+import com.vmedia.feature.auth.api.AuthScreen
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsScreen
 import com.vmedia.feature.feed.api.FeedNavigator
@@ -125,7 +126,7 @@ internal class UbilyActivity : NavigationActivity(
 //                }
             }
         } else {
-            navigateTo(ScreenDestination.Auth)
+            navigateTo(AuthScreen)
         }
     }
 
