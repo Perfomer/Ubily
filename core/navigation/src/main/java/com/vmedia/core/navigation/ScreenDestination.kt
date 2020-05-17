@@ -1,7 +1,6 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.feature.gallery.api.BEAN_FRAGMENT_GALLERY
 import com.vmedia.feature.main.api.BEAN_FRAGMENT_MAIN
 import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import com.vmedia.feature.splash.api.BEAN_FRAGMENT_SPLASH
@@ -38,15 +37,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object PublisherDetails : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))
-    }
-
-    class Gallery(
-        private val images: List<String>,
-        private val targetImagesPosition: Int
-    ) : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_GALLERY)) {
-            parametersOf(images, targetImagesPosition)
-        }
     }
 
 }

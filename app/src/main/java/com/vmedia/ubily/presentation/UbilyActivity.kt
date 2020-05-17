@@ -12,6 +12,7 @@ import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsScreen
 import com.vmedia.feature.feed.api.FeedNavigator
 import com.vmedia.feature.feed.api.FeedScreen
+import com.vmedia.feature.gallery.api.GalleryScreen
 import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.splash.api.SplashNavigator
@@ -75,7 +76,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToGallery(images: List<String>, targetImagesPosition: Int) {
-        addOver(ScreenDestination.Gallery(images, targetImagesPosition))
+        addOver(GalleryScreen(images, targetImagesPosition))
     }
 
     override fun navigateToGallery(imageUrl: String) {
