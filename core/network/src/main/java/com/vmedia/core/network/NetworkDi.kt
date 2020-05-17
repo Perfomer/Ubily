@@ -45,11 +45,7 @@ internal typealias _AssetMapper = ListMapper<PackageModelWithVersions, AssetDto>
 internal typealias _ReviewMapper = ListMapper<RssItemModel, ReviewDto>
 internal typealias _PeriodMapper = ListMapper<PeriodModel, Period>
 
-val networkModules by lazy {
-    listOf(networkModule, utilsModule, retrofitModule)
-}
-
-private val networkModule = module {
+val coreNetworkModule = module {
     single<NetworkDataSource> {
         NetworkDataSourceImpl(
             api = get(),
@@ -70,7 +66,7 @@ private val networkModule = module {
     }
 }
 
-private val utilsModule = module {
+val coreNetworkUtilsModule = module {
     single { SaleMapper }
     single { DownloadMapper }
     single { IncomeMapper }
@@ -85,7 +81,7 @@ private val utilsModule = module {
     single { RevenueFilter }
 }
 
-private val retrofitModule = module {
+val coreNetworkRetrofitModule = module {
     single {
         val get = get<Retrofit> { parametersOf(get<GsonConverterFactory>()) }
         get.create(UnityApi::class.java)

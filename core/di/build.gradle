@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: "../../android_common_build.gradle"
+
+dependencies {
+    implementation project(":core:common:android")
+    implementation project(':core:navigation')
+    implementation project(':core:data')
+    implementation project(':core:network')
+    implementation project(':core:sync')
+
+    implementation project(':feature:main:presentation')
+
+    implementation project(':feature:auth:data')
+    implementation project(':feature:auth:domain')
+    implementation project(':feature:auth:presentation')
+
+    implementation project(':feature:sync:domain')
+    implementation project(':feature:sync:presentation')
+
+    implementation project(':feature:splash:data')
+    implementation project(':feature:splash:domain')
+    implementation project(':feature:splash:presentation')
+
+    implementation project(':feature:feed:presentation')
+
+    implementation project(':feature:eventdetails:domain')
+    implementation project(':feature:eventdetails:presentation')
+
+    implementation project(':feature:assetlist:domain')
+    implementation project(':feature:assetlist:presentation')
+
+    implementation project(':feature:assetdetails:data')
+    implementation project(':feature:assetdetails:domain')
+    implementation project(':feature:assetdetails:presentation')
+
+    implementation project(':feature:publisherdetails:presentation')
+    implementation project(':feature:publisherdetails:domain')
+
+    implementation project(':feature:gallery:presentation')
+}

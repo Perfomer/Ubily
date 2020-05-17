@@ -5,8 +5,6 @@ import com.vmedia.core.navigation.BEAN_FRAGMENT_MAIN
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val featureMainModules by lazy { listOf(presentationModule) }
-
-val presentationModule = module {
+val featureMainPresentationModule = module {
     factory<Fragment>(named(BEAN_FRAGMENT_MAIN)) { MainFragment() }
 }

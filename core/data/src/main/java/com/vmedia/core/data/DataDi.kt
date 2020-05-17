@@ -33,13 +33,6 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val dataModules by lazy {
-    listOf(
-        preferencesModule,
-        databaseModule
-    )
-}
-
 internal typealias _AssetShortInfoMapper = ObservableListMapper<Asset, AssetShortInfo>
 
 internal typealias _EventListMapper = ObservableListMapper<Event, EventInfo<*>>
@@ -57,7 +50,7 @@ private const val BEAN_PREF_CREDENTIALS = "PREF_CREDENTIALS"
 private const val BEAN_PREF_SETTINGS = "PREF_SETTINGS"
 private const val BEAN_PREF_PUBLISHER = "PREF_PUBLISHER"
 
-private val preferencesModule = module {
+val coreDataPreferencesModule = module {
     single<CredentialsDataSource> {
         CredentialsDataSourceImpl(get(named(BEAN_PREF_CREDENTIALS)), get())
     }
@@ -86,7 +79,7 @@ private val preferencesModule = module {
     }
 }
 
-private val databaseModule = module {
+val coreDataDatabaseModule = module {
     single<DatabaseDataSource> {
         DatabaseDataSourceImpl(
             database = get(),

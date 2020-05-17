@@ -55,17 +55,6 @@ import org.koin.dsl.module
 import java.math.BigDecimal
 import java.util.*
 
-val syncModules by lazy {
-    listOf(
-        syncModule,
-        synchronizerModule,
-        eventExtractorModule,
-        mapperModule,
-        filterModule,
-        providerModule
-    )
-}
-
 internal typealias _AssetProviderById = (id: Long) -> Asset?
 internal typealias _AssetProviderByUrl = (url: String) -> Asset
 internal typealias _UserProviderByName = (name: String) -> User
@@ -128,7 +117,7 @@ private const val BEAN_PROVIDER_REVIEW = "SyncReviewProvider"
 private const val BEAN_PROVIDER_REVIEW_ID = "SyncReviewIdProvider"
 private const val BEAN_PROVIDER_PERIODS_FREEDOWNLOADS = "SyncFreeDownloadsPeriodsProvider"
 
-private val syncModule = module {
+val coreSyncModule = module {
     single { CachedDatabaseDataSourceDecorator(get()) }
     single { CachedNetworkDataSourceDecorator(get()) }
 
@@ -179,7 +168,7 @@ private val syncModule = module {
     }
 }
 
-private val eventExtractorModule = module {
+val coreSyncEventExtractorModule = module {
     single { AssetEventExtractor }
     single { SaleEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
     single { DownloadEventExtractor(get(named(BEAN_PROVIDER_SALE_ID))) }
@@ -188,7 +177,7 @@ private val eventExtractorModule = module {
     single { PayoutEventExtractor }
 }
 
-private val synchronizerModule = module {
+val coreSyncSynchronizerModule = module {
     single {
         AssetSynchronizer(
             networkDataSource = get<CachedNetworkDataSourceDecorator>(),
@@ -280,7 +269,7 @@ private val synchronizerModule = module {
     }
 }
 
-private val mapperModule = module {
+val coreSyncMapperModule = module {
     single { AssetMapper }
     single { UserMapper }
     single { PublisherMapper }
@@ -297,7 +286,7 @@ private val mapperModule = module {
     }
 }
 
-private val filterModule = module {
+val coreSyncFilterModule = module {
     single { PeriodFilter(get(named(BEAN_PROVIDER_PERIOD_LAST))) }
     single { AssetFilter(get(named(BEAN_PROVIDER_ASSET_BY_ID))) }
     single { SaleFilter(get(), get(named(BEAN_PROVIDER_SALE_DATE_LAST))) }
@@ -307,7 +296,7 @@ private val filterModule = module {
     single { PayoutDateFilter(get(named(BEAN_PROVIDER_PAYOUT_DATE_LAST))) }
 }
 
-private val providerModule = module {
+val coreSyncProviderModule = module {
     databaseProvider<_AssetProviderById>(named(BEAN_PROVIDER_ASSET_BY_ID)) {
         { id: Long -> getAsset(id).blockingNullable() }
     }

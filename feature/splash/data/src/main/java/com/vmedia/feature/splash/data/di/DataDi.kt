@@ -6,7 +6,7 @@ import com.vmedia.feature.splash.data.SplashRepositoryImpl
 import com.vmedia.feature.splash.domain.SplashRepository
 import org.koin.dsl.module
 
-val dataModule = module {
+val featureSplashDataModule = module {
     single<NetworkCredentialsDataSource> {
         NetworkCredentialsDataSourceImpl(
             networkCredentialsProvider = get(),

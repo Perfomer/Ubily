@@ -1,4 +1,3 @@
-include ':feature:publisherdetails:domain'
 rootProject.name = 'Ubily'
 
 include ':app'
@@ -6,6 +5,7 @@ include ':app'
 include ':core:common:pure'
 include ':core:common:android'
 
+include ':core:di'
 include ':core:navigation'
 include ':core:data'
 include ':core:network'
@@ -45,6 +45,7 @@ include ':feature:assetdetails:presentation'
 
 include ':feature:publisherdetails:api'
 include ':feature:publisherdetails:presentation'
+include ':feature:publisherdetails:domain'
 
 include ':feature:gallery:api'
 include ':feature:gallery:presentation'

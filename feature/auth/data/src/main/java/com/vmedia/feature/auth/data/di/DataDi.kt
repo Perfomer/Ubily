@@ -7,7 +7,7 @@ import com.vmedia.feature.auth.domain.AuthRepository
 import com.vmedia.feature.auth.domain.SignInTask
 import org.koin.dsl.module
 
-val dataModule = module {
+val featureAuthDataModule = module {
     single<AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
     factory<SignInTask> { UnityWebViewSignInTask(get()) }
     single { CookieManager.getInstance() }

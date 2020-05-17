@@ -8,7 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
-val presentationModule = module {
+val featureAssetListPresentationModule = module {
     viewModel { AssetListViewModel(get()) }
     factory<Fragment>(named(BEAN_FRAGMENT_ASSETLIST)) { AssetListFragment() }
 }

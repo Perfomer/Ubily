@@ -15,7 +15,7 @@ import org.koin.dsl.module
 
 internal typealias _StatusMapper = Mapper<SynchronizationStatus, SyncStatus>
 
-val presentationModule = module {
+val featureSyncPresentationModule = module {
     single { StatusMapper }
 
     factory<Fragment>(named(BEAN_FRAGMENT_SYNC)) { (mode: SyncScreenMode) ->
