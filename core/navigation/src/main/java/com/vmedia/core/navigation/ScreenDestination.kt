@@ -1,7 +1,6 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import com.vmedia.feature.splash.api.BEAN_FRAGMENT_SPLASH
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -27,11 +26,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object Onboarding : ScreenDestination() {
         override fun getFragment() = TODO()
-    }
-
-
-    object PublisherDetails : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))
     }
 
 }

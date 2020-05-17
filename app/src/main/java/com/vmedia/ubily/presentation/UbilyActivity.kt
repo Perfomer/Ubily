@@ -16,6 +16,7 @@ import com.vmedia.feature.gallery.api.GalleryScreen
 import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.main.api.MainScreen
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
+import com.vmedia.feature.publisherdetails.api.PublisherDetailsScreen
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.sync.api.SyncNavigator
 import com.vmedia.feature.sync.api.SyncScreen
@@ -65,7 +66,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToPublisher() {
-        navigateTo(ScreenDestination.PublisherDetails)
+        navigateTo(PublisherDetailsScreen)
     }
 
     override fun navigateToUser(id: Long) {
