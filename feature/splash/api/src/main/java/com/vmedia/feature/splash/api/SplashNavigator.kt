@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.splash
+package com.vmedia.feature.splash.api
+
+const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 
 interface SplashNavigator {
 

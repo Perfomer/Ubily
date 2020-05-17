@@ -17,4 +17,5 @@ dependencies {
     implementation project(":feature:feed:api")
     implementation project(":feature:gallery:api")
     implementation project(':feature:publisherdetails:api')
+    implementation project(':feature:splash:api')
 }

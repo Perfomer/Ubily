@@ -5,8 +5,9 @@ apply from: '../../../android_common_build.gradle'
 
 dependencies {
     implementation project(":core:common:android")
-    implementation project(':core:navigation')
     implementation project(':core:data')
     implementation project(':core:network')
+
+    implementation project(':feature:splash:api')
     implementation project(':feature:splash:domain')
 }

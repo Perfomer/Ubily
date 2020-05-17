@@ -10,7 +10,6 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 
 const val BEAN_FRAGMENT_MAIN = "MainFragment"
-const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 const val BEAN_FRAGMENT_MENU = "MenuFragment"
 const val BEAN_FRAGMENT_STATISTICS = "StatisticsFragment"
 
