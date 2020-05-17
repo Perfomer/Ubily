@@ -3,6 +3,7 @@ package com.vmedia.ubily.presentation
 import com.vmedia.core.navigation.NavigationActivity
 import com.vmedia.core.navigation.ScreenDestination
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
+import com.vmedia.feature.assetdetails.api.AssetDetailsScreen
 import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.auth.api.AuthNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
@@ -38,7 +39,7 @@ internal class UbilyActivity : NavigationActivity(
     }
 
     override fun navigateToAsset(assetId: Long) {
-        navigateTo(ScreenDestination.AssetDetails(assetId))
+        navigateTo(AssetDetailsScreen(assetId))
     }
 
     override fun navigateToFeed() {

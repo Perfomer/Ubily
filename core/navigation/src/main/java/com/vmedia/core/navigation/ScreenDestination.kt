@@ -1,7 +1,6 @@
 package com.vmedia.core.navigation
 
 import androidx.fragment.app.Fragment
-import com.vmedia.feature.assetdetails.api.BEAN_FRAGMENT_ASSETDETAILS
 import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
@@ -58,12 +57,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
 
     object PublisherDetails : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))
-    }
-
-    class AssetDetails(private val assetId: Long) : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_ASSETDETAILS)) {
-            parametersOf(assetId)
-        }
     }
 
     object AssetList : ScreenDestination() {
