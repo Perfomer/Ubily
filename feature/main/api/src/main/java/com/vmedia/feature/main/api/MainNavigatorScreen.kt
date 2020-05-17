@@ -1,8 +1,7 @@
-package com.vmedia.core.navigation.navigator.main
+package com.vmedia.feature.main.api
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.vmedia.core.navigation.R
 
 enum class MainNavigatorScreen(
     @DrawableRes val iconRes: Int,

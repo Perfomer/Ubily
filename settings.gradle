@@ -11,6 +11,7 @@ include ':core:data'
 include ':core:network'
 include ':core:sync'
 
+include ':feature:main:api'
 include ':feature:main:presentation'
 
 include ':feature:auth:api'

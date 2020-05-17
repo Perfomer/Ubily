@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.main
+package com.vmedia.feature.main.api
+
+const val BEAN_FRAGMENT_MAIN = "MainFragment"
 
 interface MainNavigator {
 
