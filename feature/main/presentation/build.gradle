@@ -9,4 +9,5 @@ dependencies {
 
     implementation project(":feature:assetlist:api")
     implementation project(":feature:feed:api")
+    implementation project(':feature:publisherdetails:api')
 }

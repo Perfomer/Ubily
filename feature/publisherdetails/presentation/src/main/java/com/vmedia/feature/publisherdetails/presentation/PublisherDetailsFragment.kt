@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.*
 import com.vmedia.core.common.pure.util.cropToString
-import com.vmedia.core.navigation.navigator.publisherdetails.PublisherDetailsNavigator
+import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.publisherdetails.presentation.mvi.PublisherDetailsIntent
 import com.vmedia.feature.publisherdetails.presentation.mvi.PublisherDetailsIntent.LoadData
 import com.vmedia.feature.publisherdetails.presentation.mvi.PublisherDetailsState

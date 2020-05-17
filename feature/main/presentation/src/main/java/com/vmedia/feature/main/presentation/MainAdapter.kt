@@ -4,11 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.vmedia.core.navigation.BEAN_FRAGMENT_MENU
-import com.vmedia.core.navigation.BEAN_FRAGMENT_PUBLISHERDETAILS
 import com.vmedia.core.navigation.BEAN_FRAGMENT_STATISTICS
 import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen
 import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
+import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import org.koin.core.KoinComponent
 import org.koin.core.error.NoBeanDefFoundException
 import org.koin.core.qualifier.named

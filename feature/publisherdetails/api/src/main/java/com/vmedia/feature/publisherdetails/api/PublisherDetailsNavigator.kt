@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.publisherdetails
+package com.vmedia.feature.publisherdetails.api
+
+const val BEAN_FRAGMENT_PUBLISHERDETAILS = "PublisherDetailsFragment"
 
 interface PublisherDetailsNavigator {
 
