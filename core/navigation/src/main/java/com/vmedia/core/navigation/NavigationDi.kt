@@ -14,7 +14,6 @@ const val BEAN_FRAGMENT_FEED = "FeedFragment"
 const val BEAN_FRAGMENT_PUBLISHERDETAILS = "PublisherDetailsFragment"
 const val BEAN_FRAGMENT_SPLASH = "SplashFragment"
 const val BEAN_FRAGMENT_GALLERY = "GalleryFragment"
-const val BEAN_FRAGMENT_SYNC = "SyncFragment"
 const val BEAN_FRAGMENT_MENU = "MenuFragment"
 const val BEAN_FRAGMENT_STATISTICS = "StatisticsFragment"
 

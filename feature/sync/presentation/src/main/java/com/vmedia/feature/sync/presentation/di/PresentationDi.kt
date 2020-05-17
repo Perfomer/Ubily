@@ -2,9 +2,9 @@ package com.vmedia.feature.sync.presentation.di
 
 import androidx.fragment.app.Fragment
 import com.vmedia.core.common.pure.util.Mapper
-import com.vmedia.core.navigation.BEAN_FRAGMENT_SYNC
-import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.core.sync.SynchronizationStatus
+import com.vmedia.feature.sync.api.BEAN_FRAGMENT_SYNC
+import com.vmedia.feature.sync.api.SyncScreenMode
 import com.vmedia.feature.sync.presentation.SyncFragment
 import com.vmedia.feature.sync.presentation.SyncViewModel
 import com.vmedia.feature.sync.presentation.mapper.StatusMapper

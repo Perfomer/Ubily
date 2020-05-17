@@ -13,4 +13,5 @@ dependencies {
     implementation project(":feature:assetlist:api")
     implementation project(":feature:auth:api")
     implementation project(":feature:eventdetails:api")
+    implementation project(":feature:sync:api")
 }

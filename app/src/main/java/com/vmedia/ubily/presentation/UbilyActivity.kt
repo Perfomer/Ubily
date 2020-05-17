@@ -6,12 +6,12 @@ import com.vmedia.core.navigation.navigator.feed.FeedNavigator
 import com.vmedia.core.navigation.navigator.main.MainNavigator
 import com.vmedia.core.navigation.navigator.publisherdetails.PublisherDetailsNavigator
 import com.vmedia.core.navigation.navigator.splash.SplashNavigator
-import com.vmedia.core.navigation.navigator.sync.SyncNavigator
-import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.auth.api.AuthNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
+import com.vmedia.feature.sync.api.SyncNavigator
+import com.vmedia.feature.sync.api.SyncScreenMode
 import com.vmedia.ubily.R
 
 internal class UbilyActivity : NavigationActivity(

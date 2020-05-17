@@ -7,10 +7,10 @@ import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.util.toSpan
-import com.vmedia.core.navigation.navigator.sync.SyncNavigator
-import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
-import com.vmedia.core.navigation.navigator.sync.SyncScreenMode.INITIAL
-import com.vmedia.core.navigation.navigator.sync.SyncScreenMode.REGULAR
+import com.vmedia.feature.sync.api.SyncNavigator
+import com.vmedia.feature.sync.api.SyncScreenMode
+import com.vmedia.feature.sync.api.SyncScreenMode.INITIAL
+import com.vmedia.feature.sync.api.SyncScreenMode.REGULAR
 import com.vmedia.feature.sync.presentation.mvi.SyncIntent
 import com.vmedia.feature.sync.presentation.mvi.SyncIntent.ObserveSyncStatus
 import com.vmedia.feature.sync.presentation.mvi.SyncIntent.StartSync
