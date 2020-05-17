@@ -2,12 +2,12 @@ package com.vmedia.ubily.presentation
 
 import com.vmedia.core.navigation.NavigationActivity
 import com.vmedia.core.navigation.ScreenDestination
-import com.vmedia.core.navigation.navigator.main.MainNavigator
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.auth.api.AuthNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.feed.api.FeedNavigator
+import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.sync.api.SyncNavigator

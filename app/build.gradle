@@ -20,8 +20,7 @@ dependencies {
     implementation project(':core:sync')
     implementation project(':core:di')
 
-    implementation project(':feature:main:presentation') //todo change to api
-
+    implementation project(':feature:main:api')
     implementation project(':feature:splash:api')
     implementation project(":feature:auth:api")
     implementation project(':feature:sync:api')

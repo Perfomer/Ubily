@@ -3,9 +3,9 @@ package com.vmedia.feature.main.presentation
 import android.os.Bundle
 import android.view.View
 import com.vmedia.core.common.android.view.BaseFragment
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen
-import com.vmedia.core.navigation.utils.initMainMenu
-import com.vmedia.core.navigation.utils.mainNavigator
+import com.vmedia.feature.main.api.MainNavigatorScreen
+import com.vmedia.feature.main.presentation.utils.initMainMenu
+import com.vmedia.feature.main.presentation.utils.mainNavigator
 import kotlinx.android.synthetic.main.main_fragment.*
 
 internal class MainFragment : BaseFragment(R.layout.main_fragment) {

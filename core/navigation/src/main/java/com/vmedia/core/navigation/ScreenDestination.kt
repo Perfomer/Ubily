@@ -7,6 +7,7 @@ import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
 import com.vmedia.feature.eventdetails.api.BEAN_FRAGMENT_EVENTDETAILS
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.gallery.api.BEAN_FRAGMENT_GALLERY
+import com.vmedia.feature.main.api.BEAN_FRAGMENT_MAIN
 import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import com.vmedia.feature.splash.api.BEAN_FRAGMENT_SPLASH
 import com.vmedia.feature.sync.api.BEAN_FRAGMENT_SYNC

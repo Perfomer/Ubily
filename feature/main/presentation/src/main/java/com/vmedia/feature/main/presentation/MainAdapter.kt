@@ -3,11 +3,9 @@ package com.vmedia.feature.main.presentation
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.vmedia.core.navigation.BEAN_FRAGMENT_MENU
-import com.vmedia.core.navigation.BEAN_FRAGMENT_STATISTICS
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen
 import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
+import com.vmedia.feature.main.api.MainNavigatorScreen
 import com.vmedia.feature.publisherdetails.api.BEAN_FRAGMENT_PUBLISHERDETAILS
 import org.koin.core.KoinComponent
 import org.koin.core.error.NoBeanDefFoundException
@@ -31,10 +29,10 @@ internal class MainAdapter(
         private val MainNavigatorScreen.beanQualifier: String
             get() = when (this) {
                 MainNavigatorScreen.FEED -> BEAN_FRAGMENT_FEED
-                MainNavigatorScreen.STATISTICS -> BEAN_FRAGMENT_STATISTICS
+                MainNavigatorScreen.STATISTICS -> "TODO"
                 MainNavigatorScreen.PUBLISHER -> BEAN_FRAGMENT_PUBLISHERDETAILS
                 MainNavigatorScreen.ASSETLIST -> BEAN_FRAGMENT_ASSETLIST
-                MainNavigatorScreen.MENU -> BEAN_FRAGMENT_MENU
+                MainNavigatorScreen.MENU -> "TODO"
             }
 
         // todo remove try catch when all fragment will be done

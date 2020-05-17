@@ -9,10 +9,6 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 
-const val BEAN_FRAGMENT_MAIN = "MainFragment"
-const val BEAN_FRAGMENT_MENU = "MenuFragment"
-const val BEAN_FRAGMENT_STATISTICS = "StatisticsFragment"
-
 val navigationModule = module {
     factory<Navigator> { (activity: FragmentActivity, containerId: Int) ->
         UbilyNavigator(activity, containerId)

@@ -1,4 +1,4 @@
-package com.vmedia.core.navigation.utils
+package com.vmedia.feature.main.presentation.utils
 
 import androidx.fragment.app.Fragment
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
@@ -6,13 +6,13 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.vmedia.core.common.android.R
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.getColorCompat
-import com.vmedia.core.navigation.navigator.main.MainNavigator
-import com.vmedia.core.navigation.navigator.main.MainNavigatorScreen
+import com.vmedia.feature.main.api.MainNavigator
+import com.vmedia.feature.main.api.MainNavigatorScreen
 
-val Fragment.mainNavigator
+internal val Fragment.mainNavigator
     get() = activity as MainNavigator
 
-fun AHBottomNavigation.initMainMenu(
+internal fun AHBottomNavigation.initMainMenu(
     navigator: MainNavigator,
     currentScreen: MainNavigatorScreen
 ) {
