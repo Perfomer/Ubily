@@ -13,6 +13,11 @@
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
+                android:rotation="-180"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/splash_logo_text" />
+
+            <KeyAttribute
                 android:scaleX="100"
                 motion:framePosition="0"
                 motion:motionTarget="@+id/splash_logo_text" />
@@ -28,43 +33,23 @@
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
-                android:scaleX="1"
-                motion:framePosition="40"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
-                android:scaleY="1"
-                motion:framePosition="40"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleX="0.75"
-                motion:framePosition="50"
+                motion:framePosition="40"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
                 android:scaleY="0.75"
-                motion:framePosition="50"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
-                android:scaleX="1"
-                motion:framePosition="60"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
-                android:scaleY="1"
-                motion:framePosition="60"
+                motion:framePosition="40"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
                 android:scaleX="1.075"
-                motion:framePosition="72"
+                motion:framePosition="60"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
                 android:scaleY="1.075"
-                motion:framePosition="72"
+                motion:framePosition="60"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
@@ -75,6 +60,11 @@
             <KeyAttribute
                 android:scaleY="1"
                 motion:framePosition="80"
+                motion:motionTarget="@+id/splash_logo_text" />
+
+            <KeyAttribute
+                android:rotation="0"
+                motion:framePosition="40"
                 motion:motionTarget="@+id/splash_logo_text" />
 
         </KeyFrameSet>
