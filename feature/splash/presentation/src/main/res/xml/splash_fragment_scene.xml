@@ -5,24 +5,19 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1500">
+        motion:duration="1750">
         <KeyFrameSet>
+
             <KeyAttribute
                 android:alpha="0"
+                android:translationY="-16dp"
                 motion:framePosition="0"
-                motion:motionTarget="@+id/splash_logo_text" />
+                motion:motionTarget="@+id/splash_logo_subtitle" />
 
             <KeyAttribute
+                android:alpha="0"
                 android:rotation="-180"
-                motion:framePosition="0"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleX="100"
-                motion:framePosition="0"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleY="100"
                 motion:framePosition="0"
                 motion:motionTarget="@+id/splash_logo_text" />
@@ -33,39 +28,40 @@
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
+                android:rotation="0"
                 android:scaleX="0.75"
-                motion:framePosition="40"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleY="0.75"
                 motion:framePosition="40"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
                 android:scaleX="1.075"
-                motion:framePosition="60"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleY="1.075"
                 motion:framePosition="60"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
                 android:scaleX="1"
-                motion:framePosition="80"
-                motion:motionTarget="@+id/splash_logo_text" />
-
-            <KeyAttribute
                 android:scaleY="1"
                 motion:framePosition="80"
                 motion:motionTarget="@+id/splash_logo_text" />
 
             <KeyAttribute
-                android:rotation="0"
-                motion:framePosition="40"
-                motion:motionTarget="@+id/splash_logo_text" />
+                android:alpha="0"
+                android:translationY="-16dp"
+                motion:framePosition="45"
+                motion:motionTarget="@+id/splash_logo_subtitle" />
+
+            <KeyAttribute
+                android:alpha="1"
+                android:translationY="4dp"
+                motion:framePosition="55"
+                motion:motionTarget="@+id/splash_logo_subtitle" />
+
+            <KeyAttribute
+                android:translationY="0dp"
+                motion:framePosition="65"
+                motion:motionTarget="@+id/splash_logo_subtitle" />
 
         </KeyFrameSet>
     </Transition>
