@@ -1,4 +1,6 @@
-package com.vmedia.core.navigation.navigator.eventdetails
+package com.vmedia.feature.eventdetails.api
+
+const val BEAN_FRAGMENT_EVENTDETAILS = "EventDetailsFragment"
 
 interface EventDetailsNavigator {
 

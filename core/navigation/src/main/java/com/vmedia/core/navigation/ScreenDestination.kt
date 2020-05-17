@@ -5,6 +5,7 @@ import com.vmedia.core.navigation.navigator.sync.SyncScreenMode
 import com.vmedia.feature.assetdetails.api.BEAN_FRAGMENT_ASSETDETAILS
 import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
+import com.vmedia.feature.eventdetails.api.BEAN_FRAGMENT_EVENTDETAILS
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.parameter.parametersOf

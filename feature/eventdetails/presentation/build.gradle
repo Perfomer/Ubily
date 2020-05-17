@@ -5,8 +5,8 @@ apply from: '../../../android_common_build.gradle'
 
 dependencies {
     implementation project(":core:common:android")
-    implementation project(':core:navigation')
     implementation project(':core:data')
 
+    implementation project(":feature:eventdetails:api")
     implementation project(":feature:eventdetails:domain")
 }

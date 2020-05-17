@@ -7,7 +7,7 @@ import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.*
 import com.vmedia.core.common.pure.util.FORMAT_DDMMYYYY
 import com.vmedia.core.common.pure.util.format
-import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
+import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsIntent.LoadEventDetails
 import com.vmedia.feature.eventdetails.presentation.mvi.EventDetailsState

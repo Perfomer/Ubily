@@ -1,9 +1,11 @@
 package com.vmedia.core.navigation.navigator.feed
 
-import com.vmedia.core.navigation.navigator.eventdetails.EventDetailsNavigator
-
-interface FeedNavigator : EventDetailsNavigator {
+interface FeedNavigator {
 
     fun navigateToEventDetails(eventId: Long)
+
+    fun navigateToAsset(assetId: Long)
+
+    fun navigateToStatistics(periodId: Long)
 
 }
