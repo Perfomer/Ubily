@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import com.vmedia.feature.assetdetails.api.BEAN_FRAGMENT_ASSETDETAILS
 import com.vmedia.feature.assetlist.api.BEAN_FRAGMENT_ASSETLIST
 import com.vmedia.feature.auth.api.BEAN_FRAGMENT_AUTH
-import com.vmedia.feature.eventdetails.api.BEAN_FRAGMENT_EVENTDETAILS
 import com.vmedia.feature.feed.api.BEAN_FRAGMENT_FEED
 import com.vmedia.feature.gallery.api.BEAN_FRAGMENT_GALLERY
 import com.vmedia.feature.main.api.BEAN_FRAGMENT_MAIN
@@ -19,6 +18,16 @@ import org.koin.core.qualifier.named
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
+
+    abstract class ScreenDestinationNew(
+        private val name: String,
+        vararg args: Any
+    ) : ScreenDestination() {
+
+        private val definitionParameters by lazy { parametersOf(*args) }
+
+        override fun getFragment() = get<Fragment>(named(name)) { definitionParameters }
+    }
 
     object Splash : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_SPLASH))
@@ -46,11 +55,6 @@ sealed class ScreenDestination : SupportAppScreen(), KoinComponent {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_FEED))
     }
 
-    class EventDetails(private val eventId: Long) : ScreenDestination() {
-        override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_EVENTDETAILS)) {
-            parametersOf(eventId)
-        }
-    }
 
     object PublisherDetails : ScreenDestination() {
         override fun getFragment() = get<Fragment>(named(BEAN_FRAGMENT_PUBLISHERDETAILS))

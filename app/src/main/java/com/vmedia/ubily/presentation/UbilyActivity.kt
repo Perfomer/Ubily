@@ -6,6 +6,7 @@ import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetlist.api.AssetListNavigator
 import com.vmedia.feature.auth.api.AuthNavigator
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
+import com.vmedia.feature.eventdetails.api.EventDetailsScreen
 import com.vmedia.feature.feed.api.FeedNavigator
 import com.vmedia.feature.main.api.MainNavigator
 import com.vmedia.feature.publisherdetails.api.PublisherDetailsNavigator
@@ -33,7 +34,7 @@ internal class UbilyActivity : NavigationActivity(
     private var onboardingAlreadyShown: Boolean = false
 
     override fun navigateToEventDetails(eventId: Long) {
-        navigateTo(ScreenDestination.EventDetails(eventId))
+        navigateTo(EventDetailsScreen(eventId))
     }
 
     override fun navigateToAsset(assetId: Long) {
