@@ -1,4 +1,4 @@
-package com.vmedia.ubily
+package com.vmedia.ubily.data
 
 import com.vmedia.core.sync.SynchronizationDataType
 import com.vmedia.core.sync.SynchronizationDataType.*

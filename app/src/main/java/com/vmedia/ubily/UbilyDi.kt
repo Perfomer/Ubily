@@ -6,6 +6,8 @@ import com.vmedia.core.navigation.navigationModule
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import com.vmedia.core.network.datasource.NetworkCredentialsProvider
 import com.vmedia.core.sync.datasource.SynchronizationDataTypeProvider
+import com.vmedia.ubily.data.NetworkCredentialsHolder
+import com.vmedia.ubily.data.SynchronizationDataTypeProviderImpl
 import org.koin.dsl.module
 
 internal val koinModules by lazy {
