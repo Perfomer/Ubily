@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.ColorRes
+import androidx.annotation.FontRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
@@ -173,6 +174,10 @@ fun RecyclerView.addItemTouchHelper(callback: ItemTouchHelper.Callback) {
 
 fun <T> Observable<T>.distinctByValue(valueReceiver: () -> T): Observable<T> {
     return filter { it != valueReceiver.invoke() }
+}
+
+fun TextView.setFontCompat(@FontRes fontResource: Int) {
+    typeface = context.getFontCompat(fontResource)
 }
 
 @SuppressLint("ClickableViewAccessibility")

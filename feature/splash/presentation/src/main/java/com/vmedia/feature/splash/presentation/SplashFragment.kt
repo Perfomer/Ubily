@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.createSnackbar
-import com.vmedia.core.common.android.util.getFontCompat
 import com.vmedia.core.common.android.util.isVisible
+import com.vmedia.core.common.android.util.setFontCompat
 import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.splash.presentation.mvi.SplashIntent
@@ -83,9 +83,9 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
      * TODO: remove when ConstraintLayout 2.0.0 will be released (Hope the bug will be fixed already)
      */
     private fun preloadFonts() {
-        splash_logo_text.typeface = context!!.getFontCompat(R.font.rubik_bold)
-        splash_logo_subtitle.typeface = context!!.getFontCompat(R.font.rubik)
-        splash_copyright.typeface = context!!.getFontCompat(R.font.rubik)
+        splash_logo_text.setFontCompat(R.font.rubik_bold)
+        splash_logo_subtitle.setFontCompat(R.font.rubik)
+        splash_copyright.setFontCompat(R.font.rubik)
     }
 
 }
