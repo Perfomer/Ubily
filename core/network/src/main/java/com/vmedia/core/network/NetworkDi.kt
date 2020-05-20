@@ -22,6 +22,7 @@ import com.vmedia.core.network.entity.internal.ReviewDto
 import com.vmedia.core.network.filter.RevenueFilter
 import com.vmedia.core.network.filter.ReviewFilter
 import com.vmedia.core.network.mapper.*
+import com.vmedia.core.network.util.Cookie
 import com.vmedia.core.network.util.addCookieInterceptor
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
@@ -114,8 +115,8 @@ val coreNetworkRetrofitModule = module {
         val builder = OkHttpClient.Builder()
             .addCookieInterceptor {
                 arrayOf(
-                    BuildConfig.NETWORK_COOKIE_TOKEN to tokenProvider.token.tokenValue,
-                    BuildConfig.NETWORK_COOKIE_SESSION to tokenProvider.token.session
+                    Cookie(BuildConfig.NETWORK_COOKIE_TOKEN, tokenProvider.token.tokenValue),
+                    Cookie(BuildConfig.NETWORK_COOKIE_SESSION, tokenProvider.token.session)
                 )
             }
             .dispatcher(get())

@@ -2,7 +2,7 @@ package com.vmedia.core.network.util
 
 import okhttp3.OkHttpClient
 
-internal fun OkHttpClient.Builder.addCookieInterceptor(cookiesProvider: () -> Array<Pair<String, String>>): OkHttpClient.Builder {
+internal fun OkHttpClient.Builder.addCookieInterceptor(cookiesProvider: () -> Array<Cookie>): OkHttpClient.Builder {
     return addInterceptor { chain ->
         val header = cookiesProvider.invoke().formatCookies()
         val request = chain.request()
@@ -14,13 +14,13 @@ internal fun OkHttpClient.Builder.addCookieInterceptor(cookiesProvider: () -> Ar
     }
 }
 
-private fun Array<Pair<String, String>>.formatCookies(): String {
+private fun Array<Cookie>.formatCookies(): String {
     val result = StringBuilder()
 
     for (cookie in this) {
-        result.append(cookie.first)
+        result.append(cookie.title)
             .append('=')
-            .append(cookie.second)
+            .append(cookie.value)
             .append(';')
     }
 
