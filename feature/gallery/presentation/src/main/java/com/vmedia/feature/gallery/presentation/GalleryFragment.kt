@@ -62,7 +62,7 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
     override fun onDestroyView() {
         super.onDestroyView()
         systemUiHelper.show()
-        prevSystemUiColorMode = prevSystemUiColorMode
+        systemUiColorMode = prevSystemUiColorMode
         gallery_images_list.adapter = null
     }
 
