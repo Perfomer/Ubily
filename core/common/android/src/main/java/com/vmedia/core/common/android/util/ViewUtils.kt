@@ -13,7 +13,7 @@ import androidx.annotation.FontRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.iterator
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,9 +66,7 @@ var RecyclerView.diffedAdapter: RecyclerView.Adapter<*>?
 
 /** Returns a [Sequence] over the child views in this view group. */
 val View.children: Sequence<View>
-    get() = object : Sequence<View> {
-        override fun iterator() = (this@children as ViewGroup).iterator()
-    }
+    get() = (this as? ViewGroup)?.children ?: emptySequence()
 
 fun Fragment.inflate(
     @LayoutRes resource: Int,
