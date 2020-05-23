@@ -18,7 +18,6 @@
     <color name="brand_black">#24303D</color>
 
     <color name="brand_red">#E11B1B</color>
-    <color name="brand_transparent">#00000000</color>
 
     <color name="additional_red">#EC2A2A</color>
     <color name="additional_pink">#DC1DA3</color>
@@ -35,6 +34,8 @@
     <color name="black_20">#32000000</color>
     <color name="grey_light_65">#8CE9E9E9</color>
     <color name="white_65">#8Cffffff</color>
+
+    <color name="transparent">#01ffffff</color>
 
     <color name="colorPrimary">@color/brand_green</color>
     <color name="colorPrimaryDark">@color/brand_green_dark</color>

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.core.common.pure.util.FORMAT_DDMMYYYY
 import com.vmedia.core.common.pure.util.format
 import com.vmedia.feature.eventdetails.api.EventDetailsNavigator
@@ -50,7 +51,7 @@ internal class EventDetailsFragment : MviFragment<EventDetailsIntent, EventDetai
 
     override fun onResume() {
         super.onResume()
-        setNavigationBarDark(false)
+        systemUiColorMode = SystemUiColorMode.Transparent(false)
     }
 
     override fun onDestroyView() {

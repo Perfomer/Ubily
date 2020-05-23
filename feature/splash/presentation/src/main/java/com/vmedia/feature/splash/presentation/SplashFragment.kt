@@ -9,6 +9,7 @@ import com.vmedia.core.common.android.util.createSnackbar
 import com.vmedia.core.common.android.util.isVisible
 import com.vmedia.core.common.android.util.setFontCompat
 import com.vmedia.core.common.android.util.toSpan
+import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.feature.splash.api.SplashNavigator
 import com.vmedia.feature.splash.presentation.mvi.SplashIntent
 import com.vmedia.feature.splash.presentation.mvi.SplashState
@@ -35,6 +36,11 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
 
         splash_copyright.text = getString(R.string.app_copyright).toSpan()
         splash_root.transitionToEnd()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        systemUiColorMode = SystemUiColorMode.Transparent(true)
     }
 
     override fun onStart() {

@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseFragment(
@@ -17,6 +18,13 @@ abstract class BaseFragment(
         get() = activity as BaseActivity
 
     protected val disposable by lazy { CompositeDisposable() }
+
+    protected var systemUiColorMode: SystemUiColorMode
+        get() = baseActivity.systemUiColorMode
+        set(value) {
+            baseActivity.systemUiColorMode = value
+        }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +65,6 @@ abstract class BaseFragment(
 
     protected fun goBack() {
         activity?.onBackPressed()
-    }
-
-    protected fun setNavigationBarDark(dark: Boolean) {
-        baseActivity.setNavigationBarDark(dark)
     }
 
     protected fun Toolbar.attachToActivity(enableArrowUp: Boolean = true) {

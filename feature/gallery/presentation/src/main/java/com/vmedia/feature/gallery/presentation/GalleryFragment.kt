@@ -10,6 +10,7 @@ import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.util.setOnPageSelectedListener
 import com.vmedia.core.common.android.view.BaseFragment
+import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
 import com.vmedia.feature.gallery.presentation.recycler.GalleryPreviewAdapter
 import com.vmedia.feature.gallery.presentation.util.createFlickGestureListener
@@ -27,6 +28,8 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
     private lateinit var backgroundDrawable: Drawable
     private lateinit var systemUiHelper: SystemUiHelper
+
+    private lateinit var prevSystemUiColorMode: SystemUiColorMode
 
     private var uiShown = true
 
@@ -52,13 +55,14 @@ internal class GalleryFragment : BaseFragment(R.layout.gallery_fragment) {
 
     override fun onResume() {
         super.onResume()
-        setNavigationBarDark(true)
+        prevSystemUiColorMode = systemUiColorMode
+        systemUiColorMode = SystemUiColorMode.Dark
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         systemUiHelper.show()
-        setNavigationBarDark(false)
+        prevSystemUiColorMode = prevSystemUiColorMode
         gallery_images_list.adapter = null
     }
 

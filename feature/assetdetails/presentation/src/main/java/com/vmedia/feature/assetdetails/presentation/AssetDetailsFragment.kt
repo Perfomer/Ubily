@@ -11,6 +11,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.core.common.pure.obj.ReviewsSortType
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.core.data.internal.database.entity.Artwork
@@ -126,7 +127,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     override fun onResume() {
         super.onResume()
-        setNavigationBarDark(false)
+        systemUiColorMode = SystemUiColorMode.Light
     }
 
     override fun onStop() {
