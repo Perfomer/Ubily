@@ -3,6 +3,7 @@ package com.vmedia.feature.feed.presentation.recycler.holder
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import com.vmedia.core.common.android.util.children
@@ -21,7 +22,7 @@ internal abstract class AssetListViewHolder<Content, Event : EventListInfo<Conte
     private val onAssetClick: (position: Int, assetIndex: Int) -> Unit
 ) : FeedViewHolder<Event>(containerView, onClick, onOptionsClick) {
 
-    private val assetViewHolders = feed_item_content.getChildAt(0).children
+    private val assetViewHolders = feed_item_content[0].children
         .map(::onItemViewHolderCreate)
         .onEachIndexed { index, item ->
             item.containerView.setOnClickListener { safeOnClick(index) }
