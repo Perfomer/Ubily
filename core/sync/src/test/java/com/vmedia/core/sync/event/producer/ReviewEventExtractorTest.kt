@@ -1,7 +1,6 @@
 package com.vmedia.core.sync.event.producer
 
 import com.vmedia.core.common.pure.obj.EventType
-import com.vmedia.core.common.pure.util.each
 import com.vmedia.core.data.internal.database.entity.Review
 import com.vmedia.core.sync.event.EventModel
 import org.junit.Test
@@ -38,7 +37,7 @@ class ReviewEventExtractorTest {
             .assertComplete()
             .assertNoErrors()
             .assertValue { it.size == MOCKY_REVIEWS.size }
-            .assertValue { it.each { it.type == EventType.REVIEW } }
+            .assertValue { it.all { it.type == EventType.REVIEW } }
             .assertValue { it.map(EventModel::entities).flatten() == MOCKY_IDS }
     }
 

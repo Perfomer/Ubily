@@ -22,10 +22,6 @@ fun <T, R> List<T>.zipWithNullable(otherSource: List<R>?): List<Pair<T, R?>> {
     return result
 }
 
-fun <T> List<T>.each(predicate: (T) -> Boolean): Boolean {
-    return count(predicate) == size
-}
-
 fun <T, R : Comparable<R>> Collection<T>.maxValue(extractor: (T) -> R): R {
     val maxItem = maxBy { extractor.invoke(it) }!!
     return extractor.invoke(maxItem)

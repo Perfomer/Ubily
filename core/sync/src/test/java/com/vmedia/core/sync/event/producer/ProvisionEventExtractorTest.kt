@@ -1,7 +1,6 @@
 package com.vmedia.core.sync.event.producer
 
 import com.vmedia.core.common.pure.obj.*
-import com.vmedia.core.common.pure.util.each
 import com.vmedia.core.data.internal.database.entity.Sale
 import com.vmedia.core.sync.event.EventModel
 import org.junit.Test
@@ -40,7 +39,7 @@ internal class ProvisionEventExtractorTest {
             .assertComplete()
             .assertNoErrors()
             .assertValue { it.size == MOCKY_PERIODS.size }
-            .assertValue { it.each { it.type == EventType.SALE } }
+            .assertValue { it.all { it.type == EventType.SALE } }
             .assertValue { it.map(EventModel::entities).flatten() == MOCKY_IDS }
     }
 

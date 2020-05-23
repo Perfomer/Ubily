@@ -5,7 +5,6 @@ import com.vmedia.core.common.pure.obj.Month.*
 import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.common.pure.obj.of
 import com.vmedia.core.common.pure.obj.startDate
-import com.vmedia.core.common.pure.util.each
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.sync.event.EventModel
 import org.junit.Test
@@ -42,7 +41,7 @@ internal class PayoutEventExtractorTest {
             .assertComplete()
             .assertNoErrors()
             .assertValue { it.size == MOCKY_PAYOUTS.size }
-            .assertValue { it.each { it.type == EventType.PAYOUT } }
+            .assertValue { it.all { it.type == EventType.PAYOUT } }
             .assertValue { it.map(EventModel::entities).flatten() == MOCKY_IDS }
     }
 
