@@ -53,11 +53,15 @@ abstract class NavigationActivity(
     }
 
     protected fun navigateTo(screen: ScreenDestination) {
-        router.navigateTo(screen)
+        router.forward(screen)
     }
 
     protected fun addOver(screen: ScreenDestination) {
         router.addOver(screen)
+    }
+
+    protected fun remove(screen: ScreenDestination) {
+        router.remove(screen)
     }
 
 
