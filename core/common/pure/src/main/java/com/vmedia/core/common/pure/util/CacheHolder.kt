@@ -88,6 +88,7 @@ private class SingleCachedProperty<T>(
         return cache.getValue()
     }
 
+    @Synchronized
     override fun drop() {
         cache.drop()
     }
@@ -110,6 +111,7 @@ private class CachedSingleValue<T>(
         }
     }
 
+    @Synchronized
     override fun drop() {
         subject = BehaviorSubject.create()
         isQueried.set(false)
