@@ -3,7 +3,6 @@ package com.vmedia.core.common.pure.util
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
-import java.io.Closeable
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.set
 import kotlin.properties.ReadOnlyProperty
@@ -47,7 +46,7 @@ interface SingleValueHolder<K, V> {
 internal class MapSingleCachedProperty<K, V>(
     private val queryProvider: (K) -> Single<V>
 ) : ReadOnlyProperty<Any, SingleValueHolder<K, V>>,
-    Closeable,
+    Reusable,
     SingleValueHolder<K, V> {
 
     private val cachedValues: MutableMap<K, CachedSingleValue<V>> = mutableMapOf()
@@ -62,11 +61,15 @@ internal class MapSingleCachedProperty<K, V>(
 
     override fun getValue(thisRef: Any, property: KProperty<*>) = this
 
-    override fun close() {
-        cachedValues.values.forEach(CachedSingleValue<V>::close)
+    override fun drop() {
+        cachedValues.values.forEach(CachedSingleValue<V>::drop)
         cachedValues.clear()
     }
 
+}
+
+private interface Reusable {
+    fun drop()
 }
 
 /**
@@ -77,7 +80,7 @@ internal class MapSingleCachedProperty<K, V>(
 private class SingleCachedProperty<T>(
     private val source: Single<T>
 ) : ReadOnlyProperty<Any, Single<T>>,
-    Closeable {
+    Reusable {
 
     private val cache = CachedSingleValue(source)
 
@@ -85,15 +88,15 @@ private class SingleCachedProperty<T>(
         return cache.getValue()
     }
 
-    override fun close() {
-        cache.close()
+    override fun drop() {
+        cache.drop()
     }
 
 }
 
 private class CachedSingleValue<T>(
     private val source: Single<T>
-) : Closeable {
+) : Reusable {
 
     private var subject: Subject<T> = BehaviorSubject.create()
     private var isQueried = AtomicBoolean(false)
@@ -107,7 +110,7 @@ private class CachedSingleValue<T>(
         }
     }
 
-    override fun close() {
+    override fun drop() {
         subject = BehaviorSubject.create()
         isQueried.set(false)
     }
@@ -122,14 +125,14 @@ private class CachedSingleValue<T>(
  */
 private class CacheDropper {
 
-    private val listeners = mutableListOf<Closeable>()
+    private val listeners = mutableListOf<Reusable>()
 
-    fun listen(action: Closeable) {
+    fun listen(action: Reusable) {
         listeners += action
     }
 
     fun dropCache() {
-        listeners.forEach(Closeable::close)
+        listeners.forEach(Reusable::drop)
     }
 
 }
