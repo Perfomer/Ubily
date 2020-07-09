@@ -4,6 +4,7 @@ import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 import java.io.Closeable
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.collections.set
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
@@ -95,20 +96,20 @@ private class CachedSingleValue<T>(
 ) : Closeable {
 
     private var subject: Subject<T> = BehaviorSubject.create()
-    private var isQueried = false
+    private var isQueried = AtomicBoolean(false)
 
     fun getValue(): Single<T> {
-        return if (isQueried) {
+        return if (isQueried.get()) {
             subject.firstOrError()
         } else {
-            source.doOnSubscribe { isQueried = true }
+            source.doOnSubscribe { isQueried.set(true) }
                 .doOnSuccess(subject::onNext)
         }
     }
 
     override fun close() {
         subject = BehaviorSubject.create()
-        isQueried = false
+        isQueried.set(false)
     }
 
 }
