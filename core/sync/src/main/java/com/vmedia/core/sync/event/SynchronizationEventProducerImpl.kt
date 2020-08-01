@@ -1,7 +1,6 @@
 package com.vmedia.core.sync.event
 
 import android.annotation.SuppressLint
-import com.vmedia.core.common.pure.util.split
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Payout
 import com.vmedia.core.data.internal.database.entity.Revenue
@@ -40,7 +39,7 @@ internal class SynchronizationEventProducerImpl(
         val downloads = events[FREE_DOWNLOADS] as Data<List<Sale>>
         val sales = events[SALES] as Data<List<Sale>>
 
-        val (freeSales, paidSales) = sales.data.split(Sale::isFree)
+        val (freeSales, paidSales) = sales.data.partition(Sale::isFree)
 
         return Completable.mergeArray(
             assetEventExtractor.execute(assets.data),

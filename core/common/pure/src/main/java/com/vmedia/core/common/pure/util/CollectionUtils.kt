@@ -1,17 +1,5 @@
 package com.vmedia.core.common.pure.util
 
-fun <T> List<T>.split(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
-    val trues = mutableListOf<T>()
-    val falses = mutableListOf<T>()
-
-    forEach {
-        if (predicate.invoke(it)) trues += it
-        else falses += it
-    }
-
-    return trues to falses
-}
-
 fun <T, R> List<T>.zipWithNullable(otherSource: List<R>?): List<Pair<T, R?>> {
     val result = mutableListOf<Pair<T, R?>>()
 
