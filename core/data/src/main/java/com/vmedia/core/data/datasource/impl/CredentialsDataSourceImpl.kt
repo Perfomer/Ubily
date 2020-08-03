@@ -2,12 +2,10 @@ package com.vmedia.core.data.datasource.impl
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import com.vmedia.core.common.android.util.preferences.encryptedValue
 import com.vmedia.core.common.pure.obj.creds.Credentials
 import com.vmedia.core.common.pure.obj.creds.Token
 import com.vmedia.core.data.datasource.CredentialsDataSource
-import com.vmedia.core.common.android.util.NO_VALUE_ENCRYPT
-import com.vmedia.core.common.android.util.decrypt
-import com.vmedia.core.common.android.util.encrypt
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -18,35 +16,30 @@ internal class CredentialsDataSourceImpl(
     private val credentialsProvider: MutableNetworkCredentialsProvider
 ) : CredentialsDataSource {
 
-    override fun getCredentials(): Single<Credentials> {
-        fun read(key: String) = preferences.getString(key,
-            NO_VALUE_ENCRYPT
-        )!!.decrypt()
+    private var login: String by preferences.encryptedValue(KEY_LOGIN)
+    private var password: String by preferences.encryptedValue(KEY_PASSWORD)
+    private var token: String by preferences.encryptedValue(KEY_TOKEN)
+    private var session: String by preferences.encryptedValue(KEY_SESSION)
 
+    override fun getCredentials(): Single<Credentials> {
         return Single.fromCallable {
             Credentials(
-                login = read(KEY_LOGIN),
-                password = read(KEY_PASSWORD),
+                login = login,
+                password = password,
                 token = Token(
-                    tokenValue = read(KEY_TOKEN),
-                    session = read(KEY_SESSION)
+                    tokenValue = token,
+                    session = session
                 )
             )
         }
     }
 
     override fun writeCredentials(credentials: Credentials): Completable {
-        fun SharedPreferences.Editor.write(key: String, value: String): SharedPreferences.Editor {
-            return putString(key, value.encrypt())
-        }
-
         return Completable.fromAction {
-            preferences.edit()
-                .write(KEY_LOGIN, credentials.login)
-                .write(KEY_PASSWORD, credentials.password)
-                .write(KEY_TOKEN, credentials.token.tokenValue)
-                .write(KEY_SESSION, credentials.token.session)
-                .commit()
+            login = credentials.login
+            password = credentials.password
+            token = credentials.token.tokenValue
+            session = credentials.token.session
 
             credentialsProvider.token = credentials.token
         }
