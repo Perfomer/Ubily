@@ -1,6 +1,6 @@
-package com.vmedia.core.data.util
+package com.vmedia.core.common.android.util
 
-import com.vmedia.core.data.BuildConfig
+import com.vmedia.core.common.android.BuildConfig
 import org.jasypt.util.text.BasicTextEncryptor
 
 val NO_VALUE_ENCRYPT by lazy { "".encrypt() }

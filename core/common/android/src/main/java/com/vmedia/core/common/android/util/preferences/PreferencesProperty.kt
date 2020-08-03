@@ -2,7 +2,6 @@ package com.vmedia.core.common.android.util.preferences
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import com.vmedia.core.common.android.util.preferences.PreferencesWriteStrategy.APPLY
 import com.vmedia.core.common.android.util.preferences.PreferencesWriteStrategy.COMMIT
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KClass
@@ -23,7 +22,7 @@ inline fun <reified T : Any> SharedPreferences.value(
 }
 
 @Suppress("UNCHECKED_CAST")
-class PreferencesProperty<T : Any>(
+open class PreferencesProperty<T : Any>(
     private val sharedPreferences: SharedPreferences,
     private val clazz: KClass<T>,
     private val key: String,
@@ -59,17 +58,6 @@ class PreferencesProperty<T : Any>(
         }
 
         editor.write(writeStrategy)
-    }
-
-    private companion object {
-
-        private fun SharedPreferences.Editor.write(strategy: PreferencesWriteStrategy) {
-            when (strategy) {
-                APPLY -> apply()
-                COMMIT -> commit()
-            }
-        }
-
     }
 
 }

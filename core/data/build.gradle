@@ -13,9 +13,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room"
     androidTestImplementation "androidx.room:room-testing:$room"
 
-    // Crypto TODO remove
-    implementation "org.jasypt:jasypt:1.9.2"
-
     implementation project(":core:common:android")
     implementation project(":core:network")
 }

@@ -5,9 +5,9 @@ import android.content.SharedPreferences
 import com.vmedia.core.common.pure.obj.creds.Credentials
 import com.vmedia.core.common.pure.obj.creds.Token
 import com.vmedia.core.data.datasource.CredentialsDataSource
-import com.vmedia.core.data.util.NO_VALUE_ENCRYPT
-import com.vmedia.core.data.util.decrypt
-import com.vmedia.core.data.util.encrypt
+import com.vmedia.core.common.android.util.NO_VALUE_ENCRYPT
+import com.vmedia.core.common.android.util.decrypt
+import com.vmedia.core.common.android.util.encrypt
 import com.vmedia.core.network.datasource.MutableNetworkCredentialsProvider
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -19,7 +19,9 @@ internal class CredentialsDataSourceImpl(
 ) : CredentialsDataSource {
 
     override fun getCredentials(): Single<Credentials> {
-        fun read(key: String) = preferences.getString(key, NO_VALUE_ENCRYPT)!!.decrypt()
+        fun read(key: String) = preferences.getString(key,
+            NO_VALUE_ENCRYPT
+        )!!.decrypt()
 
         return Single.fromCallable {
             Credentials(
