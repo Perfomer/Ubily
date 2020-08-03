@@ -9,7 +9,7 @@ internal class PublisherDataSourceImpl(
     private val preferences: SharedPreferences
 ): PublisherDataSource {
 
-    private var isOnboardingAlreadyShown: Boolean by preferences.value(KEY_ONBOARDING, false)
+    private var isOnboardingAlreadyShown: Boolean by preferences.value(KEY_ONBOARDING)
 
     override fun isOnboardingAlreadyShown(): Single<Boolean> {
         return Single.fromCallable { isOnboardingAlreadyShown }

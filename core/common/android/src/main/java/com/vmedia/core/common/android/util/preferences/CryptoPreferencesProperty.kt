@@ -12,7 +12,7 @@ import kotlin.reflect.KProperty
 
 inline fun <reified T : Any> SharedPreferences.encryptedValue(
     key: String,
-    defaultValue: T,
+    defaultValue: T = getPreferencesDefaultValue(),
     writeStrategy: PreferencesWriteStrategy = COMMIT
 ): ReadWriteProperty<Any, T> {
     return EncryptedPreferencesProperty(
