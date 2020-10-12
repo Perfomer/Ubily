@@ -19,10 +19,10 @@ fun Date.format(format: String): String {
     return format.toDateFormat().format(this)
 }
 
-fun String.parse(format: String) : Date {
+fun String.parse(format: String): Date {
     return format.toDateFormat().parse(this)!!
 }
 
-private fun String.toDateFormat(locale: Locale = Locale.US) : DateFormat {
+private fun String.toDateFormat(locale: Locale = Locale.US): DateFormat {
     return SimpleDateFormat(this, locale)
 }
