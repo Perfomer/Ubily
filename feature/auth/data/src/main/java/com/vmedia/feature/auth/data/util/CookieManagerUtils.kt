@@ -4,7 +4,7 @@ import android.webkit.CookieManager
 
 internal fun CookieManager.getCookie(url: String, cookieName: String): String? {
     val cookies = getCookie(url)
-    if (cookies.isEmpty()) return null
+    if (cookies.isNullOrBlank()) return null
 
     return cookies
         .split(';')
