@@ -5,6 +5,7 @@ import android.webkit.WebView
 import com.vmedia.feature.auth.data.browser.util.RoutableWebClient
 import io.reactivex.Completable
 import io.reactivex.CompletableObserver
+import timber.log.Timber
 
 internal abstract class BrowserRequestCompletable(
     protected val webView: WebView,
@@ -26,10 +27,12 @@ internal abstract class BrowserRequestCompletable(
         webView.webViewClient = RoutableWebClient(::onPageFinished, ::onErrorReceived)
 
         webView.loadUrl(url)
+        Timber.tag("BrowserRequest").d("Trying to load $url")
     }
 
     @Synchronized
     private fun onPageFinished(url: String) {
+        Timber.tag("BrowserRequest").d("Loaded $url")
         if (lastUrl == url) {
             if (tryCount >= maxTryCount) observer?.onError(Exception("Failed $maxTryCount times"))
             else tryCount++
@@ -45,6 +48,7 @@ internal abstract class BrowserRequestCompletable(
     protected abstract fun onPageLoaded(url: String)
 
     private fun onErrorReceived(errorMessage: String) {
+        Timber.tag("BrowserRequest").d("Error encountered $errorMessage")
         observer?.onError(Exception(errorMessage))
     }
 
