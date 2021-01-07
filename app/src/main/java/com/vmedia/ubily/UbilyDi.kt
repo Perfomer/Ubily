@@ -1,5 +1,6 @@
 package com.vmedia.ubily
 
+import androidx.work.WorkManager
 import com.vmedia.core.di.coreModules
 import com.vmedia.core.di.featureModules
 import com.vmedia.core.navigation.navigationModule
@@ -22,4 +23,6 @@ private val appModule = module {
     single<NetworkCredentialsProvider> { get<MutableNetworkCredentialsProvider>() }
     single<MutableNetworkCredentialsProvider> { NetworkCredentialsHolder() }
     single<SynchronizationDataTypeProvider> { SynchronizationDataTypeProviderImpl() }
+
+    single { WorkManager.getInstance(get()) }
 }

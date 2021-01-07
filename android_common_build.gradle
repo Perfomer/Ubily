@@ -79,6 +79,11 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
+    // WorkManager
+    def work_version = "2.4.0"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.work:work-rxjava2:$work_version"
+
     // UI
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
