@@ -14,6 +14,8 @@ android {
         buildConfigField "String", "NETWORK_COOKIE_TOKEN", '"kharma_token"'
         buildConfigField "String", "NETWORK_COOKIE_BASE_URL", '"https://assetstore.unity3d.com"'
         buildConfigField "String", "NETWORK_BASE_URL", '"https://publisher.assetstore.unity3d.com/"'
+        buildConfigField "String", "NETWORK_AUTHORIZED_URL", '"https://publisher.assetstore.unity3d.com/packages.html"'
+        buildConfigField "String", "NETWORK_LOGIN_URL_PART", '"id.unity.com"'
         buildConfigField "int", "NETWORK_MAX_REQUESTS", '5'
         buildConfigField "long", "NETWORK_READ_TIMEOUT", '180'
         buildConfigField "long", "NETWORK_WRITE_TIMEOUT", '180'
@@ -78,7 +80,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // UI
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta6'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'com.google.android.material:material:1.1.0'
     implementation "io.coil-kt:coil:0.9.5"
