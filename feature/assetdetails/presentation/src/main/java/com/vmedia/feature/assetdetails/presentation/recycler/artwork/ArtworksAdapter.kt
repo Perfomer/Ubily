@@ -2,13 +2,13 @@ package com.vmedia.feature.assetdetails.presentation.recycler.artwork
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.presentation.R
 
 internal class ArtworksAdapter(
-    private val onClick: ViewHolderOnClick
+    private val onClick: ViewHolderOnClickListener
 ) : BaseAdapter<ArtworkViewHolder>() {
 
     var items by diffedListBy(Artwork::id)
