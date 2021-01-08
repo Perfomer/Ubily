@@ -7,7 +7,7 @@ interface SplashNavigator {
     fun onInitialized(
         isUserAuthorized: Boolean,
         isUserDataSynchronized: Boolean,
-        onboardingAlreadyShown: Boolean
+        isOnboardingAlreadyShown: Boolean
     )
 
 }

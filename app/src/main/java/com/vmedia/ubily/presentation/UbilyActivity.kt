@@ -39,7 +39,7 @@ internal class UbilyActivity : NavigationActivity(
 
     private var isUserAuthorized: Boolean = false
     private var isUserDataSynchronized: Boolean = false
-    private var onboardingAlreadyShown: Boolean = false
+    private var isOnboardingAlreadyShown: Boolean = false
 
     override fun navigateToEventDetails(eventId: Long) {
         navigateTo(EventDetailsScreen(eventId))
@@ -100,11 +100,11 @@ internal class UbilyActivity : NavigationActivity(
     override fun onInitialized(
         isUserAuthorized: Boolean,
         isUserDataSynchronized: Boolean,
-        onboardingAlreadyShown: Boolean
+        isOnboardingAlreadyShown: Boolean
     ) {
         this.isUserAuthorized = isUserAuthorized
         this.isUserDataSynchronized = isUserDataSynchronized
-        this.onboardingAlreadyShown = onboardingAlreadyShown
+        this.isOnboardingAlreadyShown = isOnboardingAlreadyShown
 
         navigateThroughStartGraph()
     }

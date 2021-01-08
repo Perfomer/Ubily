@@ -72,8 +72,8 @@ internal class SplashFragment : MviFragment<SplashIntent, SplashState, SplashSub
 
             navigator.onInitialized(
                 isUserAuthorized = result.isUserAuthorized,
-                isUserDataSynchronized = result.synchronizationSucceedAtLeastOnce,
-                onboardingAlreadyShown = result.onboardingAlreadyShown
+                isUserDataSynchronized = result.isSynchronizationSucceedAtLeastOnce,
+                isOnboardingAlreadyShown = result.isOnboardingAlreadyShown
             )
         }
     }
