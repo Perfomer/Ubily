@@ -14,6 +14,7 @@ import com.vmedia.feature.sync.presentation.mvi.SyncIntent.StartSync
 import com.vmedia.feature.sync.presentation.mvi.SyncState
 import com.vmedia.feature.sync.presentation.mvi.SyncSubscription
 import io.reactivex.Completable
+import io.reactivex.Observable
 
 internal class SyncViewModel(
     private val interactor: SyncInteractor,
@@ -32,9 +33,16 @@ internal class SyncViewModel(
             .mapWith(statusMapper)
             .map(::SyncStatusUpdated)
 
-        StartSync -> Completable.fromAction { SynchronizationWorker.startOnceImmediately(workManager) }
-            .onErrorComplete()
-            .andThen(super.act(state, intent))
+        StartSync -> interactor.isSynchronizationSucceedAtLeastOnce()
+            .flatMapObservable { isSynchronizationSucceedAtLeastOnce ->
+                if (isSynchronizationSucceedAtLeastOnce) {
+                    Observable.just<SyncAction>(SyncAction.InitialSyncNotNeeded)
+                } else {
+                    Completable.fromAction { SynchronizationWorker.startOnceImmediately(workManager) }
+                        .onErrorComplete()
+                        .andThen(super.act(state, intent))
+                }
+            }
             .asFlowSource(StartSync::class)
     }
 
@@ -46,6 +54,7 @@ internal class SyncViewModel(
             status = action.status,
             inProgress = !action.status.isFinished
         )
+        else -> super.reduce(oldState, action)
     }
 
     override fun publishSubscription(
@@ -55,6 +64,9 @@ internal class SyncViewModel(
         is SyncStatusUpdated -> {
             if (action.status.isFinished) SyncSubscription.SyncFinished
             else super.publishSubscription(state, action)
+        }
+        is SyncAction.InitialSyncNotNeeded -> {
+            SyncSubscription.SyncFinished
         }
     }
 
