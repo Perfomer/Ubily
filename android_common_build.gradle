@@ -62,6 +62,10 @@ android {
         }
     }
 
+    viewBinding {
+        enabled = true
+    }
+
     androidExtensions {
         experimental = true
     }
