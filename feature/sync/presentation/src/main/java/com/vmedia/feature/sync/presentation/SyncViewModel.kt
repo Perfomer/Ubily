@@ -3,7 +3,7 @@ package com.vmedia.feature.sync.presentation
 import androidx.work.WorkManager
 import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.core.common.pure.util.mapWith
-import com.vmedia.core.sync.SyncWorker
+import com.vmedia.core.sync.SynchronizationWorker
 import com.vmedia.feature.sync.domain.SyncInteractor
 import com.vmedia.feature.sync.presentation.di._StatusMapper
 import com.vmedia.feature.sync.presentation.mvi.SyncAction
@@ -32,7 +32,7 @@ internal class SyncViewModel(
             .mapWith(statusMapper)
             .map(::SyncStatusUpdated)
 
-        StartSync -> Completable.fromAction { SyncWorker.startOnceImmediately(workManager) }
+        StartSync -> Completable.fromAction { SynchronizationWorker.startOnceImmediately(workManager) }
             .onErrorComplete()
             .andThen(super.act(state, intent))
             .asFlowSource(StartSync::class)

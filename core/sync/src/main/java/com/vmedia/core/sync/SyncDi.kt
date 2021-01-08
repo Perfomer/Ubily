@@ -16,6 +16,7 @@ import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.SynchronizationEventProducer
 import com.vmedia.core.sync.event.SynchronizationEventProducerImpl
 import com.vmedia.core.sync.event.producer.*
+import com.vmedia.core.sync.notification.SyncStatusNotificationManager
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -166,6 +167,10 @@ val coreSyncModule = module {
             credentials = get()
         )
     }
+}
+
+val coreSyncNotificationModule = module {
+    factory { SyncStatusNotificationManager(get()) }
 }
 
 val coreSyncEventExtractorModule = module {

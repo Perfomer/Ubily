@@ -25,6 +25,7 @@ private val coreNetworkModules by lazy {
 private val coreSyncModules by lazy {
     listOf(
         coreSyncModule,
+        coreSyncNotificationModule,
         coreSyncSynchronizerModule,
         coreSyncEventExtractorModule,
         coreSyncMapperModule,

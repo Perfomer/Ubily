@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="status_channel_title">Synchronization Status Notifications</string>
+    <string name="status_channel_description">Shows current synchronization status</string>
+    <string name="status_notification_title">Synchronization</string>
+    <string name="status_notification_description_publisher">Publisher</string>
+    <string name="status_notification_description_assets">Assets</string>
+    <string name="status_notification_description_reviews">Reviews</string>
+    <string name="status_notification_description_sales">Sales</string>
+    <string name="status_notification_description_free_downloads">Free downloads</string>
+    <string name="status_notification_description_revenue">Revenue</string>
+
+    <string name="result_channel_title">Synchronization Result Notifications</string>
+    <string name="result_channel_description">Shows result of the synchronization</string>
+</resources>
