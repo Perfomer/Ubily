@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/assetdetails_largeimage"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_placeholder_rect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <LinearLayout
+        android:id="@+id/assetdetails_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/assetdetails_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/assetdetails_externallink"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:backgroundTint="@color/brand_grey_lighter"
+        android:text="@string/common_details_externallink"
+        android:textColor="@color/brand_green_darker"
+        android:translationY="-48dp"
+        app:icon="@drawable/ic_external_link"
+        app:iconGravity="textStart"
+        app:iconTint="@color/brand_green_darker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
+        app:rippleColor="@color/brand_green" />
+
+    <FrameLayout
+        android:id="@+id/assetdetails_asset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="20dp"
+        android:translationY="-8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_largeimage">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="14dp"
+            tools:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="36dp"
+                android:paddingBottom="24dp">
+
+                <TextView
+                    android:id="@+id/assetdetails_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/rubik"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.165"
+                    android:textAllCaps="true"
+                    android:textColor="@color/brand_green_darker"
+                    android:textSize="14sp"
+                    tools:text="Icons &amp; UI" />
+
+                <TextView
+                    android:id="@+id/assetdetails_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/rubik_bold"
+                    android:gravity="center_horizontal"
+                    android:textAllCaps="true"
+                    android:textColor="@color/brand_black"
+                    android:textSize="24sp"
+                    tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/assetdetails_asset_price"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/assetdetails_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="$14.00" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_list_item_grey"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/common_details_id"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/assetdetails_identifier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp"
+                        tools:text="22305" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/assetdetails_asset_version"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/assetdetails_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp"
+                        tools:text="1.2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_list_item_grey"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/assetdetails_asset_status"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/assetdetails_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_green_darker"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Published" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/assetdetails_asset_size"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/assetdetails_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/brand_black"
+                        android:textSize="16sp"
+                        tools:text="22305" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/assetdetails_icon"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:background="@drawable/bg_asset_icon"
+        android:padding="4dp"
+        android:translationY="-8dp"
+        android:src="@drawable/bg_placeholder_circle"
+        app:layout_constraintBottom_toTopOf="@id/assetdetails_asset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/assetdetails_asset" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

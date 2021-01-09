@@ -82,18 +82,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        assetdetails_root.addSystemBottomPadding()
-        assetdetails_toolbar.addSystemTopPadding()
+//     todo   assetdetails_root.addSystemBottomPadding()
+//      todo  assetdetails_toolbar.addSystemTopPadding()
 
-        assetdetails_back.setOnClickListener(::goBack)
-
-        assetdetails_icon.setOnClickListener {
-            currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
-        }
-
-        assetdetails_externallink.setOnClickListener {
-            navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
-        }
+       // todo header listeners
 
         assetdetails_content.adapter = adapter
     }
@@ -113,27 +105,9 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_loading.isVisible = state.isLoading
 
         adapter.items = state.content
-        adapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged() // todo
 
-        with(state.payload) {
-            renderAsset(asset)
-        }
-    }
-
-    private fun renderAsset(asset: DetailedAsset) = with(asset) {
-        assetdetails_name.diffedValue = name
-        assetdetails_identifier.diffedValue = id.toString()
-        assetdetails_category.diffedValue = categoryName
-        assetdetails_price.diffedValue = "$$priceUsd"
-        assetdetails_version.diffedValue = versionName
-        assetdetails_status.diffedValue = getString(status.labelResource)
-        assetdetails_size.diffedValue = getString(
-            R.string.assetdetails_asset_value_size,
-            sizeMb.cropToString()
-        )
-
-        iconImage?.let { assetdetails_icon.loadCircleImage(it) }
-        bigImage?.let { assetdetails_largeimage.loadImage(it) }
+        assetdetails_header.asset = state.payload.asset
     }
 
     internal companion object {
