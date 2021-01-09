@@ -15,6 +15,10 @@ fun <T, R : Comparable<R>> Collection<T>.maxValue(extractor: (T) -> R): R {
     return extractor.invoke(maxItem)
 }
 
+fun <T> flatListOf(vararg lists: List<out T>): List<T> {
+    return listOf(*lists).flatten()
+}
+
 fun <T> Sequence<T>.onEachIndexed(action: (index: Int, item: T) -> Unit): Sequence<T> {
     return mapIndexed { index: Int, item: T ->
         action(index, item)

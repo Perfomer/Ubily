@@ -28,7 +28,6 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.artworksListAdapterDelegate
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.ArtworksListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_card_asset.*
 import kotlinx.android.synthetic.main.assetdetails_card_description.*
@@ -142,9 +141,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         errorSnackbar?.isVisible = state.error != null
         assetdetails_loading.isVisible = state.isLoading
 
+        adapter.items = state.content
+
         with(state.payload) {
             renderAsset(asset)
-            renderArtworks(asset.artworks)
             renderDescription(asset, state.isDescriptionExpanded)
             renderReviews(reviews, state.reviewsSortType, state.isReviewsExpanded)
             renderPublisher(publisher)
@@ -183,14 +183,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_description_text.maxLines =
             if (isExpanded) Integer.MAX_VALUE
             else MAX_COLLAPSED_DESCRIPTION_LINES
-    }
-
-    private fun renderArtworks(artworks: List<Artwork>) {
-        adapter.items = if (artworks.isNotEmpty()) {
-            listOf(ArtworksListItem(artworks))
-        } else {
-            emptyList()
-        }
     }
 
     private fun renderKeywords(keywords: List<KeywordModel>, isDescriptionExpanded: Boolean) {

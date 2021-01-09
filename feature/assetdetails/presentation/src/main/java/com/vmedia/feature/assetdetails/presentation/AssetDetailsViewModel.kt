@@ -10,6 +10,7 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.AssetDetailsListItemFactory
 
 internal class AssetDetailsViewModel(
     private val assetId: Long,
@@ -65,6 +66,7 @@ internal class AssetDetailsViewModel(
                         reviews = sort(payload.reviews.reviews, oldState.reviewsSortType)
                     )
                 ),
+                content = AssetDetailsListItemFactory.create(asset.artworks),
                 isDescriptionExpanded = isDescriptionExpanded,
                 isReviewsExpanded = isReviewsExpanded
             )
