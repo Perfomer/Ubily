@@ -1,13 +1,8 @@
 package com.vmedia.feature.assetdetails.presentation
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.vmedia.core.common.android.mvi.MviFragment
@@ -20,15 +15,14 @@ import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.MediaType
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
-import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
-import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.artworksListAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.artworksAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.descriptionAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.reviewsAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_card_asset.*
 import kotlinx.android.synthetic.main.assetdetails_card_description.*
@@ -46,11 +40,9 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     private val navigator: AssetDetailsNavigator
         get() = activity as AssetDetailsNavigator
 
-    private val reviewsAdapter by lazy { ReviewsAdapter(navigator::navigateToUser) }
-
     private val adapter: ListDelegationAdapter<List<BaseListItem>> by lazy {
         ListDelegationAdapter(
-            artworksListAdapterDelegate(
+            artworksAdapterDelegate(
                 onArtworkClickListener = { artworkPosition ->
                     navigator.navigateToGallery(
                         images = currentState!!.payload.asset.artworks.images,
@@ -65,6 +57,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
                 onImageClickListener = { currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery) },
                 onCollapsedClickListener = { postIntent(ExpandDescription) },
                 onKeywordClickListener = navigator::navigateToAssetsSearch
+            ),
+            reviewsAdapterDelegate(
+                onAuthorClickListener = navigator::navigateToUser,
+                onReviewsSortTypeChangedListener = { selectedType -> postIntent(UpdateSortType(selectedType)) },
+                onCollapsedReviewsClickListener = { postIntent(ExpandReviews) }
             )
         )
     }
@@ -80,9 +77,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_root.addSystemBottomPadding()
         assetdetails_toolbar.addSystemTopPadding()
 
-        assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
-        assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
-
         assetdetails_back.setOnClickListener(::goBack)
         assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
@@ -94,24 +88,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
         }
 
-        assetdetails_reviews_sort_value.setOnItemSelectedListener {
-            postIntent(UpdateSortType(ReviewsSortType.values()[it]))
-        }
-
-        assetdetails_reviews_1.disableTouches()
-        assetdetails_reviews_2.disableTouches()
-        assetdetails_reviews_3.disableTouches()
-        assetdetails_reviews_4.disableTouches()
-        assetdetails_reviews_5.disableTouches()
-
-        assetdetails_reviews_sort_value.adapter = ArrayAdapters.createFromResources(
-            context!!,
-            reviewsSortTypeLabelResources,
-            R.layout.common_reviews_sort_item
-        )
-
         assetdetails_content.adapter = adapter
-        assetdetails_reviews_list.adapter = reviewsAdapter
     }
 
     override fun onResume() {
@@ -133,7 +110,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         with(state.payload) {
             renderAsset(asset)
-            renderReviews(reviews, state.reviewsSortType, state.isReviewsExpanded)
             renderPublisher(publisher)
         }
     }
@@ -159,42 +135,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_publisher_name.diffedValue = name
         assetdetails_publisher_description.text = description.toSpan()
         assetdetails_publisher_avatar.loadCircleImage(avatar)
-    }
-
-    private fun renderReviews(
-        reviewsModel: ReviewsModel,
-        sortType: ReviewsSortType,
-        isExpanded: Boolean,
-    ) = with(reviewsModel) {
-        val hasReviews = reviewsCount > 0
-
-        assetdetails_reviews.isVisible = hasReviews
-
-        if (!hasReviews) {
-            return
-        }
-
-        assetdetails_reviews_sort_value.setSelection(sortType.ordinal)
-        assetdetails_reviews_count.text = getString(R.string.reviews_count, reviewsCount).toSpan()
-
-        assetdetails_reviews_rating_value.diffedValue = averageReviewsRating.cropToString()
-
-        assetdetails_reviews_1_count.diffedValue = oneStarStats.count.toString()
-        assetdetails_reviews_2_count.diffedValue = twoStarsStats.count.toString()
-        assetdetails_reviews_3_count.diffedValue = threeStarsStats.count.toString()
-        assetdetails_reviews_4_count.diffedValue = fourStarsStats.count.toString()
-        assetdetails_reviews_5_count.diffedValue = fiveStarsStats.count.toString()
-
-        assetdetails_reviews_1_progress.diffedValue = oneStarStats.percent
-        assetdetails_reviews_2_progress.diffedValue = twoStarsStats.percent
-        assetdetails_reviews_3_progress.diffedValue = threeStarsStats.percent
-        assetdetails_reviews_4_progress.diffedValue = fourStarsStats.percent
-        assetdetails_reviews_5_progress.diffedValue = fiveStarsStats.percent
-
-        assetdetails_reviews_viewmore.isVisible = !isExpanded
-        assetdetails_reviews_scrim.isVisible = !isExpanded
-
-        reviewsAdapter.setItems(reviews, isExpanded)
     }
 
     internal companion object {

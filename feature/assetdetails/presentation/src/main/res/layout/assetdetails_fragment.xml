@@ -115,21 +115,6 @@
             app:layout_constraintTop_toBottomOf="@id/assetdetails_asset" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_reviews"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_content"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_reviews" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
             android:id="@+id/assetdetails_publisher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -137,7 +122,7 @@
             app:cardCornerRadius="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews"
+            app:layout_constraintTop_toBottomOf="@id/assetdetails_content"
             app:rippleColor="@color/brand_green"
             tools:background="@android:color/white">
 

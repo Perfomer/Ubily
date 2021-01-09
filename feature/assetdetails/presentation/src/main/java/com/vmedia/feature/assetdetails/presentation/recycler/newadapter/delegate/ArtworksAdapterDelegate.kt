@@ -10,7 +10,7 @@ import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem
 
 internal typealias OnShowAllClickListener = () -> Unit
 
-internal fun artworksListAdapterDelegate(
+internal fun artworksAdapterDelegate(
     onArtworkClickListener: ViewHolderOnClickListener,
     onShowArtworksClickListener: OnShowAllClickListener,
 ) = adapterDelegateViewBinding<ArtworksListItem, BaseListItem, AssetdetailsCardArtworksBinding>(

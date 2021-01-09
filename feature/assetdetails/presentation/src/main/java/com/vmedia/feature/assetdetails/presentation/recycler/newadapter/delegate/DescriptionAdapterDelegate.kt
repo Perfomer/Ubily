@@ -12,23 +12,19 @@ import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.android.view.recycler.base.adapterDelegateViewBinding
-import com.vmedia.feature.assetdetails.presentation.AssetDetailsFragment
 import com.vmedia.feature.assetdetails.presentation.databinding.AssetdetailsCardDescriptionBinding
-import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.OnKeywordClickListener
 import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.DescriptionListItem
-import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
-import kotlinx.android.synthetic.main.assetdetails_card_description.*
 
 internal typealias OnImageClickListener = () -> Unit
-internal typealias OnCollapsedClickListener = () -> Unit
+internal typealias OnCollapsedDescriptionClickListener = () -> Unit
 
 private const val MAX_COLLAPSED_DESCRIPTION_LINES: Int = 10
 
 internal fun descriptionAdapterDelegate(
     onImageClickListener: OnImageClickListener,
-    onCollapsedClickListener: OnCollapsedClickListener,
+    onCollapsedClickListener: OnCollapsedDescriptionClickListener,
     onKeywordClickListener: OnKeywordClickListener,
 ) = adapterDelegateViewBinding<DescriptionListItem, BaseListItem, AssetdetailsCardDescriptionBinding>(
     AssetdetailsCardDescriptionBinding::inflate
