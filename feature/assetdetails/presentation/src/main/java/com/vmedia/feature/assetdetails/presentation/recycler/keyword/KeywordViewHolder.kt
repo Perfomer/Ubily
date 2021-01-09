@@ -2,13 +2,13 @@ package com.vmedia.feature.assetdetails.presentation.recycler.keyword
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import kotlinx.android.synthetic.main.assetdetails_item_keyword.*
 
 internal class KeywordViewHolder(
     containerView: View,
-    onClick: ViewHolderOnClick
+    onClick: ViewHolderOnClickListener
 ) : BaseViewHolder(containerView) {
 
     init {

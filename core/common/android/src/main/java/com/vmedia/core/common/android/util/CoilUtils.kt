@@ -3,7 +3,7 @@ package com.vmedia.core.common.android.util
 import android.widget.ImageView
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
-import coil.api.load
+import coil.load
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.vmedia.core.common.android.R

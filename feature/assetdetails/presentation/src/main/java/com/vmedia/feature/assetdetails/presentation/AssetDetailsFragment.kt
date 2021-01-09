@@ -9,8 +9,10 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.core.common.pure.obj.ReviewsSortType
 import com.vmedia.core.common.pure.util.cropToString
@@ -24,10 +26,10 @@ import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
-import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.artworksListAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.descriptionAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
-import kotlinx.android.synthetic.main.assetdetails_card_artworks.*
 import kotlinx.android.synthetic.main.assetdetails_card_asset.*
 import kotlinx.android.synthetic.main.assetdetails_card_description.*
 import kotlinx.android.synthetic.main.assetdetails_card_publisher.*
@@ -35,7 +37,6 @@ import kotlinx.android.synthetic.main.assetdetails_card_reviews.*
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetailsState, Nothing>(
     layoutResource = R.layout.assetdetails_fragment,
@@ -47,32 +48,38 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private val reviewsAdapter by lazy { ReviewsAdapter(navigator::navigateToUser) }
 
-    private val keywordsAdapter by lazy { KeywordsAdapter(navigator::navigateToAssetsSearch) }
-
-    private val artworksAdapter by lazy {
-        ArtworksAdapter { artworkPosition ->
-            navigator.navigateToGallery(
-                images = currentState!!.payload.asset.artworks.images,
-                targetImagesPosition = artworkPosition
+    private val adapter: ListDelegationAdapter<List<BaseListItem>> by lazy {
+        ListDelegationAdapter(
+            artworksListAdapterDelegate(
+                onArtworkClickListener = { artworkPosition ->
+                    navigator.navigateToGallery(
+                        images = currentState!!.payload.asset.artworks.images,
+                        targetImagesPosition = artworkPosition
+                    )
+                },
+                onShowArtworksClickListener = {
+                    navigator.navigateToGallery(currentState!!.payload.asset.artworks.images)
+                }
+            ),
+            descriptionAdapterDelegate(
+                onImageClickListener = { currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery) },
+                onCollapsedClickListener = { postIntent(ExpandDescription) },
+                onKeywordClickListener = navigator::navigateToAssetsSearch
             )
-        }
+        )
     }
 
     private var errorSnackbar: Snackbar? = null
 
     private var assetId: Long by argument()
 
-    override fun provideViewModel() = getViewModel<AssetDetailsViewModel> {
-        parametersOf(assetId)
-    }
+    override fun provideViewModel() = getViewModel<AssetDetailsViewModel> { parametersOf(assetId) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         assetdetails_root.addSystemBottomPadding()
         assetdetails_toolbar.addSystemTopPadding()
 
-        assetdetails_description_scrim.setOnClickListener { postIntent(ExpandDescription) }
-        assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
         assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
 
@@ -81,14 +88,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_icon.setOnClickListener {
             currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
-        }
-
-        assetdetails_description_image.setOnClickListener {
-            currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery)
-        }
-
-        assetdetails_artworks_showall.setOnClickListener {
-            navigator.navigateToGallery(currentState!!.payload.asset.artworks.images)
         }
 
         assetdetails_externallink.setOnClickListener {
@@ -111,18 +110,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             R.layout.common_reviews_sort_item
         )
 
-        assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
-
-        assetdetails_artworks_list.adapter = artworksAdapter
+        assetdetails_content.adapter = adapter
         assetdetails_reviews_list.adapter = reviewsAdapter
-        assetdetails_description_keywords_list.init(
-            adapter = keywordsAdapter,
-            layoutManager = FlexboxLayoutManager(context).apply {
-                flexWrap = FlexWrap.WRAP
-                flexDirection = FlexDirection.ROW
-                alignItems = AlignItems.STRETCH
-            }
-        )
     }
 
     override fun onResume() {
@@ -139,10 +128,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         errorSnackbar?.isVisible = state.error != null
         assetdetails_loading.isVisible = state.isLoading
 
+        adapter.items = state.content
+        adapter.notifyDataSetChanged()
+
         with(state.payload) {
             renderAsset(asset)
-            renderArtworks(asset.artworks)
-            renderDescription(asset, state.isDescriptionExpanded)
             renderReviews(reviews, state.reviewsSortType, state.isReviewsExpanded)
             renderPublisher(publisher)
         }
@@ -164,49 +154,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         bigImage?.let { assetdetails_largeimage.loadImage(it) }
     }
 
-    private fun renderDescription(asset: DetailedAsset, isExpanded: Boolean) = with(asset) {
-        val hasLargeImage = !bigImage.isNullOrBlank()
-
-        assetdetails_description_text.text = description.toSpan()
-
-        assetdetails_description_image.isVisible = hasLargeImage
-        if (hasLargeImage) assetdetails_description_image.loadImage(bigImage)
-
-        renderKeywords(asset.keywords, isExpanded)
-
-        assetdetails_description_viewmore.isVisible = !isExpanded
-        assetdetails_description_scrim.isVisible = !isExpanded
-
-        assetdetails_description_text.maxLines =
-            if (isExpanded) Integer.MAX_VALUE
-            else MAX_COLLAPSED_DESCRIPTION_LINES
-    }
-
-    private fun renderArtworks(artworks: List<Artwork>) {
-        val hasArtworks = artworks.isNotEmpty()
-
-        assetdetails_artworks.isVisible = hasArtworks
-
-        if (!hasArtworks) {
-            return
-        }
-
-        artworksAdapter.items = artworks
-    }
-
-    private fun renderKeywords(keywords: List<KeywordModel>, isDescriptionExpanded: Boolean) {
-        val hasKeywords = keywords.isNotEmpty() && isDescriptionExpanded
-
-        assetdetails_description_keywords_list.isVisible = hasKeywords
-        assetdetails_description_keywords_title.isVisible = hasKeywords
-
-        if (!hasKeywords) {
-            return
-        }
-
-        keywordsAdapter.items = keywords
-    }
-
     private fun renderPublisher(publisherModel: PublisherModel) = with(publisherModel) {
         assetdetails_publisher_rating.diffedValue = averageRating.cropToString()
         assetdetails_publisher_name.diffedValue = name
@@ -217,7 +164,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     private fun renderReviews(
         reviewsModel: ReviewsModel,
         sortType: ReviewsSortType,
-        isExpanded: Boolean
+        isExpanded: Boolean,
     ) = with(reviewsModel) {
         val hasReviews = reviewsCount > 0
 
@@ -254,14 +201,12 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         private const val MAX_COLLAPSED_DESCRIPTION_LINES = 10
 
-        internal fun newInstance(assetId: Long) = AssetDetailsFragment().apply {
-            this.assetId = assetId
-        }
-
         private val List<Artwork>.images: List<String>
             get() = this.filter { it.mediaType == MediaType.IMAGE }
                 .map(Artwork::previewUrl)
 
+        internal fun newInstance(assetId: Long) = AssetDetailsFragment().apply {
+            this.assetId = assetId
+        }
     }
-
 }
