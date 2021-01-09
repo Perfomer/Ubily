@@ -22,6 +22,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.textfield.TextInputLayout
 import io.reactivex.Observable
 
+val View.inflater: LayoutInflater
+    get() = LayoutInflater.from(context)
+
 var TextView.diffedValue: String
     get() = text.toString()
     set(value) {
