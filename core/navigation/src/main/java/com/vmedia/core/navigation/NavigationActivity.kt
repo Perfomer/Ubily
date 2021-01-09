@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.core.view.updatePadding
 import com.vmedia.core.common.android.util.doOnApplyWindowInsets
-import com.vmedia.core.common.android.view.BaseActivity
+import com.vmedia.core.common.android.view.base.BaseActivity
 import com.vmedia.core.navigation.cicerone.UbilyRouter
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

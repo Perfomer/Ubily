@@ -9,7 +9,7 @@ import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.util.setOnPageSelectedListener
-import com.vmedia.core.common.android.view.BaseFragment
+import com.vmedia.core.common.android.view.base.BaseFragment
 import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.feature.gallery.presentation.recycler.GalleryAdapter
 import com.vmedia.feature.gallery.presentation.recycler.GalleryPreviewAdapter
