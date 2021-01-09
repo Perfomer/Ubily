@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.keyword
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.keyword
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter

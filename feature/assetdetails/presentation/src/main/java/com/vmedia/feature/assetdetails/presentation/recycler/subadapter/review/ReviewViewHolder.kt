@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.review
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.review
 
 import android.view.View
 import androidx.core.view.isVisible

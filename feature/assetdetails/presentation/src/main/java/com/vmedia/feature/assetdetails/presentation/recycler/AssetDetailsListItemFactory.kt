@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.newadapter
+package com.vmedia.feature.assetdetails.presentation.recycler
 
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.pure.obj.ReviewsSortType
@@ -7,9 +7,9 @@ import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.domain.model.AssetDetails
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.ArtworksListItem
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.DescriptionListItem
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.ReviewsListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ArtworksListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.DescriptionListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ReviewsListItem
 
 internal object AssetDetailsListItemFactory {
 

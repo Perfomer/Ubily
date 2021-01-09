@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate
+package com.vmedia.feature.assetdetails.presentation.recycler.delegate
 
 import androidx.core.view.isVisible
 import com.vmedia.core.common.android.util.ArrayAdapters
@@ -9,20 +9,14 @@ import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.util.setOnItemSelectedListener
 import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.core.common.android.view.recycler.base.adapterDelegateViewBinding
 import com.vmedia.core.common.pure.obj.ReviewsSortType
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.feature.assetdetails.presentation.R
-import com.vmedia.feature.assetdetails.presentation.databinding.AssetdetailsCardArtworksBinding
 import com.vmedia.feature.assetdetails.presentation.databinding.AssetdetailsCardReviewsBinding
-import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
-import com.vmedia.feature.assetdetails.presentation.recycler.artwork.ArtworksAdapter
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.ArtworksListItem
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.ReviewsListItem
-import com.vmedia.feature.assetdetails.presentation.recycler.review.OnAuthorClickListener
-import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
-import kotlinx.android.synthetic.main.assetdetails_card_reviews.*
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ReviewsListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.subadapter.review.OnAuthorClickListener
+import com.vmedia.feature.assetdetails.presentation.recycler.subadapter.review.ReviewsAdapter
 
 internal typealias OnReviewsSortTypeChangedListener = (type: ReviewsSortType) -> Unit
 internal typealias OnCollapsedReviewsClickListener = () -> Unit

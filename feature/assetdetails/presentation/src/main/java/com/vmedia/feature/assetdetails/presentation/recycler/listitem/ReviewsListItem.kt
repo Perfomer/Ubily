@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem
+package com.vmedia.feature.assetdetails.presentation.recycler.listitem
 
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.pure.obj.ReviewsSortType

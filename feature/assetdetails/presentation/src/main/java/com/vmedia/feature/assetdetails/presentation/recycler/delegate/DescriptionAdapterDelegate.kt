@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate
+package com.vmedia.feature.assetdetails.presentation.recycler.delegate
 
 import android.text.method.LinkMovementMethod
 import androidx.core.view.isVisible
@@ -13,9 +13,9 @@ import com.vmedia.core.common.android.util.toSpan
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.android.view.recycler.base.adapterDelegateViewBinding
 import com.vmedia.feature.assetdetails.presentation.databinding.AssetdetailsCardDescriptionBinding
-import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
-import com.vmedia.feature.assetdetails.presentation.recycler.keyword.OnKeywordClickListener
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem.DescriptionListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.subadapter.keyword.KeywordsAdapter
+import com.vmedia.feature.assetdetails.presentation.recycler.subadapter.keyword.OnKeywordClickListener
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.DescriptionListItem
 
 internal typealias OnImageClickListener = () -> Unit
 internal typealias OnCollapsedDescriptionClickListener = () -> Unit

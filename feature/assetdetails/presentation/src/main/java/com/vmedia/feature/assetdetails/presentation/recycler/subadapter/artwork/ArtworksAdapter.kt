@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.artwork
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.artwork
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter

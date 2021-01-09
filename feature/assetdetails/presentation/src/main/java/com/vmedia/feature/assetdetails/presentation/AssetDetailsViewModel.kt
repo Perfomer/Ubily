@@ -10,7 +10,7 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.AssetDetailsListItemFactory
+import com.vmedia.feature.assetdetails.presentation.recycler.AssetDetailsListItemFactory
 
 internal class AssetDetailsViewModel(
     private val assetId: Long,
