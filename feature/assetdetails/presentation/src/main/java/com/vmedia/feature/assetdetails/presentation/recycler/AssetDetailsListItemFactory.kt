@@ -6,9 +6,11 @@ import com.vmedia.core.common.pure.util.flatListOf
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.domain.model.AssetDetails
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
+import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ArtworksListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.DescriptionListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.PublisherListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ReviewsListItem
 
 internal object AssetDetailsListItemFactory {
@@ -25,6 +27,7 @@ internal object AssetDetailsListItemFactory {
             createArtworksItem(asset.artworks),
             createDescriptionItem(asset, isDescriptionExpanded),
             createReviewsItem(assetDetails.reviews, isReviewsExpanded, reviewsSortType),
+            createPublisherItem(assetDetails.publisher),
         )
     }
 
@@ -52,5 +55,9 @@ internal object AssetDetailsListItemFactory {
                 reviewsSortType = reviewsSortType,
             )
         )
+    }
+
+    private fun createPublisherItem(publisher: PublisherModel): List<BaseListItem> {
+        return listOf(PublisherListItem(publisher))
     }
 }

@@ -1,79 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipToPadding="false"
-    android:padding="20dp"
-    tools:ignore="ContentDescription">
+    android:layout_marginTop="24dp"
+    app:cardCornerRadius="14dp"
+    app:rippleColor="@color/brand_green"
+    tools:background="@android:color/white"
+    tools:ignore="ContentDescription"
+    tools:layout_marginTop="0dp">
 
-    <TextView
-        android:id="@+id/assetdetails_publisher_title"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/assetdetails_title_publisher"
-        android:textAllCaps="true"
-        android:textColor="@color/brand_black"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:clipToPadding="false"
+        android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/assetdetails_publisher_avatar"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_placeholder_circle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_title"
-        tools:src="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/assetdetails_publisher_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assetdetails_title_publisher"
+            android:textAllCaps="true"
+            android:textColor="@color/brand_black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/assetdetails_publisher_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/rubik_bold"
-        android:maxLines="1"
-        android:textColor="@color/brand_black"
-        android:textSize="20sp"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toStartOf="@id/assetdetails_publisher_rating"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_avatar"
-        app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_avatar"
-        tools:text="Wello Graphics" />
+        <ImageView
+            android:id="@+id/assetdetails_publisher_avatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_placeholder_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_title"
+            tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/assetdetails_publisher_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/brand_green_darker"
-        android:textStyle="bold"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_name"
-        app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_name"
-        tools:text="4" />
+        <TextView
+            android:id="@+id/assetdetails_publisher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_bold"
+            android:maxLines="1"
+            android:textColor="@color/brand_black"
+            android:textSize="20sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/assetdetails_publisher_rating"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_avatar"
+            app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_avatar"
+            tools:text="Wello Graphics" />
 
-    <TextView
-        android:id="@+id/assetdetails_publisher_description"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:ellipsize="end"
-        android:textColor="@color/brand_grey_darker"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/assetdetails_publisher_name"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_name"
-        tools:text="@tools:sample/lorem/random" />
+        <TextView
+            android:id="@+id/assetdetails_publisher_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/brand_green_darker"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/assetdetails_publisher_name"
+            app:layout_constraintTop_toTopOf="@id/assetdetails_publisher_name"
+            tools:text="4" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/assetdetails_publisher_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:textColor="@color/brand_grey_darker"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/assetdetails_publisher_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/assetdetails_publisher_name"
+            app:layout_constraintTop_toBottomOf="@id/assetdetails_publisher_name"
+            tools:text="@tools:sample/lorem/random" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -6,7 +6,15 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.vmedia.core.common.android.mvi.MviFragment
-import com.vmedia.core.common.android.util.*
+import com.vmedia.core.common.android.util.addSystemBottomPadding
+import com.vmedia.core.common.android.util.addSystemTopPadding
+import com.vmedia.core.common.android.util.argument
+import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.isVisible
+import com.vmedia.core.common.android.util.labelResource
+import com.vmedia.core.common.android.util.loadCircleImage
+import com.vmedia.core.common.android.util.loadImage
+import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
 import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.core.common.pure.util.cropToString
@@ -14,15 +22,17 @@ import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.MediaType
 import com.vmedia.feature.assetdetails.api.AssetDetailsNavigator
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
-import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
-import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandDescription
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.ExpandReviews
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.LoadData
+import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.UpdateSortType
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.artworksAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.descriptionAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.delegate.publisherAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.reviewsAdapterDelegate
 import kotlinx.android.synthetic.main.assetdetails_card_asset.*
-import kotlinx.android.synthetic.main.assetdetails_card_publisher.*
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -57,7 +67,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
                 onAuthorClickListener = navigator::navigateToUser,
                 onReviewsSortTypeChangedListener = { selectedType -> postIntent(UpdateSortType(selectedType)) },
                 onCollapsedReviewsClickListener = { postIntent(ExpandReviews) }
-            )
+            ),
+            publisherAdapterDelegate(
+                onPublisherClickListener = navigator::navigateToPublisher
+            ),
         )
     }
 
@@ -73,7 +86,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_toolbar.addSystemTopPadding()
 
         assetdetails_back.setOnClickListener(::goBack)
-        assetdetails_publisher.setOnClickListener(navigator::navigateToPublisher)
 
         assetdetails_icon.setOnClickListener {
             currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
@@ -105,7 +117,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         with(state.payload) {
             renderAsset(asset)
-            renderPublisher(publisher)
         }
     }
 
@@ -125,16 +136,7 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         bigImage?.let { assetdetails_largeimage.loadImage(it) }
     }
 
-    private fun renderPublisher(publisherModel: PublisherModel) = with(publisherModel) {
-        assetdetails_publisher_rating.diffedValue = averageRating.cropToString()
-        assetdetails_publisher_name.diffedValue = name
-        assetdetails_publisher_description.text = description.toSpan()
-        assetdetails_publisher_avatar.loadCircleImage(avatar)
-    }
-
     internal companion object {
-
-        private const val MAX_COLLAPSED_DESCRIPTION_LINES = 10
 
         private val List<Artwork>.images: List<String>
             get() = this.filter { it.mediaType == MediaType.IMAGE }
