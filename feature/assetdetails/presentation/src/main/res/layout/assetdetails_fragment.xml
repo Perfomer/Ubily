@@ -109,6 +109,8 @@
             android:layout_height="600dp"
             android:layout_marginTop="64dp"
             android:orientation="vertical"
+            android:clipToPadding="false"
+            android:clipChildren="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
