@@ -15,7 +15,7 @@ fun <T, R : Comparable<R>> Collection<T>.maxValue(extractor: (T) -> R): R {
     return extractor.invoke(maxItem)
 }
 
-fun <T> flatListOf(vararg lists: List<out T>): List<T> {
+fun <T> flatListOf(vararg lists: List<T>): List<T> {
     return listOf(*lists).flatten()
 }
 

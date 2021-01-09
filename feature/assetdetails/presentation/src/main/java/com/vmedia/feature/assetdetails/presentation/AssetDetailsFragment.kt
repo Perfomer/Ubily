@@ -27,7 +27,8 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.keyword.KeywordsAdapter
-import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.artworksListAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.artworksListAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate.descriptionAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.review.ReviewsAdapter
 import kotlinx.android.synthetic.main.assetdetails_card_asset.*
 import kotlinx.android.synthetic.main.assetdetails_card_description.*
@@ -36,7 +37,6 @@ import kotlinx.android.synthetic.main.assetdetails_card_reviews.*
 import kotlinx.android.synthetic.main.assetdetails_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetailsState, Nothing>(
     layoutResource = R.layout.assetdetails_fragment,
@@ -48,8 +48,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private val reviewsAdapter by lazy { ReviewsAdapter(navigator::navigateToUser) }
 
-    private val keywordsAdapter by lazy { KeywordsAdapter(navigator::navigateToAssetsSearch) }
-
     private val adapter: ListDelegationAdapter<List<BaseListItem>> by lazy {
         ListDelegationAdapter(
             artworksListAdapterDelegate(
@@ -59,9 +57,14 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
                         targetImagesPosition = artworkPosition
                     )
                 },
-                onShowArtworksBinding = {
+                onShowArtworksClickListener = {
                     navigator.navigateToGallery(currentState!!.payload.asset.artworks.images)
                 }
+            ),
+            descriptionAdapterDelegate(
+                onImageClickListener = { currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery) },
+                onCollapsedClickListener = { postIntent(ExpandDescription) },
+                onKeywordClickListener = navigator::navigateToAssetsSearch
             )
         )
     }
@@ -77,8 +80,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_root.addSystemBottomPadding()
         assetdetails_toolbar.addSystemTopPadding()
 
-        assetdetails_description_scrim.setOnClickListener { postIntent(ExpandDescription) }
-        assetdetails_description_viewmore.setOnClickListener { postIntent(ExpandDescription) }
         assetdetails_reviews_scrim.setOnClickListener { postIntent(ExpandReviews) }
         assetdetails_reviews_viewmore.setOnClickListener { postIntent(ExpandReviews) }
 
@@ -87,10 +88,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         assetdetails_icon.setOnClickListener {
             currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
-        }
-
-        assetdetails_description_image.setOnClickListener {
-            currentState!!.payload.asset.bigImage?.let(navigator::navigateToGallery)
         }
 
         assetdetails_externallink.setOnClickListener {
@@ -113,18 +110,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
             R.layout.common_reviews_sort_item
         )
 
-        assetdetails_description_text.movementMethod = LinkMovementMethod.getInstance()
-
         assetdetails_content.adapter = adapter
         assetdetails_reviews_list.adapter = reviewsAdapter
-        assetdetails_description_keywords_list.init(
-            adapter = keywordsAdapter,
-            layoutManager = FlexboxLayoutManager(context).apply {
-                flexWrap = FlexWrap.WRAP
-                flexDirection = FlexDirection.ROW
-                alignItems = AlignItems.STRETCH
-            }
-        )
     }
 
     override fun onResume() {
@@ -142,10 +129,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         assetdetails_loading.isVisible = state.isLoading
 
         adapter.items = state.content
+        adapter.notifyDataSetChanged()
 
         with(state.payload) {
             renderAsset(asset)
-            renderDescription(asset, state.isDescriptionExpanded)
             renderReviews(reviews, state.reviewsSortType, state.isReviewsExpanded)
             renderPublisher(publisher)
         }
@@ -165,37 +152,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         iconImage?.let { assetdetails_icon.loadCircleImage(it) }
         bigImage?.let { assetdetails_largeimage.loadImage(it) }
-    }
-
-    private fun renderDescription(asset: DetailedAsset, isExpanded: Boolean) = with(asset) {
-        val hasLargeImage = !bigImage.isNullOrBlank()
-
-        assetdetails_description_text.text = description.toSpan()
-
-        assetdetails_description_image.isVisible = hasLargeImage
-        if (hasLargeImage) assetdetails_description_image.loadImage(bigImage)
-
-        renderKeywords(asset.keywords, isExpanded)
-
-        assetdetails_description_viewmore.isVisible = !isExpanded
-        assetdetails_description_scrim.isVisible = !isExpanded
-
-        assetdetails_description_text.maxLines =
-            if (isExpanded) Integer.MAX_VALUE
-            else MAX_COLLAPSED_DESCRIPTION_LINES
-    }
-
-    private fun renderKeywords(keywords: List<KeywordModel>, isDescriptionExpanded: Boolean) {
-        val hasKeywords = keywords.isNotEmpty() && isDescriptionExpanded
-
-        assetdetails_description_keywords_list.isVisible = hasKeywords
-        assetdetails_description_keywords_title.isVisible = hasKeywords
-
-        if (!hasKeywords) {
-            return
-        }
-
-        keywordsAdapter.items = keywords
     }
 
     private fun renderPublisher(publisherModel: PublisherModel) = with(publisherModel) {

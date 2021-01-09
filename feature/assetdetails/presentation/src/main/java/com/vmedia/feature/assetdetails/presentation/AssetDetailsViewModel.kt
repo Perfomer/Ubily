@@ -66,7 +66,10 @@ internal class AssetDetailsViewModel(
                         reviews = sort(payload.reviews.reviews, oldState.reviewsSortType)
                     )
                 ),
-                content = AssetDetailsListItemFactory.create(asset.artworks),
+                content = AssetDetailsListItemFactory.create(
+                    asset = asset,
+                    isDescriptionExpanded = isDescriptionExpanded,
+                ),
                 isDescriptionExpanded = isDescriptionExpanded,
                 isReviewsExpanded = isReviewsExpanded
             )
@@ -77,7 +80,13 @@ internal class AssetDetailsViewModel(
         }
 
         DescriptionExpanded -> {
-            oldState.copy(isDescriptionExpanded = true)
+            oldState.copy(
+                content = AssetDetailsListItemFactory.create(
+                    asset = oldState.payload.asset,
+                    isDescriptionExpanded = true
+                ),
+                isDescriptionExpanded = true,
+            )
         }
 
         ReviewsExpanded -> {

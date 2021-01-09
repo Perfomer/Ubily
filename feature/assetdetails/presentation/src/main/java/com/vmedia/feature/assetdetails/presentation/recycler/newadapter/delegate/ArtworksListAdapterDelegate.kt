@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.newadapter
+package com.vmedia.feature.assetdetails.presentation.recycler.newadapter.delegate
 
 import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.android.view.recycler.base.BaseListItem
@@ -12,13 +12,13 @@ internal typealias OnShowAllClickListener = () -> Unit
 
 internal fun artworksListAdapterDelegate(
     onArtworkClickListener: ViewHolderOnClickListener,
-    onShowArtworksBinding: OnShowAllClickListener,
+    onShowArtworksClickListener: OnShowAllClickListener,
 ) = adapterDelegateViewBinding<ArtworksListItem, BaseListItem, AssetdetailsCardArtworksBinding>(
     AssetdetailsCardArtworksBinding::inflate
 ) {
     val adapter = ArtworksAdapter(onArtworkClickListener)
 
-    binding.assetdetailsArtworksShowall.setOnClickListener(onShowArtworksBinding)
+    binding.assetdetailsArtworksShowall.setOnClickListener(onShowArtworksClickListener)
     binding.assetdetailsArtworksList.adapter = adapter
 
     bind {
