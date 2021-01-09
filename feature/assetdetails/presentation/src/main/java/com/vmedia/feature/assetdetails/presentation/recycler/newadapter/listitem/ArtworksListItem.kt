@@ -1,0 +1,10 @@
+package com.vmedia.feature.assetdetails.presentation.recycler.newadapter.listitem
+
+import com.vmedia.core.common.android.view.recycler.base.BaseListItem
+import com.vmedia.core.data.internal.database.entity.Artwork
+
+internal data class ArtworksListItem(
+    val items: List<Artwork>
+) : BaseListItem {
+    override val id: String = ArtworksListItem::class.simpleName!!
+}
