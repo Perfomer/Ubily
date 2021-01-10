@@ -9,6 +9,7 @@ import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.domain.model.PublisherModel
 import com.vmedia.feature.assetdetails.domain.model.ReviewsModel
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ArtworksListItem
+import com.vmedia.feature.assetdetails.presentation.recycler.listitem.AssetListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.DescriptionListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.PublisherListItem
 import com.vmedia.feature.assetdetails.presentation.recycler.listitem.ReviewsListItem
@@ -24,11 +25,16 @@ internal object AssetDetailsListItemFactory {
         val asset = assetDetails.asset
 
         return flatListOf(
+            createAssetItem(asset),
             createArtworksItem(asset.artworks),
             createDescriptionItem(asset, isDescriptionExpanded),
             createReviewsItem(assetDetails.reviews, isReviewsExpanded, reviewsSortType),
             createPublisherItem(assetDetails.publisher),
         )
+    }
+
+    private fun createAssetItem(asset: DetailedAsset): List<BaseListItem> {
+        return listOf(AssetListItem(asset))
     }
 
     private fun createArtworksItem(artworks: List<Artwork>): List<BaseListItem> {

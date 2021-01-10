@@ -1,195 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp"
-    android:paddingTop="36dp"
-    android:paddingBottom="24dp"
-    app:layoutDescription="@xml/assetdetails_card_asset_scene">
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingBottom="64dp"
+    tools:ignore="ContentDescription">
 
-    <TextView
-        android:id="@+id/assetdetails_category"
+    <ImageView
+        android:id="@+id/assetdetails_largeimage"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/rubik"
-        android:gravity="center_horizontal"
-        android:letterSpacing="0.165"
-        android:textAllCaps="true"
-        android:textColor="@color/brand_green_darker"
-        android:textSize="14sp"
+        android:layout_height="210dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_placeholder_rect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Icons &amp; UI" />
-
-    <TextView
-        android:id="@+id/assetdetails_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/rubik_bold"
-        android:gravity="center_horizontal"
-        android:textAllCaps="true"
-        android:textColor="@color/brand_black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_category"
-        app:layout_goneMarginTop="0dp"
-        tools:text="[GUI] Emerald Treasure — THE EMERALD INTERFACE" />
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
-        android:id="@+id/assetdetails_asset_price_wrap"
+        android:id="@+id/assetdetails_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
         android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_name">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/assetdetails_asset_price"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/assetdetails_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="$14.00" />
+        <ImageView
+            android:id="@+id/assetdetails_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@android:color/white" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/assetdetails_asset_identifier_wrap"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/assetdetails_externallink"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_list_item_grey"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
+        android:layout_height="96dp"
+        android:backgroundTint="@color/brand_grey_lighter"
+        android:paddingTop="20dp"
+        android:text="@string/common_details_externallink"
+        android:textColor="@color/brand_green_darker"
+        android:translationY="64dp"
+        app:icon="@drawable/ic_external_link"
+        app:iconGravity="textStart"
+        app:iconTint="@color/brand_green_darker"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_asset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset_price_wrap">
+        app:rippleColor="@color/brand_green" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/common_details_id"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/assetdetails_identifier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp"
-            tools:text="22305" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/assetdetails_asset_version_wrap"
+    <FrameLayout
+        android:id="@+id/assetdetails_asset"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
+        android:clipToPadding="false"
+        android:translationY="-8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset_identifier_wrap">
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_largeimage">
 
-        <TextView
-            android:layout_width="0dp"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/assetdetails_asset_version"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp" />
+            app:cardCornerRadius="14dp"
+            tools:background="@android:color/white">
 
-        <TextView
-            android:id="@+id/assetdetails_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp"
-            tools:text="1.2" />
+            <include
+                android:id="@+id/assetdetails_asset_card"
+                layout="@layout/assetdetails_card_asset_content" />
 
-    </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <LinearLayout
-        android:id="@+id/assetdetails_asset_status_wrap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_list_item_grey"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/assetdetails_icon"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:background="@drawable/bg_asset_icon"
+        android:padding="4dp"
+        android:src="@drawable/bg_placeholder_circle"
+        android:translationY="-8dp"
+        app:layout_constraintBottom_toTopOf="@id/assetdetails_asset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset_version_wrap">
+        app:layout_constraintTop_toTopOf="@id/assetdetails_asset" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/assetdetails_asset_status"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/assetdetails_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brand_green_darker"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Published" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/assetdetails_asset_size_wrap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset_status_wrap">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/assetdetails_asset_size"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/assetdetails_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/brand_black"
-            android:textSize="16sp"
-            tools:text="22305" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

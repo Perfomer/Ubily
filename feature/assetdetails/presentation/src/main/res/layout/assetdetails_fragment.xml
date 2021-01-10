@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/brand_grey_lightest">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/general_appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
-
-        <com.vmedia.feature.assetdetails.presentation.view.AssetDetailsHeaderView
-            android:id="@+id/assetdetails_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/assetdetails_content"
         android:layout_width="match_parent"
@@ -30,7 +14,6 @@
         android:clipToPadding="false"
         android:orientation="vertical"
         android:overScrollMode="never"
-        android:paddingTop="20dp"
         android:paddingBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -38,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
         tools:itemCount="1"
-        tools:listitem="@layout/assetdetails_card_description" />
+        tools:listitem="@layout/assetdetails_card_asset" />
 
     <ProgressBar
         android:id="@+id/assetdetails_loading"

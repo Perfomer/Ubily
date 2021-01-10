@@ -8,6 +8,7 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.addSystemBottomPadding
 import com.vmedia.core.common.android.util.addSystemTopPadding
+import com.vmedia.core.common.android.util.addSystemVerticalPadding
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.diffedValue
 import com.vmedia.core.common.android.util.isVisible
@@ -29,6 +30,7 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.LoadD
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.UpdateSortType
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.artworksAdapterDelegate
+import com.vmedia.feature.assetdetails.presentation.recycler.delegate.assetAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.descriptionAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.publisherAdapterDelegate
 import com.vmedia.feature.assetdetails.presentation.recycler.delegate.reviewsAdapterDelegate
@@ -47,6 +49,11 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     private val adapter: ListDelegationAdapter<List<BaseListItem>> by lazy {
         ListDelegationAdapter(
+            assetAdapterDelegate(
+                onAssetIconClickListener = { currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery) },
+                onBackArrowClickListener = ::goBack,
+                onExternalLinkClickListener = { navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!) },
+            ),
             artworksAdapterDelegate(
                 onArtworkClickListener = { artworkPosition ->
                     navigator.navigateToGallery(
@@ -83,12 +90,8 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        assetdetails_content.addSystemBottomPadding()
+        assetdetails_content.addSystemVerticalPadding()
         assetdetails_content.adapter = adapter
-
-        assetdetails_header.onAssetIconClickListener = { currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery) }
-        assetdetails_header.onBackArrowClickListener = ::goBack
-        assetdetails_header.onExternalLinkClickListener = { navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!) }
     }
 
     override fun onResume() {
@@ -107,8 +110,6 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
         adapter.items = state.content
         adapter.notifyDataSetChanged() // todo
-
-        assetdetails_header.asset = state.payload.asset
     }
 
     internal companion object {

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
-
-    <Transition
-        motion:constraintSetEnd="@layout/assetdetails_card_asset_collapsed"
-        motion:constraintSetStart="@layout/assetdetails_card_asset_expanded"
-        motion:duration="1000" />
-
-</MotionScene>
