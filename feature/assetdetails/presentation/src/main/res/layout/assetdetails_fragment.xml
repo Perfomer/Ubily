@@ -17,7 +17,8 @@
         <com.vmedia.feature.assetdetails.presentation.view.AssetDetailsHeaderView
             android:id="@+id/assetdetails_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
