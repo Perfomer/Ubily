@@ -52,6 +52,11 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
         val progress = -verticalOffset / appBarLayout!!.totalScrollRange.toFloat()
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        (parent as? AppBarLayout)?.addOnOffsetChangedListener(this)
+    }
+
     private fun onAssetUpdate() {
         with(asset ?: return) {
             binding.assetdetailsName.diffedValue = name
