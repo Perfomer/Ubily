@@ -10,7 +10,6 @@ import com.vmedia.core.common.android.util.inflater
 import com.vmedia.core.common.android.util.labelResource
 import com.vmedia.core.common.android.util.loadCircleImage
 import com.vmedia.core.common.android.util.loadImage
-import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.presentation.R
@@ -41,9 +40,9 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
     private val binding = AssetdetailsViewHeaderBinding.inflate(inflater, this, true)
 
     init {
-        binding.assetdetailsBack.setOnClickListener(onBackArrowClickListener)
-        binding.assetdetailsIcon.setOnClickListener(onAssetIconClickListener)
-        binding.assetdetailsExternallink.setOnClickListener(onExternalLinkClickListener)
+        binding.assetdetailsBack.setOnClickListener { onBackArrowClickListener?.invoke() }
+        binding.assetdetailsIcon.setOnClickListener { onAssetIconClickListener?.invoke() }
+        binding.assetdetailsExternallink.setOnClickListener { onExternalLinkClickListener?.invoke() }
 
         binding.assetdetailsToolbar.addSystemTopPadding()
     }
