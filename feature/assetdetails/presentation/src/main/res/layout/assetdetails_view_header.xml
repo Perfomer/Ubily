@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:paddingBottom="64dp"
     tools:ignore="ContentDescription">
 
     <ImageView
@@ -50,16 +51,16 @@
         android:layout_width="0dp"
         android:layout_height="96dp"
         android:backgroundTint="@color/brand_grey_lighter"
-        android:paddingTop="18dp"
+        android:paddingTop="20dp"
         android:text="@string/common_details_externallink"
         android:textColor="@color/brand_green_darker"
-        android:translationY="-32dp"
+        android:translationY="64dp"
         app:icon="@drawable/ic_external_link"
         app:iconGravity="textStart"
         app:iconTint="@color/brand_green_darker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
+        app:layout_constraintBottom_toBottomOf="@id/assetdetails_asset"
         app:rippleColor="@color/brand_green" />
 
     <FrameLayout
