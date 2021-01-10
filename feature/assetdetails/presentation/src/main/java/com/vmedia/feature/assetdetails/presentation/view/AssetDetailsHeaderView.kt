@@ -1,6 +1,5 @@
 package com.vmedia.feature.assetdetails.presentation.view
 
-import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
@@ -11,11 +10,13 @@ import com.vmedia.core.common.android.util.inflater
 import com.vmedia.core.common.android.util.labelResource
 import com.vmedia.core.common.android.util.loadCircleImage
 import com.vmedia.core.common.android.util.loadImage
+import com.vmedia.core.common.android.util.setOnClickListener
 import com.vmedia.core.common.pure.util.cropToString
 import com.vmedia.feature.assetdetails.domain.model.DetailedAsset
 import com.vmedia.feature.assetdetails.presentation.R
 import com.vmedia.feature.assetdetails.presentation.databinding.AssetdetailsViewHeaderBinding
 
+internal typealias OnBackArrowClickListener = () -> Unit
 internal typealias OnAssetIconClickListener = () -> Unit
 internal typealias OnExternalLinkClickListener = () -> Unit
 
@@ -27,6 +28,7 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
     AppBarLayout.OnOffsetChangedListener {
 
     internal var onAssetIconClickListener: OnAssetIconClickListener? = null
+    internal var onBackArrowClickListener: OnBackArrowClickListener? = null
     internal var onExternalLinkClickListener: OnExternalLinkClickListener? = null
 
     internal var asset: DetailedAsset? = null
@@ -39,9 +41,9 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
     private val binding = AssetdetailsViewHeaderBinding.inflate(inflater, this, true)
 
     init {
-        binding.assetdetailsBack.setOnClickListener { (context as Activity).onBackPressed() }
-        binding.assetdetailsIcon.setOnClickListener { onAssetIconClickListener?.invoke() }
-        binding.assetdetailsExternallink.setOnClickListener { onExternalLinkClickListener?.invoke() }
+        binding.assetdetailsBack.setOnClickListener(onBackArrowClickListener)
+        binding.assetdetailsIcon.setOnClickListener(onAssetIconClickListener)
+        binding.assetdetailsExternallink.setOnClickListener(onExternalLinkClickListener)
 
         binding.assetdetailsToolbar.addSystemTopPadding()
     }
