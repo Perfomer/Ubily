@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.google.android.material.appbar.AppBarLayout
+import com.vmedia.core.common.android.util.addSystemTopPadding
 import com.vmedia.core.common.android.util.diffedValue
 import com.vmedia.core.common.android.util.inflater
 import com.vmedia.core.common.android.util.labelResource
@@ -26,7 +27,6 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
     AppBarLayout.OnOffsetChangedListener {
 
     internal var onAssetIconClickListener: OnAssetIconClickListener? = null
-
     internal var onExternalLinkClickListener: OnExternalLinkClickListener? = null
 
     internal var asset: DetailedAsset? = null
@@ -42,6 +42,8 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
         binding.assetdetailsBack.setOnClickListener { (context as Activity).onBackPressed() }
         binding.assetdetailsIcon.setOnClickListener { onAssetIconClickListener?.invoke() }
         binding.assetdetailsExternallink.setOnClickListener { onExternalLinkClickListener?.invoke() }
+
+        binding.assetdetailsToolbar.addSystemTopPadding()
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {

@@ -84,12 +84,10 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
         super.onViewCreated(view, savedInstanceState)
 
         assetdetails_content.addSystemBottomPadding()
-        general_appbar.addSystemTopPadding()
+        assetdetails_content.adapter = adapter
 
         assetdetails_header.onAssetIconClickListener = { currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery) }
         assetdetails_header.onExternalLinkClickListener = { navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!) }
-
-        assetdetails_content.adapter = adapter
     }
 
     override fun onResume() {
