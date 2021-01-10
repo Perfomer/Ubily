@@ -82,10 +82,12 @@ internal class AssetDetailsFragment : MviFragment<AssetDetailsIntent, AssetDetai
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//     todo   assetdetails_root.addSystemBottomPadding()
-//      todo  assetdetails_toolbar.addSystemTopPadding()
 
-       // todo header listeners
+        assetdetails_content.addSystemBottomPadding()
+        general_appbar.addSystemTopPadding()
+
+        assetdetails_header.onAssetIconClickListener = { currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery) }
+        assetdetails_header.onExternalLinkClickListener = { navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!) }
 
         assetdetails_content.adapter = adapter
     }

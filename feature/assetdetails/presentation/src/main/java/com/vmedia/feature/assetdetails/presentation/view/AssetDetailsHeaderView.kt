@@ -25,10 +25,8 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr),
     AppBarLayout.OnOffsetChangedListener {
 
-    // currentState!!.payload.asset.iconImage?.let(navigator::navigateToGallery)
     internal var onAssetIconClickListener: OnAssetIconClickListener? = null
 
-    // navigator.navigateToUrl(currentState!!.payload.asset.shortUrl!!)
     internal var onExternalLinkClickListener: OnExternalLinkClickListener? = null
 
     internal var asset: DetailedAsset? = null
