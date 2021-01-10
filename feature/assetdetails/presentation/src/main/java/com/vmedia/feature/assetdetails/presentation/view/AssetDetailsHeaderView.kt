@@ -60,13 +60,13 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
 
     private fun onAssetUpdate() {
         with(asset ?: return) {
-            binding.assetdetailsName.diffedValue = name
-            binding.assetdetailsIdentifier.diffedValue = id.toString()
-            binding.assetdetailsCategory.diffedValue = categoryName
-            binding.assetdetailsPrice.diffedValue = "$$priceUsd"
-            binding.assetdetailsVersion.diffedValue = versionName
-            binding.assetdetailsStatus.diffedValue = context.getString(status.labelResource)
-            binding.assetdetailsSize.diffedValue = context.getString(
+            binding.assetdetailsAssetCard.assetdetailsName.diffedValue = name
+            binding.assetdetailsAssetCard.assetdetailsIdentifier.diffedValue = id.toString()
+            binding.assetdetailsAssetCard.assetdetailsCategory.diffedValue = categoryName
+            binding.assetdetailsAssetCard.assetdetailsPrice.diffedValue = "$$priceUsd"
+            binding.assetdetailsAssetCard.assetdetailsVersion.diffedValue = versionName
+            binding.assetdetailsAssetCard.assetdetailsStatus.diffedValue = context.getString(status.labelResource)
+            binding.assetdetailsAssetCard.assetdetailsSize.diffedValue = context.getString(
                 R.string.assetdetails_asset_value_size,
                 sizeMb.cropToString()
             )
