@@ -6,6 +6,7 @@ import android.widget.FrameLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.vmedia.core.common.android.util.addSystemTopPadding
 import com.vmedia.core.common.android.util.diffedValue
+import com.vmedia.core.common.android.util.disableTouches
 import com.vmedia.core.common.android.util.inflater
 import com.vmedia.core.common.android.util.labelResource
 import com.vmedia.core.common.android.util.loadCircleImage
@@ -44,6 +45,7 @@ internal class AssetDetailsHeaderView @JvmOverloads constructor(
         binding.assetdetailsIcon.setOnClickListener { onAssetIconClickListener?.invoke() }
         binding.assetdetailsExternallink.setOnClickListener { onExternalLinkClickListener?.invoke() }
 
+        binding.assetdetailsAsset.disableTouches()
         binding.assetdetailsToolbar.addSystemTopPadding()
     }
 
