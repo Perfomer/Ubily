@@ -138,8 +138,8 @@ fun SwitchCompat.setOnCheckedChangeListener(listener: (Boolean) -> Unit) {
     setOnCheckedChangeListener { _, isChecked -> listener.invoke(isChecked) }
 }
 
-fun View.setOnClickListener(listener: () -> Unit) {
-    setOnClickListener { listener.invoke() }
+fun View.setOnClickListener(listener: (() -> Unit)?) {
+    setOnClickListener { listener?.invoke() }
 }
 
 fun View.setBackgroundTint(@ColorRes colorRes: Int) {
