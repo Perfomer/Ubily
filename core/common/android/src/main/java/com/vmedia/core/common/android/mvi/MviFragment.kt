@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.annotation.MenuRes
 import com.vmedia.core.common.android.view.base.BaseFragment
-import com.vmedia.core.common.pure.util.toObservable
+import com.vmedia.core.common.pure.util.rx.toObservable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

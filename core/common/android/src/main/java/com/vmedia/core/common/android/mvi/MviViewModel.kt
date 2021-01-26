@@ -3,7 +3,7 @@ package com.vmedia.core.common.android.mvi
 import androidx.lifecycle.ViewModel
 import com.vmedia.core.common.android.util.SwitchableObservable
 import com.vmedia.core.common.android.util.switchSource
-import com.vmedia.core.common.pure.util.flatWithLatestFrom
+import com.vmedia.core.common.pure.util.rx.flatWithLatestFrom
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers

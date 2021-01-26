@@ -5,7 +5,7 @@ import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.common.pure.obj.event.EventInfo.EventPayout
 import com.vmedia.core.common.pure.obj.event.PayoutInfo
 import com.vmedia.core.common.pure.util.ObservableMapper
-import com.vmedia.core.common.pure.util.zipWith
+import com.vmedia.core.common.pure.util.rx.zipWith
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Event
 import com.vmedia.core.data.internal.database.entity.Payout

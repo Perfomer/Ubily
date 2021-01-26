@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.synchronizer.revenue
 
-import com.vmedia.core.common.pure.util.actOnSuccess
-import com.vmedia.core.common.pure.util.filterItemsAreInstance
+import com.vmedia.core.common.pure.util.rx.actOnSuccess
+import com.vmedia.core.common.pure.util.rx.filterItemsAreInstance
 import com.vmedia.core.common.pure.util.filterWith
 import com.vmedia.core.common.pure.util.mapWith
 import com.vmedia.core.data.datasource.DatabaseDataSource

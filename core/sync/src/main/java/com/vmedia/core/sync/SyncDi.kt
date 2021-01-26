@@ -2,6 +2,7 @@ package com.vmedia.core.sync
 
 import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.common.pure.util.*
+import com.vmedia.core.common.pure.util.rx.blockingNullable
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.api.entity.CategoryDto
