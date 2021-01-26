@@ -43,7 +43,6 @@ fun <T1 : Any, T2 : Any> Observable<T1>.zipWith(
 }
 
 
-
 fun <T> Single<List<List<T>>>.flatten(): Single<List<T>> {
     return map { it.flatten() }
 }
@@ -60,8 +59,8 @@ fun <T, R : Any> Single<List<T>>.filterItemsAreInstance(clazz: KClass<R>): Singl
     return map { it.filterIsInstance(clazz.java) }
 }
 
-fun <T> Single<T>.actOnSuccess(action: (T) -> Completable): Single<T> {
-    return flatMap { action.invoke(it).andThen(Single.just(it)) }
+fun <T : Any> Single<T>.actOnSuccess(action: (T) -> Completable): Single<T> {
+    return flatMap { action.invoke(it).toSingleDefault(it) }
 }
 
 fun <T> Single<T>.blockingNullable(): T? {
