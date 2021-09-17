@@ -1,9 +1,6 @@
 # Ubily
 [2020] The RICH client for Unity Asset Store Publisher cabinet
-
 **WIP: WORK IN PROGRESS**
-
-Rich mobile client for Unity Asset Store Publisher cabinet.
 
 <img src="art/ubily_preview.png">
 
