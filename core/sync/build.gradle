@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../../android_common_build.gradle'
 
 dependencies {
-    implementation project(":core:common:pure")
+    implementation project(":core:common:android")
     implementation project(":core:network")
     implementation project(":core:data")
 }

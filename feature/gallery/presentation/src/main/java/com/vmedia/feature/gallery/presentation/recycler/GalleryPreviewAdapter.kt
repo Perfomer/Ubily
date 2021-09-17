@@ -2,12 +2,12 @@ package com.vmedia.feature.gallery.presentation.recycler
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.feature.gallery.presentation.R
 
 internal class GalleryPreviewAdapter(
-    private val onClick: ViewHolderOnClick
+    private val onClick: ViewHolderOnClickListener
 ) : BaseAdapter<GalleryPreviewViewHolder>() {
 
     var items by diffedListBy(String::hashCode)

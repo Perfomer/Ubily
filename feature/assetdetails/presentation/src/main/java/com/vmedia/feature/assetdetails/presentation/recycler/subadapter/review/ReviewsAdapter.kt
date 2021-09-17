@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.review
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.review
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
@@ -6,8 +6,10 @@ import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.feature.assetdetails.presentation.AssetDetailsViewModel
 import com.vmedia.feature.assetdetails.presentation.R
 
+internal typealias OnAuthorClickListener = (authorId: Long) -> Unit
+
 internal class ReviewsAdapter(
-    private val onAuthorClick: (authorId: Long) -> Unit
+    private val onAuthorClick: OnAuthorClickListener
 ) : BaseAdapter<ReviewViewHolder>() {
 
     private var items: List<ReviewDetailed> = emptyList()
@@ -46,5 +48,4 @@ internal class ReviewsAdapter(
     private fun onAuthorClick(position: Int) {
         onAuthorClick.invoke(items[position].authorId)
     }
-
 }

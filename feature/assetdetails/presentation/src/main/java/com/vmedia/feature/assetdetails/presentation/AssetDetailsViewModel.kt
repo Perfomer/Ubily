@@ -2,7 +2,7 @@ package com.vmedia.feature.assetdetails.presentation
 
 import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.core.common.pure.obj.ReviewsSortType
-import com.vmedia.core.common.pure.util.toObservable
+import com.vmedia.core.common.pure.util.rx.toObservable
 import com.vmedia.core.data.internal.database.model.ReviewDetailed
 import com.vmedia.feature.assetdetails.domain.AssetDetailsInteractor
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction
@@ -10,6 +10,7 @@ import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsAction.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsIntent.*
 import com.vmedia.feature.assetdetails.presentation.mvi.AssetDetailsState
+import com.vmedia.feature.assetdetails.presentation.recycler.AssetDetailsListItemFactory
 
 internal class AssetDetailsViewModel(
     private val assetId: Long,
@@ -46,6 +47,7 @@ internal class AssetDetailsViewModel(
         is AssetLoadingSucceed -> {
             val payload = action.payload
             val asset = payload.asset
+            val reviewsSortType = oldState.reviewsSortType
 
             val isDescriptionShort = asset.description.length <= MAX_COLLAPSED_DESCRIPTION_LENGTH
             val isKeywordsListShort = asset.keywords.size <= MAX_COLLAPSED_KEYWORDS_COUNT
@@ -62,8 +64,14 @@ internal class AssetDetailsViewModel(
                 isLoading = false,
                 payload = payload.copy(
                     reviews = payload.reviews.copy(
-                        reviews = sort(payload.reviews.reviews, oldState.reviewsSortType)
+                        reviews = sort(payload.reviews.reviews, reviewsSortType)
                     )
+                ),
+                content = AssetDetailsListItemFactory.create(
+                    assetDetails = payload,
+                    reviewsSortType = reviewsSortType,
+                    isReviewsExpanded = isReviewsExpanded,
+                    isDescriptionExpanded = isDescriptionExpanded,
                 ),
                 isDescriptionExpanded = isDescriptionExpanded,
                 isReviewsExpanded = isReviewsExpanded
@@ -75,24 +83,47 @@ internal class AssetDetailsViewModel(
         }
 
         DescriptionExpanded -> {
-            oldState.copy(isDescriptionExpanded = true)
+            oldState.copy(
+                content = AssetDetailsListItemFactory.create(
+                    assetDetails = oldState.payload,
+                    reviewsSortType = oldState.reviewsSortType,
+                    isReviewsExpanded = oldState.isReviewsExpanded,
+                    isDescriptionExpanded = true,
+                ),
+                isDescriptionExpanded = true,
+            )
         }
 
         ReviewsExpanded -> {
-            oldState.copy(isReviewsExpanded = true)
+            oldState.copy(
+                content = AssetDetailsListItemFactory.create(
+                    assetDetails = oldState.payload,
+                    reviewsSortType = oldState.reviewsSortType,
+                    isReviewsExpanded = true,
+                    isDescriptionExpanded = oldState.isDescriptionExpanded,
+                ),
+                isReviewsExpanded = true,
+            )
         }
 
         is SortTypeUpdated -> {
             val reviewsSortType = action.sortType
             val sortedReviews = sort(oldState.payload.reviews.reviews, reviewsSortType)
+            val payload = oldState.payload.copy(
+                reviews = oldState.payload.reviews.copy(
+                    reviews = sortedReviews
+                )
+            )
 
             oldState.copy(
                 reviewsSortType = reviewsSortType,
-                payload = oldState.payload.copy(
-                    reviews = oldState.payload.reviews.copy(
-                        reviews = sortedReviews
-                    )
-                )
+                content = AssetDetailsListItemFactory.create(
+                    assetDetails = payload,
+                    reviewsSortType = reviewsSortType,
+                    isReviewsExpanded = oldState.isReviewsExpanded,
+                    isDescriptionExpanded = oldState.isDescriptionExpanded,
+                ),
+                payload = payload
             )
         }
     }

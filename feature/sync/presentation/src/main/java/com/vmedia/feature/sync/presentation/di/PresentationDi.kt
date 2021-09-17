@@ -25,7 +25,8 @@ val featureSyncPresentationModule = module {
     viewModel {
         SyncViewModel(
             interactor = get(),
-            statusMapper = get<StatusMapper>()
+            statusMapper = get<StatusMapper>(),
+            workManager = get(),
         )
     }
 }

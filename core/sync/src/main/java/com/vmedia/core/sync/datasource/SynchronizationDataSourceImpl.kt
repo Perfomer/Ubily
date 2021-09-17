@@ -1,7 +1,7 @@
 package com.vmedia.core.sync.datasource
 
 import com.vmedia.core.common.pure.obj.Period
-import com.vmedia.core.common.pure.util.andThenMerge
+import com.vmedia.core.common.pure.util.rx.andThenMerge
 import com.vmedia.core.sync.*
 import com.vmedia.core.sync.SynchronizationDataType.PERIODS
 import com.vmedia.core.sync.SynchronizationEvent.*

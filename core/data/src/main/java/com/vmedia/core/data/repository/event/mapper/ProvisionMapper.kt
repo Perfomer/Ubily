@@ -4,7 +4,7 @@ import androidx.annotation.WorkerThread
 import com.vmedia.core.common.pure.obj.event.EventInfo
 import com.vmedia.core.common.pure.obj.event.SaleInfo
 import com.vmedia.core.common.pure.util.ObservableMapper
-import com.vmedia.core.common.pure.util.associateWith
+import com.vmedia.core.common.pure.util.rx.associateWith
 import com.vmedia.core.common.pure.util.sumByBigDecimal
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset

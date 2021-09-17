@@ -10,20 +10,20 @@ import kotlin.reflect.KProperty
 
 abstract class CacheHolder {
 
-    private val cacheDropper = CacheDropper()
+    private val cacheTerminator = CacheTerminator()
 
-    fun dropCache() = cacheDropper.dropCache()
+    fun dropCache() = cacheTerminator.terminateCache()
 
     protected fun <T> cachedSingle(
         query: Single<T>
     ): ReadOnlyProperty<Any, Single<T>> {
-        return SingleCachedProperty(query).apply { cacheDropper.listen(this) }
+        return SingleCachedProperty(query).apply { cacheTerminator.attach(this) }
     }
 
     protected fun <K, V> cachedMapSingle(
         queryProvider: (K) -> Single<V>
     ): ReadOnlyProperty<Any, SingleValueHolder<K, V>> {
-        return MapSingleCachedProperty(queryProvider).apply { cacheDropper.listen(this) }
+        return MapSingleCachedProperty(queryProvider).apply { cacheTerminator.attach(this) }
     }
 
 }
@@ -120,20 +120,20 @@ private class CachedSingleValue<T>(
 }
 
 /**
- * Cache dropper class
+ * Cache terminator class
  *
- * You can add listeners and [listen] cache drop requests.
- * You can drop cache for all listeners by [dropCache] method.
+ * You can add listeners and [attach] cache drop requests.
+ * You can drop cache for all listeners by [terminateCache] method.
  */
-private class CacheDropper {
+private class CacheTerminator {
 
     private val listeners = mutableListOf<Reusable>()
 
-    fun listen(action: Reusable) {
+    fun attach(action: Reusable) {
         listeners += action
     }
 
-    fun dropCache() {
+    fun terminateCache() {
         listeners.forEach(Reusable::drop)
     }
 

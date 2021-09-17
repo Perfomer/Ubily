@@ -1,4 +1,4 @@
-package com.vmedia.core.common.android.view
+package com.vmedia.core.common.android.view.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

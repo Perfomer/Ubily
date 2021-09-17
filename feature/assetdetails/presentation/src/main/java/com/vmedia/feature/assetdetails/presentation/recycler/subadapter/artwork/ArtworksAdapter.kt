@@ -1,14 +1,14 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.artwork
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.artwork
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.feature.assetdetails.presentation.R
 
 internal class ArtworksAdapter(
-    private val onClick: ViewHolderOnClick
+    private val onClickListener: ViewHolderOnClickListener
 ) : BaseAdapter<ArtworkViewHolder>() {
 
     var items by diffedListBy(Artwork::id)
@@ -24,7 +24,7 @@ internal class ArtworksAdapter(
     override fun onLayoutRequested(viewType: Int) = R.layout.assetdetails_item_artwork
 
     override fun onCreateViewHolder(view: View, viewType: Int): ArtworkViewHolder {
-        return ArtworkViewHolder(view, onClick)
+        return ArtworkViewHolder(view, onClickListener)
     }
 
     override fun onBindViewHolder(holder: ArtworkViewHolder, position: Int) {

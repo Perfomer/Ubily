@@ -1,179 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/brand_grey_lightest"
-    tools:ignore="ContentDescription">
+    android:background="@color/brand_grey_lightest">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/assetdetails_root"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/assetdetails_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingBottom="20dp">
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:paddingBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
+        tools:itemCount="1"
+        tools:listitem="@layout/assetdetails_card_asset" />
 
-        <ImageView
-            android:id="@+id/assetdetails_largeimage"
-            android:layout_width="0dp"
-            android:layout_height="210dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_placeholder_rect"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
+    <ProgressBar
+        android:id="@+id/assetdetails_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
-        <LinearLayout
-            android:id="@+id/assetdetails_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/assetdetails_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:padding="12dp"
-                android:src="@drawable/ic_arrow_back"
-                android:tint="@android:color/white" />
-
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/assetdetails_externallink"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="0dp"
-            android:layout_height="96dp"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="@color/brand_grey_lighter"
-            android:paddingTop="28dp"
-            android:text="@string/common_details_externallink"
-            android:textColor="@color/brand_green_darker"
-            app:icon="@drawable/ic_external_link"
-            app:iconGravity="textStart"
-            app:iconTint="@color/brand_green_darker"
-            app:layout_constraintBottom_toTopOf="@id/assetdetails_artworks"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rippleColor="@color/brand_green" />
-
-        <FrameLayout
-            android:id="@+id/assetdetails_asset"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="202dp"
-            android:clipToPadding="false"
-            android:paddingBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
-                tools:background="@android:color/white">
-
-                <include layout="@layout/assetdetails_card_asset" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/assetdetails_icon"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:background="@drawable/bg_asset_icon"
-            android:padding="4dp"
-            android:src="@drawable/bg_placeholder_circle"
-            app:layout_constraintBottom_toTopOf="@id/assetdetails_asset"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/assetdetails_asset" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_artworks"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_asset"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_artworks" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_artworks"
-            app:layout_goneMarginTop="0dp"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_description" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_reviews"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_description"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_reviews" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/assetdetails_publisher"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/assetdetails_reviews"
-            app:rippleColor="@color/brand_green"
-            tools:background="@android:color/white">
-
-            <include layout="@layout/assetdetails_card_publisher" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <ProgressBar
-            android:id="@+id/assetdetails_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/assetdetails_largeimage"
-            app:layout_constraintEnd_toEndOf="@id/assetdetails_largeimage"
-            app:layout_constraintStart_toStartOf="@id/assetdetails_largeimage"
-            app:layout_constraintTop_toTopOf="@id/assetdetails_largeimage" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

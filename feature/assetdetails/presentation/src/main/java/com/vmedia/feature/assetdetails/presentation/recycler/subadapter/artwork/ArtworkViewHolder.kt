@@ -1,17 +1,17 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.artwork
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.artwork
 
 import android.view.View
 import androidx.core.view.isVisible
 import com.vmedia.core.common.android.util.loadImage
 import com.vmedia.core.common.android.view.recycler.base.BaseViewHolder
-import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClick
+import com.vmedia.core.common.android.view.recycler.base.ViewHolderOnClickListener
 import com.vmedia.core.data.internal.database.entity.Artwork
 import com.vmedia.core.data.internal.database.entity.MediaType.VIDEO
 import kotlinx.android.synthetic.main.assetdetails_item_artwork.*
 
 internal class ArtworkViewHolder(
     containerView: View,
-    onClick: ViewHolderOnClick
+    onClick: ViewHolderOnClickListener
 ) : BaseViewHolder(containerView) {
 
     init {

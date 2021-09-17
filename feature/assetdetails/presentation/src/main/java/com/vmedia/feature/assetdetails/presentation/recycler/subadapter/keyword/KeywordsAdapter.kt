@@ -1,4 +1,4 @@
-package com.vmedia.feature.assetdetails.presentation.recycler.keyword
+package com.vmedia.feature.assetdetails.presentation.recycler.subadapter.keyword
 
 import android.view.View
 import com.vmedia.core.common.android.view.recycler.base.BaseAdapter
@@ -6,8 +6,10 @@ import com.vmedia.core.common.android.view.recycler.diffedListBy
 import com.vmedia.feature.assetdetails.domain.model.KeywordModel
 import com.vmedia.feature.assetdetails.presentation.R
 
+internal typealias OnKeywordClickListener = (keywordId: Long) -> Unit
+
 internal class KeywordsAdapter(
-    private val onClick: (keywordId: Long) -> Unit
+    private val onKeywordClickListener: OnKeywordClickListener
 ) : BaseAdapter<KeywordViewHolder>() {
 
     var items by diffedListBy(KeywordModel::id)
@@ -32,7 +34,7 @@ internal class KeywordsAdapter(
 
 
     private fun onClick(position: Int) {
-        onClick.invoke(items[position].id)
+        onKeywordClickListener.invoke(items[position].id)
     }
 
 }

@@ -2,6 +2,7 @@ package com.vmedia.core.sync
 
 import com.vmedia.core.common.pure.obj.Period
 import com.vmedia.core.common.pure.util.*
+import com.vmedia.core.common.pure.util.rx.blockingNullable
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.*
 import com.vmedia.core.network.api.entity.CategoryDto
@@ -16,6 +17,7 @@ import com.vmedia.core.sync.event.EventExtractor
 import com.vmedia.core.sync.event.SynchronizationEventProducer
 import com.vmedia.core.sync.event.SynchronizationEventProducerImpl
 import com.vmedia.core.sync.event.producer.*
+import com.vmedia.core.sync.notification.SyncStatusNotificationManager
 import com.vmedia.core.sync.synchronizer.MutableSynchronizationPeriodsProvider
 import com.vmedia.core.sync.synchronizer.PublisherCredentialsSynchronizer
 import com.vmedia.core.sync.synchronizer.SynchronizationPeriodsProvider
@@ -166,6 +168,10 @@ val coreSyncModule = module {
             credentials = get()
         )
     }
+}
+
+val coreSyncNotificationModule = module {
+    factory { SyncStatusNotificationManager(get()) }
 }
 
 val coreSyncEventExtractorModule = module {

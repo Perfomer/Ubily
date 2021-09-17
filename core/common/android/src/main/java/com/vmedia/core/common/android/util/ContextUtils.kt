@@ -7,7 +7,11 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.res.ResourcesCompat
+
+val Context.notificationManager: NotificationManagerCompat
+    get() = NotificationManagerCompat.from(this)
 
 @ColorInt
 fun Context.getColorCompat(@ColorRes id: Int): Int {

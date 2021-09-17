@@ -2,7 +2,7 @@ package com.vmedia.feature.main.presentation
 
 import android.os.Bundle
 import android.view.View
-import com.vmedia.core.common.android.view.BaseFragment
+import com.vmedia.core.common.android.view.base.BaseFragment
 import com.vmedia.core.common.android.view.system.SystemUiColorMode
 import com.vmedia.feature.main.api.MainNavigatorScreen
 import com.vmedia.feature.main.presentation.utils.initMainMenu

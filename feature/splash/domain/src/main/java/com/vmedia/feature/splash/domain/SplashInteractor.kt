@@ -5,7 +5,7 @@ import io.reactivex.Single
 import io.reactivex.rxkotlin.Singles
 
 class SplashInteractor(
-    private val repository: SplashRepository
+    private val repository: SplashRepository,
 ) {
 
     fun initialize(): Single<InitializationResult> {
@@ -15,11 +15,11 @@ class SplashInteractor(
                     repository.isUserAuthorized(),
                     repository.isSynchronizationSucceedAtLeastOnce(),
                     repository.isOnboardingAlreadyShown()
-                ) { isUserAuthorized, synchronizationSucceedAtLeastOnce, onboardingAlreadyShown ->
+                ) { isUserAuthorized, isSynchronizationSucceedAtLeastOnce, isOnboardingAlreadyShown ->
                     InitializationResult(
                         isUserAuthorized = isUserAuthorized,
-                        synchronizationSucceedAtLeastOnce = synchronizationSucceedAtLeastOnce,
-                        onboardingAlreadyShown = onboardingAlreadyShown
+                        isSynchronizationSucceedAtLeastOnce = isSynchronizationSucceedAtLeastOnce,
+                        isOnboardingAlreadyShown = isOnboardingAlreadyShown
                     )
                 }
             )

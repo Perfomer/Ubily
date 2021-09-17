@@ -1,6 +1,6 @@
 package com.vmedia.feature.assetdetails.domain
 
-import com.vmedia.core.common.pure.util.mapItems
+import com.vmedia.core.common.pure.util.rx.mapItems
 import com.vmedia.core.data.datasource.DatabaseDataSource
 import com.vmedia.core.data.internal.database.entity.Asset
 import com.vmedia.core.data.internal.database.entity.Keyword
