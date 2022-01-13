@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 apply from: '../../android_common_build.gradle'
 
 dependencies {
-    def room = "2.2.6"
+    def room = "2.4.1"
 
     // Database
     api "androidx.room:room-runtime:$room"
