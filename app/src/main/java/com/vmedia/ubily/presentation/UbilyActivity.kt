@@ -114,6 +114,11 @@ internal class UbilyActivity : NavigationActivity(
         navigateThroughStartGraph()
     }
 
+    override fun onSynchronizationFailed() {
+        isUserAuthorized = false
+        navigateThroughStartGraph()
+    }
+
     override fun onAuthSucceed() {
         isUserAuthorized = true
         navigateThroughStartGraph()

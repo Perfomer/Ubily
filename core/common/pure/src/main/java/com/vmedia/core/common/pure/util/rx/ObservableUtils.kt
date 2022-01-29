@@ -1,5 +1,6 @@
 package com.vmedia.core.common.pure.util.rx
 
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.Single
@@ -24,6 +25,10 @@ fun <T : Any> Observable<T>.blockingNullable(): T? {
     } catch (e: Exception) {
         null
     }
+}
+
+fun <T : Any> Observable<T>.actOnNext(action: (T) -> Completable): Observable<T> {
+    return flatMapSingle { action.invoke(it).toSingleDefault(it) }
 }
 
 fun <T1 : Any, T2 : Any> Observable<T1>.zipWith(

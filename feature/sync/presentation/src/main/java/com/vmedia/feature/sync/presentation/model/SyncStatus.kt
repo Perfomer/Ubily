@@ -8,7 +8,8 @@ import kotlinx.android.parcel.Parcelize
 internal class SyncStatus(
     val dataStatuses: List<SyncDataItem> = emptyStatuses(),
     val isFinished: Boolean = false,
-    val hasErrors: Boolean = false
+    val hasErrors: Boolean = false,
+    val isAuthFailed: Boolean = false,
 ) : Parcelable
 
 private fun emptyStatuses(): List<SyncDataItem> {

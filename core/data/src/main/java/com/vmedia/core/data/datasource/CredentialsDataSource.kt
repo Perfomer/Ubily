@@ -10,4 +10,5 @@ interface CredentialsDataSource {
 
     fun writeCredentials(credentials: Credentials): Completable
 
+    fun dropCredentials(): Completable
 }

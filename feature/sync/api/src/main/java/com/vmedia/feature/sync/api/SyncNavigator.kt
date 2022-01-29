@@ -6,4 +6,6 @@ interface SyncNavigator {
 
     fun onSynchronizationSucceed()
 
+    fun onSynchronizationFailed()
+
 }

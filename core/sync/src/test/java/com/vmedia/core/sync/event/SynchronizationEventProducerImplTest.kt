@@ -57,7 +57,7 @@ class SynchronizationEventProducerImplTest {
     @Test
     fun produce_notfinished() {
         // Given
-        val emptyStatus = SynchronizationStatus(emptyMap())
+        val emptyStatus = SynchronizationStatus()
 
         // When
         producer.produce(emptyStatus).blockingGet()
@@ -71,7 +71,7 @@ class SynchronizationEventProducerImplTest {
     fun produce_error() {
         // Given
         val errorStatus = SynchronizationStatus(
-            mapOf(
+            events = mapOf(
                 PUBLISHER to Error(Throwable()),
                 ASSETS to Data(emptyList<AssetModel>()),
                 PERIODS to Data(emptyList<Period>()),
@@ -101,7 +101,7 @@ class SynchronizationEventProducerImplTest {
     fun produce_success() {
         // Given
         val wellStatus = SynchronizationStatus(
-            mapOf(
+            events = mapOf(
                 PUBLISHER to Data(Publisher(1L)),
                 ASSETS to Data(emptyList<AssetModel>()),
                 PERIODS to Data(emptyList<Period>()),

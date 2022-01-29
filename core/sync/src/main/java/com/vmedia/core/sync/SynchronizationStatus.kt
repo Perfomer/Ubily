@@ -1,6 +1,7 @@
 package com.vmedia.core.sync
 
 data class SynchronizationStatus(
+    val isAuthFailed: Boolean = false,
     val events: Map<SynchronizationDataType, SynchronizationEvent> = emptyMap(),
 ) {
 

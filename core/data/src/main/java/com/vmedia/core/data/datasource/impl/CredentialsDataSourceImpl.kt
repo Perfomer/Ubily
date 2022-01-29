@@ -12,7 +12,7 @@ import io.reactivex.Single
 
 @SuppressLint("ApplySharedPref")
 internal class CredentialsDataSourceImpl(
-    private val preferences: SharedPreferences,
+    preferences: SharedPreferences,
     private val credentialsProvider: MutableNetworkCredentialsProvider
 ) : CredentialsDataSource {
 
@@ -42,6 +42,17 @@ internal class CredentialsDataSourceImpl(
             session = credentials.token.session
 
             credentialsProvider.token = credentials.token
+        }
+    }
+
+    override fun dropCredentials(): Completable {
+        return Completable.fromAction {
+            login = ""
+            password = ""
+            token = ""
+            session = ""
+
+            credentialsProvider.token = Token()
         }
     }
 

@@ -43,7 +43,7 @@ internal class SynchronizationDataSourceImpl(
     private val statusSubject: Subject<SynchronizationStatus> = BehaviorSubject.create()
 
     @Volatile
-    private var syncStatus = SynchronizationStatus(emptyMap())
+    private var syncStatus = SynchronizationStatus()
         set(value) {
             field = value
             statusSubject.onNext(value)
@@ -72,6 +72,7 @@ internal class SynchronizationDataSourceImpl(
 
     private fun execute(): Completable {
         return credentialsSynchronizer.synchronize()
+            .doOnError { syncStatus = syncStatus.copy(isAuthFailed = true) }
             .andThen(categorySynchronizer.synchronize())
             .andThenSynchronizeWith(
                 publisherSynchronizer,
@@ -95,7 +96,7 @@ internal class SynchronizationDataSourceImpl(
         networkDataSource.dropCache()
         databaseDataSource.dropCache()
 
-        syncStatus = SynchronizationStatus(emptyMap())
+        syncStatus = SynchronizationStatus()
     }
 
     @Suppress("UNCHECKED_CAST")

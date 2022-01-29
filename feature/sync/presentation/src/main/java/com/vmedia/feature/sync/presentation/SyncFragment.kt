@@ -76,8 +76,13 @@ internal class SyncFragment : MviFragment<SyncIntent, SyncState, SyncSubscriptio
                     navigator.onSynchronizationSucceed()
                 }
             }
+
             SyncSubscription.StartSyncService -> {
                 SynchronizationService.startForeground(requireContext())
+            }
+
+            SyncSubscription.SyncFailed -> {
+                navigator.onSynchronizationFailed()
             }
         }
     }

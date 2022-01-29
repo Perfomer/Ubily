@@ -39,6 +39,7 @@ internal object StatusMapper : Mapper<SynchronizationStatus, SyncStatus> {
         return SyncStatus(
             isFinished = from.isFinished,
             hasErrors = from.hasErrors,
+            isAuthFailed = from.isAuthFailed,
             dataStatuses = statuses.map { (key, value) ->
                 SyncDataItem(
                     type = key,
