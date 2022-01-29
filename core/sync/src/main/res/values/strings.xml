@@ -3,6 +3,7 @@
     <string name="status_channel_title">Synchronization Status Notifications</string>
     <string name="status_channel_description">Shows current synchronization status</string>
     <string name="status_notification_title">Synchronization</string>
+    <string name="status_notification_description">Start in a few seconds…</string>
     <string name="status_notification_description_publisher">Publisher</string>
     <string name="status_notification_description_assets">Assets</string>
     <string name="status_notification_description_reviews">Reviews</string>

@@ -3,7 +3,6 @@ package com.vmedia.feature.sync.presentation
 import androidx.work.WorkManager
 import com.vmedia.core.common.android.mvi.MviViewModel
 import com.vmedia.core.common.pure.util.mapWith
-import com.vmedia.core.sync.SynchronizationWorker
 import com.vmedia.feature.sync.domain.SyncInteractor
 import com.vmedia.feature.sync.presentation.di._StatusMapper
 import com.vmedia.feature.sync.presentation.mvi.SyncAction
@@ -13,8 +12,6 @@ import com.vmedia.feature.sync.presentation.mvi.SyncIntent.ObserveSyncStatus
 import com.vmedia.feature.sync.presentation.mvi.SyncIntent.StartSync
 import com.vmedia.feature.sync.presentation.mvi.SyncState
 import com.vmedia.feature.sync.presentation.mvi.SyncSubscription
-import io.reactivex.Completable
-import io.reactivex.Observable
 
 internal class SyncViewModel(
     private val interactor: SyncInteractor,
@@ -34,15 +31,14 @@ internal class SyncViewModel(
             .map(::SyncStatusUpdated)
 
         StartSync -> interactor.isSynchronizationSucceedAtLeastOnce()
-            .flatMapObservable { isSynchronizationSucceedAtLeastOnce ->
+            .map { isSynchronizationSucceedAtLeastOnce ->
                 if (isSynchronizationSucceedAtLeastOnce) {
-                    Observable.just<SyncAction>(SyncAction.InitialSyncNotNeeded)
+                    SyncAction.InitialSyncNotNeeded
                 } else {
-                    Completable.fromAction { SynchronizationWorker.startOnceImmediately(workManager) }
-                        .onErrorComplete()
-                        .andThen(super.act(state, intent))
+                    SyncAction.InitialSyncNeeded
                 }
             }
+            .toObservable()
             .asFlowSource(StartSync::class)
     }
 
@@ -65,6 +61,11 @@ internal class SyncViewModel(
             if (action.status.isFinished) SyncSubscription.SyncFinished
             else super.publishSubscription(state, action)
         }
+
+        is SyncAction.InitialSyncNeeded -> {
+            SyncSubscription.StartSyncService
+        }
+
         is SyncAction.InitialSyncNotNeeded -> {
             SyncSubscription.SyncFinished
         }

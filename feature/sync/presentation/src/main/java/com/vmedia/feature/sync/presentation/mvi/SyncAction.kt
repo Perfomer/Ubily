@@ -6,5 +6,7 @@ internal sealed class SyncAction {
 
     class SyncStatusUpdated(val status: SyncStatus) : SyncAction()
 
+    object InitialSyncNeeded : SyncAction()
+
     object InitialSyncNotNeeded : SyncAction()
 }

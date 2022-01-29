@@ -4,4 +4,5 @@ internal sealed class SyncSubscription {
 
     object SyncFinished : SyncSubscription()
 
+    object StartSyncService : SyncSubscription()
 }

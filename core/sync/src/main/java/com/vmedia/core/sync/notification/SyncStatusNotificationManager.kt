@@ -22,9 +22,23 @@ internal class SyncStatusNotificationManager(
 
     private val notificationManager: NotificationManagerCompat = context.notificationManager
 
-    internal fun onStatusUpdated(status: SynchronizationStatus) {
+    init {
         createChannel()
+    }
 
+    internal fun createInitialNotification(): Notification {
+        return NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.logo_ubily)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            .setTimeoutAfter(TimeUnit.MINUTES.toMillis(3))
+            .setContentTitle(context.getString(R.string.status_notification_title))
+            .setContentText(context.getString(R.string.status_notification_description))
+            .setProgress(100, 0, true)
+            .build()
+    }
+
+    internal fun onStatusUpdated(status: SynchronizationStatus) {
         if (status.isFinished) {
             removeNotification()
         } else {
@@ -65,8 +79,8 @@ internal class SyncStatusNotificationManager(
             .setOnlyAlertOnce(true)
             .setTimeoutAfter(TimeUnit.MINUTES.toMillis(3))
             .setContentTitle(context.getString(R.string.status_notification_title))
-            .setProgress(maxProgress, currentProgress, false)
             .setContentText(description)
+            .setProgress(maxProgress, currentProgress, false)
             .build()
     }
 
@@ -81,10 +95,10 @@ internal class SyncStatusNotificationManager(
         return receivingItem?.nameResource?.let(context::getString)
     }
 
-    private companion object {
+    internal companion object {
 
+        internal const val NOTIFICATION_ID: Int = 201
         private const val CHANNEL_ID: String = "SyncStatus"
-        private const val NOTIFICATION_ID: Int = 201
 
         @get:StringRes
         private val SynchronizationDataType.nameResource: Int

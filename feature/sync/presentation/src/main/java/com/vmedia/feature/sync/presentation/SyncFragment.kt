@@ -7,6 +7,7 @@ import com.vmedia.core.common.android.mvi.MviFragment
 import com.vmedia.core.common.android.util.argument
 import com.vmedia.core.common.android.util.init
 import com.vmedia.core.common.android.util.toSpan
+import com.vmedia.core.sync.SynchronizationService
 import com.vmedia.feature.sync.api.SyncNavigator
 import com.vmedia.feature.sync.api.SyncScreenMode
 import com.vmedia.feature.sync.api.SyncScreenMode.INITIAL
@@ -74,6 +75,9 @@ internal class SyncFragment : MviFragment<SyncIntent, SyncState, SyncSubscriptio
                 if (mode == INITIAL) {
                     navigator.onSynchronizationSucceed()
                 }
+            }
+            SyncSubscription.StartSyncService -> {
+                SynchronizationService.startForeground(requireContext())
             }
         }
     }
