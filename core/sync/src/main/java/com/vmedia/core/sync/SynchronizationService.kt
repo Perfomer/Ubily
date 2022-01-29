@@ -33,7 +33,15 @@ class SynchronizationService : Service() {
             .doOnSubscribe { startNotificationManager() }
             .doOnTerminate { stopNotificationManager() }
             .subscribeOn(Schedulers.io())
-            .subscribeBy(onError = Timber::e)
+            .subscribeBy(
+                onComplete = {
+                    stopForeground(false)
+                },
+                onError = { error ->
+                    Timber.e(error)
+                    stopForeground(true)
+                }
+            )
 
         return super.onStartCommand(intent, flags, startId)
     }
