@@ -5,7 +5,6 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.vmedia.core.data.KeyEntity
 
 @Entity(
     indices = [
@@ -20,12 +19,12 @@ import com.vmedia.core.data.KeyEntity
     )]
 )
 data class Artwork(
-    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val assetId: Long,
     val mediaType: MediaType,
     val previewUrl: String,
     val contentUrl: String?
-) : KeyEntity<Long>
+)
 
 enum class MediaType {
     IMAGE,

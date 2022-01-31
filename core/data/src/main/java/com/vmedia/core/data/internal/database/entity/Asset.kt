@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import com.vmedia.core.common.pure.obj.AssetStatus
 import com.vmedia.core.common.pure.obj.HollowRating
 import com.vmedia.core.common.pure.util.EMPTY_DATE
-import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
 import java.util.*
 
@@ -20,7 +19,7 @@ import java.util.*
     )]
 )
 data class Asset(
-    @PrimaryKey override val id: Long,
+    @PrimaryKey val id: Long,
     val categoryId: Long = 0L,
     val versionId: Long = 0L,
 
@@ -41,4 +40,4 @@ data class Asset(
     val bigImage: String? = "",
     val smallImage: String? = "",
     val iconImage: String? = ""
-) : KeyEntity<Long>
+)

@@ -258,9 +258,9 @@ internal class DatabaseDataSourceImpl(
 
     @WorkerThread
     private fun putKeyword(keyword: String, assetId: Long) {
-        var keywordId = keywordDao.getId(keyword)
+        var keywordId = keywordDao.getKeyword(keyword)?.id
 
-        if (keywordId == 0L) {
+        if (keywordId == null) {
             keywordId = keywordDao.insert(Keyword(value = keyword))
         }
 

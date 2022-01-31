@@ -3,7 +3,6 @@ package com.vmedia.core.data.internal.database.entity
 import androidx.room.*
 import com.vmedia.core.common.pure.obj.Rating
 import com.vmedia.core.common.pure.util.EMPTY_DATE
-import com.vmedia.core.data.KeyEntity
 import java.util.*
 
 @Entity(
@@ -28,14 +27,14 @@ import java.util.*
     ]
 )
 data class Review(
-    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val assetId: Long,
     val authorId: Long,
     val title: String = "",
     @Rating val rating: Int = 1,
     @Embedded val comment: CommentBody = CommentBody(),
     @Embedded(prefix = "reply_") val publisherReply: CommentBody? = null
-) : KeyEntity<Long>
+)
 
 data class CommentBody(
     val comment: String = "",

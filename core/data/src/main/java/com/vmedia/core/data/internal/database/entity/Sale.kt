@@ -4,7 +4,6 @@ import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import com.vmedia.core.common.pure.util.EMPTY_DATE
 import com.vmedia.core.common.pure.util.times
-import com.vmedia.core.data.KeyEntity
 import java.math.BigDecimal
 import java.util.*
 
@@ -18,12 +17,12 @@ import java.util.*
     )]
 )
 data class Sale(
-    @PrimaryKey(autoGenerate = true) override val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     val assetId: Long = 0L,
     val priceUsd: BigDecimal = BigDecimal.ZERO,
     val date: Date = EMPTY_DATE,
     val quantity: Int = 0
-) : KeyEntity<Long> {
+) {
 
     @Ignore
     val amount: BigDecimal = priceUsd * quantity

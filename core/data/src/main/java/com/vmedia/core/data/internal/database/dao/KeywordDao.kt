@@ -11,8 +11,8 @@ import io.reactivex.Observable
 interface KeywordDao : BaseDao<Keyword> {
 
     @WorkerThread
-    @Query("SELECT id FROM Keyword WHERE value = :keyword")
-    fun getId(keyword: String): Long
+    @Query("SELECT * FROM Keyword WHERE value = :keyword")
+    fun getKeyword(keyword: String): Keyword?
 
     @Query(
         """
