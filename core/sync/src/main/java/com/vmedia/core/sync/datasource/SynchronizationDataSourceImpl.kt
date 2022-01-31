@@ -15,6 +15,7 @@ import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
+import timber.log.Timber
 
 internal class SynchronizationDataSourceImpl(
     private val networkDataSource: CachedNetworkDataSourceDecorator,
@@ -71,8 +72,7 @@ internal class SynchronizationDataSourceImpl(
     }
 
     private fun execute(): Completable {
-        return credentialsSynchronizer.synchronize()
-            .doOnError { syncStatus = syncStatus.copy(isAuthFailed = true) }
+        return synchronizeCredentials()
             .andThen(categorySynchronizer.synchronize())
             .andThenSynchronizeWith(
                 publisherSynchronizer,
@@ -90,6 +90,11 @@ internal class SynchronizationDataSourceImpl(
                 revenueSynchronizer,
                 payoutSynchronizer
             )
+    }
+
+    private fun synchronizeCredentials(): Completable {
+        return credentialsSynchronizer.synchronize()
+            .doOnError { syncStatus = syncStatus.copy(isAuthFailed = true) }
     }
 
     private fun clear() {
@@ -110,8 +115,11 @@ internal class SynchronizationDataSourceImpl(
             .flatMapSingle {
                 execute()
                     .doOnSubscribe { syncStatus = syncStatus.update(dataType, Loading) }
-                    .doOnError { syncStatus = syncStatus.update(dataType, Error(it)) }
-                    .doOnSuccess { syncStatus = syncStatus.update(dataType, Data(it)) }
+                    .doOnSuccess { value -> syncStatus = syncStatus.update(dataType, Data(value)) }
+                    .doOnError { error ->
+                        Timber.e(error)
+                        syncStatus = syncStatus.update(dataType, Error(error))
+                    }
             }
             .ignoreElement()
             .onErrorComplete()
