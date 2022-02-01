@@ -15,8 +15,8 @@ internal object DownloadMapper : TableValuesMapper<DownloadDto>() {
             assetName = dataRow[0],
             assetUrl = extraRow!!.shortUrl,
             downloadsQuantity = dataRow[1].toInt(),
-            firstDownload = dataRow[2].parse(FORMAT_TABLEVALUES),
-            lastDownload = dataRow[3].parse(FORMAT_TABLEVALUES)
+            firstDownload = dataRow[3].parse(FORMAT_TABLEVALUES),
+            lastDownload = dataRow[4].parse(FORMAT_TABLEVALUES)
         )
     }
 
